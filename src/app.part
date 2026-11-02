@@ -1,0 +1,197 @@
+<script>
+/* ===== Nhóm 9 sửa ở đây ===== */
+const CONFIG = {
+  group: "Nhóm 9",
+  lop: "SE1919",
+  giangVien: "BinhNV26",
+  phanBien: "Nhóm 10, Nhóm 4, Nhóm 5",
+  ngay: "",                 // ví dụ "10/11/2026"
+  thanhVien: [],            // ví dụ ["Trần Ngọc Thiện", "..."]
+  phanNhomDaLam: ""         // viết thật những gì nhóm đã tự làm, hiện trên slide Minh bạch AI
+};
+/* ============================ */
+
+const V = "02/11/2026";
+const DRIVE = "https://drive.google.com/file/d/1kD4-FWb8MXoen6B_DhxJTahx38bnqibN/view";
+const S = {
+  gt:{short:"Bộ GD&ĐT, 2021",kind:"Giáo trình",url:DRIVE,apa:"Bộ Giáo dục và Đào tạo. (2021). <i>Giáo trình Kinh tế chính trị Mác - Lênin (Dành cho bậc đại học - không chuyên lý luận chính trị)</i> [Bản PDF của học phần MLN122]. Nxb. Chính trị quốc gia Sự thật.",use:"Lý luận của cả bài. Số trang theo bản PDF của lớp; trang in bằng trang PDF cộng 2."},
+  mac:{short:"C.Mác và Ph.Ăngghen, t.46, dẫn theo Bộ GD&ĐT, 2021",kind:"Tác phẩm kinh điển",url:DRIVE,apa:"C.Mác và Ph.Ăngghen. (k.n.). <i>Toàn tập</i> (t. 46, phần II, tr. 368–369, 372). Nxb. Chính trị quốc gia. Dẫn theo Bộ Giáo dục và Đào tạo (2021, tr. 144).",use:"Dự báo về việc ứng dụng khoa học vào sản xuất. Chú thích trong giáo trình không ghi năm xuất bản tập này."},
+  nq57:{short:"Bộ Chính trị, 2024",kind:"Văn kiện của Đảng",url:"https://www.quanlynhanuoc.vn/2025/01/22/nghi-quyet-57-nq-tw-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia/",apa:"Bộ Chính trị. (2024, 22 tháng 12). <i>Nghị quyết số 57-NQ/TW về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia</i>. Đăng trên Tạp chí Quản lý nhà nước.",use:"Mục tiêu 2030: kinh tế số tối thiểu 30% GDP, R&D 2% GDP; đột phá quan trọng hàng đầu; người dân và doanh nghiệp là trung tâm."},
+  dh14:{short:"Tuổi Trẻ Online, 2026",kind:"Báo chí, tóm tắt văn kiện",url:"https://tuoitre.vn/thong-qua-nghi-quyet-dai-hoi-xiv-cua-dang-xac-lap-mo-hinh-tang-truong-moi-dot-pha-manh-me-the-che-20260123162320197.htm",apa:"Tuổi Trẻ Online. (2026, 23 tháng 1). <i>Thông qua Nghị quyết Đại hội XIV của Đảng: Xác lập mô hình tăng trưởng mới, đột phá mạnh mẽ thể chế</i>.",use:"Mục tiêu 2030: lao động qua đào tạo có bằng, chứng chỉ 35–40%; GDP bình quân đầu người khoảng 8.500 USD. Nên thay bằng bản gốc văn kiện."},
+  luatai:{short:"Znews, 2025",kind:"Báo chí về văn bản luật",url:"https://znews.vn/thong-qua-luat-tri-tue-nhan-tao-khung-phap-ly-dau-tien-cho-phat-trien-ai-post1610142.html",apa:"Znews. (2025, 10 tháng 12). <i>Thông qua Luật Trí tuệ nhân tạo: Khung pháp lý đầu tiên cho phát triển AI</i>. (Luật số 134/2025/QH15).",use:"Thông qua 10/12/2025, hiệu lực 01/3/2026; đặt con người ở vị trí trung tâm. Nên thay bằng toàn văn luật."},
+  nso26q3:{short:"Cục Thống kê, 2026a",kind:"Thống kê chính thức",url:"https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/10/thong-cao-bao-chi-tinh-hinh-kinh-te-xa-hoi-quy-iii-va-9-thang-nam-2026/",apa:"Cục Thống kê. (2026a, tháng 10). <i>Thông cáo báo chí tình hình kinh tế - xã hội quý III và 9 tháng năm 2026</i>.",use:"Cơ cấu nền kinh tế 9 tháng 2026: 10,65% / 38,35% / 42,97% / thuế 8,03%. Số ước tính."},
+  nso26ld:{short:"Cục Thống kê, 2026b",kind:"Thống kê chính thức",url:"https://www.nso.gov.vn/tin-tuc-thong-ke/2026/10/thong-cao-bao-chi-ve-tinh-hinh-lao-dong-viec-lam-quy-iii-va-9-thang-nam-2026/",apa:"Cục Thống kê. (2026b, tháng 10). <i>Thông cáo báo chí về tình hình lao động, việc làm quý III và 9 tháng năm 2026</i>.",use:"Quý III/2026: 25,1% / 33,9% / 41,0% lao động; 60,6% phi chính thức; 30,4% qua đào tạo có bằng, chứng chỉ."},
+  nso25:{short:"Cục Thống kê, 2026c",kind:"Thống kê chính thức",url:"https://www.nso.gov.vn/tin-tuc-thong-ke/2026/01/thong-cao-bao-chi-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025/",apa:"Cục Thống kê. (2026c, tháng 1). <i>Thông cáo báo chí tình hình kinh tế - xã hội quý IV và năm 2025</i>.",use:"GDP bình quân đầu người 2025: 5.026 USD."},
+  kts:{short:"Báo Đầu tư, 2026",kind:"Báo chí, số của Cục Thống kê",url:"https://baodautu.vn/kinh-te-so-chiem-1402-gdp-nam-2025-tro-thanh-dong-luc-tang-truong-quan-trong-d484834.html",apa:"Báo Đầu tư. (2026, 6 tháng 1). <i>Kinh tế số chiếm 14,02% GDP năm 2025, trở thành động lực tăng trưởng quan trọng</i>.",use:"Giá trị tăng thêm của kinh tế số ước đạt 14,02% GDP năm 2025, theo Cục Thống kê."},
+  ilo16:{short:"ILO, 2016",kind:"Tổ chức quốc tế",url:"https://www.ilo.org/resource/news/skills-enhancement-vital-viet-nam%E2%80%99s-decent-work-technology-era",apa:"International Labour Organization. (2016, 13 tháng 12). <i>Skills enhancement is vital for Viet Nam's decent work in technology era</i>.",use:"86% lao động dệt, may, da giày có rủi ro tự động hóa cao."},
+  ilo26:{short:"ILO, 2026",kind:"Tổ chức quốc tế",url:"https://www.ilo.org/resource/news/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows",apa:"International Labour Organization. (2026, 16 tháng 4). <i>Generative AI could transform millions of jobs in Viet Nam, new ILO brief shows</i>.",use:"11,5 triệu lao động chịu tác động; khoảng 1 triệu, dưới 2%, rủi ro tự động hóa cao; nữ 24,1%, nam 17,8%."},
+  wef25:{short:"WEF, 2025",kind:"Tổ chức quốc tế",url:"https://www.weforum.org/press/2025/01/future-of-jobs-report-2025-78-million-new-job-opportunities-by-2030-but-urgent-upskilling-needed-to-prepare-workforces/",apa:"World Economic Forum. (2025, 8 tháng 1). <i>Future of Jobs Report 2025: 78 million new job opportunities by 2030 but urgent upskilling needed to prepare workforces</i>.",use:"+170 triệu, −92 triệu, ròng +78 triệu; 59/100 lao động cần đào tạo lại hoặc nâng kỹ năng."},
+  unctad25:{short:"UNCTAD, 2025",kind:"Tổ chức quốc tế",url:"https://unctad.org/press-material/ais-48-trillion-future-un-trade-and-development-alerts-divides-urges-action",apa:"UN Trade and Development. (2025, 7 tháng 4). <i>AI's $4.8 trillion future: UN Trade and Development alerts on divides, urges action</i>.",use:"100 công ty, chủ yếu ở Mỹ và Trung Quốc, chiếm 40% chi R&D doanh nghiệp toàn cầu."},
+  qlnn26:{short:"Nguyễn Thị Ngọc Anh, 2026",kind:"Tạp chí khoa học",url:"https://www.quanlynhanuoc.vn/?p=69421",apa:"Nguyễn Thị Ngọc Anh. (2026, 21 tháng 10). Nghịch lý trong nhận thức rủi ro về tự động hóa và khoảng trống kỹ năng số của lao động ngành dệt may tại Việt Nam. <i>Tạp chí Quản lý nhà nước</i>.",use:"Dẫn lại khảo sát Bangladesh 2024 (429 lao động), đề tài ĐTĐL.XH/15-22 (1.770 lao động, chọn mẫu thuận tiện), và phát biểu của Hiệp hội Dệt May. Đây là số thứ cấp."},
+  bnews26:{short:"Hằng Trần, 2026",kind:"Thông tấn xã Việt Nam",url:"https://bnews.vn/huong-di-bat-buoc-de-doanh-nghiep-det-may-duy-tri-don-hang/432293.html",apa:"Hằng Trần. (2026, 11 tháng 8). <i>Hướng đi bắt buộc để doanh nghiệp dệt may duy trì đơn hàng</i>. Bnews/TTXVN.",use:"Ngành dệt may có hơn 3,3 triệu lao động."},
+  vna26:{short:"TTXVN, 2026",kind:"Thông tấn xã Việt Nam",url:"https://happyvietnam.vnanet.vn/en/ai-reshapes-logistics-raising-bar-for-workforce-skills/58804.html",apa:"Thông tấn xã Việt Nam. (2026, 12 tháng 6). <i>AI reshapes logistics, raising bar for workforce skills</i>.",use:"Theo Hiệp hội Doanh nghiệp dịch vụ Logistics, ngành cần khoảng 2,2 triệu lao động đến 2030."},
+  tcct26:{short:"Trần Bửu Long, 2026",kind:"Tạp chí khoa học",url:"https://tapchicongthuong.vn/thach-thuc-va-giai-phap-nang-cao-ky-nang-ung-dung-ai-cho-nguon-nhan-luc-nganh-logistics-trong-boi-canh-chuyen-doi-so-tai-viet-nam-516434.htm",apa:"Trần Bửu Long. (2026, 8 tháng 5). Thách thức và giải pháp nâng cao kỹ năng ứng dụng AI cho nguồn nhân lực ngành logistics trong bối cảnh chuyển đổi số tại Việt Nam. <i>Tạp chí Công Thương</i>.",use:"90,5% doanh nghiệp số hóa cơ bản; 5–7% lao động được đào tạo bài bản; dẫn từ Bộ Công Thương. Đây là số thứ cấp."},
+  nd25:{short:"Báo Nhân Dân, 2025",kind:"Báo Đảng, số của Ngân hàng Thế giới",url:"https://special.nhandan.vn/dau-tu-cho-r-d-suc-bat-moi-cho-viet-nam/index.html",apa:"Báo Nhân Dân. (2025, tháng 3). <i>Đầu tư cho R&D: Sức bật mới cho Việt Nam</i>. Nhân Dân hằng tháng.",use:"R&D Việt Nam khoảng 0,42% GDP năm 2021; Hàn Quốc khoảng 4,9% GDP."},
+  ifr26:{short:"IFR, 2026",kind:"Hiệp hội quốc tế",url:"https://ifr.org/news/robot-density-surges-in-europe-asia-and-americas/1",apa:"International Federation of Robotics. (2026, 8 tháng 4). <i>Robot density surges in Europe, Asia and Americas</i>.",use:"Số liệu 2024 từ World Robotics 2025: Hàn Quốc 1.220, Singapore 818, Nhật Bản 446, Trung Quốc 166."},
+  gii26:{short:"Báo Pháp luật Việt Nam, 2026",kind:"Báo chí, số của WIPO",url:"https://doanhnhan.baophapluat.vn/gii-2026-viet-nam-len-hang-43-hai-chi-so-dung-dau-the-gioi.html",apa:"Doanh nhân và Pháp luật. (2026, 30 tháng 9). <i>GII 2026: Việt Nam lên hạng 43, hai chỉ số đứng đầu thế giới</i>. Báo Pháp luật Việt Nam.",use:"Hạng 43/139; trụ cột nguồn nhân lực và nghiên cứu giảm từ 70 xuống 79."},
+  ieee:{short:"IEEE Computer Society, k.n.",kind:"Hiệp hội khoa học",url:"https://history.computer.org/pioneers/pdfs/j/Jacquard.pdf",apa:"IEEE Computer Society. (k.n.). <i>Joseph-Marie Jacquard</i>. Computer Pioneers.",use:"Máy dệt hoàn thành năm 1804, dùng thẻ đục lỗ điều khiển hoa văn; Babbage được cho là lấy ý tưởng thẻ đục lỗ từ đây."}
+};
+
+const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
+const slides=$$("section.s");
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const ch=(()=>{try{return new BroadcastChannel("mln122-n9")}catch(e){return null}})();
+const PRES=location.hash==="#presenter";
+let cur=0;
+
+/* Bìa */
+(()=>{const m=$("#covermeta");const a=[["NHÓM",CONFIG.group],["LỚP · GIẢNG VIÊN",CONFIG.lop+" · "+CONFIG.giangVien],["NHÓM PHẢN BIỆN",CONFIG.phanBien]];
+ if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.join(" · ")]);
+ a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");s.textContent=v;m.append(b,s)});
+ const r=$("#grouprow td");r.innerHTML="";const t=document.createElement("span");
+ t.textContent=CONFIG.phanNhomDaLam?("Phần nhóm tự làm: "+CONFIG.phanNhomDaLam):"Phần nhóm tự làm: [nhóm điền trước khi nộp]";r.append(t)})();
+
+/* Khung dệt trên bìa */
+function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let row=0,run=true,last=0;
+ const mot=(x,y)=>{const a=Math.abs((x%14)-7)+Math.abs((y%14)-7);if(a<2)return"#FFC93C";if(a===4)return"#FF5C86";if(a===7)return"#F5F1E6";return null};
+ function paint(y){const vis=rows-1-y;const f=vis/rows;
+  for(let x=0;x<cols;x++){const px=x*C,py=y*C;g.clearRect(px,py,C,C);const col=mot(x,y);
+   if(f>.62){ if(col){g.fillStyle=col;g.fillRect(px+1,py+3,C-2,C-6);g.fillRect(px+5,py+1,C-10,C-2)} else {g.fillStyle="rgba(245,241,230,.05)";g.fillRect(px+1,py+8,C-2,3)} }
+   else { const on=col||Math.random()<.13; if(on){g.fillStyle=f>.42&&col?col:"#4BE3C4";g.globalAlpha=col?1:.5;g.fillRect(px+4,py+4,C-8,C-8);g.globalAlpha=1} }
+  }}
+ function tick(t){if(!run)return;if(t-last>60){last=t;if(row<rows){const y=rows-1-row;paint(y);row++;}
+   else{const y=Math.floor(rows*.38*Math.random());paint(y)}}
+  requestAnimationFrame(tick)}
+ const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+ if(reduce){for(let y=rows-1;y>=0;y--)paint(y);return{stop(){},start(){}}}
+ for(let i=0;i<rows*.6;i++){paint(rows-1-i);row++}
+ requestAnimationFrame(tick);
+ return{stop(){run=false},start(){if(!run){run=true;requestAnimationFrame(tick)}}}}
+let lm=null;
+
+/* Khảo sát */
+const OPTS=["AI thay hẳn phần lớn người làm nghề","AI đổi cách làm, nghề vẫn cần người","Chưa ảnh hưởng nhiều"];
+const poll=store.get("n9poll",{a:[0,0,0],b:[0,0,0]});
+function renderPoll(){$$("[data-poll]").forEach(h=>{const k=h.dataset.poll;const tot=poll[k].reduce((x,y)=>x+y,0)||1;const atot=poll.a.reduce((x,y)=>x+y,0)||1;
+ h.innerHTML=OPTS.map((o,i)=>`<div class="opt"><span style="font-size:24px">${o}</span><div>
+  ${k==="b"?`<div class="track" style="height:18px;margin-bottom:4px"><div class="fill" style="width:${poll.a[i]/atot*100}%;background:var(--vai-3)"></div></div>`:""}
+  <div class="track" ${k==="b"?'style="height:26px"':''}><div class="fill" style="width:${poll[k][i]/tot*100}%"></div></div></div>
+  <div class="step"><button data-p="${k},${i},-1" aria-label="Giảm một phiếu">−</button><span>${poll[k][i]}</span><button data-p="${k},${i},1" aria-label="Thêm một phiếu">+</button></div></div>`).join("")+
+  (k==="b"?`<div class="legend"><span><i style="background:var(--vai-3)"></i>Đầu bài</span><span><i style="background:var(--nghe)"></i>Cuối bài</span></div>`:`<p class="sm">Thanh hiện tỷ lệ phiếu trên tổng số đã nhập. Kết quả lưu trên máy này cho đến cuối buổi.</p>`)})}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(!b)return;const[k,i,d]=b.dataset.p.split(",");poll[k][+i]=Math.max(0,poll[k][+i]+ +d);store.set("n9poll",poll);renderPoll()});
+
+/* Bốn cuộc cách mạng */
+const REV=[
+ {n:"I",t:"Giữa TK XVIII đến giữa TK XIX",sw:"w1",h:"Cơ khí hóa bằng nước và hơi nước",b:"Bắt đầu ở Anh, <b>từ ngành dệt</b>: thoi bay, xe kéo sợi Jenny, máy dệt Cartwright, rồi máy hơi nước. Lao động thủ công chuyển sang lao động máy móc.",x:"tr. 141"},
+ {n:"II",t:"Nửa cuối TK XIX đến đầu TK XX",sw:"w2",h:"Điện và dây chuyền hàng loạt",b:"Năng lượng điện, động cơ điện, dây chuyền chuyên môn hóa cao; phương pháp quản lý của Ford và Taylor làm tăng năng suất lao động.",x:"tr. 141–142"},
+ {n:"III",t:"Đầu thập niên 1960 đến cuối TK XX",sw:"w3",h:"Công nghệ thông tin và tự động hóa",b:"Bán dẫn, siêu máy tính, máy tính cá nhân, Internet, robot công nghiệp. Và một chi tiết: thẻ đục lỗ của <span class='n' data-c='ieee'>máy dệt Jacquard (1804)</span> được cho là gợi ý cho máy tính của Babbage.",x:"tr. 142"},
+ {n:"IV",t:"Đề cập lần đầu tại Hannover, 2011",sw:"w4",h:"Liên kết thế giới thực và ảo",b:"Cách mạng số, Internet vạn vật, trí tuệ nhân tạo, dữ liệu lớn, in 3D. Thay đổi về chất trong lực lượng sản xuất.",x:"tr. 142–143"}];
+function rev(i){$$("#revtabs button").forEach((b,j)=>b.setAttribute("aria-selected",j===i));const r=REV[i];
+ $("#revbody").innerHTML=`<h3 style="font-size:40px">${r.h}</h3><p>${r.b}</p><p class="sm">Giáo trình, <span class="n" data-c="gt" data-l="${r.x}">${r.x}</span>; Hộp 6.1, tr. 143.</p>`;$("#revsw").className="swatch "+r.sw}
+$("#revtabs").innerHTML=REV.map((r,i)=>`<button role="tab" data-rev="${i}"><b>${r.n}</b><span>${r.t}</span></button>`).join("");
+$("#revtabs").addEventListener("click",e=>{const b=e.target.closest("[data-rev]");if(b)rev(+b.dataset.rev)});rev(0);
+
+/* Ba con đường */
+const WAYS=[["Tự nghiên cứu, chế tạo","Nâng dần từ thấp đến cao. Thường diễn ra trong thời gian dài, tổn thất nhiều khi thử nghiệm.","#F5F1E6"],
+["Nhận chuyển giao","Nhanh hơn, nhưng cần nhiều vốn, ngoại tệ và luôn chịu sự phụ thuộc vào nước ngoài.","#FFC93C"],
+["Chiến lược nhiều tầng","Vừa nghiên cứu chế tạo, vừa nhận chuyển giao; \"vừa cơ bản, lâu dài và vững chắc vừa đảm bảo đi tắt và bám đuổi\". Đây là đường của Nhật Bản, NICs.","#FF5C86"]];
+function way(i){$$(".way").forEach(p=>{p.style.opacity=+p.dataset.w===i?1:.18});$$("#ways button").forEach((b,j)=>{b.className=j===i?"panel dark":"panel";b.setAttribute("aria-pressed",j===i)})}
+$("#ways").innerHTML=WAYS.map((w,i)=>`<button class="panel" data-way="${i}" style="text-align:left;padding:16px 20px;border-left:7px solid ${w[2]}"><h3 style="font-size:26px">${w[0]}</h3><span style="font-size:20px;line-height:1.32">${w[1]}</span></button>`).join("");
+$("#ways").addEventListener("click",e=>{const b=e.target.closest("[data-way]");if(b)way(+b.dataset.way)});way(2);
+
+/* Thẻ lật */
+document.addEventListener("click",e=>{const f=e.target.closest("[data-flip]");if(f)f.setAttribute("aria-expanded",f.getAttribute("aria-expanded")!=="true")});
+
+/* Mô phỏng: hàm thuần, dễ kiểm tra */
+function sim(a,all){const N=100*(1-.6*a),c=100+40*a,v=N,m=N,unit=(c+2*N)/100,social=all?unit:3,x=(social-unit)*100;return{N,c,v,m,unit,social,x,r:c/v}}
+$("#dots").innerHTML="<i></i>".repeat(100);
+const fmt=(x,d=1)=>x.toFixed(d).replace(".",",");
+function runSim(){const a=+$("#simA").value/100,all=$("#simAll").getAttribute("aria-pressed")==="true",o=sim(a,all);
+ $("#simAv").textContent=Math.round(a*100)+"%";$("#simN").textContent=Math.round(o.N);
+ $$("#dots i").forEach((d,i)=>d.classList.toggle("out",i>=Math.round(o.N)));
+ $("#simC").textContent=fmt(o.c,0);$("#simV").textContent=fmt(o.v,0);$("#simR").textContent=fmt(o.r,2);
+ $("#simU").textContent=fmt(o.unit,2);$("#simS").textContent=fmt(o.social,2);$("#simX").textContent=fmt(o.x,0);
+ $("#simText").textContent=a===0?"Chưa có máy mới: giá trị cá biệt bằng giá trị xã hội, chưa có siêu ngạch.":all?"Cả ngành đã áp dụng: giá trị xã hội hạ xuống, siêu ngạch mất. Cạnh tranh buộc doanh nghiệp tìm đổi mới tiếp. Số chỗ làm trên chuyền vẫn thấp.":"Doanh nghiệp đi trước bán theo giá trị xã hội, chi phí riêng thấp hơn: phần chênh là giá trị thặng dư siêu ngạch (tr. 65). c/v tăng (tr. 68), cần ít lao động hơn (tr. 69)."}
+$("#simA").addEventListener("input",runSim);$("#simAll").addEventListener("click",e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");runSim()});runSim();
+
+/* Thanh mục tiêu */
+const G=[["Kinh tế số, % GDP",14.02,30,"14,02% (2025)","≥ 30%","kts","nq57","#FF5C86"],["Chi R&D, % GDP",.42,2,"0,42% (2021)","2%","nd25","nq57","#FFC93C"],["Lao động có bằng, chứng chỉ, %",30.4,35,"30,4% (quý III/2026)","35–40%","nso26ld","dh14","#4BE3C4"],["GDP bình quân đầu người, USD",5026,8500,"5.026 (2025)","~8.500","nso25","dh14","#F5F1E6"]];
+$("#gauges").innerHTML=G.map(g=>`<div style="margin-block:24px"><div style="display:flex;justify-content:space-between;font-size:24px;margin-bottom:6px"><b style="font-weight:600">${g[0]}</b><span><span class="n" data-c="${g[5]}">${g[3]}</span> &nbsp;đến 2030: <span class="n" data-c="${g[6]}">${g[4]}</span></span></div><div style="height:30px;background:var(--cham-deep)"><div class="gfill" style="height:100%;background:${g[7]};width:${g[1]/g[2]*100}%"></div></div></div>`).join("");
+
+/* Phiếu 90 ngày */
+const P={"Kỹ thuật phần mềm":[["viết mã mẫu, sinh ca kiểm thử, giải thích mã lạ"],["thiết kế hệ thống, đánh giá bảo mật, chịu trách nhiệm khi lỗi"],["30: tự đọc và sửa được mã AI sinh ra","60: làm một dự án có kiểm thử đầy đủ","90: viết tài liệu thiết kế, xin góp ý từ người đi trước"]],
+"Trí tuệ nhân tạo, Dữ liệu":[["làm sạch dữ liệu thô, thử nhanh mô hình"],["đặt bài toán, đánh giá sai lệch, hiểu giới hạn dữ liệu"],["30: củng cố xác suất, thống kê","60: làm một mô hình với dữ liệu Việt Nam","90: công bố báo cáo đánh giá, kể cả chỗ mô hình sai"]],
+"An toàn thông tin":[["rà soát nhật ký, tóm tắt cảnh báo"],["điều tra sự cố, đánh giá rủi ro, tuân thủ pháp luật"],["30: học các nguyên tắc nền về mạng, hệ điều hành","60: luyện trên môi trường thực hành hợp pháp","90: viết báo cáo đánh giá một hệ thống của mình"]],
+"Thiết kế, Mỹ thuật số":[["phác nhanh nhiều phương án, làm biến thể"],["ý tưởng, gu thẩm mỹ, bản quyền, kiểm chứng hình ảnh"],["30: học nguyên lý bố cục, chữ, màu","60: làm một bộ nhận diện cho một dự án thật","90: tự ghi rõ phần AI, phần tự làm trong hồ sơ"]],
+"Kinh doanh, Marketing":[["tổng hợp thị trường, viết nháp nội dung"],["hiểu khách hàng, kiểm tra số liệu, quyết định có đạo đức"],["30: học đọc báo cáo tài chính, số liệu thống kê","60: khảo sát thật 30 khách hàng","90: viết đề xuất có nguồn số liệu rõ ràng"]],
+"Logistics, Kinh doanh quốc tế":[["soạn nháp chứng từ, dự báo nhu cầu"],["xử lý sự cố chuỗi cung ứng, hiểu luật thương mại, đàm phán"],["30: nắm Incoterms, quy tắc xuất xứ","60: học một hệ thống quản lý kho hoặc vận tải","90: làm một phương án tối ưu cho tình huống thật"]],
+"Ngôn ngữ":[["dịch nháp, tra thuật ngữ, luyện hội thoại"],["hiểu văn hóa, sắc thái, chịu trách nhiệm về bản dịch"],["30: học một lĩnh vực chuyên ngành","60: hậu kiểm 20 trang bản dịch máy, ghi lại lỗi","90: làm cộng tác viên cho một dự án thật"]]};
+let major=Object.keys(P)[0];
+function plan(){$$("#majors button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===major));const p=P[major];
+ $("#plan").innerHTML=`<div class="panel"><span class="eb">GIAO CHO AI, RỒI KIỂM TRA</span><p>${p[0][0]}</p></div><div class="panel"><span class="eb">TỰ MÌNH GIỮ</span><p>${p[1][0]}</p></div><div class="panel dark"><span class="eb">30 · 60 · 90 NGÀY</span>${p[2].map(x=>{const[d,...r]=x.split(": ");return`<p style="font-size:22px"><b>Ngày ${d}:</b> ${r.join(": ")}</p>`}).join("")}</div>`}
+$("#majors").innerHTML=Object.keys(P).map(m=>`<button data-m="${m}">${m}</button>`).join("");
+$("#majors").addEventListener("click",e=>{const b=e.target.closest("[data-m]");if(b){major=b.dataset.m;plan()}});plan();
+$("#copyplan").addEventListener("click",async e=>{const p=P[major],t=`Phiếu 90 ngày - ${major}\nGiao cho AI, rồi kiểm tra: ${p[0][0]}\nTự mình giữ: ${p[1][0]}\n${p[2].join("\n")}`;
+ try{await navigator.clipboard.writeText(t);e.target.textContent="Đã sao chép"}catch(x){e.target.textContent="Máy này không cho sao chép, hãy chụp lại màn hình"}setTimeout(()=>e.target.textContent="Sao chép phiếu này",2400)});
+
+/* Tài liệu tham khảo */
+$("#refs").innerHTML=Object.values(S).slice().sort((a,b)=>a.apa.replace(/<[^>]+>/g,"").localeCompare(b.apa.replace(/<[^>]+>/g,""),"vi")).map(s=>`<p>${s.apa} <a href="${s.url}" target="_blank" rel="noopener">${s.url.replace(/^https?:\/\/(www\.)?/,"").split("/")[0]}</a></p>`).join("");
+
+/* Số liệu bấm được bằng bàn phím */
+function a11y(r=document){$$(".n",r).forEach(n=>{n.setAttribute("role","button");n.tabIndex=0})}
+document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList?.contains("n"))cite(e.target.dataset.c,e.target.dataset.l)});
+/* Chân slide: nguồn */
+slides.forEach(s=>{const r=s.dataset.refs;if(!r)return;const f=document.createElement("div");f.className="foot";f.innerHTML="<span>Nguồn:</span>"+r.split(";").map(x=>{const[k,l]=x.split("|");return`<button data-c="${k}" ${l?`data-l="${l}"`:""}>${S[k].short}${l?", "+l:""}</button>`}).join("<span>;</span>");s.append(f)});
+
+/* Ngăn nguồn */
+const dr=$("#drawer");
+function cite(k,l){const s=S[k];if(!s)return;dr.innerHTML=`<button class="x" id="drx">Đóng · Esc</button><span class="tag ${/Thống kê|Giáo trình|Văn kiện|kinh điển/.test(s.kind)?"m":"y"}" style="width:fit-content">${s.kind}</span><h3>${s.short}${l?", "+l:""}</h3><p>${s.use}</p><p class="sm">${s.apa}</p><a href="${s.url}" target="_blank" rel="noopener">${s.url}</a><p class="sm">Đối chiếu ngày ${V}.</p>`;dr.classList.add("on");$("#drx").onclick=()=>dr.classList.remove("on")}
+document.addEventListener("click",e=>{const n=e.target.closest("[data-c]");if(n){e.stopPropagation();cite(n.dataset.c,n.dataset.l)}});
+
+/* Sợi chỉ */
+const ACTS=["Mở đầu","Câu 1","Câu 2","Câu 3","Kết"];
+function threadSvg(){const w=1600,firsts=ACTS.map((_,a)=>slides.findIndex(s=>+s.dataset.act===a));const xOf=i=>30+(w-60)*i/(slides.length-1);
+ let d=`M30 16`;for(let x=30;x<w-30;x+=26){d+=` Q${x+13} ${x%52===30?7:25} ${x+26} 16`}
+ $("#thread").innerHTML=`<svg viewBox="0 0 1600 40" preserveAspectRatio="none"><path d="${d}" fill="none" stroke="#33409A" stroke-width="2.5" stroke-dasharray="7 6"/><path id="tp" d="${d}" fill="none" stroke="#FF5C86" stroke-width="3.5" pathLength="100" stroke-dasharray="0 100" style="transition:stroke-dasharray .6s"/>
+ ${firsts.map((f,i)=>`<g class="knot" data-go="${f}"><circle cx="${xOf(f)}" cy="16" r="7" fill="#FFC93C"/><text x="${xOf(f)+(i===firsts.length-1?-12:12)}" y="35" font-size="13" fill="#C6C8E4" text-anchor="${i===firsts.length-1?"end":"start"}" font-family="IBM Plex Mono,monospace">${ACTS[i]}</text></g>`).join("")}</svg>`}
+threadSvg();
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)go(+g.dataset.go)});
+
+/* Điều hướng */
+const warp=$("#warp");warp.innerHTML=Array.from({length:40},(_,j)=>`<i style="--j:${j}"></i>`).join("");
+function show(i){slides.forEach((s,j)=>s.classList.toggle("on",j===i));cur=i;const p=slides.length>1?i/(slides.length-1)*100:0;$("#tp").setAttribute("stroke-dasharray",`${p} ${100-p}`);
+ try{history.replaceState(null,"","#"+(i+1))}catch(e){}
+ $("#notes").innerHTML=$(".notes",slides[i])?.innerHTML||"";dr.classList.remove("on");
+ if(i===0){lm=lm||loom();lm.start()}else if(lm)lm.stop();
+ if(ch)ch.postMessage({t:"at",i})}
+function go(i,tell=true){i=Math.max(0,Math.min(slides.length-1,i));if(i===cur&&slides[i].classList.contains("on"))return;
+ if(matchMedia("(prefers-reduced-motion:reduce)").matches){show(i);return}
+ warp.classList.remove("go");void warp.offsetWidth;warp.classList.add("go");setTimeout(()=>show(i),270)}
+addEventListener("keydown",e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)&&e.target.type!=="range")return;const k=e.key;
+ if(k==="ArrowRight"||k==="PageDown"||(k===" "&&e.target.tagName!=="BUTTON")){e.preventDefault();go(cur+1)}
+ else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();go(cur-1)}
+ else if(k==="Home")go(0);else if(k==="End")go(slides.length-1);
+ else if(k==="n"||k==="N")$("#notes").classList.toggle("on");
+ else if(k==="k"||k==="K")document.body.classList.toggle("k");
+ else if(k==="f"||k==="F"){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen?.().catch(()=>{})}
+ else if(k==="t"||k==="T")startClock();
+ else if(k==="p"||k==="P")window.open(location.pathname+"#presenter","n9p");
+ else if(k==="Escape")dr.classList.remove("on")});
+
+/* Co sân khấu vừa màn hình */
+function fit(){const st=$("#stage"),z=Math.min(innerWidth/1600,innerHeight/900);st.style.transform=`scale(${z}) translate(-50%,-50%)`}
+addEventListener("resize",fit);fit();
+
+/* Đồng hồ: chuẩn 20 phút */
+let t0=null;function startClock(){t0=Date.now();if(ch)ch.postMessage({t:"clock",t0})}
+function fmtT(){if(!t0)return"00:00";const s=Math.floor((Date.now()-t0)/1000);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+setInterval(()=>{$("#clock").textContent=fmtT()+" / 20:00";if($("#pvc"))$("#pvc").textContent=fmtT()+" / 20:00"},1000);
+
+/* Cửa sổ người nói */
+if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slides[i];$("#pvt").textContent=`${i+1}/${slides.length} · ${s.dataset.title}`;$("#pvn").innerHTML=$(".notes",s)?.innerHTML||"";$("#pvm").textContent=`Dự kiến ${s.dataset.min||0} phút. Slide sau: ${slides[i+1]?.dataset.title||"hết"}.`};
+ ch&&(ch.onmessage=e=>{if(e.data.t==="at")paint(e.data.i);if(e.data.t==="clock")t0=e.data.t0});paint(0);
+ $("#pvp").onclick=()=>ch&&ch.postMessage({t:"go",i:cur-1});$("#pvx").onclick=()=>ch&&ch.postMessage({t:"go",i:cur+1});$("#pvr").onclick=startClock}
+else{ch&&(ch.onmessage=e=>{if(e.data.t==="go")go(e.data.i);if(e.data.t==="clock")t0=e.data.t0});
+ const h=parseInt(location.hash.slice(1),10);renderPoll();show(h>=1&&h<=slides.length?h-1:0)}
+a11y();window.__sim=sim;
+</script>
