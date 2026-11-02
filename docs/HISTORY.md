@@ -8,3 +8,8 @@
 
 ## Việc còn lại của nhóm
 Xem mục "Việc nhóm phải làm" trong README.
+
+## 02/11/2026: slide bản đầu
+- 21 slide, tự kiểm tra: không lỗi JavaScript, không tràn khung, mô phỏng ra đúng 3,50 và 80 ở mức 100%.
+- Chưa bật được GitHub Pages từ phiên Claude (bị chặn); người dùng bật trong Settings hoặc nối Vercel.
+- Chưa thử trên máy chiếu thật.

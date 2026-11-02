@@ -2,7 +2,7 @@
 
 Slide web và tài liệu cho chủ đề 9, lớp SE1919: Công nghiệp hóa, hiện đại hóa ở Việt Nam trong Cách mạng công nghiệp lần thứ tư.
 
-**Xem slide:** https://thiengthb.github.io/mln122-nhom9/
+**Xem slide:** bật GitHub Pages (Settings, Pages, nhánh `main`, thư mục gốc) rồi mở https://thiengthb.github.io/mln122-nhom9/
 
 ## Phím trong slide
 Mũi tên hoặc Space: chuyển slide · N: ghi chú · P: cửa sổ người nói · T: bắt đầu đồng hồ · K: soi tất cả số có nguồn · F: toàn màn hình. Bấm vào số có gạch chấm để xem nguồn.

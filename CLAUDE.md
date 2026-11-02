@@ -16,8 +16,8 @@ Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng v
 - Mọi lần AI hỗ trợ phải ghi vào `docs/05-phu-luc-ai.md`. Nhóm phải tự giải thích được nội dung: nếu không, cả cấu phần có thể bị 0 điểm.
 
 ## Cấu trúc
-- `src/deck.html`: nguồn của slide, sửa ở đây. `index.html`: bản build. Chạy `python3 scripts/build.py` rồi commit cả hai.
-- `src/deck.html` phần đầu script có `CONFIG`: tên thành viên, ngày, giờ.
+- Nguồn slide: `src/deck.css.part` (giao diện), `src/slides.part` (nội dung), `src/app.part` (dữ liệu nguồn, tương tác). `src/deck.html` và `index.html` là bản build: chạy `python3 scripts/build.py` rồi commit.
+- Đầu `src/app.part` có `CONFIG`: tên thành viên, ngày, phần nhóm đã làm.
 - Phím trong slide: mũi tên, N ghi chú, P cửa sổ người nói, K soi nguồn, F toàn màn hình.
 
 ## Liên kết

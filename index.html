@@ -36,7 +36,7 @@ html,body{height:100%;margin:0;background:var(--cham-deep);color:var(--vai);font
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 a{color:var(--si)}
 :focus-visible{outline:3px solid var(--nghe);outline-offset:3px}
-#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;overflow:hidden;background:var(--cham);
+#stage{position:absolute;left:50%;top:50%;width:1600px;height:900px;transform-origin:0 0;overflow:hidden;overflow:clip;background:var(--cham);
   background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.022) 0 2px,transparent 2px 7px),repeating-linear-gradient(90deg,rgba(255,255,255,.022) 0 2px,transparent 2px 7px)}
 .s{position:absolute;inset:0;padding:44px 76px 76px;display:none;flex-direction:column;gap:22px}
 .s.on{display:flex}
@@ -74,8 +74,8 @@ body.k .n{background:var(--nghe);color:var(--cham-deep);border:0;padding:0 5px}
 #warp i:nth-child(3n){background:var(--son)}#warp i:nth-child(7n){background:var(--nghe)}
 @keyframes warp{0%{transform:scaleY(0);transform-origin:bottom}49%{transform:scaleY(1);transform-origin:bottom}51%{transform:scaleY(1);transform-origin:top}100%{transform:scaleY(0);transform-origin:top}}
 /* ngăn nguồn */
-#drawer{position:absolute;top:0;right:0;bottom:0;width:640px;background:var(--cham-deep);z-index:9;padding:42px 40px;display:flex;flex-direction:column;gap:16px;transform:translateX(102%);transition:transform .28s;border-left:6px solid var(--nghe);overflow:auto}
-#drawer.on{transform:none}
+#drawer{position:absolute;top:0;right:0;bottom:0;width:640px;background:var(--cham-deep);z-index:9;padding:42px 40px;display:flex;flex-direction:column;gap:16px;transform:translateX(102%);visibility:hidden;transition:transform .28s,visibility .28s;border-left:6px solid var(--nghe);overflow:auto}
+#drawer.on{transform:none;visibility:visible}
 #drawer .x{align-self:flex-end;font:600 18px var(--mono);border:1px solid var(--vai-3);padding:6px 10px}
 #drawer h3{font-size:32px}
 #drawer p{font-size:21px}
