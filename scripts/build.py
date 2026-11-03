@@ -19,3 +19,42 @@ page = (
 )
 (root / "index.html").write_text(page, encoding="utf8")
 print("OK", len(body))
+
+# Sinh kịch bản nói từ ghi chú trong slide, để slide và lời nói luôn khớp nhau.
+import re
+
+src_slides = (src / "slides.part").read_text(encoding="utf8")
+items = re.findall(
+    r'<section[^>]*data-who="(\d)"[^>]*data-title="([^"]+)".*?<aside class="notes">(.*?)</aside>',
+    src_slides,
+    re.S,
+)
+RATE = 170  # tiếng mỗi phút
+out = [
+    "# Kịch bản thuyết trình 5 người\n\n"
+    "Tự sinh từ ghi chú trong `src/slides.part`; sửa ở đó rồi chạy `python3 scripts/build.py`. "
+    "Thời lượng ước tính theo tốc độ 170 tiếng mỗi phút, chưa tính nhịp dừng, nên phải bấm giờ khi tập.\n\n"
+    "Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là nhịp bấm trong cùng slide. "
+    "Hết mỗi đoạn thì bấm sang slide sau.\n"
+]
+who = {}
+for i, (w, title, note) in enumerate(items, 1):
+    who.setdefault(w, []).append((i, title, note.strip()))
+total = 0
+table = ["\n| Người | Slide | Nội dung | Ước tính |\n|---|---|---|---|\n"]
+parts = []
+for w, rows in sorted(who.items()):
+    spoken = [r for r in rows if r[1] not in ("Minh bạch AI", "Tài liệu tham khảo")]
+    words = sum(len(n.split()) for _, _, n in spoken)
+    mins = words / RATE
+    total += mins
+    a, b = spoken[0][0], spoken[-1][0]
+    table.append(f"| Người {w} | {a}–{b} | {spoken[0][1]} đến {spoken[-1][1]} | {mins:.1f} phút |\n")
+    parts.append(f"\n## Người {w}: slide {a}–{b} (khoảng {mins:.1f} phút)\n")
+    for i, title, n in spoken:
+        parts.append(f"\n### Slide {i}. {title}\n\n{n}\n")
+table.append(f"| **Tổng phần nói** | | | **{total:.1f} phút** |\n")
+out += table + parts
+out.append("\n## Slide dự phòng\n\nSlide 22 (Minh bạch AI) và 23 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi.\n")
+(root / "docs" / "06-kich-ban.md").write_text("".join(out), encoding="utf8")
+print("Kịch bản: %.1f phút" % total)

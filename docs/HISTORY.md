@@ -9,6 +9,9 @@
 ## 04/11/2026: nhận review Codex và góp ý của người dùng
 Xem `docs/08-ra-soat-va-ke-hoach-v2.md`. Chưa sửa slide, đang chờ người dùng chốt và chờ trình duyệt.
 
+## 04/11/2026: bản 2
+Dựng lại hoạt ảnh, sơ đồ, một phím một nhịp; bỏ khảo sát; thêm Nhật Bản, Hàn Quốc và NQ57 nguyên văn; sửa câu chữ; kịch bản 5 người; Kahoot.
+
 ## Việc còn lại của nhóm
 Xem mục "Việc nhóm phải làm" trong README.
 

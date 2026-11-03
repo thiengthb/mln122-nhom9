@@ -123,7 +123,7 @@ td{padding:10px 14px 10px 0;border-top:1px solid var(--cham-3);vertical-align:to
 .s.mid .panel{padding:34px 30px}
 .s.mid h3{font-size:34px}
 table.lg{font-size:26px}table.lg td{padding-block:20px}
-#plan p{font-size:30px;line-height:1.3}#plan .dark p{font-size:25px!important}
+#plan .panel{justify-content:center}#plan p{font-size:32px;line-height:1.3}#plan .dark p{font-size:25px!important}
 #revbody p{font-size:30px}
 .vc .panel{justify-content:center;gap:18px}
 .vc .bar{font-size:26px;margin-block:12px}.vc .bar .t{height:38px}
@@ -168,326 +168,389 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 #hint{position:absolute;left:0;right:0;top:0;text-align:center;font-size:13px;color:var(--vai-3);display:none}
 @media (orientation:portrait) and (max-width:700px){#hint{display:block;padding-block:6px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* Bản 2: hình động và sơ đồ */
+.st{opacity:0;transform:translateY(10px);transition:.45s}.st.in{opacity:1;transform:none}
+.rv{display:grid;grid-template-columns:70px 1fr;gap:14px;padding:13px 18px;margin-bottom:10px;background:var(--cham-2);opacity:.45;transition:.5s;border-left:6px solid transparent}
+.rv b{font:800 40px/1 var(--display)}.rv h3{font-size:27px}.rv p{font-size:19px;line-height:1.3;color:var(--vai-2)}
+.rv.done{opacity:.72}.rv.on{opacity:1;background:var(--cham-deep);border-color:var(--son)}
+#morph{width:100%;height:100%;object-fit:contain;min-height:0}
+.fork{padding:16px 20px;background:var(--cham-2);border-left:7px solid var(--son)}.fork.m{border-color:var(--si)}.fork p{font-size:25px}
+.chain{display:flex;align-items:center;gap:8px}.chain b{flex:1;padding:12px;background:var(--cham-deep);font-size:20px;text-align:center}.chain i{width:26px;height:3px;background:var(--nghe)}
+.race{display:flex;flex-direction:column;gap:22px;margin-top:10px}
+.axis{display:flex;justify-content:space-between;margin-left:250px;width:760px;font:600 17px var(--mono);color:var(--vai-3)}
+.lane{display:grid;grid-template-columns:230px 760px 1fr;gap:20px;align-items:center}.lane b{font:600 28px var(--display)}.lane>span{font-size:21px;line-height:1.3;color:var(--vai-2)}
+.tr{height:62px;background:var(--cham-deep);position:relative}.tr.ghost{display:flex;align-items:center;padding-inline:18px;font-size:21px;color:var(--vai-2);background:repeating-linear-gradient(90deg,var(--cham-2) 0 14px,transparent 14px 26px)}
+.bar1,.bar2{position:absolute;top:0;bottom:0;left:var(--l,0);width:0}.bar1.v,.bar2.v{background:var(--vai)}.bar1.p,.bar2.p{background:var(--son)}.bar2{opacity:.45}
+.s.on .bar1{animation:gw 2.6s .5s cubic-bezier(.3,.7,.2,1) forwards}.s.on .bar2{animation:gw 1s 3.1s ease-out forwards}
+@keyframes gw{to{width:var(--w)}}
+.way{stroke-dasharray:1;stroke-dashoffset:1}.s.on .way{animation:dw 3.2s ease-in-out forwards}.s.on .w1{animation-delay:3.4s;animation-duration:1.4s}.s.on .w2{animation-delay:5.2s;animation-duration:3.8s}
+@keyframes dw{to{stroke-dashoffset:0}}
+.wc{opacity:0;padding:16px 20px}.s.on .wc{animation:fi .5s forwards}.s.on .wc0{animation-delay:.3s}.s.on .wc1{animation-delay:3.4s}.s.on .wc2{animation-delay:5.2s}.wd{font-size:21px;line-height:1.32}
+@keyframes fi{to{opacity:1}}
+.tl{margin-block:6px 14px}.tlaxis{display:flex;justify-content:space-between;margin-left:170px;font:600 17px var(--mono);color:var(--vai-3);margin-bottom:8px}
+.tlrow{display:grid;grid-template-columns:170px 1fr;align-items:center;margin-bottom:12px}.tlrow>b{font:600 28px var(--display)}
+.tlrow{position:relative}.tlbar{margin-left:var(--l);width:0;background:var(--c);color:var(--cham-deep);height:112px;overflow:hidden;display:flex;align-items:center}.s.on .tlbar{animation:gw 1.6s .4s ease-out forwards}
+.tlbar span{padding:10px 18px;font-size:22px;line-height:1.28;font-weight:600;min-width:420px}
+.hub{display:grid;grid-template-columns:1fr 280px 1fr;gap:26px;align-items:center}.hubL,.hubR{display:flex;flex-direction:column;gap:14px}.hubR .leaf{margin:0;border-left:6px solid var(--nghe);font-size:25px}
+.hubC{width:280px;height:280px;border-radius:50%;background:var(--son);color:var(--cham-deep);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}.hubC b{font:800 44px/1.05 var(--display)}.hubC span{font-size:22px}
+.s.on .hubC{animation:pu 3s ease-in-out infinite}@keyframes pu{50%{box-shadow:0 0 0 22px rgba(255,92,134,.16)}}
+.wf{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;max-width:430px}.wf i{aspect-ratio:1;display:block;transform:scale(0)}.s.on .wf i{animation:wi .3s forwards;animation-delay:calc(var(--d)*18ms + .4s)}
+@keyframes wi{to{transform:scale(1)}}.wf.sm8{max-width:255px;gap:4px;margin:4px 0}
+.lg{display:grid;grid-template-columns:20px 1fr;gap:4px 10px;font-size:21px;align-items:center}.lg i{width:20px;height:20px}.lg b{grid-column:2;font:600 20px var(--mono)}
+.funnel{display:grid;grid-template-columns:300px 1fr 70px 390px;gap:20px;align-items:stretch}.fcol{display:flex;flex-direction:column;gap:10px;justify-content:center}.fcol .leaf{margin:0}
+.farrow{align-self:center;height:0;border-top:26px solid transparent;border-bottom:26px solid transparent;border-left:50px solid var(--son)}
+.fend{background:var(--son);color:var(--cham-deep);padding:30px;display:flex;flex-direction:column;gap:14px;justify-content:center}.fend .n{border-color:var(--cham-deep)}
+.shift{display:grid;grid-template-columns:1fr 60px 1.4fr;gap:10px;align-items:center;font-size:22px}.shift span{background:var(--cham-deep);padding:12px}.shift i{height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:30px solid var(--si);justify-self:center}
+.wfall{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;height:300px;margin-top:44px;position:relative}
+.wb{position:relative;height:100%}.wb::before{content:"";position:absolute;left:0;right:0;bottom:calc(var(--b)*.86 + 12%);height:0;background:var(--c)}.s.on .wb::before{animation:gh 1.2s .4s ease-out forwards}@keyframes gh{to{height:calc(var(--h)*.86)}}
+.wb.m{--c:var(--si)}.wb.p{--c:var(--son)}.wb.w{--c:var(--vai)}.wb.p::before{animation-delay:1.6s!important}.wb.w::before{animation-delay:2.8s!important}
+.wb b{position:absolute;left:0;right:0;text-align:center;bottom:calc((var(--b) + var(--h))*.86 + 13%);font:800 34px var(--display);border:0}.wb span{position:absolute;bottom:0;left:0;right:0;text-align:center;font-size:21px}
+.nq{display:grid;grid-template-columns:1fr 300px 1fr;gap:26px;align-items:center}.nqcol{display:flex;flex-direction:column;gap:9px}.nqcol .leaf{margin:0;font-size:23px}
+.leaf.hi2{background:var(--son);color:var(--cham-deep);font-weight:600}.leaf.hi{background:var(--nghe);color:var(--cham-deep);font-weight:600}
+.nqc{width:300px;height:300px;border-radius:50%;background:var(--cham-deep);border:6px solid var(--nghe);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;gap:8px}.nqc b{font:800 28px/1.15 var(--display)}.nqc span{font:600 17px var(--mono);color:var(--nghe)}
+.s.on .nqc{animation:pu 3s ease-in-out infinite}
+.gc{align-items:stretch;gap:8px;padding:18px}.arc{stroke-dashoffset:var(--o)}.s.on .arc{animation:ar 1.8s .5s ease-out forwards}@keyframes ar{to{stroke-dashoffset:var(--to)}}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:34px;align-items:center}.tcol{padding-top:14px;border-top:4px solid var(--nghe);display:flex;flex-direction:column;gap:8px}.tcol p{font-size:29px;line-height:1.32}
+.grow-in .f{width:0}.s.on .grow-in .f{animation:gw 1.2s .4s ease-out forwards}
+.bar .f.p,.bar .f.m,.bar .f.w{}
+.toggle{cursor:default}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
 <div id="stage">
-<div id="clock" title="Đồng hồ thuyết trình, phím T để bắt đầu lại">00:00 / 20:00</div>
+<div id="clock" title="Phím T để bắt đầu đồng hồ">00:00 / 20:00</div>
 
-<section class="s cover" data-act="0" data-min="0.25" data-title="Bìa">
+<section class="s cover" data-act="0" data-who="1" data-min="0.5" data-title="Bìa">
   <canvas id="loom" width="760" height="855" aria-hidden="true"></canvas>
   <div class="eb r">ĐẠI HỌC FPT · MLN122 · KINH TẾ CHÍNH TRỊ MÁC - LÊNIN</div>
   <h1 class="r" style="--i:1">Một sợi chỉ,<br><em>bốn cuộc</em><br><em>cách mạng</em></h1>
   <p class="r" style="--i:2;max-width:780px;font-size:24px">Chủ đề 9. Công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh Cách mạng công nghiệp lần thứ tư: trí tuệ nhân tạo, chuyển đổi số và yêu cầu về nguồn nhân lực.</p>
   <div class="meta r" style="--i:3" id="covermeta"></div>
-  <aside class="notes">Chào thầy và các bạn. Nhóm 9 mở bài bằng một hình ảnh: tấm vải đang dệt bên phải dần biến thành dữ liệu. Cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Hôm nay ngành dệt may vẫn là nơi hàng triệu lao động Việt Nam đang đứng trước AI. Sợi chỉ ở đáy màn hình sẽ đi cùng cả bài.</aside>
+  <aside class="notes">Em chào thầy và các bạn. Chúng em là Nhóm 9, hôm nay trình bày chủ đề công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh Cách mạng công nghiệp lần thứ tư. Các bạn hãy nhìn tấm vải đang được dệt bên phải màn hình: phía dưới là hoa văn, càng lên cao càng biến thành dữ liệu. Hình ảnh đó chính là câu chuyện của bài hôm nay, vì cuộc cách mạng công nghiệp đầu tiên đã bắt đầu từ ngành dệt.</aside>
 </section>
 
-<section class="s mid" data-act="0" data-min="0.75" data-title="Khảo sát đầu bài" data-refs="">
-  <div class="eb r">TRƯỚC KHI NGHE · KHẢO SÁT CẢ LỚP</div>
-  <h2 class="r" style="--i:1">Đến năm 2035, AI sẽ làm gì với <em>nghề bạn đang học</em>?</h2>
-  <p class="sm r" style="--i:2">Các bạn giơ tay cho một lựa chọn. Một thành viên đếm và nhập số phiếu. Cuối bài lớp sẽ trả lời lại đúng câu này.</p>
-  <div class="r" style="--i:3" data-poll="a"></div>
-  <aside class="notes">Mời cả lớp giơ tay, đọc từng phương án. Không có đáp án đúng ở đây. Cuối bài chúng ta sẽ hỏi lại để xem lập luận và số liệu có làm ý kiến thay đổi không. Đây là khảo sát thật, không phải câu đố.</aside>
+<section class="s mid" data-act="0" data-who="1" data-min="0.75" data-title="Câu hỏi mở đầu">
+  <div class="eb r">TRƯỚC KHI VÀO BÀI</div>
+  <h2 class="r" style="--i:1;font-size:96px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
+  <p class="r" style="--i:2;font-size:30px;color:var(--vai-2)">Xin mời một, hai bạn trả lời nhanh.</p>
+  <aside class="notes">Trước khi vào nội dung, em xin hỏi nhanh: theo bạn, đến khi ra trường, AI sẽ làm gì với cái nghề bạn đang học? Mời một bạn. [Nghe một, hai câu trả lời, không tranh luận.] Cảm ơn bạn. Câu trả lời của bạn rất đáng nhớ, vì cuối bài nhóm sẽ quay lại câu hỏi này.</aside>
 </section>
 
-<section class="s mid" data-act="0" data-min="0.75" data-title="Luận điểm và ba câu hỏi" data-refs="gt|tr. 158">
+<section class="s mid" data-act="0" data-who="1" data-min="0.75" data-title="Luận điểm và ba câu hỏi" data-refs="gt|tr. 158">
   <div class="eb r">LUẬN ĐIỂM XUYÊN SUỐT <span class="tag">quan điểm nhóm</span></div>
   <h2 class="r" style="--i:1;font-size:82px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
-  <p class="r" style="--i:2;max-width:1200px">Giáo trình không nói đi tắt là bỏ bước. Giáo trình viết: <span class="n" data-c="gt" data-l="tr. 158">"kết hợp quá trình phát triển tuần tự với đi tắt đón đầu"</span>. Ba câu hỏi sau kiểm tra luận điểm này.</p>
+  <p class="r" style="--i:2;max-width:1250px">Giáo trình viết: <span class="n" data-c="gt" data-l="tr. 158">"kết hợp quá trình phát triển tuần tự với đi tắt đón đầu"</span>.</p>
   <div class="row c3 r" style="--i:3">
-    <button class="panel" data-go="3" style="text-align:left"><span class="eb">CÂU 1</span><h3>Học được gì từ Nhật Bản và các nước công nghiệp mới?</h3></button>
-    <button class="panel" data-go="10" style="text-align:left"><span class="eb">CÂU 2</span><h3>AI thay người hay tạo việc trong dệt may, logistics?</h3></button>
-    <button class="panel" data-go="14" style="text-align:left"><span class="eb">CÂU 3</span><h3>Nghị quyết 57 đặt ra yêu cầu gì với sinh viên?</h3></button>
+    <div class="panel"><span class="eb">CÂU 1</span><h3>Học được gì từ Nhật Bản và các nước công nghiệp mới?</h3></div>
+    <div class="panel"><span class="eb">CÂU 2</span><h3>AI tạo việc làm hay thay thế lao động trong dệt may, logistics?</h3></div>
+    <div class="panel"><span class="eb">CÂU 3</span><h3>Nghị quyết 57 đặt ra yêu cầu gì với sinh viên?</h3></div>
   </div>
-  <aside class="notes">Luận điểm của nhóm là: công nghệ có thể mua hoặc nhận chuyển giao, nhưng năng lực làm chủ nó thì phải tích lũy. Câu này không mâu thuẫn với chủ trương đi tắt đón đầu, vì chính giáo trình trang 158 viết là kết hợp tuần tự với đi tắt đón đầu. Bài có ba phần, đúng theo ba câu hỏi được giao.</aside>
+  <aside class="notes">Nhóm em xin nêu luận điểm ngay từ đầu: đi tắt được công nghệ, nhưng không đi tắt được năng lực. Công nghệ thì có thể mua, có thể nhận chuyển giao. Còn năng lực làm chủ công nghệ thì phải tích lũy. Luận điểm này không trái với chủ trương đi tắt đón đầu, bởi chính giáo trình ở trang 158 viết là "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu". Bài của nhóm dùng luận điểm đó để trả lời ba câu hỏi được giao. Để trả lời, trước hết chúng ta cần hiểu cách mạng công nghiệp thực chất là gì.</aside>
 </section>
 
-<section class="s" data-act="1" data-min="1" data-title="Bốn cuộc cách mạng" data-refs="gt|tr. 140–143;ieee">
+<section class="s" data-act="1" data-who="1" data-min="1.25" data-title="Bốn cuộc cách mạng" data-refs="gt|tr. 140–143;ieee">
   <div class="eb r">CÂU 1 · LÝ LUẬN · CÁCH MẠNG CÔNG NGHIỆP</div>
   <h2 class="r" style="--i:1">Mỗi cuộc cách mạng là một <em>bước nhảy của tư liệu lao động</em></h2>
-  <div class="tabs r" style="--i:2" role="tablist" id="revtabs"></div>
-  <div class="row r grow" style="--i:3;grid-template-columns:1fr 300px">
-    <div class="panel dark" id="revbody" style="min-height:270px"></div>
-    <div class="swatch" id="revsw" style="height:auto"></div>
+  <div class="row grow r" style="--i:2;grid-template-columns:600px 1fr">
+    <div id="revlist"></div>
+    <canvas id="morph" width="820" height="560" aria-label="Hình động: tấm vải biến thành dây chuyền, vi mạch, rồi mạng lưới"></canvas>
   </div>
-  <aside class="notes">Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt về chất của tư liệu lao động, kéo theo thay đổi phân công lao động. Bấm lần lượt từng cuộc. Điểm nhóm muốn nhấn: cuộc thứ nhất bắt đầu từ ngành dệt. Và máy dệt Jacquard dùng thẻ đục lỗ để điều khiển hoa văn, được cho là gợi ý cho Babbage về máy tính. Sợi chỉ và dòng lệnh có họ hàng với nhau.</aside>
+  <aside class="notes">Giáo trình định nghĩa cách mạng công nghiệp là những bước phát triển nhảy vọt về chất trình độ của tư liệu lao động, kéo theo thay đổi căn bản về phân công lao động. Hình bên phải tự chạy theo bốn chặng. Cuộc thứ nhất bắt đầu ở Anh, từ giữa thế kỷ 18, và khởi đầu chính từ ngành dệt, với thoi bay, xe kéo sợi, rồi máy hơi nước. Cuộc thứ hai là điện và dây chuyền sản xuất hàng loạt. Cuộc thứ ba là công nghệ thông tin và tự động hóa. Cuộc thứ tư liên kết thế giới thực và thế giới ảo, với trí tuệ nhân tạo, dữ liệu lớn, Internet vạn vật. Có một chi tiết thú vị: thẻ đục lỗ điều khiển hoa văn của máy dệt Jacquard được cho là đã gợi ý cho Babbage ý tưởng điều khiển máy tính. Vậy từ sợi chỉ đến dòng lệnh, đây là một mạch liên tục. Và mạch ấy đã được Mác nhìn thấy từ rất sớm.</aside>
 </section>
 
-<section class="s" data-act="1" data-min="1" data-title="Dự báo của Mác" data-refs="mac;gt|tr. 143–148">
+<section class="s" data-act="1" data-who="1" data-min="1" data-title="Dự báo của Mác" data-refs="mac;gt|tr. 143–148">
   <div class="eb r">CÂU 1 · LÝ LUẬN · LỰC LƯỢNG SẢN XUẤT</div>
-  <h2 class="r" style="--i:1">Mác đã thấy trước: của cải sẽ ít phụ thuộc vào <em>giờ làm</em></h2>
+  <h2 class="r" style="--i:1">Mác đã dự báo: của cải sẽ ít phụ thuộc vào <em>thời gian lao động</em></h2>
   <div class="row c2 grow r" style="--i:2">
     <div class="panel dark" style="justify-content:center">
-      <p style="font-size:31px;line-height:1.3;font-family:var(--display);font-weight:600"><span class="n" data-c="mac">"việc tạo ra của cải sẽ trở nên ít phụ thuộc vào thời gian lao động và số lượng lao động đã chi phí mà phụ thuộc vào việc ứng dụng khoa học ấy vào sản xuất"</span></p>
+      <p style="font-size:32px;line-height:1.3;font-family:var(--display);font-weight:600"><span class="n" data-c="mac">"việc tạo ra của cải sẽ trở nên ít phụ thuộc vào thời gian lao động và số lượng lao động đã chi phí mà phụ thuộc vào việc ứng dụng khoa học ấy vào sản xuất"</span></p>
       <p class="sm">C.Mác và Ph.Ăngghen, Toàn tập, t.46, phần II, tr. 368–369, dẫn theo giáo trình tr. 144.</p>
     </div>
-    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center">
-      <p><b>Hệ quả cho nước đi sau:</b> Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 144">"sẽ làm mất đi những lợi thế sản xuất truyền thống"</span> như nhân công rẻ, tài nguyên.</p>
-      <p><b>Nhưng cũng mở cơ hội:</b> nước đi sau có thể <span class="n" data-c="gt" data-l="tr. 145">tận dụng lợi thế của người đi sau</span> để rút ngắn khoảng cách.</p>
-      <div class="row c3" style="gap:10px">
-        <div class="panel" style="padding:14px"><b style="font-size:21px">Lực lượng sản xuất</b><span class="sm">phát triển nhảy vọt</span></div>
-        <div class="panel" style="padding:14px"><b style="font-size:21px">Quan hệ sản xuất</b><span class="sm">phải hoàn thiện theo</span></div>
-        <div class="panel" style="padding:14px"><b style="font-size:21px">Quản trị phát triển</b><span class="sm">phải đổi phương thức</span></div>
-      </div>
+    <div style="display:flex;flex-direction:column;gap:18px;justify-content:center">
+      <div class="fork"><span class="eb">THÁCH THỨC</span><p>Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 144">"sẽ làm mất đi những lợi thế sản xuất truyền thống"</span> như nhân công rẻ, tài nguyên.</p></div>
+      <div class="fork m"><span class="eb">CƠ HỘI</span><p>Nước đi sau có thể <span class="n" data-c="gt" data-l="tr. 145">tận dụng lợi thế của người đi sau</span> để rút ngắn khoảng cách.</p></div>
+      <div class="chain"><b>Lực lượng sản xuất</b><i></i><b>Quan hệ sản xuất</b><i></i><b>Phương thức quản trị</b></div>
     </div>
   </div>
-  <aside class="notes">Câu của Mác viết từ thế kỷ 19 nhưng đọc như nói về AI. Vì của cải dựa vào tri thức nhiều hơn, lợi thế nhân công rẻ của Việt Nam sẽ yếu dần. Đó là thách thức. Mặt khác, người đi sau có thể dùng ngay thành tựu đã có. Ba ô bên phải là ba vai trò của cách mạng công nghiệp trong giáo trình.</aside>
+  <aside class="notes">Mác viết rằng, theo đà phát triển của đại công nghiệp, việc tạo ra của cải sẽ ít phụ thuộc vào thời gian lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. Từ đó có hai hệ quả cho Việt Nam. Thách thức là những lợi thế truyền thống như nhân công rẻ sẽ mất dần. Cơ hội là nước đi sau có thể tận dụng thành tựu đã có để rút ngắn khoảng cách. Giáo trình cũng chỉ ra cách mạng công nghiệp tác động lên ba mặt: lực lượng sản xuất, quan hệ sản xuất và phương thức quản trị. Vậy người đi sau rút ngắn khoảng cách bằng cách nào? Xin mời bạn tiếp theo.</aside>
 </section>
 
-<section class="s" data-act="1" data-min="0.75" data-title="Ba mô hình công nghiệp hóa" data-refs="gt|tr. 151–153">
+<section class="s" data-act="1" data-who="2" data-min="1" data-title="Ba mô hình công nghiệp hóa" data-refs="gt|tr. 151–153">
   <div class="eb r">CÂU 1 · CÁC MÔ HÌNH CÔNG NGHIỆP HÓA</div>
-  <h2 class="r" style="--i:1">Từ 60–80 năm xuống <em>20–30 năm</em>: thời gian được rút ngắn bằng cách nào?</h2>
-  <div class="grow r mt" style="--i:2">
-  <table class="lg">
-    <tr><th style="width:230px">Mô hình</th><th>Thời gian, thang 0–80 năm</th><th style="width:340px">Cách làm</th><th style="width:340px">Giới hạn</th></tr>
-    <tr><td><b>Cổ điển</b><br>Anh</td><td><div style="height:30px;position:relative;background:var(--cham-deep)"><div style="position:absolute;left:0;width:75%;height:100%;background:var(--vai)"></div><div style="position:absolute;left:75%;width:25%;height:100%;background:var(--vai);opacity:.45"></div></div><span class="sm">60–80 năm</span></td><td>Đi từ công nghiệp nhẹ, trước hết là dệt, rồi đến cơ khí</td><td>Vốn dựa vào khai thác lao động làm thuê và cướp bóc thuộc địa</td></tr>
-    <tr><td><b>Kiểu Liên Xô</b></td><td><span class="sm">"trong một thời gian ngắn"; giáo trình không nêu số năm</span></td><td>Ưu tiên công nghiệp nặng, kế hoạch hóa tập trung</td><td>Không thích ứng với tiến bộ kỹ thuật mới, dẫn đến trì trệ</td></tr>
-    <tr><td><b>Nhật Bản, NICs</b><br>Hàn Quốc, Singapore</td><td><div style="height:30px;position:relative;background:var(--cham-deep)"><div style="position:absolute;left:0;width:25%;height:100%;background:var(--son)"></div><div style="position:absolute;left:25%;width:12.5%;height:100%;background:var(--son);opacity:.45"></div></div><span class="sm">20–30 năm</span></td><td>Hướng xuất khẩu, thay thế nhập khẩu, tận dụng công nghệ đi trước cùng nguồn lực trong nước</td><td>Cần những chính sách phát triển đúng đắn</td></tr>
-  </table>
+  <h2 class="r" style="--i:1">Từ 60–80 năm xuống <em>20–30 năm</em></h2>
+  <div class="race r" style="--i:2">
+    <div class="axis"><span>0</span><span>20</span><span>40</span><span>60</span><span>80 năm</span></div>
+    <div class="lane"><b>Cổ điển · Anh</b><div class="tr"><div class="bar1 v" style="--w:75%"></div><div class="bar2 v" style="--l:75%;--w:25%"></div></div><span>Đi từ công nghiệp nhẹ, trước hết là dệt. Vốn dựa vào làm thuê và thuộc địa.</span></div>
+    <div class="lane"><b>Kiểu Liên Xô</b><div class="tr ghost">giáo trình ghi "trong một thời gian ngắn", không nêu số năm</div><span>Ưu tiên công nghiệp nặng, kế hoạch hóa tập trung. Về sau không thích ứng được, dẫn đến trì trệ.</span></div>
+    <div class="lane"><b>Nhật Bản, NICs</b><div class="tr"><div class="bar1 p" style="--w:25%"></div><div class="bar2 p" style="--l:25%;--w:12.5%"></div></div><span>Hướng xuất khẩu, thay thế nhập khẩu, tận dụng công nghệ đi trước cùng nguồn lực trong nước.</span></div>
   </div>
-  <aside class="notes">Việt Nam từng áp dụng mô hình Liên Xô từ những năm 1960. Bảng này cho thấy nhóm Nhật Bản và các nước công nghiệp mới rút ngắn chỉ còn 20 đến 30 năm. Câu hỏi là họ rút ngắn bằng cách nào, vì nếu đó chỉ là mua công nghệ thì bài học rất khác. Slide sau trả lời.</aside>
+  <aside class="notes">Cảm ơn bạn. Giáo trình nêu ba mô hình công nghiệp hóa tiêu biểu. Mô hình cổ điển của nước Anh đi từ công nghiệp nhẹ, mất trung bình 60 đến 80 năm, và nguồn vốn gắn với khai thác lao động làm thuê, xâm chiếm thuộc địa. Mô hình kiểu Liên Xô ưu tiên công nghiệp nặng, xây dựng được cơ sở vật chất lớn trong thời gian ngắn, nhưng về sau không thích ứng kịp với tiến bộ kỹ thuật. Việt Nam cũng từng áp dụng mô hình này từ những năm 1960. Còn Nhật Bản và các nước công nghiệp mới chỉ cần khoảng 20 đến 30 năm. Câu hỏi quan trọng là: họ rút ngắn được hơn một nửa thời gian bằng cách nào?</aside>
 </section>
 
-<section class="s" data-act="1" data-min="1" data-title="Ba con đường công nghệ" data-refs="gt|tr. 153, 158">
+<section class="s" data-act="1" data-who="2" data-min="1" data-title="Ba con đường công nghệ" data-refs="gt|tr. 153, 158">
   <div class="eb r">CÂU 1 · BÀI HỌC CHÍNH</div>
-  <h2 class="r" style="--i:1">Nhật Bản và NICs đi bằng con đường <em>bện hai sợi</em></h2>
+  <h2 class="r" style="--i:1">Nhật Bản và NICs chọn con đường <em>vừa tiếp nhận, vừa tự nghiên cứu</em></h2>
   <div class="row r grow" style="--i:2;grid-template-columns:1fr 520px">
-    <svg viewBox="0 0 900 480" style="width:100%;height:100%;max-height:520px" role="img" aria-label="Sơ đồ ba con đường từ trình độ thấp đến trình độ cao">
-      <text x="10" y="470" fill="#C6C8E4" font-size="22" font-family="var(--mono)">trình độ thấp</text>
-      <text x="890" y="40" fill="#C6C8E4" font-size="22" text-anchor="end" font-family="var(--mono)">trình độ cao</text>
-      <path class="way" data-w="0" d="M20 430 C120 430 90 330 200 340 S300 420 380 320 S480 230 560 260 S680 200 720 140 S820 110 880 70" fill="none" stroke="#F5F1E6" stroke-width="5"/>
-      <path class="way" data-w="1" d="M20 430 L880 70" fill="none" stroke="#FFC93C" stroke-width="5" stroke-dasharray="14 10"/>
-      <path class="way" data-w="2" d="M20 430 C110 340 170 420 260 330 S380 290 450 250 S570 240 640 170 S770 130 880 70" fill="none" stroke="#FF5C86" stroke-width="7"/>
-      <path class="way" data-w="2" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke="#FF5C86" stroke-width="7"/>
+    <svg viewBox="0 0 900 470" id="waysvg" style="width:100%;height:100%" role="img" aria-label="Ba con đường từ trình độ thấp đến trình độ cao">
+      <text x="10" y="462" fill="#C6C8E4" font-size="22" font-family="var(--mono)">trình độ thấp</text>
+      <text x="890" y="34" fill="#C6C8E4" font-size="22" text-anchor="end" font-family="var(--mono)">trình độ cao</text>
+      <path class="way w0" pathLength="1" d="M20 430 C120 430 90 330 200 340 S300 420 380 320 S480 230 560 260 S680 200 720 140 S820 110 880 70" fill="none" stroke="#F5F1E6" stroke-width="5"/>
+      <path class="way w1" pathLength="1" d="M20 430 L880 70" fill="none" stroke="#FFC93C" stroke-width="5"/>
+      <path class="way w2" pathLength="1" d="M20 430 C110 340 170 420 260 330 S380 290 450 250 S570 240 640 170 S770 130 880 70" fill="none" stroke="#FF5C86" stroke-width="7"/>
+      <path class="way w2" pathLength="1" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke="#FF5C86" stroke-width="7"/>
     </svg>
-    <div style="display:flex;flex-direction:column;gap:10px" id="ways"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+      <div class="panel wc wc0" style="border-left:7px solid #F5F1E6"><h3 style="font-size:26px">Tự nghiên cứu, chế tạo</h3><span class="wd">Thời gian dài, tổn thất nhiều khi thử nghiệm.</span></div>
+      <div class="panel wc wc1" style="border-left:7px solid #FFC93C"><h3 style="font-size:26px">Nhận chuyển giao</h3><span class="wd">Cần nhiều vốn, ngoại tệ và chịu sự phụ thuộc vào nước ngoài.</span></div>
+      <div class="panel dark wc wc2" style="border-left:7px solid #FF5C86"><h3 style="font-size:26px">Chiến lược nhiều tầng</h3><span class="wd"><span class="n" data-c="gt" data-l="tr. 153">"vừa cơ bản, lâu dài và vững chắc vừa đảm bảo đi tắt và bám đuổi"</span>.</span></div>
+    </div>
   </div>
-  <aside class="notes">Giáo trình trang 153 nêu ba con đường. Tự nghiên cứu thì lâu và tổn thất. Nhận chuyển giao thì nhanh nhưng phụ thuộc. Con đường thứ ba kết hợp cả hai và đó là cách Nhật Bản, các nước công nghiệp mới đã đi. Vì vậy bài học không phải là bỏ qua giai đoạn, mà là vừa đuổi theo vừa tự học. Bấm vào từng con đường để xem.</aside>
+  <aside class="notes">Giáo trình trang 153 chỉ ra ba con đường tiếp cận công nghệ. Con đường thứ nhất, tự nghiên cứu từ thấp đến cao, thường kéo dài và tổn thất nhiều. Con đường thứ hai, nhận chuyển giao, nhanh hơn nhưng cần nhiều vốn và luôn chịu sự phụ thuộc. Con đường thứ ba là xây dựng chiến lược nhiều tầng, vừa nghiên cứu chế tạo vừa nhận chuyển giao. Giáo trình gọi đó là con đường vừa cơ bản, lâu dài, vững chắc, vừa đảm bảo đi tắt và bám đuổi. Đây là đường mà Nhật Bản và các nước công nghiệp mới đã chọn. Vậy cụ thể họ đã làm gì?</aside>
 </section>
 
-<section class="s" data-act="1" data-min="0.75" data-title="Học phí của đi tắt" data-refs="nd25;ifr26;nq57">
+<section class="s" data-act="1" data-who="2" data-min="1.25" data-title="Nhật Bản, Hàn Quốc đã làm gì" data-refs="ea26;ldn24;gt|tr. 153, 156">
+  <div class="eb r">CÂU 1 · THỰC TIỄN ĐÔNG Á</div>
+  <h2 class="r" style="--i:1">Họ nhập công nghệ để <em>học cách cải tiến</em>, không chỉ để dùng</h2>
+  <div class="tl r" style="--i:2">
+    <div class="tlaxis"><span>1945</span><span>1960</span><span>1975</span><span>1990</span></div>
+    <div class="tlrow"><b>Nhật Bản</b><div class="tlbar" style="--l:0%;--w:55.6%;--c:var(--vai)"><span>Nhập máy móc, hóa chất, tập trung học để cải tiến; đầu tư giáo dục và kỹ sư</span></div></div>
+    <div class="tlrow"><b>Hàn Quốc</b><div class="tlbar" style="--l:33.3%;--w:66.7%;--c:var(--son)"><span>Xuất khẩu buộc phải học nhanh; thập niên 1980: viện nghiên cứu ngay trong doanh nghiệp; đưa chuyên gia trở về</span></div></div>
+  </div>
+  <div class="row c4 r" style="--i:3;gap:14px">
+    <div class="panel"><span class="eb">BÀI HỌC 1</span><h3 style="font-size:25px">Nhập công nghệ phải đi kèm hấp thụ</h3></div>
+    <div class="panel"><span class="eb">BÀI HỌC 2</span><h3 style="font-size:25px">Doanh nghiệp là trung tâm đổi mới</h3></div>
+    <div class="panel"><span class="eb">BÀI HỌC 3</span><h3 style="font-size:25px">Đầu tư sớm cho con người</h3></div>
+    <div class="panel"><span class="eb">BÀI HỌC 4</span><h3 style="font-size:25px"><span class="n" data-c="gt" data-l="tr. 156">"không chủ quan, nóng vội"</span>, cũng không trì hoãn</h3></div>
+  </div>
+  <aside class="notes">Hàn Quốc đầu những năm 1960 là một trong những nước kém phát triển nhất, GDP bình quân chỉ khoảng 79 đô la một năm, nhưng khoảng 20 năm sau đã được công nhận là nền kinh tế công nghiệp mới. Theo một nghiên cứu trên Tạp chí Quản lý nhà nước năm 2026, Nhật Bản giai đoạn 1945 đến 1970 nhập công nghệ trong các ngành then chốt, nhưng tập trung vào việc học để cải tiến và đầu tư cho giáo dục, kỹ sư. Hàn Quốc từ 1960 đến 1990 dùng xuất khẩu làm sức ép buộc doanh nghiệp học nhanh. Đến những năm 1980, Nhà nước hỗ trợ doanh nghiệp lập viện nghiên cứu riêng và thu hút chuyên gia về nước. Từ đó nhóm rút ra bốn bài học cho Việt Nam. Thứ nhất, nhập công nghệ phải đi kèm hấp thụ. Thứ hai, doanh nghiệp là trung tâm đổi mới. Thứ ba, đầu tư sớm cho con người. Thứ tư, như giáo trình nói, không chủ quan, nóng vội, nhưng cũng không trì hoãn.</aside>
+</section>
+
+<section class="s" data-act="1" data-who="2" data-min="1" data-title="Đầu tư cho năng lực" data-refs="ea26;nd25;ifr26;nq57">
   <div class="eb r">CÂU 1 · SỐ LIỆU</div>
-  <h2 class="r" style="--i:1">Đi tắt vẫn phải đóng <em>học phí</em></h2>
+  <h2 class="r" style="--i:1">Đi tắt nhưng vẫn phải <em>đầu tư cho năng lực</em></h2>
   <div class="row c2 grow r vc" style="--i:2">
     <div class="panel">
       <h3>Chi cho nghiên cứu và phát triển, % GDP</h3>
-      <div class="bar" style="--lab:210px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="width:98%"></div></div><span class="n" data-c="nd25">~4,9</span></div>
-      <div class="bar" style="--lab:210px"><span>VN, mục tiêu 2030</span><div class="t"><div class="f p" style="width:40%"></div></div><span class="n" data-c="nq57">2</span></div>
-      <div class="bar" style="--lab:210px"><span>Việt Nam, 2021</span><div class="t"><div class="f" style="width:8.4%"></div></div><span class="n" data-c="nd25">0,42</span></div>
-      <p class="sm">0,42% là số năm 2021, số mới nhất nhóm đối chiếu được.</p>
+      <div class="bar grow-in" style="--lab:230px"><span>Hàn Quốc, 2018</span><div class="t"><div class="f w" style="--w:90.6%"></div></div><span class="n" data-c="ea26">4,53</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>Nhật Bản, 2018</span><div class="t"><div class="f w" style="--w:65.2%"></div></div><span class="n" data-c="ea26">3,26</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>VN, mục tiêu 2030</span><div class="t"><div class="f p" style="--w:40%"></div></div><span class="n" data-c="nq57">2</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>Việt Nam, 2019</span><div class="t"><div class="f" style="--w:10.6%"></div></div><span class="n" data-c="ea26">0,53</span></div>
     </div>
     <div class="panel">
       <h3>Robot trên 10.000 lao động chế tạo, 2024</h3>
-      <div class="bar" style="--lab:150px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="width:96%"></div></div><span class="n" data-c="ifr26">1.220</span></div>
-      <div class="bar" style="--lab:150px"><span>Singapore</span><div class="t"><div class="f w" style="width:64.4%"></div></div><span class="n" data-c="ifr26">818</span></div>
-      <div class="bar" style="--lab:150px"><span>Nhật Bản</span><div class="t"><div class="f w" style="width:35.1%"></div></div><span class="n" data-c="ifr26">446</span></div>
-      <div class="bar" style="--lab:150px"><span>Trung Quốc</span><div class="t"><div class="f w" style="width:13.1%"></div></div><span class="n" data-c="ifr26">166</span></div>
-      <p class="sm">Đây là số hiện tại, không phải số lúc các nước này đuổi kịp. Thông cáo của IFR không nêu Việt Nam.</p>
+      <div class="bar grow-in" style="--lab:170px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="--w:96%"></div></div><span class="n" data-c="ifr26">1.220</span></div>
+      <div class="bar grow-in" style="--lab:170px"><span>Singapore</span><div class="t"><div class="f w" style="--w:64.4%"></div></div><span class="n" data-c="ifr26">818</span></div>
+      <div class="bar grow-in" style="--lab:170px"><span>Nhật Bản</span><div class="t"><div class="f w" style="--w:35.1%"></div></div><span class="n" data-c="ifr26">446</span></div>
+      <div class="bar grow-in" style="--lab:170px"><span>Trung Quốc</span><div class="t"><div class="f w" style="--w:13.1%"></div></div><span class="n" data-c="ifr26">166</span></div>
     </div>
   </div>
-  <p class="r" style="--i:3"><span class="tag">quan điểm nhóm</span> Các nước đã đi trước vẫn chi rất lớn để học tiếp. Mua được máy, nhưng khả năng làm ra máy tiếp theo thì phải tự xây.</p>
-  <aside class="notes">Hai biểu đồ này cần đọc cẩn thận. Đây là số hiện tại, nên không chứng minh được chính xác lúc Hàn Quốc đuổi kịp họ chi bao nhiêu. Điều nó cho thấy là khoảng cách đầu tư vào năng lực hiện nay. Nếu bị hỏi về số 0,42%: đó là số năm 2021 của Ngân hàng Thế giới do báo Nhân Dân dẫn lại.</aside>
+  <p class="sm r" style="--i:3">Đây là số gần đây, không phải số lúc các nước này đuổi kịp. Một nguồn khác ghi R&D Việt Nam năm 2021 là <span class="n" data-c="nd25">0,42%</span>. Thông cáo của IFR không nêu Việt Nam.</p>
+  <aside class="notes">Hai biểu đồ này cho thấy các nước đi trước đến nay vẫn tiếp tục đầu tư rất lớn. Hàn Quốc chi hơn 4,5% GDP cho nghiên cứu và phát triển, trong khi Việt Nam năm 2019 là 0,53%, và Nghị quyết 57 đặt mục tiêu 2% vào năm 2030. Nhóm xin nói rõ, đây là số những năm gần đây, không phải con số lúc họ đuổi kịp, nên nó không chứng minh trực tiếp nguyên nhân thành công. Điều nó cho thấy là khoảng cách đầu tư vào năng lực hiện nay. Mua được máy móc, nhưng khả năng làm ra thế hệ máy tiếp theo thì phải tự xây dựng. Đó là câu trả lời của nhóm cho câu hỏi thứ nhất. Tiếp theo, bạn của em sẽ đưa bài học ấy về Việt Nam.</aside>
 </section>
 
-<section class="s" data-act="1" data-min="1" data-title="Việt Nam đang ở đâu" data-refs="gt|tr. 153–155;nso26q3;nso26ld">
-  <div class="eb r">CÂU 1 · TÍNH TẤT YẾU VÀ THỰC TRẠNG</div>
+<section class="s" data-act="1" data-who="3" data-min="1" data-title="Tính tất yếu và đặc điểm" data-refs="gt|tr. 153–155">
+  <div class="eb r">CÂU 1 · VỀ VIỆT NAM · TÍNH TẤT YẾU</div>
+  <h2 class="r" style="--i:1">Với Việt Nam, công nghiệp hóa là <em>yêu cầu khách quan</em></h2>
+  <div class="hub grow r" style="--i:2">
+    <div class="hubL">
+      <div class="panel"><span class="eb">LÝ DO 1</span><p><span class="n" data-c="gt" data-l="tr. 153">"quy luật phổ biến"</span> của sự phát triển lực lượng sản xuất xã hội</p></div>
+      <div class="panel"><span class="eb">LÝ DO 2</span><p>Xây dựng cơ sở vật chất kỹ thuật cho chủ nghĩa xã hội <span class="n" data-c="gt" data-l="tr. 154">từ đầu</span></p></div>
+    </div>
+    <div class="hubC"><b>CNH, HĐH</b><span>ở Việt Nam</span></div>
+    <div class="hubR">
+      <div class="leaf">Định hướng xã hội chủ nghĩa</div>
+      <div class="leaf">Gắn với kinh tế tri thức</div>
+      <div class="leaf">Trong kinh tế thị trường định hướng xã hội chủ nghĩa</div>
+      <div class="leaf">Trong toàn cầu hóa, hội nhập</div>
+    </div>
+  </div>
+  <aside class="notes">Cảm ơn bạn. Vì sao Việt Nam phải công nghiệp hóa, hiện đại hóa? Giáo trình nêu hai lý do. Một là, đây là quy luật phổ biến của sự phát triển lực lượng sản xuất xã hội mà mọi quốc gia đều trải qua. Hai là, với một nước kém phát triển quá độ lên chủ nghĩa xã hội như nước ta, cơ sở vật chất kỹ thuật phải được xây dựng từ đầu thông qua công nghiệp hóa, hiện đại hóa. Quá trình đó có bốn đặc điểm: theo định hướng xã hội chủ nghĩa, gắn với kinh tế tri thức, diễn ra trong kinh tế thị trường định hướng xã hội chủ nghĩa, và trong bối cảnh toàn cầu hóa, hội nhập. Vậy hiện nay chúng ta đang đứng ở đâu?</aside>
+</section>
+
+<section class="s" data-act="1" data-who="3" data-min="1.25" data-title="Việt Nam đang ở đâu" data-refs="nso26q3;nso26ld;kts;gt|tr. 156">
+  <div class="eb r">CÂU 1 · VỀ VIỆT NAM · THỰC TRẠNG</div>
   <h2 class="r" style="--i:1">Việt Nam phải làm <em>hai việc cùng lúc</em>: cơ khí hóa và số hóa</h2>
-  <div class="row r grow" style="--i:2;grid-template-columns:1fr 520px">
-    <div class="panel">
-      <div class="legend"><span><i style="background:var(--vai)"></i>Tỷ trọng lao động, quý III/2026</span><span><i style="background:var(--nghe)"></i>Tỷ trọng GDP, 9 tháng 2026</span></div>
-      <div class="pair"><b>Nông, lâm, thủy sản</b>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f w" style="width:50.2%"></div></div><span class="n" data-c="nso26ld">25,1%</span></div>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f" style="width:21.3%"></div></div><span class="n" data-c="nso26q3">10,65%</span></div></div>
-      <div class="pair"><b>Công nghiệp, xây dựng</b>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f w" style="width:67.8%"></div></div><span class="n" data-c="nso26ld">33,9%</span></div>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f" style="width:76.7%"></div></div><span class="n" data-c="nso26q3">38,35%</span></div></div>
-      <div class="pair"><b>Dịch vụ</b>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f w" style="width:82%"></div></div><span class="n" data-c="nso26ld">41,0%</span></div>
-        <div class="bar" style="--lab:0px"><span></span><div class="t"><div class="f" style="width:85.9%"></div></div><span class="n" data-c="nso26q3">42,97%</span></div></div>
-      <p class="sm">Nhóm đặt hai chỉ tiêu cạnh nhau; chúng khác kỳ số liệu và GDP còn gồm 8,03% thuế sản phẩm.</p>
-    </div>
-    <div style="display:flex;flex-direction:column;gap:14px">
-      <div class="panel dark"><span class="big n" data-c="nso26ld">60,6%</span><span>lao động có việc làm phi chính thức</span></div>
-      <div class="panel dark"><span class="big n" data-c="kts">14,02%</span><span>GDP là kinh tế số, năm 2025</span></div>
-      <p class="sm"><b style="color:var(--vai)">Vì sao tất yếu:</b> quy luật chung của phát triển lực lượng sản xuất, và là cách xây dựng cơ sở vật chất kỹ thuật cho chủ nghĩa xã hội từ đầu. <b style="color:var(--vai)">Bốn đặc điểm:</b> định hướng xã hội chủ nghĩa; gắn kinh tế tri thức; trong kinh tế thị trường định hướng xã hội chủ nghĩa; trong toàn cầu hóa, hội nhập.</p>
+  <div class="row grow r" style="--i:2;grid-template-columns:1fr 1fr 370px;gap:28px">
+    <div><h3 style="font-size:25px;margin-bottom:10px">100 người lao động, quý III/2026</h3><div class="wf" data-wf="25.1:s,33.9:y,41:w"></div></div>
+    <div><h3 style="font-size:25px;margin-bottom:10px">100 đồng GDP, 9 tháng 2026</h3><div class="wf" data-wf="10.65:s,38.35:y,42.97:w,8.03:g"></div></div>
+    <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
+      <div class="lg"><i style="background:var(--son)"></i>Nông, lâm, thủy sản<b><span class="n" data-c="nso26ld">25,1%</span> · <span class="n" data-c="nso26q3">10,65%</span></b></div>
+      <div class="lg"><i style="background:var(--nghe)"></i>Công nghiệp, xây dựng<b><span class="n" data-c="nso26ld">33,9%</span> · <span class="n" data-c="nso26q3">38,35%</span></b></div>
+      <div class="lg"><i style="background:var(--vai)"></i>Dịch vụ<b><span class="n" data-c="nso26ld">41,0%</span> · <span class="n" data-c="nso26q3">42,97%</span></b></div>
+      <div class="lg"><i style="background:var(--cham-3)"></i>Thuế sản phẩm<b>– · <span class="n" data-c="nso26q3">8,03%</span></b></div>
+      <div class="panel dark" style="padding:14px 18px;margin-top:6px"><p style="font-size:22px"><b class="n" data-c="nso26ld">60,6%</b> lao động phi chính thức<br><b class="n" data-c="kts">14,02%</b> GDP là kinh tế số, 2025</p></div>
     </div>
   </div>
-  <aside class="notes">Khoảng một phần tư lao động còn ở nông, lâm, thủy sản nhưng khu vực này tạo khoảng một phần mười GDP. Như vậy công việc của cuộc cách mạng thứ nhất, thứ hai chưa xong, thì kinh tế số đã chiếm hơn 14% GDP. Giáo trình trang 156 cũng nói vậy: trọng tâm là cơ khí hóa, nhưng khi có điều kiện vẫn ứng dụng ngay công nghệ mới.</aside>
+  <p class="sm r" style="--i:3">Mỗi ô là một phần trăm, làm tròn. Hai lưới khác kỳ số liệu, nhóm đặt cạnh nhau để so sánh.</p>
+  <aside class="notes">Mỗi ô trên màn hình là một phần trăm. Lưới bên trái là 100 người lao động, lưới bên phải là 100 đồng GDP. Màu đỏ là khu vực nông, lâm, thủy sản: khoảng một phần tư lao động, nhưng chỉ tạo khoảng một phần mười GDP. Hơn 60% lao động vẫn ở khu vực phi chính thức. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nói cách khác, việc của cuộc cách mạng thứ nhất và thứ hai chưa xong thì cuộc thứ tư đã đến. Giáo trình trang 156 giải quyết điều này rất rõ: nước kém phát triển lấy cơ khí hóa làm trọng tâm, nhưng khi có điều kiện vẫn có thể ứng dụng ngay công nghệ hiện đại để rút ngắn khoảng cách.</aside>
 </section>
 
-<section class="s" data-act="1" data-min="0.75" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162">
+<section class="s" data-act="1" data-who="3" data-min="1" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162">
   <div class="eb r">CÂU 1 · NỘI DUNG CÔNG NGHIỆP HÓA, HIỆN ĐẠI HÓA</div>
-  <h2 class="r" style="--i:1">Thể chế, công nghệ, cơ cấu rồi cũng quy về <em>con người</em></h2>
-  <div class="tree r" style="--i:2;margin-top:18px">
-    <div><div class="leaf" style="background:var(--cham-deep);height:100%"><span class="eb">MỘT LÀ</span><br><br><b>Tạo lập điều kiện:</b> tư duy phát triển, thể chế, nguồn lực, môi trường quốc tế.<br><br><span class="sm">"không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện" (tr. 155)</span></div></div>
-    <div>
-      <span class="eb">HAI LÀ · CÁC NHIỆM VỤ</span>
-      <div class="row c2" style="gap:10px;margin-top:10px">
-        <div class="leaf">Ứng dụng khoa học, công nghệ mới; gắn với kinh tế tri thức (tr. 156–158)</div>
-        <div class="leaf">Chuyển đổi cơ cấu kinh tế hiện đại, hợp lý, hiệu quả (tr. 158–159)</div>
-        <div class="leaf">Hoàn thiện quan hệ sản xuất phù hợp lực lượng sản xuất (tr. 159)</div>
-        <div class="leaf">Thích ứng với 4.0: thể chế, ứng dụng, hạ tầng và chuyển đổi số (tr. 159–161)</div>
-      </div>
-      <div class="leaf hi" style="font-size:27px">Phát triển nguồn nhân lực chất lượng cao: thích ứng với 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span></div>
-    </div>
+  <h2 class="r" style="--i:1">Mọi nhiệm vụ cuối cùng đều cần đến <em>con người</em></h2>
+  <div class="funnel grow r" style="--i:2">
+    <div class="fcol"><span class="eb">TẠO LẬP ĐIỀU KIỆN</span><div class="leaf">Tư duy phát triển, thể chế, nguồn lực, môi trường quốc tế</div><p class="sm"><span class="n" data-c="gt" data-l="tr. 155">"không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện"</span></p></div>
+    <div class="fcol"><span class="eb">THỰC HIỆN NHIỆM VỤ</span>
+      <div class="leaf">Ứng dụng khoa học, công nghệ; gắn với kinh tế tri thức</div>
+      <div class="leaf">Chuyển đổi cơ cấu kinh tế</div>
+      <div class="leaf">Hoàn thiện quan hệ sản xuất</div>
+      <div class="leaf">Thích ứng với 4.0: thể chế, ứng dụng, hạ tầng số</div></div>
+    <div class="farrow" aria-hidden="true"></div>
+    <div class="fend"><span class="eb" style="color:var(--cham-deep)">KHÂU QUYẾT ĐỊNH</span><h3 style="font-size:40px">Nguồn nhân lực chất lượng cao</h3><p style="font-size:26px">Thích ứng với 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span></p></div>
   </div>
-  <aside class="notes">Đây là khung nội dung trong giáo trình. Nhóm chú ý ô cuối: sau khi nói về thể chế và công nghệ, giáo trình khẳng định việc thích ứng phải do con người quyết định. Điều này mở đường sang câu hỏi thứ hai. Nếu con người là yếu tố quyết định, thì AI đang làm gì với con người?</aside>
+  <aside class="notes">Đây là khung nội dung trong giáo trình. Trước hết là tạo lập điều kiện về tư duy, thể chế, nguồn lực; nhưng giáo trình lưu ý không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện. Tiếp theo là các nhiệm vụ: ứng dụng khoa học công nghệ, chuyển đổi cơ cấu kinh tế, hoàn thiện quan hệ sản xuất, và thích ứng với Cách mạng 4.0. Điều nhóm muốn nhấn mạnh nằm ở ô bên phải: giáo trình khẳng định việc thích ứng phải do con người quyết định. Đây cũng là chỗ luận điểm của nhóm gắn với giáo trình. Nhưng nếu con người là khâu quyết định, thì AI đang làm gì với con người? Bạn tiếp theo sẽ trả lời câu hỏi thứ hai.</aside>
 </section>
 
-<section class="s" data-act="2" data-min="0.75" data-title="86% hay dưới 2%" data-refs="ilo16;ilo26;qlnn26">
-  <div class="eb r">CÂU 2 · CHUYỂN Ý</div>
-  <h2 class="r" style="--i:1">Cùng là ILO, cùng nói về Việt Nam, sao lại <em>hai con số</em>?</h2>
+<section class="s" data-act="2" data-who="4" data-min="1" data-title="86% hay dưới 2%" data-steps="1" data-refs="ilo16;ilo26;qlnn26">
+  <div class="eb r">CÂU 2 · ĐỌC SỐ LIỆU CHO ĐÚNG</div>
+  <h2 class="r" style="--i:1">Cùng là ILO, cùng nói về Việt Nam, sao lại có <em>hai con số</em>?</h2>
   <div class="row c2 grow r" style="--i:2">
-    <button class="flip" data-flip aria-expanded="false"><span class="eb">ILO, 2016</span><span class="big" style="color:var(--son)">86%</span><span class="hint">Bấm để xem con số này đo cái gì</span>
-      <span class="more">Người làm công trong dệt may, da giày có <b>rủi ro tự động hóa cao</b>, tính trong hai thập kỷ. Đây là ước tính về khả năng kỹ thuật theo nghề, chỉ gồm các ngành này.</span></button>
-    <button class="flip" data-flip aria-expanded="false"><span class="eb">ILO, 2026</span><span class="big" style="color:var(--si)">&lt; 2%</span><span class="hint">Bấm để xem con số này đo cái gì</span>
-      <span class="more">Lao động toàn nền kinh tế có rủi ro cao bị <b>AI tạo sinh</b> tự động hóa, khoảng 1 triệu người. Cùng lúc khoảng 11,5 triệu người, tức một phần năm, có công việc chịu tác động.</span></button>
+    <div class="panel"><div style="display:flex;gap:24px;align-items:center"><span class="big" style="font-size:96px;color:var(--son)">86%</span><span class="eb">ILO, 2016</span></div><div class="wf sm8" data-wf="86:s,14:o"></div><p class="st" data-s="1" style="font-size:22px">100 người làm công trong <b>dệt may, da giày</b>: rủi ro tự động hóa cao trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div>
+    <div class="panel"><div style="display:flex;gap:24px;align-items:center"><span class="big" style="font-size:96px;color:var(--si)">&lt; 2%</span><span class="eb">ILO, 2026</span></div><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><p class="st" data-s="1" style="font-size:22px">100 người lao động <b>toàn nền kinh tế</b>: dưới 2% rủi ro cao bị <b>AI tạo sinh</b> tự động hóa; khoảng một phần năm có công việc chịu tác động.</p></div>
   </div>
-  <p class="r" style="--i:3"><span class="tag">quan điểm nhóm</span> Hai số không mâu thuẫn, vì đo hai thứ khác nhau. Trước khi sợ một con số, phải hỏi: đo ai, đo công nghệ nào, trong bao lâu?</p>
-  <aside class="notes">Mời lớp đoán: con số nào đúng? Sau đó bấm từng thẻ. 86% là toàn bộ rủi ro về mặt kỹ thuật trong dệt may, da giày, tính đến hai thập kỷ. Dưới 2% là chỉ AI tạo sinh, tính trên toàn bộ lao động. So hai số với nhau là sai phương pháp. Đây cũng là cách nhóm tránh số liệu giật gân.</aside>
+  <p class="r st" data-s="1" style="--i:3"><span class="tag">quan điểm nhóm</span> Hai số đo hai thứ khác nhau. Trước một con số, hãy hỏi: đo ai, đo công nghệ nào, trong bao lâu?</p>
+  <aside class="notes">Cảm ơn bạn. Với câu hỏi AI tạo việc làm hay thay thế lao động, người ta thường đưa ra những con số rất khác nhau. Năm 2016, Tổ chức Lao động Quốc tế nói 86%. Năm 2026, cũng tổ chức ấy nói dưới 2%. Vậy số nào đúng? [Bấm một lần.] Thật ra hai số đo hai thứ khác nhau. 86% là người làm công trong dệt may, da giày, tính rủi ro về mặt kỹ thuật trong hai thập kỷ. Còn dưới 2%, tức khoảng 1 triệu người, là trên toàn bộ lao động và chỉ tính riêng AI tạo sinh, đồng thời khoảng 11,5 triệu người có công việc chịu tác động. So hai số này với nhau là sai phương pháp. AI tác động trước hết lên từng tác vụ. Vậy về lý luận, cơ chế tác động đó là gì?</aside>
 </section>
 
-<section class="s" data-act="2" data-min="1.5" data-title="Mô phỏng cấu tạo hữu cơ" data-refs="gt|tr. 65, 68–69">
-  <div class="eb r">CÂU 2 · VẬN DỤNG CHƯƠNG 3 <span class="tag y">mô hình minh họa, số giả định</span></div>
-  <h2 class="r" style="--i:1">Kéo thanh trượt để thấy <em>c/v</em> tăng trong một chuyền may</h2>
-  <div class="row r grow" style="--i:2;grid-template-columns:480px 1fr 470px">
+<section class="s" data-act="2" data-who="4" data-min="1.5" data-title="Mô phỏng c/v" data-steps="1" data-refs="gt|tr. 65, 68–69">
+  <div class="eb r">CÂU 2 · VẬN DỤNG CHƯƠNG 3 <span class="tag y">mô hình minh họa, số giả định, không phải số liệu thực tế</span></div>
+  <h2 class="r" style="--i:1">Khi máy nhiều lên, <em>c/v</em> tăng và chuyền may cần ít người hơn</h2>
+  <div class="row r grow" style="--i:2;grid-template-columns:440px 1fr 470px">
     <div class="panel dark"><h3>Công nhân trên chuyền: <span id="simN">100</span></h3><div id="dots" aria-hidden="true"></div></div>
-    <div class="panel" style="justify-content:center;gap:18px">
+    <div class="panel" style="justify-content:center;gap:16px">
       <label for="simA" style="font-size:24px">Mức tự động hóa: <b id="simAv">0%</b></label>
-      <input id="simA" type="range" min="0" max="100" step="5" value="0">
-      <button class="toggle" id="simAll" aria-pressed="false">Bật khi toàn ngành đã cùng áp dụng</button>
+      <input id="simA" type="range" min="0" max="100" step="1" value="0">
+      <div class="toggle" id="simAll" aria-pressed="false">Giai đoạn: một doanh nghiệp đi trước</div>
       <p class="sm" id="simText"></p>
     </div>
     <div class="panel dark kv" style="align-content:center">
       <span>Tư bản bất biến c</span><b id="simC"></b>
       <span>Tư bản khả biến v</span><b id="simV"></b>
       <span>Cấu tạo hữu cơ c/v</span><b id="simR" style="color:var(--nghe)"></b>
-      <span>Giá trị cá biệt mỗi sản phẩm</span><b id="simU"></b>
-      <span>Giá trị xã hội mỗi sản phẩm</span><b id="simS"></b>
-      <span>Giá trị thặng dư siêu ngạch</span><b id="simX" style="color:var(--si)"></b>
+      <span>Giá trị cá biệt / sản phẩm</span><b id="simU"></b>
+      <span>Giá trị xã hội / sản phẩm</span><b id="simS"></b>
+      <span>Thặng dư siêu ngạch</span><b id="simX" style="color:var(--si)"></b>
     </div>
   </div>
-  <p class="sm r" style="--i:3">Giả định: 100 sản phẩm; mỗi công nhân tạo 2 đơn vị giá trị mới, nhận 1; tự động hóa hết thì còn 40 người, khấu hao thêm 40 đơn vị. Chỉ để thấy cơ chế, không phải số đo thực tế.</p>
-  <aside class="notes">Đây là mô hình nhóm tự dựng để minh họa, các con số là giả định. Kéo thanh trượt: máy nhiều lên, người ít đi, c trên v tăng, đúng hệ quả tích lũy ở trang 68. Doanh nghiệp đi trước có giá trị cá biệt thấp hơn giá trị xã hội nên thu giá trị thặng dư siêu ngạch, đúng trang 65. Bật nút toàn ngành: siêu ngạch biến mất, nhưng số công nhân đã giảm. Đó là lý do cạnh tranh buộc doanh nghiệp tiếp tục đổi mới, và câu hỏi là những người rời chuyền sẽ đi đâu.</aside>
+  <p class="sm r" style="--i:3">Giả định: 100 sản phẩm; mỗi công nhân tạo 2 đơn vị giá trị mới, nhận 1; tự động hóa hoàn toàn còn 40 người, khấu hao thêm 40 đơn vị.</p>
+  <aside class="notes">Nhóm tự dựng một mô hình để minh họa, các con số ở đây là giả định, không phải số liệu thực tế. Hình đang tự chạy: máy nhiều lên, người ít đi, nên c trên v tăng từ 1 lên 3,5. Đây là hệ quả của tích lũy tư bản ở trang 68. Doanh nghiệp đi trước có giá trị cá biệt thấp hơn giá trị xã hội, nên thu được giá trị thặng dư siêu ngạch, đúng như trang 65. [Bấm một lần.] Khi toàn ngành cùng áp dụng, giá trị xã hội hạ xuống và phần siêu ngạch biến mất. Vì vậy cạnh tranh buộc doanh nghiệp tiếp tục đổi mới. Nhưng số chỗ làm trên chuyền đã giảm. Lý luận chỉ ra xu hướng ấy, còn thực tế diễn ra thế nào thì phải nhìn vào hai ngành cụ thể.</aside>
 </section>
 
-<section class="s" data-act="2" data-min="1.25" data-title="Dệt may và logistics" data-refs="qlnn26;bnews26;vna26;tcct26">
+<section class="s" data-act="2" data-who="4" data-min="1.25" data-title="Dệt may và logistics" data-refs="qlnn26;bnews26;vna26;tcct26;wef25">
   <div class="eb r">CÂU 2 · BẰNG CHỨNG TRONG HAI NGÀNH ĐƯỢC HỎI</div>
-  <h2 class="r" style="--i:1">Máy thay <em>công đoạn</em> trước, còn thiếu hụt nằm ở <em>kỹ năng</em></h2>
+  <h2 class="r" style="--i:1">Máy thay từng công đoạn; <em>điều còn thiếu là kỹ năng</em></h2>
   <div class="row c2 grow r vc" style="--i:2">
     <div class="panel">
       <h3>Dệt may</h3>
-      <p class="sm">Lao động giảm ở nhà máy đã tự động hóa, Bangladesh, 2024:</p>
-      <div class="bar" style="--lab:150px"><span>Khâu cắt</span><div class="t"><div class="f p" style="width:96.7%"></div></div><span class="n" data-c="qlnn26">−48,34%</span></div>
-      <div class="bar" style="--lab:150px"><span>Cả chuyền</span><div class="t"><div class="f p" style="width:61.2%"></div></div><span class="n" data-c="qlnn26">−30,58%</span></div>
-      <div class="bar" style="--lab:150px"><span>Khâu may</span><div class="t"><div class="f p" style="width:53.1%"></div></div><span class="n" data-c="qlnn26">−26,57%</span></div>
-      <p style="font-size:23px">Việt Nam: <span class="n" data-c="bnews26">hơn 3,3 triệu</span> lao động; hiệp hội nói khó khăn chính là <span class="n" data-c="qlnn26">thiếu lao động</span>; <span class="n" data-c="qlnn26">67,1%</span> người được khảo sát chưa từng được đào tạo từ khi vào nghề.</p>
+      <p class="sm"><span class="tag y">ví dụ đối chiếu, không đại diện Việt Nam</span> Giảm lao động mỗi chuyền ở nhà máy đã tự động hóa, Bangladesh, 2024:</p>
+      <div class="bar grow-in" style="--lab:150px"><span>Khâu cắt</span><div class="t"><div class="f p" style="--w:96.7%"></div></div><span class="n" data-c="qlnn26">−48,34%</span></div>
+      <div class="bar grow-in" style="--lab:150px"><span>Cả chuyền</span><div class="t"><div class="f p" style="--w:61.2%"></div></div><span class="n" data-c="qlnn26">−30,58%</span></div>
+      <div class="bar grow-in" style="--lab:150px"><span>Khâu may</span><div class="t"><div class="f p" style="--w:53.1%"></div></div><span class="n" data-c="qlnn26">−26,57%</span></div>
+      <p style="font-size:23px">Việt Nam: <span class="n" data-c="bnews26">hơn 3,3 triệu</span> lao động; <span class="n" data-c="qlnn26">67,1%</span> người được khảo sát chưa từng được đào tạo từ khi vào nghề.</p>
     </div>
     <div class="panel">
       <h3>Logistics</h3>
       <div class="row c2" style="gap:14px">
-        <div><span class="big n" data-c="vna26">2,2 tr</span><p class="sm">lao động cần có đến 2030</p></div>
-        <div><span class="big n" data-c="tcct26">90,5%</span><p class="sm">doanh nghiệp mới số hóa ở mức cơ bản</p></div>
+        <div><span class="big n" data-c="vna26">2,2 tr</span><p class="sm">lao động ngành cần đến 2030</p></div>
+        <div><span class="big n" data-c="tcct26">90,5%</span><p class="sm">doanh nghiệp số hóa ở mức cơ bản</p></div>
       </div>
-      <p style="font-size:23px">Chỉ <span class="n" data-c="tcct26">5–7%</span> lao động được đào tạo bài bản. Việc lặp lại như chứng từ, kho bãi dễ được tự động hóa; nhu cầu chuyển sang phân tích dữ liệu, vận hành hệ thống, xử lý sự cố.</p>
-      <p class="sm">Số 90,5% và 5–7% do Tạp chí Công Thương dẫn từ Bộ Công Thương.</p>
+      <div class="shift"><span>Chứng từ, kho bãi lặp lại</span><i></i><span>Phân tích dữ liệu, vận hành hệ thống, xử lý sự cố</span></div>
+      <p style="font-size:23px">Chỉ khoảng <span class="n" data-c="tcct26">5–7%</span> lao động được đào tạo bài bản.</p>
     </div>
   </div>
-  <aside class="notes">Số Bangladesh là bằng chứng thực nghiệm gần nhất với dệt may Việt Nam, nhưng không phải số của Việt Nam, nhóm nói rõ điều đó. Khâu cắt giảm nhiều hơn khâu may: máy thay từng công đoạn. Ở Việt Nam hiện tại ngành chưa có làn sóng cắt giảm lớn vì tự động hóa, và lại đang thiếu người. Logistics cũng vậy: cần nhiều người hơn, nhưng là người có kỹ năng số. Khoảng trống nằm ở đào tạo.</aside>
+  <aside class="notes">Đề bài hỏi về dệt may và logistics. Với dệt may, nhóm dùng khảo sát ở Bangladesh năm 2024 làm ví dụ đối chiếu, và xin nói rõ đây không phải số của Việt Nam. Ở các nhà máy đã tự động hóa, số lao động mỗi chuyền giảm khoảng 30%, nhưng khâu cắt giảm gần một nửa, còn khâu may giảm khoảng một phần tư. Máy thay từng công đoạn chứ không thay cả nghề cùng lúc. Ở Việt Nam, ngành hiện có hơn 3,3 triệu lao động, nhưng 67,1% người được khảo sát chưa từng được đào tạo từ khi vào nghề. Logistics cũng tương tự: ngành cần khoảng 2,2 triệu lao động đến năm 2030, trong khi 90,5% doanh nghiệp mới số hóa ở mức cơ bản, và chỉ khoảng 5 đến 7% lao động được đào tạo bài bản. Việc lặp lại sẽ được tự động hóa, còn nhu cầu chuyển sang phân tích dữ liệu và xử lý sự cố. Như vậy khoảng trống lớn nhất là kỹ năng.</aside>
 </section>
 
-<section class="s" data-act="2" data-min="1.25" data-title="Câu trả lời của nhóm" data-refs="wef25;ilo26;unctad25;gt|tr. 147;luatai">
+<section class="s" data-act="2" data-who="4" data-min="1.25" data-title="Câu trả lời" data-refs="wef25;ilo26;unctad25;gt|tr. 69, 147;luatai">
   <div class="eb r">CÂU 2 · TRẢ LỜI</div>
-  <h2 class="r" style="--i:1">AI vừa thay vừa tạo, nhưng <em>không chia đều</em></h2>
-  <div class="row c2 grow r vc" style="--i:2">
+  <h2 class="r" style="--i:1;font-size:52px">AI vừa thay thế vừa tạo việc làm, nhưng <em>cơ hội và thu nhập không chia đều</em></h2>
+  <div class="row c2 grow r" style="--i:2">
     <div class="panel">
       <h3>Dự báo việc làm toàn cầu đến 2030, triệu việc</h3>
-      <div class="bar" style="--lab:130px"><span>Tạo mới</span><div class="t"><div class="f m" style="width:96%"></div></div><span class="n" data-c="wef25">+170</span></div>
-      <div class="bar" style="--lab:130px"><span>Mất đi</span><div class="t"><div class="f p" style="width:52%"></div></div><span class="n" data-c="wef25">−92</span></div>
-      <div class="bar" style="--lab:130px"><span>Ròng</span><div class="t"><div class="f w" style="width:44%"></div></div><span class="n" data-c="wef25">+78</span></div>
-      <p class="sm">Đây là khảo sát doanh nghiệp của WEF về nhiều xu hướng, không riêng AI.</p>
-      <p style="font-size:23px">Ở Việt Nam, tỷ lệ chịu tác động: nữ <span class="n" data-c="ilo26">24,1%</span>, nam <span class="n" data-c="ilo26">17,8%</span>. Trên thế giới, <span class="n" data-c="unctad25">100 công ty</span> chiếm 40% chi R&D của doanh nghiệp.</p>
+      <div class="wfall">
+        <div class="wb m" style="--b:0%;--h:100%"><b class="n" data-c="wef25">+170</b><span>Tạo mới</span></div>
+        <div class="wb p" style="--b:45.9%;--h:54.1%"><b class="n" data-c="wef25">−92</b><span>Mất đi</span></div>
+        <div class="wb w" style="--b:0%;--h:45.9%"><b class="n" data-c="wef25">+78</b><span>Ròng</span></div>
+      </div>
+      <p class="sm">Khảo sát doanh nghiệp của WEF về nhiều xu hướng, không riêng AI.</p>
     </div>
-    <div style="display:flex;flex-direction:column;gap:16px;justify-content:center">
-      <p><span class="tag">quan điểm nhóm</span></p>
-      <p><b>Về lý luận:</b> tăng c/v làm giảm tương đối nhu cầu lao động, đó là xu hướng. Giáo trình cũng cảnh báo <span class="n" data-c="gt" data-l="tr. 147">thất nghiệp và phân hóa thu nhập</span> buộc các nước phải điều chỉnh phân phối, an sinh.</p>
-      <p><b>Về thực tiễn:</b> kết cục không do công nghệ tự quyết định. Việt Nam có khung pháp lý: <span class="n" data-c="luatai">Luật Trí tuệ nhân tạo</span> đặt con người ở vị trí trung tâm, hiệu lực từ 01/3/2026.</p>
-      <p><b>Câu trả lời:</b> nghề thay đổi nhiều hơn là biến mất, nhưng người không được đào tạo lại sẽ chịu phần thiệt.</p>
+    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center">
+      <div class="panel"><span class="eb">NHÓM CHỊU TÁC ĐỘNG NHIỀU HƠN</span><p>Ở Việt Nam: nữ <span class="n" data-c="ilo26">24,1%</span>, nam <span class="n" data-c="ilo26">17,8%</span></p></div>
+      <div class="panel"><span class="eb">GIÁ TRỊ TẬP TRUNG Ở ĐÂU</span><p><span class="n" data-c="unctad25">100 công ty</span> chiếm 40% chi R&D của doanh nghiệp toàn cầu</p></div>
+      <div class="panel dark"><span class="tag" style="width:fit-content">quan điểm nhóm</span><p>Kết cục không do công nghệ tự quyết định. Giáo trình cảnh báo <span class="n" data-c="gt" data-l="tr. 147">thất nghiệp và phân hóa thu nhập</span>; Việt Nam đã có <span class="n" data-c="luatai">Luật Trí tuệ nhân tạo</span>.</p></div>
     </div>
   </div>
-  <aside class="notes">Tổng hợp câu hai. Dự báo ròng vẫn dương, nhưng con số ròng che giấu việc ai được và ai mất. Lao động nữ ở Việt Nam chịu tác động nhiều hơn. Lợi ích công nghệ tập trung ở một số ít công ty. Nhóm không kết luận doanh nghiệp cụ thể nào sai. Nhóm dùng lý luận để chỉ ra xu hướng, và cho rằng thể chế, đào tạo mới là khâu quyết định.</aside>
+  <aside class="notes">Vậy câu trả lời của nhóm là gì? AI vừa thay thế vừa tạo việc làm. Dự báo của Diễn đàn Kinh tế Thế giới đến 2030 là tạo mới 170 triệu việc, mất đi 92 triệu, ròng tăng 78 triệu. Nhưng con số ròng che đi câu hỏi: ai được, ai mất? Ở Việt Nam, tỷ lệ lao động nữ chịu tác động là 24,1%, cao hơn nam là 17,8%. Trên thế giới, 100 công ty chiếm 40% chi nghiên cứu của doanh nghiệp, tức là phần giá trị từ công nghệ cũng có xu hướng tập trung. Giáo trình trang 147 cũng cảnh báo thất nghiệp và phân hóa thu nhập, buộc các nước phải điều chỉnh chính sách phân phối và an sinh. Vì vậy, theo nhóm, kết cục không do công nghệ tự quyết định, mà phụ thuộc vào đào tạo và thể chế. Việt Nam đã có Luật Trí tuệ nhân tạo, hiệu lực từ tháng 3 năm 2026. Còn định hướng lớn của đất nước thì nằm ở Nghị quyết 57. Mời bạn cuối cùng.</aside>
 </section>
 
-<section class="s" data-act="3" data-min="0.75" data-title="Nghị quyết 57" data-refs="nq57;kts;nd25;nso26ld;dh14;nso25;gii26">
-  <div class="eb r">CÂU 3 · VĂN KIỆN CỦA ĐẢNG</div>
-  <h2 class="r" style="--i:1">Nghị quyết 57: <span class="n" data-c="nq57">"đột phá quan trọng hàng đầu"</span>, và <em>khoảng cách phải đi</em></h2>
-  <div class="grow r" style="--i:2" id="gauges"></div>
-  <p class="sm r" style="--i:3">Cột mốc 2030 theo Nghị quyết 57 và Nghị quyết Đại hội XIV. Chỉ số kinh tế số của Cục Thống kê là giá trị tăng thêm, có thể khác cách tính "quy mô kinh tế số". Cụm "đi tắt đón đầu" nằm ở giáo trình, không có trong Nghị quyết 57. <span class="n" data-c="gii26">GII 2026:</span> Việt Nam hạng 43/139, nhưng trụ cột nhân lực và nghiên cứu hạng 79.</p>
-  <aside class="notes">Nghị quyết 57 ngày 22 tháng 12 năm 2024 xác định khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là đột phá quan trọng hàng đầu, là động lực chính để phát triển nhanh lực lượng sản xuất hiện đại. Nhìn các thanh: khoảng cách lớn nhất nằm ở chi cho nghiên cứu. Tỷ lệ lao động có bằng cấp đã gần mốc dưới, nhưng chỉ số đổi mới sáng tạo cho thấy trụ cột nhân lực và nghiên cứu xếp hạng thấp hơn hẳn thứ hạng chung.</aside>
+<section class="s" data-act="3" data-who="5" data-min="1" data-title="Nghị quyết 57" data-refs="nq57">
+  <div class="eb r">CÂU 3 · VĂN KIỆN CỦA ĐẢNG · NGHỊ QUYẾT 57-NQ/TW, 22/12/2024</div>
+  <h2 class="r" style="--i:1">Nghị quyết 57: <em><span class="n" data-c="nq57">"đột phá quan trọng hàng đầu"</span></em></h2>
+  <div class="nq grow r" style="--i:2">
+    <div class="nqcol"><span class="eb">NỘI DUNG TRỌNG TÂM, CỐT LÕI</span><div class="leaf hi">Thể chế · đi trước một bước</div><div class="leaf hi2">Nhân lực</div><div class="leaf">Hạ tầng</div><div class="leaf">Dữ liệu</div><div class="leaf">Công nghệ chiến lược</div></div>
+    <div class="nqc"><b>Khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số</b><span>động lực chính</span></div>
+    <div class="nqcol"><span class="eb">ĐỂ</span><div class="leaf">Phát triển nhanh lực lượng sản xuất hiện đại</div><div class="leaf">Hoàn thiện quan hệ sản xuất</div><div class="leaf">Đổi mới phương thức quản trị quốc gia</div><div class="leaf">Ngăn chặn nguy cơ tụt hậu</div></div>
+  </div>
+  <p class="r" style="--i:3"><b>Gặp lại câu 1:</b> <span class="n" data-c="nq57">"nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng"</span> thành tựu của thế giới, <span class="n" data-c="nq57">"từng bước tự chủ về công nghệ"</span>.</p>
+  <aside class="notes">Cảm ơn bạn. Nghị quyết 57 của Bộ Chính trị, ban hành ngày 22 tháng 12 năm 2024, xác định phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là đột phá quan trọng hàng đầu, là động lực chính để phát triển nhanh lực lượng sản xuất hiện đại, hoàn thiện quan hệ sản xuất, đổi mới phương thức quản trị quốc gia. Các bạn có thể thấy, đây cũng là ba mặt mà giáo trình đã nêu về vai trò của cách mạng công nghiệp. Nghị quyết nêu năm nội dung trọng tâm, cốt lõi: thể chế, nhân lực, hạ tầng, dữ liệu và công nghệ chiến lược, cùng bảy nhóm nhiệm vụ. Và có một câu gặp lại đúng bài học của câu 1: nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng thành tựu thế giới, từng bước tự chủ về công nghệ. Nhóm xin lưu ý: cụm "đi tắt đón đầu" nằm ở giáo trình, còn trong Nghị quyết nhóm không thấy cụm từ này. Tinh thần ấy thì thể hiện qua câu vừa nêu.</aside>
 </section>
 
-<section class="s" data-act="3" data-min="0.75" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;luatai;wef25">
+<section class="s" data-act="3" data-who="5" data-min="0.75" data-title="Mục tiêu 2030" data-refs="nq57;nq14;kts;nd25;nso26ld;nso25;gii26">
+  <div class="eb r">CÂU 3 · KHOẢNG CÁCH PHẢI ĐI</div>
+  <h2 class="r" style="--i:1">Bốn mục tiêu đến 2030 và <em>chặng đường còn lại</em></h2>
+  <div class="row c4 grow r" style="--i:2;gap:18px" id="gauges"></div>
+  <p class="sm r" style="--i:3">Mỗi chỉ tiêu có đơn vị và năm riêng, không so trực tiếp với nhau. <span class="n" data-c="gii26">GII 2026:</span> Việt Nam hạng 43/139, nhưng trụ cột nhân lực và nghiên cứu hạng 79.</p>
+  <aside class="notes">Vậy đích đến cụ thể là gì? Nhóm chọn bốn chỉ tiêu, mỗi chỉ tiêu có đơn vị và mốc riêng nên không so trực tiếp với nhau. Kinh tế số hiện khoảng 14% GDP, mục tiêu tối thiểu 30%. Chi cho nghiên cứu mới 0,42% GDP năm 2021, mục tiêu 2%. Lao động có bằng cấp, chứng chỉ là 30,4%, mục tiêu 35 đến 40%. GDP bình quân đầu người 5.026 đô la, mục tiêu khoảng 8.500. Với kinh tế số, số của Cục Thống kê là giá trị tăng thêm, có thể khác cách tính quy mô trong Nghị quyết. Điều đáng chú ý là chỉ số đổi mới sáng tạo năm 2026: Việt Nam xếp thứ 43 trên 139, nhưng riêng trụ cột nhân lực và nghiên cứu chỉ hạng 79. Có nghĩa là khâu con người đang đi sau. Vậy điều đó đặt ra yêu cầu gì với sinh viên chúng ta?</aside>
+</section>
+
+<section class="s" data-act="3" data-who="5" data-min="0.75" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;wef25;luatai">
   <div class="eb r">CÂU 3 · YÊU CẦU VỚI SINH VIÊN</div>
-  <h2 class="r" style="--i:1">Nghị quyết không viết riêng cho sinh viên, nên nhóm <em>suy ra ba yêu cầu</em></h2>
-  <div class="row c3 r" style="--i:2">
-    <div class="panel"><span class="eb">VĂN BẢN NÓI</span><p style="font-size:23px"><span class="n" data-c="nq57">"Người dân và doanh nghiệp là trung tâm, là chủ thể"</span>. Có học bổng, học phí để thu hút sinh viên giỏi vào các ngành then chốt, có trường chuyên sâu về AI.</p></div>
-    <div class="panel"><span class="eb">GIÁO TRÌNH NÓI</span><p style="font-size:23px">Thích ứng là việc của toàn dân, <span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span>. Trong kinh tế tri thức, học tập trở thành <span class="n" data-c="gt" data-l="tr. 158">yêu cầu thường xuyên</span> với mọi người.</p></div>
-    <div class="panel"><span class="eb">THỊ TRƯỜNG NÓI</span><p style="font-size:23px"><span class="n" data-c="wef25">59 trên 100</span> người lao động được dự báo cần đào tạo lại hoặc nâng kỹ năng đến 2030.</p></div>
+  <h2 class="r" style="--i:1">Từ văn kiện đến <em>ba yêu cầu cho sinh viên</em></h2>
+  <div class="tri grow r" style="--i:2">
+    <div class="tcol"><span class="eb">NGHỊ QUYẾT 57</span><p><span class="n" data-c="nq57">"nâng cao năng lực số trong xã hội"</span>; phong trào <span class="n" data-c="nq57">"học tập số"</span>; <span class="n" data-c="nq57">"công dân số"</span></p></div>
+    <div class="tcol"><span class="eb">GIÁO TRÌNH</span><p><span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span> những tác động mới; học tập là <span class="n" data-c="gt" data-l="tr. 158">yêu cầu thường xuyên</span></p></div>
+    <div class="tcol"><span class="eb">DỰ BÁO</span><p><span class="n" data-c="wef25">59 trên 100</span> lao động cần đào tạo lại hoặc nâng kỹ năng đến 2030</p></div>
   </div>
   <div class="row c3 r" style="--i:3">
-    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Làm chủ một năng lực lõi</h3><p class="sm">Thứ AI chưa làm thay được phần chịu trách nhiệm: hiểu sâu một lĩnh vực.</p></div>
-    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Dùng AI có kiểm chứng</h3><p class="sm">AI viết nhanh, người phải kiểm tra nguồn và giải thích được kết quả.</p></div>
-    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Có trách nhiệm trong môi trường số</h3><p class="sm">Tuân thủ pháp luật, liêm chính; Luật Trí tuệ nhân tạo đã có hiệu lực.</p></div>
+    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Làm chủ một năng lực lõi</h3></div>
+    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Dùng AI có kiểm chứng</h3></div>
+    <div class="panel dark"><span class="tag" style="width:fit-content">suy luận của nhóm</span><h3>Có trách nhiệm trong môi trường số</h3></div>
   </div>
-  <aside class="notes">Nhóm nói thẳng: Nghị quyết không liệt kê yêu cầu riêng cho sinh viên. Hàng trên là điều các văn bản viết. Hàng dưới là điều nhóm suy ra và được ghi rõ là suy luận. Cách này tránh việc gán cho văn kiện những câu không có. Và chính bài này cũng tuân thủ: slide số 20 công khai nhóm đã dùng AI như thế nào.</aside>
+  <aside class="notes">Nhóm nói rõ: Nghị quyết nhắc đến sinh viên ở chính sách thu hút người học giỏi, chứ không liệt kê một danh sách yêu cầu riêng cho sinh viên. Hàng trên là điều các văn bản viết: nâng cao năng lực số trong xã hội, phong trào học tập số, công dân số. Giáo trình thì viết mỗi sinh viên cần ý thức được những tác động mới. Hàng dưới là điều nhóm suy ra. Một là làm chủ một năng lực lõi, vì AI có thể làm nhanh, nhưng người chịu trách nhiệm về kết quả vẫn là mình. Hai là dùng AI có kiểm chứng, phải kiểm tra được nguồn và giải thích được kết quả. Ba là có trách nhiệm trong môi trường số, tuân thủ pháp luật và liêm chính. Cụ thể bắt đầu từ đâu?</aside>
 </section>
 
-<section class="s" data-act="3" data-min="1" data-title="Phiếu 90 ngày" data-refs="">
-  <div class="eb r">BÀI HỌC CÁ NHÂN <span class="tag">gợi ý của nhóm, không phải số liệu</span></div>
-  <h2 class="r" style="--i:1">Chọn ngành của bạn, nhận <em>phiếu tự học 90 ngày</em></h2>
-  <div class="chips r" style="--i:2" id="majors"></div>
-  <div class="row c3 r grow" style="--i:3" id="plan"></div>
-  <button class="copy r" style="--i:4" id="copyplan">Sao chép phiếu này</button>
-  <aside class="notes">Đây là phần bài học cá nhân được yêu cầu trong đề. Mời một bạn trong lớp chọn ngành của mình. Phiếu chia làm ba cột: việc có thể giao cho AI, việc phải giữ lại, và kế hoạch 30, 60, 90 ngày. Điều kiện là phần việc giao cho AI luôn phải có người kiểm tra.</aside>
+<section class="s" data-act="3" data-who="5" data-min="0.75" data-title="Kế hoạch 90 ngày">
+  <div class="eb r">BÀI HỌC CÁ NHÂN <span class="tag">đề xuất của nhóm</span></div>
+  <h2 class="r" style="--i:1">Kế hoạch tự học <em>90 ngày</em> cho sinh viên Kỹ thuật phần mềm</h2>
+  <div class="row c3 r grow" style="--i:2" id="plan"></div>
+  <div class="chips r" style="--i:3" id="majors"></div>
+  <aside class="notes">Đề bài yêu cầu một kế hoạch tự học cho bản thân. Vì lớp mình chủ yếu học Kỹ thuật phần mềm, nhóm lấy ngành này làm ví dụ. Cột thứ nhất là việc có thể giao cho AI, nhưng phải kiểm tra lại: viết mã mẫu, sinh ca kiểm thử. Cột thứ hai là việc mình phải giữ: thiết kế hệ thống, đánh giá bảo mật, chịu trách nhiệm khi có lỗi. Cột thứ ba là kế hoạch: 30 ngày đầu, tự đọc và sửa được mã AI sinh ra; đến ngày 60, làm một dự án có kiểm thử đầy đủ; đến ngày 90, viết tài liệu thiết kế và xin góp ý. Các ngành khác có sẵn ở hàng dưới. Nhóm mời các bạn bắt đầu từ hôm nay.</aside>
 </section>
 
-<section class="s mid" data-act="4" data-min="0.75" data-title="Khảo sát cuối bài" data-refs="">
-  <div class="eb r">SAU KHI NGHE · KHẢO SÁT LẠI</div>
-  <h2 class="r" style="--i:1">Ý kiến của lớp <em>có đổi không</em>?</h2>
-  <div class="r" style="--i:2" data-poll="b"></div>
-  <div class="panel dark r" style="--i:3"><span class="eb">CÂU HỎI MỞ CHO LỚP</span><p style="font-size:29px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>
-  <aside class="notes">Hỏi lại đúng câu đầu bài và so sánh. Nếu kết quả không đổi thì cũng là thông tin, nhóm hỏi một bạn vì sao. Sau đó mời một hai bạn trả lời câu hỏi mở. Mục này khoảng một phút, không kéo dài.</aside>
-</section>
-
-<section class="s mid" data-act="4" data-min="0.25" data-title="Thông điệp" data-refs="gt|tr. 158, 161–162">
+<section class="s mid" data-act="4" data-who="5" data-min="0.75" data-title="Kết luận" data-refs="baldwin;gt|tr. 158, 161–162">
   <div class="eb r">KẾT LUẬN</div>
-  <h2 class="r" style="--i:1;font-size:92px">Máy dệt cần người biết dệt.<br><em>AI cần người biết nghĩ.</em></h2>
-  <div class="row c3 r" style="--i:2">
-    <div class="panel"><span class="eb">CÂU 1</span><h3>Rút ngắn được thời gian, không bỏ được việc học</h3></div>
-    <div class="panel"><span class="eb">CÂU 2</span><h3>Nghề thay đổi nhiều hơn là biến mất, nhưng không chia đều</h3></div>
-    <div class="panel"><span class="eb">CÂU 3</span><h3>Thích ứng là việc của từng sinh viên, bắt đầu từ 90 ngày tới</h3></div>
-  </div>
-  <p class="r" style="--i:3">Nhóm 9 cảm ơn thầy và các bạn. Mời Nhóm 10, Nhóm 4, Nhóm 5 phản biện.</p>
-  <aside class="notes">Tóm lại ba ý. Nhóm cảm ơn thầy và các bạn, xin mời các nhóm phản biện.</aside>
+  <p class="r" style="--i:1;font-size:28px;color:var(--vai-2);max-width:1300px"><span class="n" data-c="baldwin">"It's somebody using AI that will take your job."</span> Người lấy việc của bạn là người biết dùng AI. <span style="font-size:20px">(Richard Baldwin, nhà kinh tế; nhóm dịch)</span></p>
+  <h2 class="r" style="--i:2;font-size:84px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
+  <p class="r" style="--i:3;font-size:30px">Vì thích ứng với Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span>.</p>
+  <div class="panel dark r" style="--i:4"><span class="eb">CÂU HỎI CHO LỚP</span><p style="font-size:29px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>
+  <aside class="notes">Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có một câu rất hay được nhắc đến: người lấy việc của bạn không phải AI, mà là người biết dùng AI. Nhóm cho rằng cần nói thêm một vế: biết dùng thôi chưa đủ, mà phải làm chủ được. Tóm lại ba ý. Thứ nhất, Nhật Bản và các nước công nghiệp mới rút ngắn được thời gian, nhưng không bỏ qua việc học. Thứ hai, AI vừa thay thế vừa tạo việc làm, nhưng cơ hội và thu nhập không chia đều. Thứ ba, Nghị quyết 57 đòi hỏi từng người phải nâng năng lực số. Vì vậy: đi tắt được công nghệ, không đi tắt được năng lực. Cuối cùng, nhóm để lại một câu hỏi cho cả lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? Nhóm xin cảm ơn thầy và các bạn đã lắng nghe, xin mời Nhóm 10, Nhóm 4 và Nhóm 5 phản biện. Sau phần phản biện, nhóm sẽ mời cả lớp chơi Kahoot để ôn lại bài.</aside>
 </section>
 
-<section class="s mid" data-act="4" data-min="0.25" data-title="Minh bạch AI" data-refs="">
-  <div class="eb r">MINH BẠCH SỬ DỤNG AI · CHI TIẾT Ở PHỤ LỤC AI <span class="tag y">bản nháp, nhóm xác nhận trước khi nộp</span></div>
-  <h2 class="r" style="--i:1;font-size:50px">AI đã làm gì, và nhóm đã <em>kiểm tra lại</em> ra sao</h2>
+<section class="s mid" data-act="4" data-who="5" data-min="0" data-title="Minh bạch AI">
+  <div class="eb r">MINH BẠCH SỬ DỤNG AI · CHI TIẾT Ở PHỤ LỤC AI</div>
+  <h2 class="r" style="--i:1;font-size:50px">AI đã hỗ trợ gì, và nhóm đã <em>kiểm tra lại</em> ra sao</h2>
   <table class="r" style="--i:2">
-    <tr><th>Việc</th><th style="width:210px">Công cụ</th><th>Kết quả AI đưa ra</th><th>Kiểm chứng</th></tr>
-    <tr><td>Đọc giáo trình, tìm nguồn</td><td>Claude (Anthropic)</td><td>Ghi chú theo trang, danh sách nguồn</td><td>Đối chiếu từng trang PDF; mở lại từng link, xem <span style="font-family:var(--mono)">docs/03</span></td></tr>
-    <tr><td>Dựng cấu trúc và web slide</td><td>Claude (Anthropic)</td><td>Bản nháp bố cục, mã nguồn, sơ đồ</td><td>Nhóm sửa nội dung, tự viết lại phần quan điểm</td></tr>
-    <tr><td>Phản biện bản nháp</td><td>Claude (Anthropic)</td><td>Câu hỏi 3C giả định</td><td>Nhóm tự luyện, trả lời không dùng AI</td></tr>
-    <tr id="grouprow"><td colspan="4"></td></tr>
+    <tr><th>Việc</th><th style="width:210px">Công cụ</th><th>Kết quả AI đưa ra</th><th>Nhóm kiểm chứng, chỉnh sửa</th></tr>
+    <tr><td>Tìm nguồn, ghi chú giáo trình</td><td>Claude (Anthropic)</td><td>Ghi chú theo trang, danh sách nguồn</td><td id="ai1"></td></tr>
+    <tr><td>Dựng web slide, nháp lời nói</td><td>Claude (Anthropic)</td><td>Bố cục, sơ đồ, mã nguồn, bản nháp</td><td>Bỏ khảo sát, đổi cách tương tác, sửa câu chữ, thêm phân công</td></tr>
+    <tr><td>Phản biện</td><td>Claude; Codex</td><td>Câu hỏi 3C, nhận xét bản nháp</td><td>Nhóm tự luyện; trả lời không dùng AI</td></tr>
   </table>
-  <div class="panel dark r" style="--i:3"><p style="font-size:23px"><b>Ví dụ phát hiện khi kiểm chứng:</b> một bài bình luận ghi kinh tế số khoảng 24% GDP, còn Cục Thống kê ước tính 14,02%; slide dùng số của Cục Thống kê. Một bài báo diễn đạt lại số 86% của ILO theo cách khác; slide dùng trang của ILO.</p>
-  <p class="sm"><b>Cam kết:</b> nhóm không để AI làm thay hoàn toàn và chịu trách nhiệm về nội dung cuối cùng.</p></div>
-  <aside class="notes">Slide này thể hiện tiêu chí 1.4. Chỉ nói những gì đúng với thực tế nhóm đã làm. Trước khi thuyết trình, cần điền phần nhóm đã tự làm vào file cấu hình.</aside>
+  <div class="panel dark r" style="--i:3"><p style="font-size:23px"><b>Ví dụ kiểm chứng:</b> một bài bình luận ghi kinh tế số khoảng 24% GDP, còn Cục Thống kê ước tính 14,02%; slide dùng số của Cục Thống kê.</p>
+  <p class="sm" id="ai2"></p></div>
+  <aside class="notes">Slide này để tham khảo, thầy có thể hỏi. Nếu được hỏi, nhóm trả lời đúng những gì nhóm đã làm.</aside>
 </section>
 
-<section class="s" data-act="4" data-min="0" data-title="Tài liệu tham khảo">
+<section class="s" data-act="4" data-who="5" data-min="0" data-title="Tài liệu tham khảo">
   <div class="eb">TÀI LIỆU THAM KHẢO · APA 7 · SỐ TRANG THEO BẢN PDF CỦA LỚP</div>
   <div id="refs"></div>
   <aside class="notes">Trang này dùng khi có câu hỏi về nguồn. Bấm vào đường dẫn để mở nguồn gốc.</aside>
@@ -502,7 +565,7 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="pvt" style="font:800 40px var(--display)"></b><span class="time" id="pvc"></span></div>
   <div class="nt" id="pvn"></div>
   <p class="sm" id="pvm"></p>
-  <div style="display:flex;gap:10px"><button id="pvp">Slide trước</button><button id="pvx">Slide sau</button><button id="pvr">Đặt lại đồng hồ</button></div>
+  <div style="display:flex;gap:10px"><button id="pvp">Trước</button><button id="pvx">Sau</button><button id="pvr">Đặt lại đồng hồ</button></div>
 </div>
 
 <script>
@@ -513,7 +576,8 @@ const CONFIG = {
   giangVien: "BinhNV26",
   phanBien: "Nhóm 10, Nhóm 4, Nhóm 5",
   ngay: "",                 // ví dụ "10/11/2026"
-  thanhVien: [],            // ví dụ ["Trần Ngọc Thiện", "..."]
+  thanhVien: ["Bùi Hiếu Nghĩa","Trần Ngọc Thiên","Vũ Huy Phương","Phạm Gia Huy","Mai Tuấn Vỹ"], // theo tab Extra points
+  camKet: "",               // câu cam kết, nhóm tự viết
   phanNhomDaLam: ""         // viết thật những gì nhóm đã tự làm, hiện trên slide Minh bạch AI
 };
 /* ============================ */
@@ -524,7 +588,7 @@ const S = {
   gt:{short:"Bộ GD&ĐT, 2021",kind:"Giáo trình",url:DRIVE,apa:"Bộ Giáo dục và Đào tạo. (2021). <i>Giáo trình Kinh tế chính trị Mác - Lênin (Dành cho bậc đại học - không chuyên lý luận chính trị)</i> [Bản PDF của học phần MLN122]. Nxb. Chính trị quốc gia Sự thật.",use:"Lý luận của cả bài. Số trang theo bản PDF của lớp; trang in bằng trang PDF cộng 2."},
   mac:{short:"C.Mác và Ph.Ăngghen, t.46, dẫn theo Bộ GD&ĐT, 2021",kind:"Tác phẩm kinh điển",url:DRIVE,apa:"C.Mác và Ph.Ăngghen. (k.n.). <i>Toàn tập</i> (t. 46, phần II, tr. 368–369, 372). Nxb. Chính trị quốc gia. Dẫn theo Bộ Giáo dục và Đào tạo (2021, tr. 144).",use:"Dự báo về việc ứng dụng khoa học vào sản xuất. Chú thích trong giáo trình không ghi năm xuất bản tập này."},
   nq57:{short:"Bộ Chính trị, 2024",kind:"Văn kiện của Đảng",url:"https://www.quanlynhanuoc.vn/2025/01/22/nghi-quyet-57-nq-tw-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia/",apa:"Bộ Chính trị. (2024, 22 tháng 12). <i>Nghị quyết số 57-NQ/TW về đột phá phát triển khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số quốc gia</i>. Đăng trên Tạp chí Quản lý nhà nước.",use:"Mục tiêu 2030: kinh tế số tối thiểu 30% GDP, R&D 2% GDP; đột phá quan trọng hàng đầu; người dân và doanh nghiệp là trung tâm."},
-  dh14:{short:"Tuổi Trẻ Online, 2026",kind:"Báo chí, tóm tắt văn kiện",url:"https://tuoitre.vn/thong-qua-nghi-quyet-dai-hoi-xiv-cua-dang-xac-lap-mo-hinh-tang-truong-moi-dot-pha-manh-me-the-che-20260123162320197.htm",apa:"Tuổi Trẻ Online. (2026, 23 tháng 1). <i>Thông qua Nghị quyết Đại hội XIV của Đảng: Xác lập mô hình tăng trưởng mới, đột phá mạnh mẽ thể chế</i>.",use:"Mục tiêu 2030: lao động qua đào tạo có bằng, chứng chỉ 35–40%; GDP bình quân đầu người khoảng 8.500 USD. Nên thay bằng bản gốc văn kiện."},
+  XXdh14:{short:"Tuổi Trẻ Online, 2026",kind:"Báo chí, tóm tắt văn kiện",url:"https://tuoitre.vn/thong-qua-nghi-quyet-dai-hoi-xiv-cua-dang-xac-lap-mo-hinh-tang-truong-moi-dot-pha-manh-me-the-che-20260123162320197.htm",apa:"Tuổi Trẻ Online. (2026, 23 tháng 1). <i>Thông qua Nghị quyết Đại hội XIV của Đảng: Xác lập mô hình tăng trưởng mới, đột phá mạnh mẽ thể chế</i>.",use:"Mục tiêu 2030: lao động qua đào tạo có bằng, chứng chỉ 35–40%; GDP bình quân đầu người khoảng 8.500 USD. Nên thay bằng bản gốc văn kiện."},
   luatai:{short:"Znews, 2025",kind:"Báo chí về văn bản luật",url:"https://znews.vn/thong-qua-luat-tri-tue-nhan-tao-khung-phap-ly-dau-tien-cho-phat-trien-ai-post1610142.html",apa:"Znews. (2025, 10 tháng 12). <i>Thông qua Luật Trí tuệ nhân tạo: Khung pháp lý đầu tiên cho phát triển AI</i>. (Luật số 134/2025/QH15).",use:"Thông qua 10/12/2025, hiệu lực 01/3/2026; đặt con người ở vị trí trung tâm. Nên thay bằng toàn văn luật."},
   nso26q3:{short:"Cục Thống kê, 2026a",kind:"Thống kê chính thức",url:"https://www.nso.gov.vn/du-lieu-va-so-lieu-thong-ke/2026/10/thong-cao-bao-chi-tinh-hinh-kinh-te-xa-hoi-quy-iii-va-9-thang-nam-2026/",apa:"Cục Thống kê. (2026a, tháng 10). <i>Thông cáo báo chí tình hình kinh tế - xã hội quý III và 9 tháng năm 2026</i>.",use:"Cơ cấu nền kinh tế 9 tháng 2026: 10,65% / 38,35% / 42,97% / thuế 8,03%. Số ước tính."},
   nso26ld:{short:"Cục Thống kê, 2026b",kind:"Thống kê chính thức",url:"https://www.nso.gov.vn/tin-tuc-thong-ke/2026/10/thong-cao-bao-chi-ve-tinh-hinh-lao-dong-viec-lam-quy-iii-va-9-thang-nam-2026/",apa:"Cục Thống kê. (2026b, tháng 10). <i>Thông cáo báo chí về tình hình lao động, việc làm quý III và 9 tháng năm 2026</i>.",use:"Quý III/2026: 25,1% / 33,9% / 41,0% lao động; 60,6% phi chính thức; 30,4% qua đào tạo có bằng, chứng chỉ."},
@@ -540,76 +604,73 @@ const S = {
   tcct26:{short:"Trần Bửu Long, 2026",kind:"Tạp chí khoa học",url:"https://tapchicongthuong.vn/thach-thuc-va-giai-phap-nang-cao-ky-nang-ung-dung-ai-cho-nguon-nhan-luc-nganh-logistics-trong-boi-canh-chuyen-doi-so-tai-viet-nam-516434.htm",apa:"Trần Bửu Long. (2026, 8 tháng 5). Thách thức và giải pháp nâng cao kỹ năng ứng dụng AI cho nguồn nhân lực ngành logistics trong bối cảnh chuyển đổi số tại Việt Nam. <i>Tạp chí Công Thương</i>.",use:"90,5% doanh nghiệp số hóa cơ bản; 5–7% lao động được đào tạo bài bản; dẫn từ Bộ Công Thương. Đây là số thứ cấp."},
   nd25:{short:"Báo Nhân Dân, 2025",kind:"Báo Đảng, số của Ngân hàng Thế giới",url:"https://special.nhandan.vn/dau-tu-cho-r-d-suc-bat-moi-cho-viet-nam/index.html",apa:"Báo Nhân Dân. (2025, tháng 3). <i>Đầu tư cho R&D: Sức bật mới cho Việt Nam</i>. Nhân Dân hằng tháng.",use:"R&D Việt Nam khoảng 0,42% GDP năm 2021; Hàn Quốc khoảng 4,9% GDP."},
   ifr26:{short:"IFR, 2026",kind:"Hiệp hội quốc tế",url:"https://ifr.org/news/robot-density-surges-in-europe-asia-and-americas/1",apa:"International Federation of Robotics. (2026, 8 tháng 4). <i>Robot density surges in Europe, Asia and Americas</i>.",use:"Số liệu 2024 từ World Robotics 2025: Hàn Quốc 1.220, Singapore 818, Nhật Bản 446, Trung Quốc 166."},
-  gii26:{short:"Báo Pháp luật Việt Nam, 2026",kind:"Báo chí, số của WIPO",url:"https://doanhnhan.baophapluat.vn/gii-2026-viet-nam-len-hang-43-hai-chi-so-dung-dau-the-gioi.html",apa:"Doanh nhân và Pháp luật. (2026, 30 tháng 9). <i>GII 2026: Việt Nam lên hạng 43, hai chỉ số đứng đầu thế giới</i>. Báo Pháp luật Việt Nam.",use:"Hạng 43/139; trụ cột nguồn nhân lực và nghiên cứu giảm từ 70 xuống 79."},
+  gii26:{short:"Báo PLVN, 2026",kind:"Báo chí, số của WIPO",url:"https://doanhnhan.baophapluat.vn/gii-2026-viet-nam-len-hang-43-hai-chi-so-dung-dau-the-gioi.html",apa:"Doanh nhân và Pháp luật. (2026, 30 tháng 9). <i>GII 2026: Việt Nam lên hạng 43, hai chỉ số đứng đầu thế giới</i>. Báo Pháp luật Việt Nam.",use:"Hạng 43/139; trụ cột nguồn nhân lực và nghiên cứu giảm từ 70 xuống 79."},
+  ea26:{short:"Nguyễn Hoàng Hải và Trần Anh Tuấn, 2026",kind:"Tạp chí khoa học",url:"https://www.quanlynhanuoc.vn/?p=56875",apa:"Nguyễn Hoàng Hải và Trần Anh Tuấn. (2026, 22 tháng 1). Chính sách khoa học, công nghệ, đổi mới sáng tạo trong công nghiệp hóa của một số quốc gia Đông Á và đề xuất định hướng cho Việt Nam. <i>Tạp chí Quản lý nhà nước</i>.",use:"Nhật Bản 1945–1970, Hàn Quốc 1960–1990; R&D/GDP: Hàn Quốc 4,53%, Nhật Bản 3,26% (2018), Việt Nam 0,53% (2019), số theo Trung tâm Thông tin KH&CN quốc gia, 2021."},
+  ldn24:{short:"Lê Đức Nguyên, 2024",kind:"Tạp chí khoa học",url:"https://vjol.info.vn/khcn/article/view/106354",apa:"Lê Đức Nguyên. (2024). Phát triển công nghiệp dựa trên khoa học, công nghệ và đổi mới sáng tạo ở Hàn Quốc và bài học cho Việt Nam. <i>Tạp chí Khoa học và Công nghệ Việt Nam - A</i>, (12A), 50.",use:"Hàn Quốc đầu thập niên 1960: GDP bình quân khoảng 79 USD/năm; khoảng 20 năm sau là nền kinh tế công nghiệp mới."},
+  nq14:{short:"TC KT-TC, 2026",kind:"Tạp chí, tóm tắt văn kiện",url:"https://tapchikinhtetaichinh.vn/nghi-quyet-dai-hoi-xiv-cua-dang-xac-dinh-cac-muc-tieu-chien-luoc-phat-trien-dat-nuoc-142627.html",apa:"Tạp chí Kinh tế - Tài chính. (2026, 23 tháng 1). <i>Nghị quyết Đại hội XIV của Đảng xác định các mục tiêu chiến lược phát triển đất nước</i>.",use:"Đến 2030: GDP bình quân đầu người khoảng 8.500 USD; lao động qua đào tạo có bằng cấp, chứng chỉ 35–40%. Nên thay bằng bản gốc văn kiện."},
+  baldwin:{short:"Mok, Business Insider",kind:"Báo chí, câu dẫn, không phải luận cứ chính",url:"https://www.businessinsider.in/tech/news/its-not-ai-that-is-going-to-take-you-job-but-someone-who-knows-how-to-use-ai-might-economist-says/articleshow/99957251.cms",apa:"Mok, A. (k.n.). <i>It's not AI that is going to take your job, but someone who knows how to use AI might, economist says</i>. Business Insider.",use:"Câu của nhà kinh tế Richard Baldwin; dùng mở phần kết, nhóm dịch."},
   ieee:{short:"IEEE Computer Society, k.n.",kind:"Hiệp hội khoa học",url:"https://history.computer.org/pioneers/pdfs/j/Jacquard.pdf",apa:"IEEE Computer Society. (k.n.). <i>Joseph-Marie Jacquard</i>. Computer Pioneers.",use:"Máy dệt hoàn thành năm 1804, dùng thẻ đục lỗ điều khiển hoa văn; Babbage được cho là lấy ý tưởng thẻ đục lỗ từ đây."}
 };
 
 const $=(q,r=document)=>r.querySelector(q), $$=(q,r=document)=>[...r.querySelectorAll(q)];
 const slides=$$("section.s");
-const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 const ch=(()=>{try{return new BroadcastChannel("mln122-n9")}catch(e){return null}})();
 const PRES=location.hash==="#presenter";
-let cur=0;
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+let cur=0,step=0;
+delete S.XXdh14;
 
 /* Bìa */
 (()=>{const m=$("#covermeta");const a=[["NHÓM",CONFIG.group],["LỚP · GIẢNG VIÊN",CONFIG.lop+" · "+CONFIG.giangVien],["NHÓM PHẢN BIỆN",CONFIG.phanBien]];
  if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.join(" · ")]);
  a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");s.textContent=v;m.append(b,s)});
- const r=$("#grouprow td");r.innerHTML="";const t=document.createElement("span");
- t.textContent=CONFIG.phanNhomDaLam?("Phần nhóm tự làm: "+CONFIG.phanNhomDaLam):"Phần nhóm tự làm: [nhóm điền trước khi nộp]";r.append(t)})();
+ $("#ai1").textContent=CONFIG.phanNhomDaLam||"[nhóm điền đúng những gì đã đối chiếu]";
+ $("#ai2").textContent=CONFIG.camKet||"Cam kết: [nhóm tự điền sau khi rà soát xong].";})();
 
 /* Khung dệt trên bìa */
 function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let row=0,run=true,last=0;
  const mot=(x,y)=>{const a=Math.abs((x%14)-7)+Math.abs((y%14)-7);if(a<2)return"#FFC93C";if(a===4)return"#FF5C86";if(a===7)return"#F5F1E6";return null};
- function paint(y){const vis=rows-1-y;const f=vis/rows;
+ function paint(y){const f=(rows-1-y)/rows;
   for(let x=0;x<cols;x++){const px=x*C,py=y*C;g.clearRect(px,py,C,C);const col=mot(x,y);
-   if(f>.62){ if(col){g.fillStyle=col;g.fillRect(px+1,py+3,C-2,C-6);g.fillRect(px+5,py+1,C-10,C-2)} else {g.fillStyle="rgba(245,241,230,.05)";g.fillRect(px+1,py+8,C-2,3)} }
-   else { const on=col||Math.random()<.13; if(on){g.fillStyle=f>.42&&col?col:"#4BE3C4";g.globalAlpha=col?1:.5;g.fillRect(px+4,py+4,C-8,C-8);g.globalAlpha=1} }
-  }}
- function tick(t){if(!run)return;if(t-last>60){last=t;if(row<rows){const y=rows-1-row;paint(y);row++;}
-   else{const y=Math.floor(rows*.38*Math.random());paint(y)}}
-  requestAnimationFrame(tick)}
- const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+   if(f<.5){if(col){g.fillStyle=col;g.fillRect(px+1,py+3,C-2,C-6);g.fillRect(px+5,py+1,C-10,C-2)}else{g.fillStyle="rgba(245,241,230,.05)";g.fillRect(px+1,py+8,C-2,3)}}
+   else{const on=col||Math.random()<.13;if(on){g.fillStyle=f<.68&&col?col:"#4BE3C4";g.globalAlpha=col?1:.5;g.fillRect(px+4,py+4,C-8,C-8);g.globalAlpha=1}}}}
+ function tick(t){if(!run)return;if(t-last>60){last=t;if(row<rows){paint(rows-1-row);row++}else paint(Math.floor(rows*.4*Math.random()))}requestAnimationFrame(tick)}
  if(reduce){for(let y=rows-1;y>=0;y--)paint(y);return{stop(){},start(){}}}
- for(let i=0;i<rows*.6;i++){paint(rows-1-i);row++}
  requestAnimationFrame(tick);
  return{stop(){run=false},start(){if(!run){run=true;requestAnimationFrame(tick)}}}}
 let lm=null;
 
-/* Khảo sát */
-const OPTS=["AI thay hẳn phần lớn người làm nghề","AI đổi cách làm, nghề vẫn cần người","Chưa ảnh hưởng nhiều"];
-const poll=store.get("n9poll",{a:[0,0,0],b:[0,0,0]});
-function renderPoll(){$$("[data-poll]").forEach(h=>{const k=h.dataset.poll;const tot=poll[k].reduce((x,y)=>x+y,0)||1;const atot=poll.a.reduce((x,y)=>x+y,0)||1;
- h.innerHTML=OPTS.map((o,i)=>`<div class="opt"><span style="font-size:24px">${o}</span><div>
-  ${k==="b"?`<div class="track" style="height:18px;margin-bottom:4px"><div class="fill" style="width:${poll.a[i]/atot*100}%;background:var(--vai-3)"></div></div>`:""}
-  <div class="track" ${k==="b"?'style="height:26px"':''}><div class="fill" style="width:${poll[k][i]/tot*100}%"></div></div></div>
-  <div class="step"><button data-p="${k},${i},-1" aria-label="Giảm một phiếu">−</button><span>${poll[k][i]}</span><button data-p="${k},${i},1" aria-label="Thêm một phiếu">+</button></div></div>`).join("")+
-  (k==="b"?`<div class="legend"><span><i style="background:var(--vai-3)"></i>Đầu bài</span><span><i style="background:var(--nghe)"></i>Cuối bài</span></div>`:`<p class="sm">Thanh hiện tỷ lệ phiếu trên tổng số đã nhập. Kết quả lưu trên máy này cho đến cuối buổi.</p>`)})}
-document.addEventListener("click",e=>{const b=e.target.closest("[data-p]");if(!b)return;const[k,i,d]=b.dataset.p.split(",");poll[k][+i]=Math.max(0,poll[k][+i]+ +d);store.set("n9poll",poll);renderPoll()});
-
-/* Bốn cuộc cách mạng */
+/* Bốn cuộc cách mạng: tự chạy sau khi vào slide */
 const REV=[
- {n:"I",t:"Giữa TK XVIII đến giữa TK XIX",sw:"w1",h:"Cơ khí hóa bằng nước và hơi nước",b:"Bắt đầu ở Anh, <b>từ ngành dệt</b>: thoi bay, xe kéo sợi Jenny, máy dệt Cartwright, rồi máy hơi nước. Lao động thủ công chuyển sang lao động máy móc.",x:"tr. 141"},
- {n:"II",t:"Nửa cuối TK XIX đến đầu TK XX",sw:"w2",h:"Điện và dây chuyền hàng loạt",b:"Năng lượng điện, động cơ điện, dây chuyền chuyên môn hóa cao; phương pháp quản lý của Ford và Taylor làm tăng năng suất lao động.",x:"tr. 141–142"},
- {n:"III",t:"Đầu thập niên 1960 đến cuối TK XX",sw:"w3",h:"Công nghệ thông tin và tự động hóa",b:"Bán dẫn, siêu máy tính, máy tính cá nhân, Internet, robot công nghiệp. Và một chi tiết: thẻ đục lỗ của <span class='n' data-c='ieee'>máy dệt Jacquard (1804)</span> được cho là gợi ý cho máy tính của Babbage.",x:"tr. 142"},
- {n:"IV",t:"Đề cập lần đầu tại Hannover, 2011",sw:"w4",h:"Liên kết thế giới thực và ảo",b:"Cách mạng số, Internet vạn vật, trí tuệ nhân tạo, dữ liệu lớn, in 3D. Thay đổi về chất trong lực lượng sản xuất.",x:"tr. 142–143"}];
-function rev(i){$$("#revtabs button").forEach((b,j)=>b.setAttribute("aria-selected",j===i));const r=REV[i];
- $("#revbody").innerHTML=`<h3 style="font-size:40px">${r.h}</h3><p>${r.b}</p><p class="sm">Giáo trình, <span class="n" data-c="gt" data-l="${r.x}">${r.x}</span>; Hộp 6.1, tr. 143.</p>`;$("#revsw").className="swatch "+r.sw}
-$("#revtabs").innerHTML=REV.map((r,i)=>`<button role="tab" data-rev="${i}"><b>${r.n}</b><span>${r.t}</span></button>`).join("");
-$("#revtabs").addEventListener("click",e=>{const b=e.target.closest("[data-rev]");if(b)rev(+b.dataset.rev)});rev(0);
+ {n:"I",t:"Giữa TK XVIII – giữa TK XIX",h:"Cơ khí hóa, nước và hơi nước",b:"Bắt đầu ở Anh, từ ngành dệt",c:"#F5F1E6",x:"tr. 141"},
+ {n:"II",t:"Nửa cuối TK XIX – đầu TK XX",h:"Điện và dây chuyền hàng loạt",b:"Chuyên môn hóa cao, Ford và Taylor",c:"#FFC93C",x:"tr. 141–142"},
+ {n:"III",t:"Đầu thập niên 1960 – cuối TK XX",h:"Công nghệ thông tin, tự động hóa",b:"Bán dẫn, máy tính, Internet, robot",c:"#4BE3C4",x:"tr. 142"},
+ {n:"IV",t:"Đề cập lần đầu tại Hannover, 2011",h:"Liên kết thế giới thực và ảo",b:"Trí tuệ nhân tạo, dữ liệu lớn, IoT",c:"#FF5C86",x:"tr. 142–143"}];
+$("#revlist").innerHTML=REV.map((r,i)=>`<div class="rv" data-r="${i}"><b>${r.n}</b><div><h3>${r.h}</h3><p>${r.t}. ${r.b}. <span class="n" data-c="gt" data-l="${r.x}">${r.x}</span></p></div></div>`).join("");
+const M=(()=>{const c=$("#morph"),g=c.getContext("2d"),W=c.width,H=c.height,N=1500;
+ let seed=7;const R=()=>(seed=(seed*16807)%2147483647)/2147483647;
+ const weave=[];for(let i=0;i<N;i++){const gx=38,gy=22,col=i%gx,row=Math.floor(i/gx)%gy;const a=Math.abs((col%12)-6)+Math.abs((row%12)-6);weave.push([50+col*19.5,25+row*23.5,a<2?"#FFC93C":a===4?"#FF5C86":a===6?"#F5F1E6":"#33409A"])}
+ const line=[];const gear=(cx,cy,r)=>{const t=R()*6.283;const rr=r*(R()<.55?1:(R()*.8));return[cx+Math.cos(t)*rr,cy+Math.sin(t)*rr]};
+ for(let i=0;i<N;i++){const k=i%10;if(k<4){const l=(i%3);line.push([R()*W,150+l*140+R()*8,"#FFC93C"])}else if(k<7){const gx=[110,300,520,710][i%4],gy=[150,290,430][i%3];const p=gear(gx,gy+50,52);line.push([p[0],p[1],"#F5F1E6"])}else{const l=i%3,b=Math.floor(R()*9);line.push([40+b*88+R()*44,110+l*140+R()*30,"#FF5C86"])}}
+ const chip=[];for(let i=0;i<N;i++){const k=i%10;if(k<3){const s=Math.floor(R()*4),t=R(),x0=250,y0=120,w=320,h=320;chip.push([s==0?x0+t*w:s==1?x0+w:s==2?x0+t*w:x0,s==0?y0:s==1?y0+t*h:s==2?y0+h:y0+t*h,"#4BE3C4"])}else if(k<8){const hor=R()<.5,lane=Math.floor(R()*12);const t=R();if(hor){const y=130+lane*26;chip.push([t<.5?30+t*440:570+(t-.5)*440,y,"#4BE3C4"])}else{const x=262+lane*26;chip.push([x,t<.5?10+t*200:450+(t-.5)*200,"#4BE3C4"])}}else{chip.push([270+Math.floor(R()*14)*20,140+Math.floor(R()*14)*20,"#F5F1E6"])}}
+ const nodes=[];for(let i=0;i<34;i++)nodes.push([50+R()*(W-100),40+R()*(H-80)]);
+ const net=[];for(let i=0;i<N;i++){const a=nodes[i%34];if(i%4===0){const t=R()*6.283,r=R()*9;net.push([a[0]+Math.cos(t)*r,a[1]+Math.sin(t)*r,"#FF5C86"])}else{let b=nodes[(i*7+3)%34],bd=1e9;for(let j=0;j<34;j++){if(j===i%34)continue;const d=Math.hypot(nodes[j][0]-a[0],nodes[j][1]-a[1])+(j*i%7)*34;if(d<bd){bd=d;b=nodes[j]}}const t=R();net.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,"#C6C8E4"])}}
+ const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=13500,MOVE=1800;
+ const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+ function hl(i){$$("#revlist .rv").forEach((e,j)=>{e.classList.toggle("on",j===i);e.classList.toggle("done",j<i)})}
+ function draw(from,to,p,tm){g.clearRect(0,0,W,H);for(let i=0;i<N;i++){const a=T[from][i],b=T[to][i];const e=ease(p);let x=a[0]+(b[0]-a[0])*e,y=a[1]+(b[1]-a[1])*e;
+   if(to===1&&i%10<4)x=(x+tm*.05)%W; if(to===3&&i%4===0){y+=Math.sin(tm*.002+i)*1.2}
+   g.fillStyle=p<.5?a[2]:b[2];const s=to===0?7:3;g.fillRect(x-s/2,y-s/2,s,s)}}
+ function frame(tm){if(!run)return;const el=Math.max(0,tm-t0);const i=Math.min(3,Math.floor(el/STAGE));if(i!==st){st=i;hl(i)}
+   const into=el-i*STAGE;const p=i===0?1:Math.min(1,into/MOVE);draw(i===0?0:i-1,i,p,tm);raf=requestAnimationFrame(frame)}
+ return{start(){if(reduce){draw(3,3,1,0);hl(3);return}run=true;st=0;hl(0);t0=performance.now();cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)},stop(){run=false}}})();
 
-/* Ba con đường */
-const WAYS=[["Tự nghiên cứu, chế tạo","Nâng dần từ thấp đến cao. Thường diễn ra trong thời gian dài, tổn thất nhiều khi thử nghiệm.","#F5F1E6"],
-["Nhận chuyển giao","Nhanh hơn, nhưng cần nhiều vốn, ngoại tệ và luôn chịu sự phụ thuộc vào nước ngoài.","#FFC93C"],
-["Chiến lược nhiều tầng","Vừa nghiên cứu chế tạo, vừa nhận chuyển giao; \"vừa cơ bản, lâu dài và vững chắc vừa đảm bảo đi tắt và bám đuổi\". Đây là đường của Nhật Bản, NICs.","#FF5C86"]];
-function way(i){$$(".way").forEach(p=>{p.style.opacity=+p.dataset.w===i?1:.18});$$("#ways button").forEach((b,j)=>{b.className=j===i?"panel dark":"panel";b.setAttribute("aria-pressed",j===i)})}
-$("#ways").innerHTML=WAYS.map((w,i)=>`<button class="panel" data-way="${i}" style="text-align:left;padding:16px 20px;border-left:7px solid ${w[2]}"><h3 style="font-size:26px">${w[0]}</h3><span style="font-size:20px;line-height:1.32">${w[1]}</span></button>`).join("");
-$("#ways").addEventListener("click",e=>{const b=e.target.closest("[data-way]");if(b)way(+b.dataset.way)});way(2);
+/* Lưới 100 ô */
+const WC={s:"var(--son)",y:"var(--nghe)",w:"var(--vai)",g:"var(--cham-3)",m:"var(--si)",o:"rgba(245,241,230,.1)"};
+$$("[data-wf]").forEach(w=>{const parts=w.dataset.wf.split(",").map(x=>x.split(":"));let cells=[],acc=0,done=0;parts.forEach(([v,c],i)=>{acc+=+v;const to=i===parts.length-1?100:Math.round(acc);for(;done<to;done++)cells.push(c)});
+ w.innerHTML=cells.map((c,i)=>`<i style="background:${WC[c]};--d:${i}"></i>`).join("")});
 
-/* Thẻ lật */
-document.addEventListener("click",e=>{const f=e.target.closest("[data-flip]");if(f)f.setAttribute("aria-expanded",f.getAttribute("aria-expanded")!=="true")});
-
-/* Mô phỏng: hàm thuần, dễ kiểm tra */
+/* Mô phỏng */
 function sim(a,all){const N=100*(1-.6*a),c=100+40*a,v=N,m=N,unit=(c+2*N)/100,social=all?unit:3,x=(social-unit)*100;return{N,c,v,m,unit,social,x,r:c/v}}
 $("#dots").innerHTML="<i></i>".repeat(100);
 const fmt=(x,d=1)=>x.toFixed(d).replace(".",",");
@@ -618,65 +679,70 @@ function runSim(){const a=+$("#simA").value/100,all=$("#simAll").getAttribute("a
  $$("#dots i").forEach((d,i)=>d.classList.toggle("out",i>=Math.round(o.N)));
  $("#simC").textContent=fmt(o.c,0);$("#simV").textContent=fmt(o.v,0);$("#simR").textContent=fmt(o.r,2);
  $("#simU").textContent=fmt(o.unit,2);$("#simS").textContent=fmt(o.social,2);$("#simX").textContent=fmt(o.x,0);
- $("#simText").textContent=a===0?"Chưa có máy mới: giá trị cá biệt bằng giá trị xã hội, chưa có siêu ngạch.":all?"Cả ngành đã áp dụng: giá trị xã hội hạ xuống, siêu ngạch mất. Cạnh tranh buộc doanh nghiệp tìm đổi mới tiếp. Số chỗ làm trên chuyền vẫn thấp.":"Doanh nghiệp đi trước bán theo giá trị xã hội, chi phí riêng thấp hơn: phần chênh là giá trị thặng dư siêu ngạch (tr. 65). c/v tăng (tr. 68), cần ít lao động hơn (tr. 69)."}
-$("#simA").addEventListener("input",runSim);$("#simAll").addEventListener("click",e=>{const b=e.currentTarget;b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");runSim()});runSim();
+ $("#simAll").textContent=all?"Giai đoạn: toàn ngành đã cùng áp dụng":"Giai đoạn: một doanh nghiệp đi trước";
+ $("#simText").textContent=all?"Giá trị xã hội hạ xuống, siêu ngạch mất. Cạnh tranh buộc doanh nghiệp đổi mới tiếp; số chỗ làm trên chuyền vẫn thấp.":"Bán theo giá trị xã hội, chi phí riêng thấp hơn: phần chênh là giá trị thặng dư siêu ngạch (tr. 65). c/v tăng (tr. 68).";}
+$("#simA").addEventListener("input",()=>{simRun=false;runSim()});
+let simRun=false;function simPlay(){$("#simAll").setAttribute("aria-pressed","false");if(reduce){$("#simA").value=100;runSim();return}$("#simA").value=0;runSim();simRun=true;const t0=performance.now();(function f(t){if(!simRun)return;const p=Math.min(1,(t-t0)/9000);$("#simA").value=Math.round(p*100);runSim();if(p<1)requestAnimationFrame(f)})(t0)}
+runSim();
 
-/* Thanh mục tiêu */
-const G=[["Kinh tế số, % GDP",14.02,30,"14,02% (2025)","≥ 30%","kts","nq57","#FF5C86"],["Chi R&D, % GDP",.42,2,"0,42% (2021)","2%","nd25","nq57","#FFC93C"],["Lao động có bằng, chứng chỉ, %",30.4,35,"30,4% (quý III/2026)","35–40%","nso26ld","dh14","#4BE3C4"],["GDP bình quân đầu người, USD",5026,8500,"5.026 (2025)","~8.500","nso25","dh14","#F5F1E6"]];
-$("#gauges").innerHTML=G.map(g=>`<div style="margin-block:24px"><div style="display:flex;justify-content:space-between;font-size:24px;margin-bottom:6px"><b style="font-weight:600">${g[0]}</b><span><span class="n" data-c="${g[5]}">${g[3]}</span> &nbsp;đến 2030: <span class="n" data-c="${g[6]}">${g[4]}</span></span></div><div style="height:30px;background:var(--cham-deep)"><div class="gfill" style="height:100%;background:${g[7]};width:${g[1]/g[2]*100}%"></div></div></div>`).join("");
+/* Thẻ chỉ tiêu */
+const G=[["Kinh tế số","% GDP",14.02,30,"14,02%","năm 2025","≥ 30%","NQ 57","kts","nq57","#FF5C86"],["Chi R&D","% GDP",.42,2,"0,42%","năm 2021","2%","NQ 57","nd25","nq57","#FFC93C"],["Lao động có bằng, chứng chỉ","% lao động",30.4,35,"30,4%","quý III/2026","35–40%","ĐH XIV","nso26ld","nq14","#4BE3C4"],["GDP bình quân đầu người","USD",5026,8500,"5.026","năm 2025","~8.500","ĐH XIV","nso25","nq14","#F5F1E6"]];
+$("#gauges").innerHTML=G.map(g=>{const p=g[2]/g[3],C=2*Math.PI*78;return`<div class="panel gc"><h3 style="font-size:25px;min-height:58px">${g[0]}</h3><svg viewBox="0 0 200 200" style="width:100%;max-width:250px;align-self:center"><circle cx="100" cy="100" r="78" fill="none" stroke="#0D133D" stroke-width="20"/><circle class="arc" cx="100" cy="100" r="78" fill="none" stroke="${g[10]}" stroke-width="20" transform="rotate(-90 100 100)" stroke-dasharray="${C}" style="--o:${C};--to:${C*(1-p)}"/><text x="100" y="98" text-anchor="middle" fill="#F5F1E6" font-size="34" font-weight="800" font-family="var(--display)">${g[4]}</text><text x="100" y="124" text-anchor="middle" fill="#C6C8E4" font-size="15">${g[5]}</text></svg><p style="font-size:22px"><span class="n" data-c="${g[8]}">Hiện tại</span> · 2030: <b class="n" data-c="${g[9]}">${g[6]}</b></p><p class="sm" style="font-size:18px">${g[1]} · mục tiêu theo ${g[7]}</p></div>`}).join("");
 
-/* Phiếu 90 ngày */
-const P={"Kỹ thuật phần mềm":[["viết mã mẫu, sinh ca kiểm thử, giải thích mã lạ"],["thiết kế hệ thống, đánh giá bảo mật, chịu trách nhiệm khi lỗi"],["30: tự đọc và sửa được mã AI sinh ra","60: làm một dự án có kiểm thử đầy đủ","90: viết tài liệu thiết kế, xin góp ý từ người đi trước"]],
-"Trí tuệ nhân tạo, Dữ liệu":[["làm sạch dữ liệu thô, thử nhanh mô hình"],["đặt bài toán, đánh giá sai lệch, hiểu giới hạn dữ liệu"],["30: củng cố xác suất, thống kê","60: làm một mô hình với dữ liệu Việt Nam","90: công bố báo cáo đánh giá, kể cả chỗ mô hình sai"]],
-"An toàn thông tin":[["rà soát nhật ký, tóm tắt cảnh báo"],["điều tra sự cố, đánh giá rủi ro, tuân thủ pháp luật"],["30: học các nguyên tắc nền về mạng, hệ điều hành","60: luyện trên môi trường thực hành hợp pháp","90: viết báo cáo đánh giá một hệ thống của mình"]],
-"Thiết kế, Mỹ thuật số":[["phác nhanh nhiều phương án, làm biến thể"],["ý tưởng, gu thẩm mỹ, bản quyền, kiểm chứng hình ảnh"],["30: học nguyên lý bố cục, chữ, màu","60: làm một bộ nhận diện cho một dự án thật","90: tự ghi rõ phần AI, phần tự làm trong hồ sơ"]],
-"Kinh doanh, Marketing":[["tổng hợp thị trường, viết nháp nội dung"],["hiểu khách hàng, kiểm tra số liệu, quyết định có đạo đức"],["30: học đọc báo cáo tài chính, số liệu thống kê","60: khảo sát thật 30 khách hàng","90: viết đề xuất có nguồn số liệu rõ ràng"]],
-"Logistics, Kinh doanh quốc tế":[["soạn nháp chứng từ, dự báo nhu cầu"],["xử lý sự cố chuỗi cung ứng, hiểu luật thương mại, đàm phán"],["30: nắm Incoterms, quy tắc xuất xứ","60: học một hệ thống quản lý kho hoặc vận tải","90: làm một phương án tối ưu cho tình huống thật"]],
+/* Kế hoạch 90 ngày */
+const P={"Kỹ thuật phần mềm":[["viết mã mẫu, sinh ca kiểm thử, giải thích mã lạ"],["thiết kế hệ thống, đánh giá bảo mật, chịu trách nhiệm khi có lỗi"],["30: tự đọc và sửa được mã AI sinh ra","60: làm một dự án có kiểm thử đầy đủ","90: viết tài liệu thiết kế, xin góp ý từ người đi trước"]],
+"Trí tuệ nhân tạo":[["làm sạch dữ liệu thô, thử nhanh mô hình"],["đặt bài toán, đánh giá sai lệch, hiểu giới hạn của dữ liệu"],["30: củng cố xác suất, thống kê","60: làm một mô hình với dữ liệu Việt Nam","90: công bố báo cáo đánh giá, kể cả chỗ mô hình sai"]],
+"An toàn thông tin":[["rà soát nhật ký, tóm tắt cảnh báo"],["điều tra sự cố, đánh giá rủi ro, tuân thủ pháp luật"],["30: học nền tảng mạng, hệ điều hành","60: luyện trên môi trường thực hành hợp pháp","90: viết báo cáo đánh giá một hệ thống của mình"]],
+"Thiết kế":[["phác nhanh nhiều phương án, làm biến thể"],["ý tưởng, thẩm mỹ, bản quyền, kiểm chứng hình ảnh"],["30: học nguyên lý bố cục, chữ, màu","60: làm bộ nhận diện cho một dự án thật","90: ghi rõ phần AI, phần tự làm trong hồ sơ"]],
+"Kinh doanh, Marketing":[["tổng hợp thị trường, viết nháp nội dung"],["hiểu khách hàng, kiểm tra số liệu, quyết định có đạo đức"],["30: học đọc số liệu thống kê","60: khảo sát thật 30 khách hàng","90: viết đề xuất có nguồn số liệu rõ ràng"]],
+"Logistics":[["soạn nháp chứng từ, dự báo nhu cầu"],["xử lý sự cố chuỗi cung ứng, hiểu luật thương mại, đàm phán"],["30: nắm Incoterms, quy tắc xuất xứ","60: học một hệ thống quản lý kho hoặc vận tải","90: làm phương án tối ưu cho tình huống thật"]],
 "Ngôn ngữ":[["dịch nháp, tra thuật ngữ, luyện hội thoại"],["hiểu văn hóa, sắc thái, chịu trách nhiệm về bản dịch"],["30: học một lĩnh vực chuyên ngành","60: hậu kiểm 20 trang bản dịch máy, ghi lại lỗi","90: làm cộng tác viên cho một dự án thật"]]};
 let major=Object.keys(P)[0];
 function plan(){$$("#majors button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.m===major));const p=P[major];
- $("#plan").innerHTML=`<div class="panel"><span class="eb">GIAO CHO AI, RỒI KIỂM TRA</span><p>${p[0][0]}</p></div><div class="panel"><span class="eb">TỰ MÌNH GIỮ</span><p>${p[1][0]}</p></div><div class="panel dark"><span class="eb">30 · 60 · 90 NGÀY</span>${p[2].map(x=>{const[d,...r]=x.split(": ");return`<p style="font-size:22px"><b>Ngày ${d}:</b> ${r.join(": ")}</p>`}).join("")}</div>`}
+ $("#plan").innerHTML=`<div class="panel"><span class="eb">GIAO CHO AI, RỒI KIỂM TRA</span><p>${p[0][0]}</p></div><div class="panel"><span class="eb">TỰ MÌNH GIỮ</span><p>${p[1][0]}</p></div><div class="panel dark"><span class="eb">30 · 60 · 90 NGÀY</span>${p[2].map(x=>{const[d,...r]=x.split(": ");return`<p><b>Ngày ${d}:</b> ${r.join(": ")}</p>`}).join("")}</div>`}
 $("#majors").innerHTML=Object.keys(P).map(m=>`<button data-m="${m}">${m}</button>`).join("");
-$("#majors").addEventListener("click",e=>{const b=e.target.closest("[data-m]");if(b){major=b.dataset.m;plan()}});plan();
-$("#copyplan").addEventListener("click",async e=>{const p=P[major],t=`Phiếu 90 ngày - ${major}\nGiao cho AI, rồi kiểm tra: ${p[0][0]}\nTự mình giữ: ${p[1][0]}\n${p[2].join("\n")}`;
- try{await navigator.clipboard.writeText(t);e.target.textContent="Đã sao chép"}catch(x){e.target.textContent="Máy này không cho sao chép, hãy chụp lại màn hình"}setTimeout(()=>e.target.textContent="Sao chép phiếu này",2400)});
+$("#majors").addEventListener("click",e=>{const b=e.target.closest("[data-m]");if(b){major=b.dataset.m;plan();b.blur()}});plan();
 
 /* Tài liệu tham khảo */
 $("#refs").innerHTML=Object.values(S).slice().sort((a,b)=>a.apa.replace(/<[^>]+>/g,"").localeCompare(b.apa.replace(/<[^>]+>/g,""),"vi")).map(s=>`<p>${s.apa} <a href="${s.url}" target="_blank" rel="noopener">${s.url.replace(/^https?:\/\/(www\.)?/,"").split("/")[0]}</a></p>`).join("");
 
 /* Số liệu bấm được bằng bàn phím */
-function a11y(r=document){$$(".n",r).forEach(n=>{n.setAttribute("role","button");n.tabIndex=0})}
-document.addEventListener("keydown",e=>{if(e.key==="Enter"&&e.target.classList?.contains("n"))cite(e.target.dataset.c,e.target.dataset.l)});
+$$(".n").forEach(n=>{n.setAttribute("role","button")});
 /* Chân slide: nguồn */
-slides.forEach(s=>{const r=s.dataset.refs;if(!r)return;const f=document.createElement("div");f.className="foot";f.innerHTML="<span>Nguồn:</span>"+r.split(";").map(x=>{const[k,l]=x.split("|");return`<button data-c="${k}" ${l?`data-l="${l}"`:""}>${S[k].short}${l?", "+l:""}</button>`}).join("<span>;</span>");s.append(f)});
+slides.forEach(s=>{const r=s.dataset.refs;if(!r)return;const f=document.createElement("div");f.className="foot";f.innerHTML="<span>Nguồn:</span>"+r.split(";").map(x=>{const[k,l]=x.split("|");return`<button tabindex="-1" data-c="${k}" ${l?`data-l="${l}"`:""}>${S[k].short}${l?", "+l:""}</button>`}).join("<span>;</span>");s.append(f)});
 
 /* Ngăn nguồn */
 const dr=$("#drawer");
-function cite(k,l){const s=S[k];if(!s)return;dr.innerHTML=`<button class="x" id="drx">Đóng · Esc</button><span class="tag ${/Thống kê|Giáo trình|Văn kiện|kinh điển/.test(s.kind)?"m":"y"}" style="width:fit-content">${s.kind}</span><h3>${s.short}${l?", "+l:""}</h3><p>${s.use}</p><p class="sm">${s.apa}</p><a href="${s.url}" target="_blank" rel="noopener">${s.url}</a><p class="sm">Đối chiếu ngày ${V}.</p>`;dr.classList.add("on");$("#drx").onclick=()=>dr.classList.remove("on")}
+function cite(k,l){const s=S[k];if(!s)return;dr.innerHTML=`<button class="x" id="drx">Đóng · Esc</button><span class="tag ${/Thống kê|Giáo trình|Văn kiện|kinh điển/.test(s.kind)?"m":"y"}" style="width:fit-content">${s.kind}</span><h3>${s.short}${l?", "+l:""}</h3><p>${s.use}</p><p class="sm">${s.apa}</p><a href="${s.url}" target="_blank" rel="noopener">${s.url}</a>`;dr.classList.add("on");$("#drx").onclick=()=>dr.classList.remove("on")}
 document.addEventListener("click",e=>{const n=e.target.closest("[data-c]");if(n){e.stopPropagation();cite(n.dataset.c,n.dataset.l)}});
 
-/* Sợi chỉ */
-const ACTS=["Mở đầu","Câu 1","Câu 2","Câu 3","Kết"];
-function threadSvg(){const w=1600,firsts=ACTS.map((_,a)=>slides.findIndex(s=>+s.dataset.act===a));const xOf=i=>30+(w-60)*i/(slides.length-1);
+/* Sợi chỉ: chia theo 5 người */
+const ACTS=["Người 1","Người 2","Người 3","Người 4","Người 5"];
+function threadSvg(){const w=1600,firsts=ACTS.map((_,a)=>slides.findIndex(s=>+s.dataset.who===a+1));const xOf=i=>30+(w-60)*i/(slides.length-1);
  let d=`M30 16`;for(let x=30;x<w-30;x+=26){d+=` Q${x+13} ${x%52===30?7:25} ${x+26} 16`}
  $("#thread").innerHTML=`<svg viewBox="0 0 1600 40" preserveAspectRatio="none"><path d="${d}" fill="none" stroke="#33409A" stroke-width="2.5" stroke-dasharray="7 6"/><path id="tp" d="${d}" fill="none" stroke="#FF5C86" stroke-width="3.5" pathLength="100" stroke-dasharray="0 100" style="transition:stroke-dasharray .6s"/>
- ${firsts.map((f,i)=>`<g class="knot" data-go="${f}"><circle cx="${xOf(f)}" cy="16" r="7" fill="#FFC93C"/><text x="${xOf(f)+(i===firsts.length-1?-12:12)}" y="35" font-size="13" fill="#C6C8E4" text-anchor="${i===firsts.length-1?"end":"start"}" font-family="IBM Plex Mono,monospace">${ACTS[i]}</text></g>`).join("")}</svg>`}
+ ${firsts.map(f=>`<circle cx="${xOf(f)}" cy="16" r="7" fill="#FFC93C"/>`).join("")}</svg>`}
 threadSvg();
-document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)go(+g.dataset.go)});
 
-/* Điều hướng */
+/* Điều hướng: một phím cho một nhịp */
 const warp=$("#warp");warp.innerHTML=Array.from({length:40},(_,j)=>`<i style="--j:${j}"></i>`).join("");
-function show(i){slides.forEach((s,j)=>s.classList.toggle("on",j===i));cur=i;const p=slides.length>1?i/(slides.length-1)*100:0;$("#tp").setAttribute("stroke-dasharray",`${p} ${100-p}`);
+function applyStep(){const s=slides[cur];$$("[data-s]",s).forEach(e=>e.classList.toggle("in",+e.dataset.s<=step));
+ if(s.dataset.title==="Mô phỏng c/v"){const on=step>=1;simRun=simRun&&!on;if(on){$("#simA").value=100}$("#simAll").setAttribute("aria-pressed",on);runSim()}}
+function show(i,st=0){slides.forEach((s,j)=>s.classList.toggle("on",j===i));cur=i;step=st;const p=slides.length>1?i/(slides.length-1)*100:0;$("#tp").setAttribute("stroke-dasharray",`${p} ${100-p}`);
  try{history.replaceState(null,"","#"+(i+1))}catch(e){}
  $("#notes").innerHTML=$(".notes",slides[i])?.innerHTML||"";dr.classList.remove("on");
+ const t=slides[i].dataset.title;
  if(i===0){lm=lm||loom();lm.start()}else if(lm)lm.stop();
- if(ch)ch.postMessage({t:"at",i})}
-function go(i,tell=true){i=Math.max(0,Math.min(slides.length-1,i));if(i===cur&&slides[i].classList.contains("on"))return;
- if(matchMedia("(prefers-reduced-motion:reduce)").matches){show(i);return}
- warp.classList.remove("go");void warp.offsetWidth;warp.classList.add("go");setTimeout(()=>show(i),270)}
+ if(t==="Bốn cuộc cách mạng")M.start();else M.stop();
+ if(t==="Mô phỏng c/v"&&st===0)simPlay();else simRun=false;
+ applyStep();if(ch)ch.postMessage({t:"at",i})}
+function go(i){i=Math.max(0,Math.min(slides.length-1,i));if(i===cur)return;
+ if(reduce){show(i);return}warp.classList.remove("go");void warp.offsetWidth;warp.classList.add("go");setTimeout(()=>show(i),270)}
+function next(){const n=+slides[cur].dataset.steps||0;if(step<n){step++;applyStep()}else go(cur+1)}
+function prev(){if(step>0){step--;applyStep()}else go(cur-1)}
 addEventListener("keydown",e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)&&e.target.type!=="range")return;const k=e.key;
- if(k==="ArrowRight"||k==="PageDown"||(k===" "&&e.target.tagName!=="BUTTON")){e.preventDefault();go(cur+1)}
- else if(k==="ArrowLeft"||k==="PageUp"){e.preventDefault();go(cur-1)}
+ if(k==="ArrowRight"||k==="PageDown"||k===" "||k==="Enter"||k==="ArrowDown"){e.preventDefault();e.target.blur?.();next()}
+ else if(k==="ArrowLeft"||k==="PageUp"||k==="ArrowUp"){e.preventDefault();prev()}
  else if(k==="Home")go(0);else if(k==="End")go(slides.length-1);
  else if(k==="n"||k==="N")$("#notes").classList.toggle("on");
  else if(k==="k"||k==="K")document.body.classList.toggle("k");
@@ -689,16 +755,16 @@ addEventListener("keydown",e=>{if(/INPUT|TEXTAREA/.test(e.target.tagName)&&e.tar
 function fit(){const st=$("#stage"),z=Math.min(innerWidth/1600,innerHeight/900);st.style.transform=`scale(${z}) translate(-50%,-50%)`}
 addEventListener("resize",fit);fit();
 
-/* Đồng hồ: chuẩn 20 phút */
+/* Đồng hồ */
 let t0=null;function startClock(){t0=Date.now();if(ch)ch.postMessage({t:"clock",t0})}
 function fmtT(){if(!t0)return"00:00";const s=Math.floor((Date.now()-t0)/1000);return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
 setInterval(()=>{$("#clock").textContent=fmtT()+" / 20:00";if($("#pvc"))$("#pvc").textContent=fmtT()+" / 20:00"},1000);
 
 /* Cửa sổ người nói */
-if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slides[i];$("#pvt").textContent=`${i+1}/${slides.length} · ${s.dataset.title}`;$("#pvn").innerHTML=$(".notes",s)?.innerHTML||"";$("#pvm").textContent=`Dự kiến ${s.dataset.min||0} phút. Slide sau: ${slides[i+1]?.dataset.title||"hết"}.`};
+if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slides[i];$("#pvt").textContent=`Slide ${i+1}/${slides.length} · Người ${s.dataset.who} · ${s.dataset.title}`;$("#pvn").innerHTML=$(".notes",s)?.innerHTML||"";$("#pvm").textContent=`Dự kiến ${s.dataset.min||0} phút. Slide sau: ${slides[i+1]?.dataset.title||"hết"}.`};
  ch&&(ch.onmessage=e=>{if(e.data.t==="at")paint(e.data.i);if(e.data.t==="clock")t0=e.data.t0});paint(0);
- $("#pvp").onclick=()=>ch&&ch.postMessage({t:"go",i:cur-1});$("#pvx").onclick=()=>ch&&ch.postMessage({t:"go",i:cur+1});$("#pvr").onclick=startClock}
-else{ch&&(ch.onmessage=e=>{if(e.data.t==="go")go(e.data.i);if(e.data.t==="clock")t0=e.data.t0});
- const h=parseInt(location.hash.slice(1),10);renderPoll();show(h>=1&&h<=slides.length?h-1:0)}
-a11y();window.__sim=sim;
+ $("#pvp").onclick=()=>ch&&ch.postMessage({t:"prev"});$("#pvx").onclick=()=>ch&&ch.postMessage({t:"next"});$("#pvr").onclick=startClock}
+else{ch&&(ch.onmessage=e=>{if(e.data.t==="next")next();if(e.data.t==="prev")prev();if(e.data.t==="clock")t0=e.data.t0});
+ const h=parseInt(location.hash.slice(1),10);cur=-1;show(h>=1&&h<=slides.length?h-1:0)}
+window.__sim=sim;
 </script>

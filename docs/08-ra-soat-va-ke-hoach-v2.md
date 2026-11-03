@@ -1,5 +1,6 @@
 # Rà soát và kế hoạch bản 2 (04/11/2026)
-Đây là tài liệu bàn giao. Phiên sau đọc file này trước khi sửa slide.
+**Trạng thái mới nhất:** bản 2 đã dựng xong (23 slide, một phím một nhịp), kịch bản 5 người ở `docs/06`, Kahoot ở `docs/09`. Đã đọc thêm Score, Extra points, PBL, RBL, Assignment tab 1 và 7, toàn văn NQ57. Còn chưa đọc: SEB, 8 trang Slot 0, phần còn lại giáo trình; các tab PBL, RBL không áp dụng vì nhóm chọn Option 1.
+Quyết định của người dùng: tự quyết việc dùng AI cho kịch bản, thời lượng 25–30 phút gồm Kahoot. Các mục dưới đây là bản ghi lúc lập kế hoạch.
 
 ## 1. Những gì đã và chưa đọc
 **Đọc đủ:** tab Links; Creative product criteria; Assignment tab 2, 3, 4, 5, 6; giáo trình mục 6.1 (tr. 140–162).

@@ -30,6 +30,15 @@ Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại
 | Luật AI | Thông qua 10/12/2025, hiệu lực 01/3/2026; số 134/2025/QH15 | Znews; số luật theo tiêu đề Thư viện Pháp luật | Dẫn lại | https://znews.vn/thong-qua-luat-tri-tue-nhan-tao-khung-phap-ly-dau-tien-cho-phat-trien-ai-post1610142.html |
 | Máy dệt Jacquard | Hoàn thành 2/1804, thẻ đục lỗ; Babbage được cho là lấy ý tưởng từ đây | IEEE Computer Society | Gốc | https://history.computer.org/pioneers/pdfs/j/Jacquard.pdf |
 
+| R&D theo cùng một bảng | Hàn Quốc 4,53%, Nhật Bản 3,26% (2018); Việt Nam 0,53% (2019) | Nguyễn Hoàng Hải, Trần Anh Tuấn, Tạp chí QLNN 2026, số của NASATI 2021 | Dẫn lại | https://www.quanlynhanuoc.vn/?p=56875 |
+| Nhật Bản 1945–1970, Hàn Quốc 1960–1990 | Nhập để học cải tiến; viện nghiên cứu trong doanh nghiệp | như trên | Dẫn lại (tạp chí) | như trên |
+| Hàn Quốc đầu 1960 | GDP đầu người khoảng 79 USD/năm | Lê Đức Nguyên, TC KH&CN VN 12A/2024 | Dẫn lại, mới đọc tóm tắt | https://vjol.info.vn/khcn/article/view/106354 |
+| Mục tiêu ĐH XIV | 35–40%; 8.500 USD; kinh tế số khoảng 30% | Tạp chí Kinh tế - Tài chính, 23/01/2026 | Dẫn lại, cần văn kiện gốc | https://tapchikinhtetaichinh.vn/nghi-quyet-dai-hoi-xiv-cua-dang-xac-dinh-cac-muc-tieu-chien-luoc-phat-trien-dat-nuoc-142627.html |
+| Câu của R. Baldwin | "It's somebody using AI that will take your job." | Business Insider | Dẫn lại, chỉ là câu dẫn | https://www.businessinsider.in/tech/news/its-not-ai-that-is-going-to-take-you-job-but-someone-who-knows-how-to-use-ai-might-economist-says/articleshow/99957251.cms |
+
+**NQ57 đã đọc nguyên văn ngày 04/11/2026** trên trang Tạp chí Quản lý nhà nước: các trích dẫn trên slide đúng từng chữ. Không có cụm "đi tắt", "đón đầu", "kỹ năng số". Có "năng lực số", "học tập số", "công dân số".
+**Chưa đọc được toàn văn Luật AI:** Thư viện Pháp luật chặn trình duyệt tự động. Cần nhóm mở và đối chiếu.
+
 ## Bẫy đã phát hiện, nhóm phải biết
 1. **Kinh tế số 14,02% hay 24%?** Bài bình luận trên VTV (12/2025) ghi tỷ trọng kinh tế số khoảng 24% năm 2025; Cục Thống kê ước tính 14,02%. Slide dùng số Cục Thống kê. Đừng trộn hai số.
 2. **86% và dưới 2% không so sánh trực tiếp được.** 86% là dệt may, da giày, rủi ro về khả năng kỹ thuật trong 2 thập kỷ (phương pháp Frey-Osborne). Dưới 2% là toàn bộ lao động, chỉ tính GenAI.

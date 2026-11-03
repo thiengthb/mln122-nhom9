@@ -27,5 +27,14 @@ Minigame: không bắt buộc, tối đa 5 phút, 5–10 câu.
 ## Yêu cầu riêng chủ đề 9
 Minh chứng bắt buộc: văn kiện của Đảng + số liệu thống kê. Dự báo việc làm phải trích tổ chức công bố, không dùng số AI tự đưa ra.
 
-## Điểm nhóm 6 để tham chiếu
-Nội dung 10/10, trình bày và phản biện được chấm riêng ở tab Score.
+## Thời lượng theo thực tế lớp (người dùng xác nhận 04/11/2026)
+Phần nói khoảng 20 phút trở xuống, Kahoot 7–10 phút, tổng 25–30 phút. FAQ ghi minigame tối đa 5 phút, cần chú ý nếu thầy nhắc.
+
+## Điểm tham chiếu ở tab Score
+Nội dung: nhóm 4: 9; nhóm 5: 9,3; nhóm 6: 10; nhóm 7: 8 (tiêu chí 1.1 chỉ 2,2). Tiêu chí 1.1 là chỗ phân hóa rõ nhất.
+
+## Sai lầm phổ biến (tab 1)
+Chia nhóm theo phần riêng, tách biệt thì mất điểm mạch lạc. Vì vậy kịch bản có câu chuyển giữa từng người.
+
+## Thành viên nhóm 9 (tab Extra points)
+Bùi Hiếu Nghĩa, Trần Ngọc Thiên, Vũ Huy Phương, Phạm Gia Huy, Mai Tuấn Vỹ.

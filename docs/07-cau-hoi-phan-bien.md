@@ -1,7 +1,7 @@
 # Luyện phản biện: câu hỏi giả định theo cấu trúc 3C
 Nhóm phản biện: 10, 4, 5. Khi trả lời thật không được dùng AI. Dưới đây chỉ là gợi ý ý chính, nhóm phải tự nói lại được.
 
-1. **Số 0,42% R&D đã cũ.** Nhóm dùng số năm 2021 để nói về hiện tại (Context), trong khi đang bàn năng lực khoa học công nghệ (Concept), vậy kết luận khoảng cách có còn đúng (Conflict)?
+1. **Số R&D đã cũ (0,53% năm 2019, 0,42% năm 2021, hai nguồn khác nhau).** Nhóm dùng số năm 2021 để nói về hiện tại (Context), trong khi đang bàn năng lực khoa học công nghệ (Concept), vậy kết luận khoảng cách có còn đúng (Conflict)?
    *Ý trả lời:* Thừa nhận số cũ, đã ghi năm trên slide. Khoảng cách với 4,9% đủ lớn để luận điểm không đổi, kể cả khi số mới cao hơn vài phần mười.
 2. **Số hiện tại không chứng minh quá khứ.** Hàn Quốc chi 4,9% hôm nay không có nghĩa họ đuổi kịp nhờ điều đó, vậy "học phí" có phải suy diễn?
    *Ý trả lời:* Đúng, slide đã ghi rõ. Căn cứ về cách đuổi kịp là giáo trình tr. 153; số liệu chỉ cho thấy họ vẫn tiếp tục đầu tư.
@@ -21,3 +21,5 @@ Nhóm phản biện: 10, 4, 5. Khi trả lời thật không được dùng AI. 
    *Ý trả lời:* Đã tách văn bản và suy luận nhóm. Giáo trình tr. 151 trực tiếp nhắc mỗi sinh viên.
 10. **Dùng AI làm bài về AI, nhóm có "đi tắt" không?**
     *Ý trả lời:* Phải trả lời thật theo những gì nhóm đã làm. Nhóm phải tự giải thích được từng số, nếu không thì chính là vi phạm.
+11. **Câu của Baldwin có đúng không?** Vì sao dẫn một câu báo chí?
+    *Ý trả lời:* Chỉ là câu dẫn cho phần kết, không phải luận cứ. Nhóm còn nói thêm: biết dùng chưa đủ, phải làm chủ.
