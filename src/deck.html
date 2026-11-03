@@ -536,20 +536,6 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
   <aside class="notes">Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có một câu rất hay được nhắc đến: người lấy việc của bạn không phải AI, mà là người biết dùng AI. Nhóm cho rằng cần nói thêm một vế: biết dùng thôi chưa đủ, mà phải làm chủ được. Tóm lại ba ý. Thứ nhất, Nhật Bản và các nước công nghiệp mới rút ngắn được thời gian, nhưng không bỏ qua việc học. Thứ hai, AI vừa thay thế vừa tạo việc làm, nhưng cơ hội và thu nhập không chia đều. Thứ ba, Nghị quyết 57 đòi hỏi từng người phải nâng năng lực số. Vì vậy: đi tắt được công nghệ, không đi tắt được năng lực. Cuối cùng, nhóm để lại một câu hỏi cho cả lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? Nhóm xin cảm ơn thầy và các bạn đã lắng nghe, xin mời Nhóm 10, Nhóm 4 và Nhóm 5 phản biện. Sau phần phản biện, nhóm sẽ mời cả lớp chơi Kahoot để ôn lại bài.</aside>
 </section>
 
-<section class="s mid" data-act="4" data-who="5" data-min="0" data-title="Minh bạch AI">
-  <div class="eb r">MINH BẠCH SỬ DỤNG AI · CHI TIẾT Ở PHỤ LỤC AI</div>
-  <h2 class="r" style="--i:1;font-size:50px">AI đã hỗ trợ gì, và nhóm đã <em>kiểm tra lại</em> ra sao</h2>
-  <table class="r" style="--i:2">
-    <tr><th>Việc</th><th style="width:210px">Công cụ</th><th>Kết quả AI đưa ra</th><th>Nhóm kiểm chứng, chỉnh sửa</th></tr>
-    <tr><td>Tìm nguồn, ghi chú giáo trình</td><td>Claude (Anthropic)</td><td>Ghi chú theo trang, danh sách nguồn</td><td id="ai1"></td></tr>
-    <tr><td>Dựng web slide, nháp lời nói</td><td>Claude (Anthropic)</td><td>Bố cục, sơ đồ, mã nguồn, bản nháp</td><td>Bỏ khảo sát, đổi cách tương tác, sửa câu chữ, thêm phân công</td></tr>
-    <tr><td>Phản biện</td><td>Claude; Codex</td><td>Câu hỏi 3C, nhận xét bản nháp</td><td>Nhóm tự luyện; trả lời không dùng AI</td></tr>
-  </table>
-  <div class="panel dark r" style="--i:3"><p style="font-size:23px"><b>Ví dụ kiểm chứng:</b> một bài bình luận ghi kinh tế số khoảng 24% GDP, còn Cục Thống kê ước tính 14,02%; slide dùng số của Cục Thống kê.</p>
-  <p class="sm" id="ai2"></p></div>
-  <aside class="notes">Slide này để tham khảo, thầy có thể hỏi. Nếu được hỏi, nhóm trả lời đúng những gì nhóm đã làm.</aside>
-</section>
-
 <section class="s" data-act="4" data-who="5" data-min="0" data-title="Tài liệu tham khảo">
   <div class="eb">TÀI LIỆU THAM KHẢO · APA 7 · SỐ TRANG THEO BẢN PDF CỦA LỚP</div>
   <div id="refs"></div>
@@ -577,8 +563,6 @@ const CONFIG = {
   phanBien: "Nhóm 10, Nhóm 4, Nhóm 5",
   ngay: "",                 // ví dụ "10/11/2026"
   thanhVien: ["Bùi Hiếu Nghĩa","Trần Ngọc Thiên","Vũ Huy Phương","Phạm Gia Huy","Mai Tuấn Vỹ"], // theo tab Extra points
-  camKet: "",               // câu cam kết, nhóm tự viết
-  phanNhomDaLam: ""         // viết thật những gì nhóm đã tự làm, hiện trên slide Minh bạch AI
 };
 /* ============================ */
 
@@ -624,8 +608,7 @@ delete S.XXdh14;
 (()=>{const m=$("#covermeta");const a=[["NHÓM",CONFIG.group],["LỚP · GIẢNG VIÊN",CONFIG.lop+" · "+CONFIG.giangVien],["NHÓM PHẢN BIỆN",CONFIG.phanBien]];
  if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.join(" · ")]);
  a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");s.textContent=v;m.append(b,s)});
- $("#ai1").textContent=CONFIG.phanNhomDaLam||"[nhóm điền đúng những gì đã đối chiếu]";
- $("#ai2").textContent=CONFIG.camKet||"Cam kết: [nhóm tự điền sau khi rà soát xong].";})();
+})();
 
 /* Khung dệt trên bìa */
 function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let row=0,run=true,last=0;

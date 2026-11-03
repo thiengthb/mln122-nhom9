@@ -12,6 +12,9 @@ Xem `docs/08-ra-soat-va-ke-hoach-v2.md`. Chưa sửa slide, đang chờ người
 ## 04/11/2026: bản 2
 Dựng lại hoạt ảnh, sơ đồ, một phím một nhịp; bỏ khảo sát; thêm Nhật Bản, Hàn Quốc và NQ57 nguyên văn; sửa câu chữ; kịch bản 5 người; Kahoot.
 
+## 04/11/2026: bỏ slide Minh bạch AI
+Người dùng phản biện, thống nhất: slide không bắt buộc. Phụ lục AI là file riêng theo Tab 6, nộp email cùng slide trước 24h. Deck còn 22 slide. GitHub Pages do người dùng bật.
+
 ## Việc còn lại của nhóm
 Xem mục "Việc nhóm phải làm" trong README.
 

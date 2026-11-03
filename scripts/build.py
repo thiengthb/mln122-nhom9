@@ -44,7 +44,7 @@ total = 0
 table = ["\n| Người | Slide | Nội dung | Ước tính |\n|---|---|---|---|\n"]
 parts = []
 for w, rows in sorted(who.items()):
-    spoken = [r for r in rows if r[1] not in ("Minh bạch AI", "Tài liệu tham khảo")]
+    spoken = [r for r in rows if r[1] != "Tài liệu tham khảo"]
     words = sum(len(n.split()) for _, _, n in spoken)
     mins = words / RATE
     total += mins
@@ -55,6 +55,6 @@ for w, rows in sorted(who.items()):
         parts.append(f"\n### Slide {i}. {title}\n\n{n}\n")
 table.append(f"| **Tổng phần nói** | | | **{total:.1f} phút** |\n")
 out += table + parts
-out.append("\n## Slide dự phòng\n\nSlide 22 (Minh bạch AI) và 23 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi.\n")
+out.append("\n## Slide dự phòng\n\nSlide 22 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi. Phụ lục AI là file riêng, nộp qua email.\n")
 (root / "docs" / "06-kich-ban.md").write_text("".join(out), encoding="utf8")
 print("Kịch bản: %.1f phút" % total)

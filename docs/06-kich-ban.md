@@ -109,4 +109,4 @@ Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang h�
 
 ## Slide dự phòng
 
-Slide 22 (Minh bạch AI) và 23 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi.
+Slide 22 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi. Phụ lục AI là file riêng, nộp qua email.

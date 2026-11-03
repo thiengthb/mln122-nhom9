@@ -2,7 +2,7 @@
 
 Slide web và tài liệu cho chủ đề 9, lớp SE1919: Công nghiệp hóa, hiện đại hóa ở Việt Nam trong Cách mạng công nghiệp lần thứ tư.
 
-**Xem slide:** bật GitHub Pages (Settings, Pages, nhánh `main`, thư mục gốc) rồi mở https://thiengthb.github.io/mln122-nhom9/
+**Xem slide:** https://thiengthb.github.io/mln122-nhom9/
 
 ## Phím trong slide
 Mũi tên, Space hoặc bút trình chiếu: chuyển nhịp · N: ghi chú · P: cửa sổ người nói · T: bắt đầu đồng hồ · K: soi tất cả số có nguồn · F: toàn màn hình. Bấm vào số có gạch chấm để xem nguồn.
@@ -23,7 +23,7 @@ Mũi tên, Space hoặc bút trình chiếu: chuyển nhịp · N: ghi chú · P
 1. Mở lại từng link trong `docs/03` và đối chiếu số. Ưu tiên các dòng "Dẫn lại".
 2. Đọc giáo trình tr. 140–162, đối chiếu mọi trích dẫn. Kiểm tra tên nhà xuất bản trên bìa.
 3. Đọc, tự chốt phần "quan điểm nhóm", tập kịch bản và sửa cho hợp giọng mỗi người.
-4. Điền `CONFIG` đầu `src/app.part` (ngày, phần nhóm đã kiểm chứng, cam kết), chạy `python3 scripts/build.py`.
+4. Điền `CONFIG` đầu `src/app.part` (tên, ngày), chạy `python3 scripts/build.py`.
 5. Hoàn thiện Phụ lục AI theo mẫu Tab 6 và biên bản nhóm Tab 7.
 6. Tập đến khi trả lời được `docs/07` mà không cần xem tài liệu. Thử slide trên máy chiếu trong lớp.
 

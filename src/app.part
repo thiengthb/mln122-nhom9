@@ -7,8 +7,6 @@ const CONFIG = {
   phanBien: "Nhóm 10, Nhóm 4, Nhóm 5",
   ngay: "",                 // ví dụ "10/11/2026"
   thanhVien: ["Bùi Hiếu Nghĩa","Trần Ngọc Thiên","Vũ Huy Phương","Phạm Gia Huy","Mai Tuấn Vỹ"], // theo tab Extra points
-  camKet: "",               // câu cam kết, nhóm tự viết
-  phanNhomDaLam: ""         // viết thật những gì nhóm đã tự làm, hiện trên slide Minh bạch AI
 };
 /* ============================ */
 
@@ -54,8 +52,7 @@ delete S.XXdh14;
 (()=>{const m=$("#covermeta");const a=[["NHÓM",CONFIG.group],["LỚP · GIẢNG VIÊN",CONFIG.lop+" · "+CONFIG.giangVien],["NHÓM PHẢN BIỆN",CONFIG.phanBien]];
  if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.join(" · ")]);
  a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");s.textContent=v;m.append(b,s)});
- $("#ai1").textContent=CONFIG.phanNhomDaLam||"[nhóm điền đúng những gì đã đối chiếu]";
- $("#ai2").textContent=CONFIG.camKet||"Cam kết: [nhóm tự điền sau khi rà soát xong].";})();
+})();
 
 /* Khung dệt trên bìa */
 function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let row=0,run=true,last=0;
