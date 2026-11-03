@@ -21,17 +21,17 @@ Có ba con đường tiếp cận công nghệ: tự nghiên cứu (lâu, tốn 
 
 **Nội dung** (tr. 155–162) gồm tạo lập điều kiện, rồi thực hiện các nhiệm vụ: ứng dụng khoa học công nghệ; chuyển dịch cơ cấu; hoàn thiện quan hệ sản xuất; thích ứng với 4.0 (thể chế, ứng dụng, ứng phó tác động tiêu cực, và phát triển nhân lực chất lượng cao).
 
-**Câu chốt của giáo trình:** "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu" (tr. 158).
+**Câu chốt của giáo trình:** "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu" (tr. 158). Văn kiện của Đảng cùng tinh thần: Nghị quyết 29-NQ/TW (17/11/2022) về tiếp tục đẩy mạnh CNH, HĐH đến 2030, tầm nhìn 2045 yêu cầu "kết hợp đồng bộ, hiệu quả giữa phát triển tuần tự với đi tắt đón đầu".
 
 **Chương 3 phụ trợ:** giá trị thặng dư siêu ngạch xuất hiện khi một xí nghiệp cải tiến kỹ thuật trước, nên giá trị cá biệt thấp hơn giá trị xã hội (tr. 65). Tích lũy làm tăng cấu tạo hữu cơ c/v, nên tư bản khả biến giảm tương đối và có nguy cơ thừa nhân khẩu (tr. 68–69).
 
 ## 2. Trả lời ba câu hỏi cốt lõi
 
-**Câu 1. Bài học "đi tắt, đón đầu".** Nhật Bản và NICs rút ngắn thời gian, nhưng không bỏ qua việc học. Họ kết hợp tiếp nhận với tự nghiên cứu, và đến nay vẫn đầu tư rất lớn: Hàn Quốc chi khoảng 4,9% GDP cho R&D, Việt Nam 0,42% (2021). Việt Nam còn một việc khó hơn: làm hai nhiệm vụ cùng lúc, vì 25,1% lao động ở nông nghiệp chỉ tạo khoảng 10,65% GDP, trong khi kinh tế số đã là 14,02% GDP.
+**Câu 1. Bài học "đi tắt, đón đầu".** Nhật Bản và NICs rút ngắn thời gian, nhưng không bỏ qua việc học. Họ kết hợp tiếp nhận với tự nghiên cứu, và đến nay vẫn đầu tư rất lớn: Hàn Quốc chi 4,94% GDP cho R&D, Việt Nam 0,41% (cùng năm 2023, World Bank), tức khoảng 12 lần. Việt Nam còn một việc khó hơn: làm hai nhiệm vụ cùng lúc, vì 25,1% lao động ở nông nghiệp chỉ tạo khoảng 10,65% GDP, trong khi kinh tế số đã là 14,02% GDP.
 
 **Câu 2. AI thay thế hay tạo việc làm?** Câu hỏi này cần tách theo tác vụ và theo nhóm người. Con số 86% của ILO năm 2016 và dưới 2% của ILO năm 2026 đo hai thứ khác nhau. Dệt may: tự động hóa ở Bangladesh giảm 30,58% lao động mỗi chuyền, mạnh nhất ở khâu cắt, nhưng ngành dệt may Việt Nam hiện vẫn hơn 3,3 triệu lao động và đang thiếu người. Logistics: ngành cần khoảng 2,2 triệu lao động đến 2030, nhưng 90,5% doanh nghiệp mới số hóa cơ bản. Lý luận cho biết tăng c/v làm giảm tương đối nhu cầu lao động; còn người lao động được đỡ đến đâu phụ thuộc thể chế phân phối và an sinh (tr. 147).
 
-**Câu 3. NQ57 đòi hỏi gì ở sinh viên?** NQ57 coi khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số là "đột phá quan trọng hàng đầu". Mục tiêu 2030: kinh tế số tối thiểu 30% GDP, R&D 2% GDP. Nghị quyết không liệt kê yêu cầu riêng cho sinh viên, nên phần này là suy luận của nhóm: có năng lực lõi, dùng AI có kiểm chứng, tuân thủ pháp luật và đạo đức (Luật AI, giáo trình tr. 151).
+**Câu 3. NQ57 đòi hỏi gì ở sinh viên?** NQ57 coi khoa học công nghệ, đổi mới sáng tạo và chuyển đổi số là "đột phá quan trọng hàng đầu". Mục tiêu 2030: kinh tế số tối thiểu 30% GDP, R&D 2% GDP. NQ57 không liệt kê yêu cầu riêng cho sinh viên; văn bản gần nhất là NQ 71-NQ/TW (8/2025) về giáo dục: "nâng cao chuẩn năng lực số và trí tuệ nhân tạo cho người học", đưa phân tích dữ liệu và AI vào chương trình đại học. Thực tiễn Việt Nam 2022–2026 (slide 16): NQ29, QĐ 1017 (50.000 nhân lực bán dẫn), NQ57, NQ71, Luật AI đều quy về nhân lực. Ví dụ: hơn 5.500 kỹ sư thiết kế chip cuối 2023 so với nhu cầu khoảng 15.000 cho khâu thiết kế năm 2030. Ba yêu cầu là suy luận của nhóm: có năng lực lõi, dùng AI có kiểm chứng, tuân thủ pháp luật và đạo đức (Luật AI, giáo trình tr. 151).
 
 ## 3. Luận điểm đề xuất (nhóm phải tự chốt)
 > **Đi tắt được công nghệ, không đi tắt được năng lực.**
