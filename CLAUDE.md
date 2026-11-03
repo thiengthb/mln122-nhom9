@@ -1,6 +1,6 @@
 # MLN122 - Nhóm 9: hướng dẫn cho phiên làm việc tiếp theo
 
-Trả lời người dùng bằng tiếng Việt, viết dễ hiểu. Đọc theo thứ tự: file này, `docs/HISTORY.md`, `docs/00-yeu-cau-mon-hoc.md`, `docs/03-nguon-va-kiem-chung.md`.
+Trả lời người dùng bằng tiếng Việt, viết dễ hiểu. Đọc theo thứ tự: file này, `docs/08-ra-soat-va-ke-hoach-v2.md`, `docs/HISTORY.md`, `docs/00-yeu-cau-mon-hoc.md`, `docs/03-nguon-va-kiem-chung.md`.
 
 ## Bối cảnh
 Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng viên BinhNV26. Nhóm 9, Slot 9, chủ đề 9 (CNH, HĐH trong CMCN 4.0, AI, chuyển đổi số, nhân lực). Nhóm phản biện: 10, 4, 5. Nhóm 6 cùng lớp đạt 10/10: https://presentation-group6-mln-122.vercel.app/

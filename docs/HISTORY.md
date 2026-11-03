@@ -6,6 +6,9 @@
 - Quyết định của người dùng: repo công khai; thành viên, ngày điền sau; khảo sát cả lớp theo kiểu giơ tay, nhập tay.
 - Quyết định thiết kế: mạch "sợi chỉ" từ ngành dệt (CMCN 1) đến AI; bấm số ra nguồn; khảo sát đầu và cuối bài; mô phỏng c/v.
 
+## 04/11/2026: nhận review Codex và góp ý của người dùng
+Xem `docs/08-ra-soat-va-ke-hoach-v2.md`. Chưa sửa slide, đang chờ người dùng chốt và chờ trình duyệt.
+
 ## Việc còn lại của nhóm
 Xem mục "Việc nhóm phải làm" trong README.
 

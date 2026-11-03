@@ -1,5 +1,5 @@
 # Bài của nhóm 6 và cách vượt
-Link: https://presentation-group6-mln-122.vercel.app/ (18 slide, 61 nguồn APA 7)
+Link: https://presentation-group6-mln-122.vercel.app/ (18 slide, 61 nguồn APA 7). Giới hạn: slide 4, 7, 8 chưa đọc được; về hình ảnh mới xem trang bìa.
 
 **Họ làm tốt:** tiêu đề là luận điểm; gắn nhãn "quan điểm nhóm"; dùng lăng kính triết học bằng ẩn dụ dễ hiểu; nguồn cuối mỗi slide; số liệu mới đến 10/2026; ghi rõ "tự tính", "mô hình minh họa"; phân biệt kinh tế nhà nước VN với độc quyền nhà nước tư bản; bản đồ đủ Hoàng Sa, Trường Sa; ảnh nền có giấy phép; chọn chuyên ngành xem kỹ năng.
 
