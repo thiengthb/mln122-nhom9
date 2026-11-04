@@ -1861,7 +1861,21 @@ function penScenes(s){if(!motion)return;const T=s.dataset.title;
  /* Slide 14: khi thanh tự kéo tới 100% thì khoanh c/v và giá trị thặng dư siêu ngạch */
  if(T==="Mô phỏng c/v"){const r=s.querySelector("#simR"),x=s.querySelector("#simX");if(!r||!x)return;const K=penLayer(s);
   const a=el("path",{class:"pk",d:roughO(...Object.values(box(r,s)),8)},K),b=el("path",{class:"pk",d:roughO(...Object.values(box(x,s)),8)},K);
-  live.push(draw(a,.7,9.7),draw(b,.7,10.5))}}
+  /* chú thích viết tay: c/v tăng từ 1 lên 3,50 (đúng số đầu và cuối của mô hình), mũi tên vòng ngoài khung xuống chỗ khoanh */
+  const R=box(r,s),kv=box(r.closest(".kv"),s);
+  K.insertAdjacentHTML("afterbegin",'<defs><marker id="pkh3" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" class="pkm"/></marker></defs>');
+  const tx=el("text",{class:"pt",x:kv.x+kv.w-24,y:kv.y+36,"text-anchor":"end"},K);tx.textContent="c/v: 1 → 3,50";tx.style.opacity=0;
+  const ar=el("path",{class:"pk ar",d:`M${kv.x+kv.w-10} ${kv.y+30} C${kv.x+kv.w+34} ${kv.y+60} ${kv.x+kv.w+30} ${R.y} ${R.x+R.w+14} ${R.y+R.h/2}`,"marker-end":"url(#pkh3)"},K);
+  live.push(draw(a,.7,9.7),draw(b,.7,10.5),gsap.to(tx,{opacity:1,duration:.5,delay:11.2}),draw(ar,.6,11.5,false))}
+ /* Máy quay chậm: sơ đồ lớn tự phóng gần vào phần chính rồi lùi ra, như camera trong video giải thích */
+ const fc=s.querySelector(".gearbox")||s.querySelector("#fe");
+ if(fc&&!s.querySelector(".thesis")){const B=box(fc,s),ox=B.x+B.w/2,oy=B.y+B.h/2,SC=1.04;
+  /* phóng cả tờ quanh phần chính; dòng Nguồn được thu ngược lại đúng tỉ lệ nên đứng yên, không đè sợi chỉ tiến độ */
+  const ft=s.querySelector(".foot"),fb=ft?box(ft,s):null,T=[s].concat(ft?[ft]:[]);gsap.set(T,{clearProps:"transform"});
+  const tl=gsap.timeline({delay:5.5,onInterrupt:()=>gsap.set(T,{clearProps:"transform"})});
+  tl.to(s,{scale:SC,transformOrigin:`${ox}px ${oy}px`,duration:5,ease:"sine.inOut"},0).to(s,{scale:1,duration:4,ease:"sine.inOut",clearProps:"transform"},8);
+  if(ft)tl.to(ft,{scale:1/SC,transformOrigin:`${ox-fb.x}px ${oy-fb.y}px`,duration:5,ease:"sine.inOut"},0).to(ft,{scale:1,duration:4,ease:"sine.inOut",clearProps:"transform"},8);
+  live.push(tl)}}
 function finalScenes(s){
  /* Slide 7: hai chấm chạy trên hai sợi xoắn của đường "kết hợp" */
  const ws=$$("#waysvg .way",s);if(ws.length>3){const t=along(ws[3],"pen p0",3.8,5.2,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:9.1}))}
