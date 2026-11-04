@@ -142,3 +142,8 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 17: sau khi nét nối vẽ xong, hạt chạy liên tục từ năm cụm vào bánh răng, rồi hạt màu nhấn chạy từ bánh răng ra bốn mục tiêu.
 - Code ở `isoRob()` và `lastScenes()` trong `src/ban-ve.part`.
 
+## 04/11/2026: Lật tờ bản vẽ, người leo bậc (slide 3), dây chuyền may (slide 15)
+- Chuyển slide thường: tờ đang chiếu được chụp lại đúng trạng thái rồi ngả ra sau qua mép trên như lật tờ trên bàn vẽ (3D, có bóng); lùi slide thì lật qua mép dưới. Tờ bìa giữa các phần giữ nguyên như cũ. Hàm `freeze()` trong `src/ban-ve.part`.
+- Slide 3: gói "công nghệ" bay theo đường tắt lên đỉnh, nhảy nhẹ trong lúc chờ; một người leo tám bậc "năng lực", lên tới đỉnh thì vòng sáng tỏa ra. Thay cho chấm tròn leo bậc cũ (slide 21 vẫn giữ chấm tròn).
+- Slide 15: dây chuyền may nhỏ cạnh chữ "Dệt may": áo chạy trên băng chuyền qua khâu cắt (kéo) và khâu may (kim), mỗi khâu hai người; cánh tay robot lần lượt hạ xuống, một người ở mỗi khâu mờ đi. Chỉ ví von cho câu "số người trên dây chuyền giảm", không thêm số.
+

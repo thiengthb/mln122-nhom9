@@ -739,6 +739,27 @@ figure.view{position:relative}
 .blank .caret{display:inline-block;width:3px;height:1.05em;margin-left:4px;vertical-align:-.15em;background:var(--son);animation:blink 1.1s steps(2) infinite}
 svg.links .pk{fill:var(--vai);stroke:var(--cham);stroke-width:2}
 svg.links .pk.o{fill:var(--son)}
+/* Lật tờ bản vẽ khi chuyển slide */
+:root{--shade:rgba(14,22,40,.28)}:root[data-look="reu"],:root[data-look="cham"]{--shade:rgba(0,0,0,.55)}
+.s.flipc{display:flex;z-index:3;pointer-events:none;backface-visibility:hidden;will-change:transform;
+  background-color:var(--cham);background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px;box-shadow:0 24px 60px var(--shade)}
+.s.flipc *,.s.flipc *::before,.s.flipc *::after{animation-delay:-60s!important;transition:none!important}
+.s.flipc .fsh{position:absolute;inset:0;background:linear-gradient(to bottom,transparent,var(--shade));opacity:0;pointer-events:none;z-index:9}
+.flsh{position:absolute;inset:0;z-index:3;background:var(--shade);pointer-events:none}
+/* Slide 3: leo bậc và gói công nghệ */
+.clb .pkg{fill:var(--cham);stroke:var(--nghe);stroke-width:1.6;stroke-linejoin:round}
+.clb .mnn{fill:none;stroke:var(--son);stroke-width:3;stroke-linecap:round}.clb .mnn circle{fill:var(--son)}
+.clb .ring{fill:none;stroke:var(--son);stroke-width:2}
+/* Slide 15: dây chuyền may */
+.s .lineq{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.lineq .blt{fill:var(--cham-2);stroke:var(--vai);stroke-width:2}
+.lineq .bln{stroke:var(--vai-3);stroke-width:2;stroke-dasharray:6 14}
+.lineq .rl{fill:var(--vai)}
+.lineq .stn,.lineq .sp{fill:none;stroke:var(--vai);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lineq .wk{fill:none;stroke:var(--vai-2);stroke-width:1.7}.lineq .wk.gone{stroke-dasharray:2 2}
+.lineq .rb{fill:none;stroke:var(--son);stroke-width:1.5;stroke-linecap:round}.lineq .rp{stroke-width:2.4}
+.lineq .it{fill:var(--cham);stroke:var(--son);stroke-width:1.5;stroke-linejoin:round}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1690,6 +1711,43 @@ function lastScenes(s){
     live.push(gsap.to(z,{f:1,duration:out?1.5:1.3,ease:"none",repeat:-1,delay:(out?3.3:2.3)+j*(out?.5:.43)+k*.11,onStart(){c.style.opacity=1},onUpdate(){const q=p.getPointAtLength(L*z.f);c.setAttribute("cx",q.x);c.setAttribute("cy",q.y)}}))}})}}
 }
 
+
+/* 10k. Slide 3: gói "công nghệ" bay theo đường tắt lên đỉnh rồi đứng chờ; một người leo từng bậc năng lực */
+function climbScene(s){const sv=s.querySelector(".thesis svg"),st=sv&&sv.querySelector(".st-step"),jp=sv&&sv.querySelector(".st-jump");if(!st||!jp)return;
+ sv.querySelectorAll(".clb").forEach(e=>e.remove());const g=el("g",{class:"clb"},sv);
+ const pk=el("g",{class:"pkg"},g);pk.innerHTML=`<g class="bn"><g transform="translate(-17 -34) scale(1.4)">${IC.thung}</g></g>`;
+ const mn=el("g",{class:"mnn"},g);mn.innerHTML=`<g transform="translate(0 -2) scale(1.35)"><circle cx="0" cy="-27" r="5"/><path d="M0 -21v11M0 -10l-5 10M0 -10l5 10M0 -18l-6 5M0 -18l6 4"/></g>`;
+ const lj=jp.getTotalLength(),ls=st.getTotalLength(),P=(p,L,f)=>p.getPointAtLength(L*f);
+ const z={j:0,m:0},putP=()=>{const q=P(jp,lj,z.j);pk.setAttribute("transform",`translate(${q.x} ${q.y})`)},putM=()=>{const q=P(st,ls,z.m);mn.setAttribute("transform",`translate(${q.x} ${q.y})`)};
+ putP();putM();gsap.set([pk,mn],{opacity:0});
+ const t=gsap.timeline({delay:3.6});
+ t.to(pk,{opacity:1,duration:.2}).to(z,{j:1,duration:1.1,ease:"power2.inOut",onUpdate:putP})
+  .to(pk,{attr:{transform:"translate(732 78)"},duration:.45,ease:"bounce.out"})
+  .to(pk.firstChild,{keyframes:[{y:-10,duration:.18,ease:"power1.out"},{y:0,duration:.22,ease:"bounce.out"}],repeat:4,repeatDelay:.6},"+=.3");
+ /* 8 bậc, mỗi bậc = một nét đứng + một nét ngang dài bằng nhau theo tỉ lệ đường đi */
+ const seg=[];let acc=0;const pts=[[70,430],[70,386],[158,386]];for(let k=1;k<8;k++){const x=70+88*k,y=386-44*k;pts.push([x,y],[x+88,y])}
+ pts[pts.length-1][0]=800;for(let k=1;k<pts.length;k++){acc+=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]);seg.push(acc)}
+ const mt=gsap.timeline({delay:3.8});mt.to(mn,{opacity:1,duration:.2});
+ for(let k=1;k<seg.length;k+=2)mt.to(z,{m:seg[k]/ls,duration:.62,ease:"power1.inOut",onUpdate:putM}).to({},{duration:.08});
+ mt.add(()=>{const r=el("circle",{class:"ring",cx:800,cy:78,r:9},g);gsap.fromTo(r,{attr:{r:9},opacity:.9},{attr:{r:34},opacity:0,duration:1,repeat:1,ease:"power1.out",onComplete:()=>r.remove()})});
+ live.push(t,mt)}
+
+/* 10l. Slide 15: dây chuyền may chạy, cánh tay robot lần lượt hạ xuống thay ở khâu cắt rồi khâu may; một người ở mỗi khâu mờ đi */
+function lineScene(s){if(s.dataset.title!=="Dệt may và logistics")return;const pn=s.querySelector(".panel"),h3=pn&&pn.querySelector("h3");if(!h3)return;
+ let K=s.querySelector(".lineq");if(!K){K=el("svg",{class:"lineq",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(K)}K.innerHTML="";
+ const P=box(pn,s),H=box(h3,s),x0=P.x+300,x1=P.x+P.w-34,y=H.y+H.h+4,W=x1-x0,sx=[x0+W*.3,x0+W*.72];
+ const MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>',ROB='<path d="M2 22h12M8 22v-4M8 18 5.5 10.5M5.5 10.5 14 5.5M14 5.5l3.6-2.4M14 5.5l3.8 1.4"/><circle cx="5.5" cy="10.5" r="1.7"/><circle cx="8" cy="18" r="1.7"/>';
+ let h=`<rect class="blt" x="${x0}" y="${y-6}" width="${W}" height="12" rx="6"/><path class="bln" d="M${x0+6} ${y-6}H${x1-6}"/><circle class="rl" cx="${x0+6}" cy="${y}" r="3"/><circle class="rl" cx="${x1-6}" cy="${y}" r="3"/><g class="its"></g>`;
+ sx.forEach((x,k)=>{h+=`<g class="stn"><path class="sp" d="M${x} ${y-6}V${y-18}"/><g transform="translate(${x-12} ${y-46})">${k?IC.kim:IC.keo}</g></g>`;
+  h+=`<g class="wk w${k}a" transform="translate(${x-58} ${y-34}) scale(1.15)">${MAN}</g><g class="wk w${k}b" transform="translate(${x+30} ${y-34}) scale(1.15)">${MAN}</g>`;
+  h+=`<g class="rb r${k}"><g transform="translate(${x-64} ${y-40}) scale(1.55)">${ROB}</g></g>`});
+ K.innerHTML=h;const its=K.querySelector(".its"),bl=K.querySelector(".bln");
+ for(let j=0;j<4;j++){const it=el("g",{class:"it"},its);it.innerHTML=`<g transform="translate(-12 -26)">${IC.ao}</g>`;
+  live.push(gsap.fromTo(it,{x:x0+10,y,opacity:0},{keyframes:[{opacity:1,duration:.3},{x:x1-10,duration:5.4,ease:"none"},{opacity:0,duration:.3}],repeat:-1,delay:1+j*1.5}))}
+ live.push(gsap.fromTo(bl,{strokeDashoffset:0},{strokeDashoffset:-40,duration:1.1,ease:"none",repeat:-1}));
+ [0,1].forEach(k=>{const r=K.querySelector(".r"+k),w=K.querySelector(`.w${k}a`),d=3+k*1.8;gsap.set(r,{y:-40,opacity:0});
+  live.push(gsap.timeline({delay:d}).to(r,{y:0,opacity:1,duration:.7,ease:"power2.out"}).to(w,{opacity:0,duration:.5},"-=.5").add(()=>w.classList.add("gone")))})}
+
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
 function elbow(sx,sy,ex,ey,vert){const r=12;
@@ -1741,7 +1799,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);live.push(heads(s,.1));
+ extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);climbScene(s);lineScene(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */
@@ -1755,7 +1813,7 @@ function extras(s){
  // Dấu khác ở slide 13
  const nq=$$(".neq path",s);if(nq.length)live.push(gsap.fromTo(nq,{strokeDashoffset:1},{strokeDashoffset:0,duration:.35,stagger:.3,delay:1.2,ease:"power2.inOut"}));
  // Bậc thang: một chấm leo từng bậc; ở slide 3 có thêm chấm "đi tắt" bay theo đường đứt
- $$("path.st-step",s).forEach(st=>{const sv=st.ownerSVGElement;$$(".climb,.jumper",sv).forEach(e=>e.remove());
+ $$("path.st-step",s).forEach(st=>{if(st.closest(".thesis"))return;/* slide 3 dùng cảnh người leo ở climbScene */const sv=st.ownerSVGElement;$$(".climb,.jumper",sv).forEach(e=>e.remove());
   const pts=st.getAttribute("d").match(/[\d.]+ [\d.]+/g).map(v=>v.split(" ").map(Number));
   const c=el("circle",{class:"climb",r:8,cx:pts[0][0],cy:pts[0][1]},sv);c.style.opacity=0;
   const jp=st.classList.contains("dr")?sv.querySelector("path.st-jump"):null;
@@ -1853,12 +1911,18 @@ window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur
    .to(iv,{clipPath:"inset(0 0 0 100%)",duration:.5,ease:"power2.inOut"})
    .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.5,ease:"power2.inOut"},"<")
    .to(wipe,{opacity:0,duration:.15});return}
- busy=gsap.timeline({onComplete(){busy=null;gsap.set(ns,{clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
-  .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
-  .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"});gsap.set(ns,{clipPath:a});show(i)})
-  .fromTo(ns,{clipPath:a},{clipPath:"inset(0 0% 0 0%)",duration:.6,ease:"power2.inOut"})
-  .fromTo(wipe,{x:back?1598:0,opacity:1},{x:back?0:1598,duration:.6,ease:"power2.inOut"},"<")
-  .to(wipe,{opacity:0,duration:.15})};go=window.go;
+ /* Tờ cũ được chụp lại (giữ đúng trạng thái đang hiện), rồi lật lên qua mép trên như lật tờ trên bàn vẽ; lùi lại thì lật xuống mép dưới. Tờ mới nằm sẵn bên dưới. */
+ const c=freeze(slides[cur]),sh=document.createElement("div");sh.className="flsh";slides[cur].after(sh,c);show(i);
+ busy=gsap.timeline({onComplete(){busy=null;c.remove();sh.remove()}})
+  .fromTo(c,{rotationX:0},{rotationX:back?100:-100,transformOrigin:back?"50% 100%":"50% 0%",transformPerspective:2600,duration:.9,ease:"power2.in"})
+  .fromTo(c.querySelector(".fsh"),{opacity:0},{opacity:1,duration:.9,ease:"power1.in"},"<")
+  .fromTo(sh,{opacity:1},{opacity:0,duration:.9,ease:"power1.in"},"<")};go=window.go;
+function freeze(o){const c=o.cloneNode(true);c.classList.add("flipc");c.querySelectorAll(".notes").forEach(n=>n.remove());
+ const oc=o.querySelectorAll("canvas"),cc=c.querySelectorAll("canvas");oc.forEach((q,k)=>{try{cc[k].getContext("2d").drawImage(q,0,0)}catch(e){}});
+ const ids=new Map();c.querySelectorAll("[id]").forEach(e=>{const n=e.id+"__f";ids.set(e.id,n);e.id=n});
+ if(ids.size)c.querySelectorAll("*").forEach(e=>{for(const at of [...e.attributes]){if(!/#/.test(at.value))continue;
+  const v=at.value.replace(/url\(#([^)]+)\)/g,(m,id)=>ids.has(id)?`url(#${ids.get(id)})`:m).replace(/^#(.+)$/,(m,id)=>ids.has(id)?"#"+ids.get(id):m);if(v!==at.value)e.setAttribute(at.name,v)}});
+ const f=document.createElement("div");f.className="fsh";c.append(f);c.setAttribute("aria-hidden","true");return c}
 addEventListener("resize",()=>{if(!busy)links(slides[cur])});
 tbSet(cur);(document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready:Promise.resolve()).then(()=>enter(cur));
 })();

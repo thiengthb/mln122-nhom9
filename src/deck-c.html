@@ -739,6 +739,27 @@ figure.view{position:relative}
 .blank .caret{display:inline-block;width:3px;height:1.05em;margin-left:4px;vertical-align:-.15em;background:var(--son);animation:blink 1.1s steps(2) infinite}
 svg.links .pk{fill:var(--vai);stroke:var(--cham);stroke-width:2}
 svg.links .pk.o{fill:var(--son)}
+/* Lật tờ bản vẽ khi chuyển slide */
+:root{--shade:rgba(14,22,40,.28)}:root[data-look="reu"],:root[data-look="cham"]{--shade:rgba(0,0,0,.55)}
+.s.flipc{display:flex;z-index:3;pointer-events:none;backface-visibility:hidden;will-change:transform;
+  background-color:var(--cham);background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px;box-shadow:0 24px 60px var(--shade)}
+.s.flipc *,.s.flipc *::before,.s.flipc *::after{animation-delay:-60s!important;transition:none!important}
+.s.flipc .fsh{position:absolute;inset:0;background:linear-gradient(to bottom,transparent,var(--shade));opacity:0;pointer-events:none;z-index:9}
+.flsh{position:absolute;inset:0;z-index:3;background:var(--shade);pointer-events:none}
+/* Slide 3: leo bậc và gói công nghệ */
+.clb .pkg{fill:var(--cham);stroke:var(--nghe);stroke-width:1.6;stroke-linejoin:round}
+.clb .mnn{fill:none;stroke:var(--son);stroke-width:3;stroke-linecap:round}.clb .mnn circle{fill:var(--son)}
+.clb .ring{fill:none;stroke:var(--son);stroke-width:2}
+/* Slide 15: dây chuyền may */
+.s .lineq{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.lineq .blt{fill:var(--cham-2);stroke:var(--vai);stroke-width:2}
+.lineq .bln{stroke:var(--vai-3);stroke-width:2;stroke-dasharray:6 14}
+.lineq .rl{fill:var(--vai)}
+.lineq .stn,.lineq .sp{fill:none;stroke:var(--vai);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lineq .wk{fill:none;stroke:var(--vai-2);stroke-width:1.7}.lineq .wk.gone{stroke-dasharray:2 2}
+.lineq .rb{fill:none;stroke:var(--son);stroke-width:1.5;stroke-linecap:round}.lineq .rp{stroke-width:2.4}
+.lineq .it{fill:var(--cham);stroke:var(--son);stroke-width:1.5;stroke-linejoin:round}
 </style>
 
 <style>
