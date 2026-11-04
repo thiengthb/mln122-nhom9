@@ -102,4 +102,4 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - `ban-b.html` chỉ còn chuyển hướng sang trang chính. `soi-chi.html` giữ nguyên, không build lại. Bản C vẫn build được nhưng đã gác lại.
 - Từ nay sửa chữ trên slide chỉ cần sửa `src/slides.part` (không còn bản chép riêng cho B).
 - Còn treo: câu chú thích slide 18 "không tính phần trăm hoàn thành" trong khi slide dùng vòng tròn; chưa có bản PDF để nộp.
-
+- Góc tờ: thay dãy 22 ô bằng sợi chỉ nhỏ (lấy ý từ sợi chỉ của bản cũ): nét lượn sóng đứt mờ, đoạn đã đi tô màu chính, chấm là chỗ đổi người nói (đặc khi đã qua).
