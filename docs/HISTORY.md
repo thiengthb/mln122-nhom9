@@ -22,3 +22,11 @@ Xem mục "Việc nhóm phải làm" trong README.
 - 21 slide, tự kiểm tra: không lỗi JavaScript, không tràn khung, mô phỏng ra đúng 3,50 và 80 ở mức 100%.
 - Chưa bật được GitHub Pages từ phiên Claude (bị chặn); người dùng bật trong Settings hoặc nối Vercel.
 - Chưa thử trên máy chiếu thật.
+
+## 04/11/2026: viết lại lời nói, giao diện mới
+- Viết lại toàn bộ ghi chú người nói; thay từ lạ trên slide (trên chuyền, thoi bay, xe kéo sợi, hậu kiểm, NICs, ròng). Trích dẫn nguyên văn giữ nguyên, giải thích ở lời nói.
+- Lời nói khoảng 24 phút ở tốc độ 170 tiếng mỗi phút, chưa bấm giờ thật.
+- Bỏ bộ đếm giờ trên slide (cửa sổ người nói vẫn có đồng hồ), thêm số slide.
+- Ba giao diện, đổi bằng phím D: Giấy kỹ thuật (mặc định), Rừng rêu, Chàm cũ.
+- Sửa slide 22: danh mục tràn khung, ba mục cuối bị khuất.
+- Còn chờ: thứ tự 5 người, ngày thuyết trình, kiểm chứng của nhóm cho Phụ lục AI.

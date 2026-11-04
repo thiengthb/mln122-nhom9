@@ -19,7 +19,8 @@ Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng v
 - Nguồn slide: `src/deck.css.part` (giao diện), `src/slides.part` (nội dung), `src/app.part` (dữ liệu nguồn, tương tác). `src/deck.html` và `index.html` là bản build: chạy `python3 scripts/build.py` rồi commit.
 - Đầu `src/app.part` có `CONFIG`: tên thành viên, ngày, phần nhóm đã làm.
 - Kịch bản `docs/06` tự sinh từ ghi chú trong `src/slides.part`.
-- Phím trong slide: mũi tên, N ghi chú, P cửa sổ người nói, K soi nguồn, F toàn màn hình.
+- Phím trong slide: mũi tên, N ghi chú, P cửa sổ người nói, K soi nguồn, F toàn màn hình, T bấm đồng hồ, D đổi giao diện. Màu lấy từ biến CSS, không viết mã màu cứng.
+- Câu chữ: viết như sinh viên nói chuyện, không dùng từ người dùng chưa nghe bao giờ; thuật ngữ của môn phải giải thích trong lời nói.
 
 ## Liên kết
 - Sheet lớp: https://docs.google.com/spreadsheets/d/1EbCKDjwmWwk-oDGSOQbBcpIg0JYxn-2vS0e0khU8ucE

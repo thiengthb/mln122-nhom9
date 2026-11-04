@@ -47,3 +47,6 @@ Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại
 5. **R&D 0,42% là số năm 2021.** Nếu tìm được số mới hơn từ Bộ KH&CN thì thay.
 6. **Tổ chức ghi 86%:** bài VOV ghi "86% lao động dệt may, da giày, điện tử bị robot thay đến 2050" là cách diễn đạt sai lệch. Dùng trang ILO.
 7. Wikipedia và blog không được dùng làm nguồn (FAQ Q1).
+
+## Ghi chú 04/11/2026
+Nghị quyết 57, mục III.4 là câu duy nhất nhắc đến sinh viên: "Có cơ chế, chính sách hấp dẫn về tín dụng, học bổng và học phí để thu hút học sinh, sinh viên giỏi" theo học các lĩnh vực then chốt. Đọc lại trên trang của Tạp chí Quản lý nhà nước ngày 04/11/2026. Dùng ở lời nói slide 19.

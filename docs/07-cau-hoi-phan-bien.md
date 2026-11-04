@@ -7,7 +7,7 @@ Nhóm phản biện: 10, 4, 5. Khi trả lời thật không được dùng AI. 
    *Ý trả lời:* Đúng, slide đã ghi rõ. Căn cứ về cách đuổi kịp là giáo trình tr. 153; số liệu chỉ cho thấy họ vẫn tiếp tục đầu tư.
 3. **Bangladesh không phải Việt Nam.** Vì sao dùng số nước khác để bàn dệt may Việt Nam?
    *Ý trả lời:* Vì chưa có số so sánh tương đương cho Việt Nam mà nhóm đối chiếu được. Đã ghi rõ quốc gia, và kết luận chỉ là xu hướng công đoạn.
-4. **Tăng c/v theo Mác thì lao động bị đẩy ra, nhưng WEF ròng +78 triệu.** Hai điều có mâu thuẫn?
+4. **Tăng c/v theo Mác thì lao động bị đẩy ra, nhưng WEF tăng thêm 78 triệu.** Hai điều có mâu thuẫn?
    *Ý trả lời:* c/v nói về một đơn vị tư bản, giảm tương đối; quy mô sản xuất mở rộng và ngành mới vẫn có thể tạo việc tuyệt đối. Ngoài ra số WEF toàn cầu, nhiều xu hướng, không riêng AI.
 5. **Mô hình mô phỏng có số giả định.** Con số siêu ngạch 80 chứng minh được gì?
    *Ý trả lời:* Không chứng minh thực tế, chỉ minh họa cơ chế tr. 65, 68–69. Đã ghi rõ giả định.

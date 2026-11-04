@@ -10,9 +10,12 @@
 | AI phản biện | Claude | "Đóng vai nhóm phản biện, đặt câu hỏi 3C" | `docs/07-cau-hoi-phan-bien.md` | [Nhóm điền: câu nào đã luyện, trả lời ra sao] | như trên |
 
 | Soạn kịch bản nói, câu Kahoot, sắp lại slide cho 5 người | Claude | "Làm script thuyết trình hoàn chỉnh, ghi rõ mỗi người từ slide nào đến slide nào" | `docs/06-kich-ban.md`, `docs/09-kahoot.md`, slide bản 2 | [Nhóm điền: đã đọc, sửa những gì] | như trên |
+| Viết lại lời nói, rà câu chữ trên slide, đổi giao diện | Claude | "Rà lại từng câu từng chữ, script nói phải tự nhiên, tăng lên khoảng 20 phút, bỏ bộ đếm giờ, thêm số slide, đề xuất style khác" | `src/slides.part`, `docs/06-kich-ban.md`, giao diện mới | [Nhóm điền phần chỉnh sửa và kiểm chứng] | Commit 04/11/2026 |
 | Nhận xét độc lập | Codex | Yêu cầu rà soát repo | Báo cáo về nguồn, deploy, chỉ tiêu | Đã chọn lọc: nhận phần nguồn và nhãn; không giữ khảo sát | File review |
 
 **Quyết định do sinh viên đưa ra sau khi đọc và phản biện bản AI (04/11/2026):** bỏ khảo sát có nhập phiếu vì tốn thời gian của lớp, thay bằng hỏi một, hai bạn; yêu cầu hoạt ảnh tự chạy, giảm số lần bấm; thêm sơ đồ; sửa câu "Đi tắt nhưng vẫn phải đầu tư cho năng lực"; yêu cầu làm rõ "lợi ích" trong câu trả lời câu 2; cân thời lượng 25–30 phút gồm Kahoot.
+
+**Góp ý của sinh viên cho bản AI (04/11/2026):** chỉ ra các từ lạ như "trên chuyền", "thoi bay"; nhận xét lời nói giống đọc lại slide, chuyển ý và chuyển người còn kém; yêu cầu viết lại cho tự nhiên.
 
 **Ví dụ kiểm chứng đã có:**
 1. Bài bình luận trên VTV ghi kinh tế số khoảng 24% GDP năm 2025; Cục Thống kê ước tính 14,02%. Chọn Cục Thống kê.
