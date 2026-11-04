@@ -545,6 +545,37 @@ svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
 .s.on .fend{animation:fpulse 1.4s 2.7s ease-out 2}
 @keyframes fpulse{0%{box-shadow:0 0 0 6px color-mix(in srgb,var(--son) 50%,transparent)}100%{box-shadow:0 0 0 30px transparent}}
 @media (prefers-reduced-motion:reduce){.s.on .fend{animation:none}}
+/* Đợt chi tiết 2 (04/11/2026) */
+.tip{fill:var(--cham);stroke:var(--nghe);stroke-width:2.5;pointer-events:none}
+svg.links .tip{fill:var(--cham)}
+/* Mặt cắt gạch chéo nằm ở lớp riêng để quét được */
+.panel.dark,.leaf.hc{isolation:isolate;background:color-mix(in srgb,var(--cham) 82%,transparent)}
+.panel.dark:not(.wc)::before,.leaf.hc::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px);clip-path:inset(0 var(--hx,0%) 0 0)}
+.wc.dark{background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px),color-mix(in srgb,var(--cham) 82%,transparent)}
+/* Dấu khác vẽ bằng nét */
+.vs .neq svg{width:72px;height:90px;overflow:visible}
+.vs .neq path{fill:none;stroke:var(--nghe);stroke-width:6;stroke-linecap:round;stroke-dasharray:1 1}
+/* Ô để trống: viền đứt chạy vòng */
+.blank{border:0;background-image:linear-gradient(90deg,var(--vai-3) 50%,transparent 50%),linear-gradient(90deg,var(--vai-3) 50%,transparent 50%),linear-gradient(0deg,var(--vai-3) 50%,transparent 50%),linear-gradient(0deg,var(--vai-3) 50%,transparent 50%);
+  background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-size:18px 2px,18px 2px,2px 18px,2px 18px;background-position:0 0,0 100%,0 0,100% 0;animation:ants 1.2s linear infinite}
+@keyframes ants{to{background-position:18px 0,-18px 100%,0 -18px,100% 18px}}
+/* Bậc thang: chấm leo bậc và chấm đi tắt */
+.climb{fill:var(--son);stroke:var(--cham);stroke-width:3}
+.jumper{fill:var(--nghe);stroke:var(--cham);stroke-width:3}
+/* Slide 7: ngòi bút trên ba con đường */
+#waysvg .pen{fill:var(--cham);stroke-width:3}
+#waysvg .p0{stroke:var(--vai)}#waysvg .p1{stroke:var(--nghe)}#waysvg .p2{stroke:var(--son);fill:var(--son)}
+#waysvg .ring{fill:none;stroke:var(--son);stroke-width:2}
+/* Slide 18: vạch chia sáng theo cung, dấu đích ở đỉnh */
+.gc .tk2 line[data-on]{stroke:var(--c);stroke-width:2.5}
+.gc .tgt{fill:var(--nghe)}
+.gc svg:not(.ol){margin-top:12px}
+/* Đường dẫn từ con số ra ô nguồn */
+#lead{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;z-index:8;overflow:visible}
+#lead path{fill:none;stroke:var(--son);stroke-width:2;stroke-dasharray:1 1}
+#lead circle{fill:var(--cham);stroke:var(--son);stroke-width:2}
+@media (prefers-reduced-motion:reduce){.blank{animation:none}}
 </style>
 
 <style>
@@ -775,6 +806,11 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-3);stroke-width:1.5}
 .blc{height:92px}
 .blk{top:34px;height:40px}
 .bl .rest{top:76px}
+/* Giữ bản C như lúc đăng: tắt các chi tiết mới của bản B */
+.panel.dark::before,.leaf.hc::before{display:none}
+.blank{background-image:none;animation:none}
+.climb,.jumper,#waysvg .pen,#waysvg .ring,.tip,#lead{display:none}
+.vs .neq svg{display:none}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>

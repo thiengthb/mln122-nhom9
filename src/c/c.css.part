@@ -226,4 +226,9 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-3);stroke-width:1.5}
 .blc{height:92px}
 .blk{top:34px;height:40px}
 .bl .rest{top:76px}
+/* Giữ bản C như lúc đăng: tắt các chi tiết mới của bản B */
+.panel.dark::before,.leaf.hc::before{display:none}
+.blank{background-image:none;animation:none}
+.climb,.jumper,#waysvg .pen,#waysvg .ring,.tip,#lead{display:none}
+.vs .neq svg{display:none}
 </style>

@@ -64,3 +64,12 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Tiêu đề hiện theo từng cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng hoặc phần in màu), rồi phần in màu được tô dần như bút dạ quang.
 - Biểu đồ tự chạy: thanh mọc dần và số đếm lên (slide 9, 15), ô vuông hiện lần lượt (11, 13), thác nước (16), nét kích thước (6), nét nối sơ đồ (5, 10, 12, 17, 19). Slide 18 đổi từ đồng hồ sang thanh đích: mỗi chỉ tiêu một thang riêng, phần gạch chéo là chặng còn lại.
 - Ba kiểu màu (phím D): Giấy báo, Bản tối, Xanh đêm. Không thêm số liệu mới.
+
+## 04/11/2026: Quay lại bản B, đợt chi tiết 2
+- Người dùng chọn quay lại bố cục B (bản C vẫn giữ ở đường dẫn riêng, không sửa thêm). Thêm cho B, không thêm số liệu:
+  - Ngòi bút (chấm tròn có viền) chạy theo đầu mọi nét đang được vẽ: bậc thang, nét kích thước, nét nối sơ đồ.
+  - Slide 3: chấm "đi tắt" bay theo đường đứt, rồi chấm "năng lực" leo từng bậc, lặp lại. Slide 21: chấm leo bậc.
+  - Slide 7: ngòi bút chạy trên ba con đường đúng nhịp nét đang vẽ, đến đích thì có vòng sóng.
+  - Slide 13: dấu khác tự vẽ (hai gạch ngang rồi nét chéo). Slide 18: vạch chia sáng dần theo cung, có dấu đích ở đỉnh vòng.
+  - Mặt cắt gạch chéo quét từ trái sang sau khi viền kẻ xong. Ô để trống ở slide 2 có viền đứt chạy vòng. Tên tờ trong khung tên gõ ra từng chữ.
+  - Bấm vào con số để soi nguồn: có đường dẫn kẻ từ con số sang ô nguồn, như chú thích trên bản vẽ.
