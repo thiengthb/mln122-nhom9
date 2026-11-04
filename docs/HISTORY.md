@@ -210,3 +210,6 @@ Trưởng nhóm cho 4 thành viên vào repo, yêu cầu quy trình nghiêm ng�
 - `scripts/kiem-tra.py`: build khớp nguồn, 22 slide và phân công, ghi chú, khóa nguồn, trang bị cấm, màu viết cứng, tải từ mạng, thời lượng ≤ 20 phút, phiên bản quy tắc trong PR; báo slide nào của ai bị sửa, file khóa nào bị đụng. Trên GitHub chạy bản của `main`, để PR không tự nới luật.
 - `scripts/chup-slide.js`: chụp 22 slide ở hai kiểu màu, báo chữ đè, đính ảnh vào lần chạy.
 - Từ nay chính phiên Claude của trưởng nhóm cũng mở PR, không push thẳng `main`. Bảo vệ `main` phải bật trong Settings (hướng dẫn ở `duyet-pr.md`).
+
+## 04/11/2026: Ngày thuyết trình
+Trưởng nhóm báo: thứ Ba tuần sau, tức 10/11/2026. Điền `CONFIG.ngay`, ghi lịch khóa nội dung (hạn PR 07/11, nộp 09/11, nộp bản sửa 11/11) vào `docs/quy-trinh/duyet-pr.md` và đầu `CONTRIBUTING.md`.

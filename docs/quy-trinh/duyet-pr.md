@@ -40,7 +40,14 @@ Mở PR → tab Checks và Files changed. Thứ tự đọc:
 
 Duyệt: Review changes → Approve → Squash and merge. Chưa được: Request changes, ghi rõ cần sửa gì.
 
-## 3. Lịch khóa nội dung (đề xuất)
+## 3. Lịch khóa nội dung
+
+**Buổi thuyết trình: thứ Ba 10/11/2026** (Slot 9). Lịch áp dụng:
+- **Thứ Bảy 07/11/2026:** hạn chót mở và merge PR nội dung. Sau mốc này chỉ nhận PR sửa lỗi.
+- **Thứ Hai 09/11/2026, trước giờ Slot 9:** nộp slide và Phụ lục AI qua email; `main` đóng đến sau buổi.
+- **Thứ Tư 11/11/2026, trước giờ Slot 9:** nộp lại slide đã sửa theo góp ý của thầy, cùng quy trình PR.
+
+Quy tắc chung (khi đổi ngày thì tính lại theo đây):
 
 Khi có ngày thuyết trình (điền `CONFIG.ngay` trong `src/app.part`):
 - **Hạn chót PR nội dung:** 72 giờ trước buổi. Sau mốc này chỉ nhận PR sửa lỗi (chính tả, số sai, đè chữ).
