@@ -40,6 +40,8 @@ Mở PR → tab Checks và Files changed. Thứ tự đọc:
 
 Duyệt: Review changes → Approve → Squash and merge. Chưa được: Request changes, ghi rõ cần sửa gì.
 
+**PR do chính bạn hoặc Claude (trong phiên của bạn) mở:** GitHub không cho tác giả tự duyệt, nên PR luôn bị "blocked" dù đã xanh. Đợi cả `quy-tac` và `chup-slide` xanh, tích ô "Merge without waiting for requirements to be met (bypass rules)", rồi Squash and merge. **Không** dùng ô này cho PR của thành viên khác, và không dùng khi kiểm tra còn đỏ hoặc đang chạy.
+
 ## 3. Lịch khóa nội dung
 
 **Buổi thuyết trình: thứ Ba 10/11/2026** (Slot 9). Lịch áp dụng:
