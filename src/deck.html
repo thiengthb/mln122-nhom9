@@ -631,6 +631,7 @@ svg.links .tip{fill:var(--cham)}
 #iv .ivl path{fill:none;stroke:var(--vai-2);stroke-width:2}
 #iv .ivw{font:600 15px var(--mono);letter-spacing:.08em;color:var(--vai-2)}
 #iv .ivw span{color:var(--vai-3);margin-right:8px}
+#iv .ivw small{font:500 12px var(--mono);color:var(--vai-3);margin-left:4px}#iv .ivw i{font-style:normal;color:var(--vai-3);margin:0 12px}
 #wipe{z-index:8}
 /* Slide 14: thu lưới chấm và đường c/v để ba khung không tràn xuống dòng giả định */
 #dots{width:340px;gap:8px}
@@ -2026,7 +2027,10 @@ function extras(s){
 const QS=$$(".qs .callout h3").map(h=>h.textContent);
 const iv=document.createElement("div");iv.id="iv";iv.setAttribute("aria-hidden","true");stage.insertBefore(iv,$("#notes"));
 function ivFill(a){iv.innerHTML=`<div class="ivn"><svg viewBox="0 0 420 420"><text x="210" y="360" text-anchor="middle">${a}</text></svg></div>
- <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> ${who(slides.find(s=>+s.dataset.act===a).dataset.who)}</div></div>`;split(iv.querySelector("h2"))}
+ <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> ${actSpeakers(a)}</div></div>`;split(iv.querySelector("h2"))}
+/* mọi người nói trong phần a, theo thứ tự, kèm khoảng slide của từng người */
+function actSpeakers(a){const g=[];slides.forEach((s,k)=>{if(+s.dataset.act!==a)return;const w=s.dataset.who,l=g[g.length-1];if(l&&l.w===w)l.b=k+1;else g.push({w,a:k+1,b:k+1})});
+ return g.map(x=>`${who(x.w)} <small>${x.a===x.b?x.a:x.a+"–"+x.b}</small>`).join('<i>·</i>')}
 
 /* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
 const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);

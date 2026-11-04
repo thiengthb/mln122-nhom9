@@ -199,3 +199,4 @@ Người dùng gửi thứ tự: 1 Phạm Gia Huy (SE192867), 2 Trần Ngọc Th
 - Góc mỗi tờ, tờ chuyển phần và cửa sổ người nói (phím P) hiện tên thật qua hàm `who(n)`; thiếu tên thì quay về "Người n".
 - Ghi chú lời nói: "Em là [Người n]" thành họ tên, "Em mời [Người n]" thành "Em mời bạn" + tên gọi.
 - `scripts/build.py` đọc tên từ `app.part`, kịch bản `docs/06` ghi "Người n (họ tên)". Phân slide giữ nguyên: 1–5, 6–9, 10–13, 14–16, 17–21.
+- Cập nhật cùng ngày (người dùng nhắc): tờ chuyển phần trước đây chỉ ghi người nói slide đầu của phần. Nay ghi mọi người nói trong phần, theo thứ tự, kèm số slide: Câu hỏi 1 là Huy (4–5), Thiên (6–9), Phương (10–12); Câu hỏi 2 là Phương (13), Vỹ (14–16); Câu hỏi 3 là Nghĩa (17–20). Hàm `actSpeakers()` trong `src/ban-ve.part`, tự tính từ `data-act` và `data-who`.
