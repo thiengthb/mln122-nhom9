@@ -91,7 +91,7 @@ const M=(()=>{const c=$("#morph"),g=c.getContext("2d"),W=c.width,H=c.height,N=15
  const chip=[];for(let i=0;i<N;i++){const k=i%10;if(k<3){const s=Math.floor(R()*4),t=R(),x0=250,y0=120,w=320,h=320;chip.push([s==0?x0+t*w:s==1?x0+w:s==2?x0+t*w:x0,s==0?y0:s==1?y0+t*h:s==2?y0+h:y0+t*h,"--si"])}else if(k<8){const hor=R()<.5,lane=Math.floor(R()*12);const t=R();if(hor){const y=130+lane*26;chip.push([t<.5?30+t*440:570+(t-.5)*440,y,"--si"])}else{const x=262+lane*26;chip.push([x,t<.5?10+t*200:450+(t-.5)*200,"--si"])}}else{chip.push([270+Math.floor(R()*14)*20,140+Math.floor(R()*14)*20,"--vai"])}}
  const nodes=[];for(let i=0;i<34;i++)nodes.push([50+R()*(W-100),40+R()*(H-80)]);
  const net=[];for(let i=0;i<N;i++){const a=nodes[i%34];if(i%4===0){const t=R()*6.283,r=R()*9;net.push([a[0]+Math.cos(t)*r,a[1]+Math.sin(t)*r,"--son"])}else{let b=nodes[(i*7+3)%34],bd=1e9;for(let j=0;j<34;j++){if(j===i%34)continue;const d=Math.hypot(nodes[j][0]-a[0],nodes[j][1]-a[1])+(j*i%7)*34;if(d<bd){bd=d;b=nodes[j]}}const t=R();net.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,"--vai-2"])}}
- const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=13500,MOVE=1800;
+ const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=window.N9_STAGE||13500,MOVE=1800;
  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
  function hl(i){$$("#revlist .rv").forEach((e,j)=>{e.classList.toggle("on",j===i);e.classList.toggle("done",j<i)})}
  function draw(from,to,p,tm){g.clearRect(0,0,W,H);for(let i=0;i<N;i++){const a=T[from][i],b=T[to][i];const e=ease(p);let x=a[0]+(b[0]-a[0])*e,y=a[1]+(b[1]-a[1])*e;

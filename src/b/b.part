@@ -9,16 +9,39 @@ const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k 
 
 /* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
 const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
-tb.innerHTML=`<div><small>HỌC PHẦN</small><span>MLN122 · ${CONFIG.group.toUpperCase()}</span></div><div><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div><small>TRÌNH BÀY</small><span id="tbw"></span></div><div><small>TỜ SỐ</small><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span></div>`;
+const PARTS=["Mở đầu","Câu hỏi 1","Câu hỏi 2","Câu hỏi 3","Kết luận"],NW=Math.max(...slides.map(s=>+s.dataset.who));
+const grp=[];slides.forEach((s,j)=>{const a=+s.dataset.act;(grp[a]=grp[a]||[]).push(j)});
+tb.innerHTML=`<div class="tbp"><small>PHẦN</small><span id="tbp"></span></div><div class="tbt"><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div class="tbw"><small>NGƯỜI NÓI</small><span class="wr"><span id="tbw"></span><span class="pp">${"<i></i>".repeat(NW)}</span></span></div><div class="tbn"><small>TỜ</small><span id="tbn"></span></div>
+<div class="tbs"><span class="gs">${grp.map((g,a)=>`<span class="g" data-a="${a}">${g.map(j=>`<i data-j="${j}"></i>`).join("")}</span>`).join("")}</span><span class="lab">MLN122 · ${CONFIG.group.toUpperCase()}</span></div>`;
 stage.insertBefore(tb,$("#notes"));
 let tbT=null;function tbSet(i){const s=slides[i],tt=$("#tbt"),txt=s.dataset.title;if(tbT)tbT.kill();
  if(motion&&window.gsap){const z={n:0};tt.textContent="";tbT=gsap.to(z,{n:txt.length,duration:Math.min(.9,txt.length*.035),delay:.2,ease:"none",onUpdate(){tt.textContent=txt.slice(0,Math.round(z.n))}})}else tt.textContent=txt;$("#tbw").textContent="Người "+s.dataset.who;
- $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
+ const pa=$("#tbp"),np=PARTS[+s.dataset.act]||"";if(pa.textContent!==np){pa.textContent=np;if(motion&&window.gsap)gsap.fromTo(pa,{yPercent:-60,opacity:0},{yPercent:0,opacity:1,duration:.45,ease:"back.out(2)"})}
+ $$("#tb .pp i").forEach((e,j)=>e.classList.toggle("on",j===+s.dataset.who-1));
+ const nb=$("#tbn");nb.innerHTML=`<b>${String(i+1).padStart(2,"0")}</b><small>/${slides.length}</small>`;if(motion&&window.gsap)gsap.fromTo(nb.firstChild,{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:.35,ease:"power2.out"});
+ $$("#tb .tbs i").forEach(e=>{const j=+e.dataset.j;e.className=j<i?"f":j===i?"c":""});$$("#tb .tbs .g").forEach(g=>g.classList.toggle("on",+g.dataset.a===+s.dataset.act))}
 
 /* 2b. Số câu hỏi rất lớn, nét viền mờ ở góc phải trên (chỉ ở ba phần câu hỏi) */
 slides.forEach(s=>{const a=+s.dataset.act;if(!(a>=1&&a<=3))return;const g=el("svg",{class:"ghostn",viewBox:"0 0 300 300","aria-hidden":"true"});
  el("line",{x1:-40,y1:198,x2:200,y2:198},g);const t=el("text",{x:200,y:190,"text-anchor":"end"},g);t.textContent=a;
  const l=el("text",{class:"gl",x:52,y:190,"text-anchor":"end"},g);l.textContent="CÂU HỎI";s.prepend(g)});
+
+/* 2c. Tách tiêu đề thành từng từ; các từ trong một cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng, phần in màu) hiện cùng lúc */
+function split(h){if(h.dataset.k)return+h.dataset.k;let k=0,has=false;
+ const walk=n=>{[...n.childNodes].forEach(c=>{
+  if(c.nodeType===3){const f=document.createDocumentFragment();
+   c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}
+    const w=document.createElement("span");w.className="w";const wi=document.createElement("span");wi.className="wi";wi.textContent=t;wi.dataset.k=k;w.append(wi);f.append(w);has=true;
+    if(/[,;:?.!]["”]?$/.test(t)){k++;has=false}});c.replaceWith(f)}
+  else if(c.nodeName==="BR"){if(has){k++;has=false}}
+  else if(c.nodeName==="EM"){if(has){k++;has=false}walk(c);if(has){k++;has=false}}
+  else walk(c)})};
+ walk(h);h.dataset.k=k+1;return k+1}
+$$(".s h1,.s h2").forEach(split);
+function heads(s,t0,root){const tl=gsap.timeline({delay:t0});
+ $$("h1,h2",root||s).forEach((h,j)=>{const n=+h.dataset.k||split(h),at=j*.45;
+  for(let k=0;k<n;k++){const ws=$$(`.wi[data-k="${k}"]`,h);if(ws.length)tl.fromTo(ws,{yPercent:118},{yPercent:0,duration:.55,ease:"power3.out",stagger:.03},at+k*.3)}});
+ return tl}
 
 /* 3. Viền khối do JS kẻ, để có thể vẽ dần */
 const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
@@ -98,7 +121,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);
+ extras(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */
@@ -129,6 +152,46 @@ function extras(s){
   const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
 }
 
+/* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */
+(()=>{const cv=$("#morph");if(!cv)return;const fig=cv.closest("figure"),rv=$$("#revlist .rv"),i4=slides.findIndex(s=>s.dataset.title==="Bốn cuộc cách mạng");
+ const ov=document.createElement("div");ov.className="proc";ov.setAttribute("aria-hidden","true");fig.append(ov);
+ let snaps=[],tmr=null,tl=null;
+ const snap=j=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);snaps[j]=c};
+ const reset=()=>{clearTimeout(tmr);tmr=null;if(tl)tl.kill();snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ new MutationObserver(()=>{const j=rv.findIndex(e=>e.classList.contains("on"));if(j<0||cur!==i4)return;
+  if(j===0){reset();return}if(!snaps[j-1])snap(j-1);
+  if(j===3&&!tmr){tmr=setTimeout(()=>{snap(3);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
+ function build(){if(cur!==i4||!motion||snaps.filter(Boolean).length<4)return;
+  const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");
+  ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
+  $$(".ph",ov).forEach((p,j)=>{snaps[j].className="";p.append(snaps[j])});
+  const sv=$(".pl",ov);sv.setAttribute("viewBox",`0 0 ${ov.offsetWidth} ${H}`);
+  const B=$$(".pc",ov).map(c=>box(c.querySelector(".ph"),ov)),cell=$$(".pc",ov);
+  const mk=(d,cls)=>el("path",{d,class:cls,"marker-end":"url(#dap)"},sv);
+  const l1=mk(`M${B[0].x+B[0].w+6} ${B[0].y+B[0].h/2} H${B[1].x-8}`,"a"),
+   sy2=B[1].y+B[1].h+30,my=(sy2+B[2].y-6)/2,l2=mk(`M${B[1].x+B[1].w/2} ${sy2} V${my-12} Q${B[1].x+B[1].w/2} ${my} ${B[1].x+B[1].w/2-12} ${my} H${B[2].x+B[2].w/2+12} Q${B[2].x+B[2].w/2} ${my} ${B[2].x+B[2].w/2} ${my+12} V${B[2].y-6}`,"a"),
+   l3=mk(`M${B[2].x+B[2].w+6} ${B[2].y+B[2].h/2} H${B[3].x-8}`,"a");
+  const sc=B[3].w/W;
+  tl=gsap.timeline()
+   .set(cell,{opacity:0}).set(cell[3],{opacity:1}).set(cell[3].querySelector(".pt"),{opacity:0})
+   .fromTo(cell[3].querySelector(".ph"),{x:-B[3].x,y:-B[3].y,scale:1/sc,transformOrigin:"0 0"},{x:0,y:0,scale:1,duration:.8,ease:"power3.inOut"})
+   .set(cv,{opacity:0},"<.05")
+   .fromTo(cell[0],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},"+=.05")
+   .add(draw(l1,.4,0),">-.05")
+   .fromTo(cell[1],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l2,.7,0),">-.05")
+   .fromTo(cell[2],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l3,.4,0),">-.05")
+   .to(cell[3].querySelector(".pt"),{opacity:1,duration:.3},">-.1")
+   .fromTo(cell[3],{"--rg":"0px"},{"--rg":"6px",duration:.5,ease:"power2.out"})}
+ const show1=window.show;window.show=function(i,st){if(i!==i4)reset();show1(i,st)};show=window.show})();
+
+/* 10e. Tờ bìa phụ khi sang phần câu hỏi mới */
+const QS=$$(".qs .callout h3").map(h=>h.textContent);
+const iv=document.createElement("div");iv.id="iv";iv.setAttribute("aria-hidden","true");stage.insertBefore(iv,$("#notes"));
+function ivFill(a){iv.innerHTML=`<div class="ivn"><svg viewBox="0 0 420 420"><text x="210" y="360" text-anchor="middle">${a}</text></svg></div>
+ <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> Người ${slides.find(s=>+s.dataset.act===a).dataset.who}</div></div>`;split(iv.querySelector("h2"))}
+
 /* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
 const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);
 function leader(n){LS.innerHTML="";const d=$("#drawer");if(!d.classList.contains("on")||!motion&&false)return;
@@ -148,7 +211,23 @@ window.next=function(){fin();next0()};next=window.next;window.prev=function(){fi
 const wipe=document.createElement("div");wipe.id="wipe";stage.append(wipe);
 window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
  LS.innerHTML="";const back=i<cur,kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];const ns=slides[i];
- const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)";
+ const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)",na=+ns.dataset.act;
+ if(!back&&na>=1&&na<=3&&na!==+slides[cur].dataset.act){ivFill(na);const T=iv.querySelector(".ivn text"),L=iv.querySelector(".ivl path");
+  busy=gsap.timeline({onComplete(){busy=null;gsap.set(iv,{autoAlpha:0,clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
+   .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
+   .set(iv,{autoAlpha:1,clipPath:"inset(0 100% 0 0)"})
+   .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"})})
+   .to(iv,{clipPath:"inset(0 0% 0 0)",duration:.35,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.35,ease:"power2.inOut"},"<")
+   .set(wipe,{opacity:0})
+   .fromTo(T,{strokeDasharray:"2200 2200",strokeDashoffset:2200},{strokeDashoffset:0,duration:1,ease:"power1.inOut"},"<.1")
+   .add(heads(iv,0,iv),"<.1")
+   .fromTo(L,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.6,ease:"power2.inOut"},"<.3")
+   .fromTo(iv.querySelectorAll(".eb,.ivw"),{opacity:0,y:8},{opacity:1,y:0,duration:.35,stagger:.15},"<")
+   .add(()=>show(i),"+=.45")
+   .to(iv,{clipPath:"inset(0 0 0 100%)",duration:.5,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.5,ease:"power2.inOut"},"<")
+   .to(wipe,{opacity:0,duration:.15});return}
  busy=gsap.timeline({onComplete(){busy=null;gsap.set(ns,{clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
   .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
   .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"});gsap.set(ns,{clipPath:a});show(i)})

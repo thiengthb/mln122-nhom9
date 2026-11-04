@@ -81,3 +81,11 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Sửa: định nghĩa CNH, HĐH ở slide 10; slide 9 dùng R&D World Bank 2023 cho cả ba nước; slide 14 ghi giới hạn mô hình; slide 15 bỏ 90,5% và 5–7%, ghi mẫu Bangladesh và 67,1%; slide 16 nói rõ WEF không riêng AI, thêm số riêng AI, thêm bốn tác nhân; slide 17 "nhóm gom thành năm cụm"; slide 18 bỏ vòng tiến độ, thành thẻ "hiện tại, mốc 2030"; slide 19, 20, 21 sửa câu chữ. Đổi nguồn NQ57, Luật AI, GII sang trang chính thức.
 - Bản B (nhánh khác) lấy lời nói từ `src/slides.part` theo tên slide nên tự nhận lời mới; chữ trên slide của bản B ở `src/b/slides.part` phải chép lại các sửa đổi này khi gộp. `#gauges` giữ id, đổi cách vẽ trong `src/app.part`.
 - Nhóm phải tự nói lại lời nói bằng lời của mình (FAQ: AI viết toàn bộ script là vi phạm).
+
+## 04/11/2026: Bản B đợt 3
+- Gộp main (PR #3 sửa nội dung) vào nhánh bản B và chép các sửa chữ trên slide sang `src/b/slides.part` (slide 6, 7, 8, 9, 13, 14, 15, 16, 17, 18, 19, 21). Slide 18 bỏ mặt đồng hồ, dùng thẻ như bản chính, vì bốn chỉ tiêu khác đơn vị và không tính phần trăm hoàn thành. Bản C cũng chép chữ mới và tắt thanh đích ở slide 18 vì cùng lý do.
+- `src/app.part`: thời gian mỗi giai đoạn ở slide 4 đọc từ `window.N9_STAGE` nếu có (bản chính vẫn 13,5 giây). Bản B đặt 6,75 giây.
+- Slide 4 bản B: chụp lại hình ở cuối mỗi giai đoạn; khi đến giai đoạn 4, hình lớn thu nhỏ vào ô 4, rồi ô 1, 2, 3 hiện lần lượt với mũi tên 1 → 2, đường nối từ 2 vòng xuống 3, rồi 3 → 4.
+- Khung tên mới: ô PHẦN (Mở đầu, Câu hỏi 1–3, Kết luận), tên tờ, người nói có 5 chấm, số tờ; hàng dưới là thanh tiến độ chia theo phần, phần đang nói được tô nền.
+- Tiêu đề hiện theo từng cụm (như bản C) nhưng giữ chữ và màu bản B.
+- Khi đi tới phần câu hỏi mới (slide 4, 13, 17) có tờ bìa phụ: số câu hỏi lớn được kẻ nét, câu hỏi hiện theo cụm, nét kích thước, tên người nói; khoảng 1,5 giây. Đi lùi thì không có tờ bìa phụ.

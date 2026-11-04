@@ -515,7 +515,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 #plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
 #plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
 /* Tiểu tiết và hoạt ảnh thêm 04/11/2026 */
-#tb .sc i.c{animation:tbc 1.6s ease-in-out infinite}
+#tb .tbs i.c{animation:tbc 1.6s ease-in-out infinite}
 @keyframes tbc{50%{opacity:.35}}
 /* Chuyển tờ: nét bút chạy ngang, tờ mới hiện sau nét bút */
 #wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--son);z-index:6;pointer-events:none;opacity:0;
@@ -532,7 +532,7 @@ svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
 .ghostn line{stroke:color-mix(in srgb,var(--son) 30%,transparent);stroke-width:1;stroke-dasharray:4 5}
 /* Slide 4: thanh thời gian của giai đoạn đang chạy */
 .rv{overflow:hidden}
-.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 13.5s linear forwards}
+.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 6.75s linear forwards}
 @keyframes rvp{to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){.rv.on::after{animation:none;transform:none}}
 /* Thác nước: nét đứt nối đỉnh cột này sang cột sau */
@@ -576,6 +576,61 @@ svg.links .tip{fill:var(--cham)}
 #lead path{fill:none;stroke:var(--son);stroke-width:2;stroke-dasharray:1 1}
 #lead circle{fill:var(--cham);stroke:var(--son);stroke-width:2}
 @media (prefers-reduced-motion:reduce){.blank{animation:none}}
+/* Đợt 3 (04/11/2026) */
+/* Khung tên mới: phần đang nói, tên tờ, người nói, số tờ; hàng dưới là thanh tiến độ chia theo phần */
+#tb{grid-template-columns:auto minmax(0,auto) auto auto;grid-template-rows:auto auto}
+#tb{bottom:22px}
+#tb>div{padding:4px 11px;gap:1px}
+#tb small{font-size:8px}
+#tb .t,#tb .tbp span{font-size:14px}
+#tb .tbp span{color:var(--son);font:700 15px var(--body);display:inline-block}
+#tb .t{max-width:280px}
+#tb .wr{display:flex;align-items:center;gap:8px}
+#tb .pp{display:flex;gap:3px}
+#tb .pp i{width:7px;height:7px;border-radius:50%;border:1px solid var(--vai-3);transition:background-color .3s,border-color .3s,transform .3s}
+#tb .pp i.on{background:var(--son);border-color:var(--son);transform:scale(1.25)}
+#tb .tbn span{display:flex;align-items:baseline;gap:2px;overflow:hidden}
+#tb .tbn b{font:700 17px/1 var(--mono);color:var(--vai);display:inline-block}
+#tb .tbn small{font:600 11px var(--mono);color:var(--vai-3)}
+#tb .tbs{grid-column:1/-1;border-left:0;border-top:1px solid var(--ln);flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding:3px 11px 4px}
+#tb .gs{display:flex;gap:7px;align-items:center}
+#tb .g{display:flex;gap:2px;padding:1.5px;border-radius:2px;transition:background-color .3s}
+#tb .g.on{background:color-mix(in srgb,var(--son) 14%,transparent)}
+#tb .tbs i{width:5px;height:5px;box-sizing:border-box;border:1px solid var(--vai-3);transition:background-color .35s,border-color .35s}
+#tb .g.on i{border-color:var(--ln)}
+#tb .tbs i.f{background:var(--vai-3)}#tb .g.on i.f{background:var(--ln)}
+#tb .tbs i.c{background:var(--son);border-color:var(--son)}
+#tb .lab{font:600 9px var(--mono);letter-spacing:.1em;color:var(--vai-3)}
+/* Tiêu đề tách từ */
+.s.on h2.r,.s.on h1.r{animation:none!important;clip-path:none}
+.s.on h2.r::after,.s.on h1.r::after{display:none!important}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .03em .12em;margin:-.16em -.03em -.12em}
+.wi{display:inline-block}
+/* Slide 4: sơ đồ bốn hình */
+.view .proc{position:absolute;left:0;right:0;top:0;display:none;grid-template-columns:repeat(2,minmax(0,300px));grid-template-rows:auto auto;justify-content:center;align-content:center;gap:76px 64px;padding:10px 20px;z-index:2}
+.view .proc.on{display:grid}
+.pc{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc .ph{position:relative;aspect-ratio:820/560;outline:1.5px solid var(--ln);background:var(--cham-deep)}
+.pc3 .ph{outline:2.5px solid var(--son);box-shadow:0 0 0 var(--rg,0px) color-mix(in srgb,var(--son) 22%,transparent)}
+.pc canvas{width:100%;height:100%;display:block}
+.pc .pt{display:flex;gap:8px;align-items:baseline;font:600 15px/1.2 var(--body);color:var(--vai)}
+.pc .pt b{font:700 14px var(--mono);color:var(--son)}
+.proc .pl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.proc .pl>path{fill:none;stroke:var(--son);stroke-width:2.5}
+#morph{transform-origin:0 0}
+/* Tờ bìa phụ giữa các phần */
+#iv{position:absolute;inset:0;z-index:7;visibility:hidden;opacity:0;display:grid;grid-template-columns:420px 1fr;align-items:center;gap:60px;padding:0 120px;
+  background-color:var(--cham);background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px}
+#iv .ivn svg{width:420px;height:420px;overflow:visible}
+#iv .ivn text{font:700 400px/1 var(--mono);fill:none;stroke:var(--son);stroke-width:3}
+#iv .ivt{display:flex;flex-direction:column;gap:22px}
+#iv h2{font-size:64px;line-height:1.08;width:auto}
+#iv .ivl{width:820px;height:30px;overflow:visible}
+#iv .ivl path{fill:none;stroke:var(--vai-2);stroke-width:2}
+#iv .ivw{font:600 15px var(--mono);letter-spacing:.08em;color:var(--vai-2)}
+#iv .ivw span{color:var(--vai-3);margin-right:8px}
+#wipe{z-index:8}
 </style>
 
 <style>
@@ -1298,7 +1353,7 @@ const M=(()=>{const c=$("#morph"),g=c.getContext("2d"),W=c.width,H=c.height,N=15
  const chip=[];for(let i=0;i<N;i++){const k=i%10;if(k<3){const s=Math.floor(R()*4),t=R(),x0=250,y0=120,w=320,h=320;chip.push([s==0?x0+t*w:s==1?x0+w:s==2?x0+t*w:x0,s==0?y0:s==1?y0+t*h:s==2?y0+h:y0+t*h,"--si"])}else if(k<8){const hor=R()<.5,lane=Math.floor(R()*12);const t=R();if(hor){const y=130+lane*26;chip.push([t<.5?30+t*440:570+(t-.5)*440,y,"--si"])}else{const x=262+lane*26;chip.push([x,t<.5?10+t*200:450+(t-.5)*200,"--si"])}}else{chip.push([270+Math.floor(R()*14)*20,140+Math.floor(R()*14)*20,"--vai"])}}
  const nodes=[];for(let i=0;i<34;i++)nodes.push([50+R()*(W-100),40+R()*(H-80)]);
  const net=[];for(let i=0;i<N;i++){const a=nodes[i%34];if(i%4===0){const t=R()*6.283,r=R()*9;net.push([a[0]+Math.cos(t)*r,a[1]+Math.sin(t)*r,"--son"])}else{let b=nodes[(i*7+3)%34],bd=1e9;for(let j=0;j<34;j++){if(j===i%34)continue;const d=Math.hypot(nodes[j][0]-a[0],nodes[j][1]-a[1])+(j*i%7)*34;if(d<bd){bd=d;b=nodes[j]}}const t=R();net.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,"--vai-2"])}}
- const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=13500,MOVE=1800;
+ const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=window.N9_STAGE||13500,MOVE=1800;
  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
  function hl(i){$$("#revlist .rv").forEach((e,j)=>{e.classList.toggle("on",j===i);e.classList.toggle("done",j<i)})}
  function draw(from,to,p,tm){g.clearRect(0,0,W,H);for(let i=0;i<N;i++){const a=T[from][i],b=T[to][i];const e=ease(p);let x=a[0]+(b[0]-a[0])*e,y=a[1]+(b[1]-a[1])*e;

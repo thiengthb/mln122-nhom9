@@ -383,6 +383,7 @@
 <div id="warp" aria-hidden="true"></div>
 <div id="drawer" role="dialog" aria-label="Chi tiết nguồn"></div>
 </div>
+<script>window.N9_STAGE=6750</script>
 <div id="pv">
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="pvt" style="font:800 40px var(--display)"></b><span class="time" id="pvc"></span></div>
   <div class="nt" id="pvn"></div>

@@ -515,7 +515,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 #plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
 #plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
 /* Tiểu tiết và hoạt ảnh thêm 04/11/2026 */
-#tb .sc i.c{animation:tbc 1.6s ease-in-out infinite}
+#tb .tbs i.c{animation:tbc 1.6s ease-in-out infinite}
 @keyframes tbc{50%{opacity:.35}}
 /* Chuyển tờ: nét bút chạy ngang, tờ mới hiện sau nét bút */
 #wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--son);z-index:6;pointer-events:none;opacity:0;
@@ -532,7 +532,7 @@ svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
 .ghostn line{stroke:color-mix(in srgb,var(--son) 30%,transparent);stroke-width:1;stroke-dasharray:4 5}
 /* Slide 4: thanh thời gian của giai đoạn đang chạy */
 .rv{overflow:hidden}
-.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 13.5s linear forwards}
+.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 6.75s linear forwards}
 @keyframes rvp{to{transform:scaleX(1)}}
 @media (prefers-reduced-motion:reduce){.rv.on::after{animation:none;transform:none}}
 /* Thác nước: nét đứt nối đỉnh cột này sang cột sau */
@@ -576,6 +576,61 @@ svg.links .tip{fill:var(--cham)}
 #lead path{fill:none;stroke:var(--son);stroke-width:2;stroke-dasharray:1 1}
 #lead circle{fill:var(--cham);stroke:var(--son);stroke-width:2}
 @media (prefers-reduced-motion:reduce){.blank{animation:none}}
+/* Đợt 3 (04/11/2026) */
+/* Khung tên mới: phần đang nói, tên tờ, người nói, số tờ; hàng dưới là thanh tiến độ chia theo phần */
+#tb{grid-template-columns:auto minmax(0,auto) auto auto;grid-template-rows:auto auto}
+#tb{bottom:22px}
+#tb>div{padding:4px 11px;gap:1px}
+#tb small{font-size:8px}
+#tb .t,#tb .tbp span{font-size:14px}
+#tb .tbp span{color:var(--son);font:700 15px var(--body);display:inline-block}
+#tb .t{max-width:280px}
+#tb .wr{display:flex;align-items:center;gap:8px}
+#tb .pp{display:flex;gap:3px}
+#tb .pp i{width:7px;height:7px;border-radius:50%;border:1px solid var(--vai-3);transition:background-color .3s,border-color .3s,transform .3s}
+#tb .pp i.on{background:var(--son);border-color:var(--son);transform:scale(1.25)}
+#tb .tbn span{display:flex;align-items:baseline;gap:2px;overflow:hidden}
+#tb .tbn b{font:700 17px/1 var(--mono);color:var(--vai);display:inline-block}
+#tb .tbn small{font:600 11px var(--mono);color:var(--vai-3)}
+#tb .tbs{grid-column:1/-1;border-left:0;border-top:1px solid var(--ln);flex-direction:row;align-items:center;justify-content:space-between;gap:16px;padding:3px 11px 4px}
+#tb .gs{display:flex;gap:7px;align-items:center}
+#tb .g{display:flex;gap:2px;padding:1.5px;border-radius:2px;transition:background-color .3s}
+#tb .g.on{background:color-mix(in srgb,var(--son) 14%,transparent)}
+#tb .tbs i{width:5px;height:5px;box-sizing:border-box;border:1px solid var(--vai-3);transition:background-color .35s,border-color .35s}
+#tb .g.on i{border-color:var(--ln)}
+#tb .tbs i.f{background:var(--vai-3)}#tb .g.on i.f{background:var(--ln)}
+#tb .tbs i.c{background:var(--son);border-color:var(--son)}
+#tb .lab{font:600 9px var(--mono);letter-spacing:.1em;color:var(--vai-3)}
+/* Tiêu đề tách từ */
+.s.on h2.r,.s.on h1.r{animation:none!important;clip-path:none}
+.s.on h2.r::after,.s.on h1.r::after{display:none!important}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .03em .12em;margin:-.16em -.03em -.12em}
+.wi{display:inline-block}
+/* Slide 4: sơ đồ bốn hình */
+.view .proc{position:absolute;left:0;right:0;top:0;display:none;grid-template-columns:repeat(2,minmax(0,300px));grid-template-rows:auto auto;justify-content:center;align-content:center;gap:76px 64px;padding:10px 20px;z-index:2}
+.view .proc.on{display:grid}
+.pc{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc .ph{position:relative;aspect-ratio:820/560;outline:1.5px solid var(--ln);background:var(--cham-deep)}
+.pc3 .ph{outline:2.5px solid var(--son);box-shadow:0 0 0 var(--rg,0px) color-mix(in srgb,var(--son) 22%,transparent)}
+.pc canvas{width:100%;height:100%;display:block}
+.pc .pt{display:flex;gap:8px;align-items:baseline;font:600 15px/1.2 var(--body);color:var(--vai)}
+.pc .pt b{font:700 14px var(--mono);color:var(--son)}
+.proc .pl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.proc .pl>path{fill:none;stroke:var(--son);stroke-width:2.5}
+#morph{transform-origin:0 0}
+/* Tờ bìa phụ giữa các phần */
+#iv{position:absolute;inset:0;z-index:7;visibility:hidden;opacity:0;display:grid;grid-template-columns:420px 1fr;align-items:center;gap:60px;padding:0 120px;
+  background-color:var(--cham);background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px}
+#iv .ivn svg{width:420px;height:420px;overflow:visible}
+#iv .ivn text{font:700 400px/1 var(--mono);fill:none;stroke:var(--son);stroke-width:3}
+#iv .ivt{display:flex;flex-direction:column;gap:22px}
+#iv h2{font-size:64px;line-height:1.08;width:auto}
+#iv .ivl{width:820px;height:30px;overflow:visible}
+#iv .ivl path{fill:none;stroke:var(--vai-2);stroke-width:2}
+#iv .ivw{font:600 15px var(--mono);letter-spacing:.08em;color:var(--vai-2)}
+#iv .ivw span{color:var(--vai-3);margin-right:8px}
+#wipe{z-index:8}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -963,6 +1018,7 @@ svg.links .tip{fill:var(--cham)}
 <div id="warp" aria-hidden="true"></div>
 <div id="drawer" role="dialog" aria-label="Chi tiết nguồn"></div>
 </div>
+<script>window.N9_STAGE=6750</script>
 <div id="pv">
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="pvt" style="font:800 40px var(--display)"></b><span class="time" id="pvc"></span></div>
   <div class="nt" id="pvn"></div>
@@ -1063,7 +1119,7 @@ const M=(()=>{const c=$("#morph"),g=c.getContext("2d"),W=c.width,H=c.height,N=15
  const chip=[];for(let i=0;i<N;i++){const k=i%10;if(k<3){const s=Math.floor(R()*4),t=R(),x0=250,y0=120,w=320,h=320;chip.push([s==0?x0+t*w:s==1?x0+w:s==2?x0+t*w:x0,s==0?y0:s==1?y0+t*h:s==2?y0+h:y0+t*h,"--si"])}else if(k<8){const hor=R()<.5,lane=Math.floor(R()*12);const t=R();if(hor){const y=130+lane*26;chip.push([t<.5?30+t*440:570+(t-.5)*440,y,"--si"])}else{const x=262+lane*26;chip.push([x,t<.5?10+t*200:450+(t-.5)*200,"--si"])}}else{chip.push([270+Math.floor(R()*14)*20,140+Math.floor(R()*14)*20,"--vai"])}}
  const nodes=[];for(let i=0;i<34;i++)nodes.push([50+R()*(W-100),40+R()*(H-80)]);
  const net=[];for(let i=0;i<N;i++){const a=nodes[i%34];if(i%4===0){const t=R()*6.283,r=R()*9;net.push([a[0]+Math.cos(t)*r,a[1]+Math.sin(t)*r,"--son"])}else{let b=nodes[(i*7+3)%34],bd=1e9;for(let j=0;j<34;j++){if(j===i%34)continue;const d=Math.hypot(nodes[j][0]-a[0],nodes[j][1]-a[1])+(j*i%7)*34;if(d<bd){bd=d;b=nodes[j]}}const t=R();net.push([a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,"--vai-2"])}}
- const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=13500,MOVE=1800;
+ const T=[weave,line,chip,net];let st=0,t0=0,run=false,raf=0;const STAGE=window.N9_STAGE||13500,MOVE=1800;
  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
  function hl(i){$$("#revlist .rv").forEach((e,j)=>{e.classList.toggle("on",j===i);e.classList.toggle("done",j<i)})}
  function draw(from,to,p,tm){g.clearRect(0,0,W,H);for(let i=0;i<N;i++){const a=T[from][i],b=T[to][i];const e=ease(p);let x=a[0]+(b[0]-a[0])*e,y=a[1]+(b[1]-a[1])*e;
@@ -1233,16 +1289,39 @@ const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k 
 
 /* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
 const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
-tb.innerHTML=`<div><small>HỌC PHẦN</small><span>MLN122 · ${CONFIG.group.toUpperCase()}</span></div><div><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div><small>TRÌNH BÀY</small><span id="tbw"></span></div><div><small>TỜ SỐ</small><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span></div>`;
+const PARTS=["Mở đầu","Câu hỏi 1","Câu hỏi 2","Câu hỏi 3","Kết luận"],NW=Math.max(...slides.map(s=>+s.dataset.who));
+const grp=[];slides.forEach((s,j)=>{const a=+s.dataset.act;(grp[a]=grp[a]||[]).push(j)});
+tb.innerHTML=`<div class="tbp"><small>PHẦN</small><span id="tbp"></span></div><div class="tbt"><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div class="tbw"><small>NGƯỜI NÓI</small><span class="wr"><span id="tbw"></span><span class="pp">${"<i></i>".repeat(NW)}</span></span></div><div class="tbn"><small>TỜ</small><span id="tbn"></span></div>
+<div class="tbs"><span class="gs">${grp.map((g,a)=>`<span class="g" data-a="${a}">${g.map(j=>`<i data-j="${j}"></i>`).join("")}</span>`).join("")}</span><span class="lab">MLN122 · ${CONFIG.group.toUpperCase()}</span></div>`;
 stage.insertBefore(tb,$("#notes"));
 let tbT=null;function tbSet(i){const s=slides[i],tt=$("#tbt"),txt=s.dataset.title;if(tbT)tbT.kill();
  if(motion&&window.gsap){const z={n:0};tt.textContent="";tbT=gsap.to(z,{n:txt.length,duration:Math.min(.9,txt.length*.035),delay:.2,ease:"none",onUpdate(){tt.textContent=txt.slice(0,Math.round(z.n))}})}else tt.textContent=txt;$("#tbw").textContent="Người "+s.dataset.who;
- $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
+ const pa=$("#tbp"),np=PARTS[+s.dataset.act]||"";if(pa.textContent!==np){pa.textContent=np;if(motion&&window.gsap)gsap.fromTo(pa,{yPercent:-60,opacity:0},{yPercent:0,opacity:1,duration:.45,ease:"back.out(2)"})}
+ $$("#tb .pp i").forEach((e,j)=>e.classList.toggle("on",j===+s.dataset.who-1));
+ const nb=$("#tbn");nb.innerHTML=`<b>${String(i+1).padStart(2,"0")}</b><small>/${slides.length}</small>`;if(motion&&window.gsap)gsap.fromTo(nb.firstChild,{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:.35,ease:"power2.out"});
+ $$("#tb .tbs i").forEach(e=>{const j=+e.dataset.j;e.className=j<i?"f":j===i?"c":""});$$("#tb .tbs .g").forEach(g=>g.classList.toggle("on",+g.dataset.a===+s.dataset.act))}
 
 /* 2b. Số câu hỏi rất lớn, nét viền mờ ở góc phải trên (chỉ ở ba phần câu hỏi) */
 slides.forEach(s=>{const a=+s.dataset.act;if(!(a>=1&&a<=3))return;const g=el("svg",{class:"ghostn",viewBox:"0 0 300 300","aria-hidden":"true"});
  el("line",{x1:-40,y1:198,x2:200,y2:198},g);const t=el("text",{x:200,y:190,"text-anchor":"end"},g);t.textContent=a;
  const l=el("text",{class:"gl",x:52,y:190,"text-anchor":"end"},g);l.textContent="CÂU HỎI";s.prepend(g)});
+
+/* 2c. Tách tiêu đề thành từng từ; các từ trong một cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng, phần in màu) hiện cùng lúc */
+function split(h){if(h.dataset.k)return+h.dataset.k;let k=0,has=false;
+ const walk=n=>{[...n.childNodes].forEach(c=>{
+  if(c.nodeType===3){const f=document.createDocumentFragment();
+   c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}
+    const w=document.createElement("span");w.className="w";const wi=document.createElement("span");wi.className="wi";wi.textContent=t;wi.dataset.k=k;w.append(wi);f.append(w);has=true;
+    if(/[,;:?.!]["”]?$/.test(t)){k++;has=false}});c.replaceWith(f)}
+  else if(c.nodeName==="BR"){if(has){k++;has=false}}
+  else if(c.nodeName==="EM"){if(has){k++;has=false}walk(c);if(has){k++;has=false}}
+  else walk(c)})};
+ walk(h);h.dataset.k=k+1;return k+1}
+$$(".s h1,.s h2").forEach(split);
+function heads(s,t0,root){const tl=gsap.timeline({delay:t0});
+ $$("h1,h2",root||s).forEach((h,j)=>{const n=+h.dataset.k||split(h),at=j*.45;
+  for(let k=0;k<n;k++){const ws=$$(`.wi[data-k="${k}"]`,h);if(ws.length)tl.fromTo(ws,{yPercent:118},{yPercent:0,duration:.55,ease:"power3.out",stagger:.03},at+k*.3)}});
+ return tl}
 
 /* 3. Viền khối do JS kẻ, để có thể vẽ dần */
 const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
@@ -1322,7 +1401,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);
+ extras(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */
@@ -1353,6 +1432,46 @@ function extras(s){
   const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
 }
 
+/* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */
+(()=>{const cv=$("#morph");if(!cv)return;const fig=cv.closest("figure"),rv=$$("#revlist .rv"),i4=slides.findIndex(s=>s.dataset.title==="Bốn cuộc cách mạng");
+ const ov=document.createElement("div");ov.className="proc";ov.setAttribute("aria-hidden","true");fig.append(ov);
+ let snaps=[],tmr=null,tl=null;
+ const snap=j=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);snaps[j]=c};
+ const reset=()=>{clearTimeout(tmr);tmr=null;if(tl)tl.kill();snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ new MutationObserver(()=>{const j=rv.findIndex(e=>e.classList.contains("on"));if(j<0||cur!==i4)return;
+  if(j===0){reset();return}if(!snaps[j-1])snap(j-1);
+  if(j===3&&!tmr){tmr=setTimeout(()=>{snap(3);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
+ function build(){if(cur!==i4||!motion||snaps.filter(Boolean).length<4)return;
+  const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");
+  ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
+  $$(".ph",ov).forEach((p,j)=>{snaps[j].className="";p.append(snaps[j])});
+  const sv=$(".pl",ov);sv.setAttribute("viewBox",`0 0 ${ov.offsetWidth} ${H}`);
+  const B=$$(".pc",ov).map(c=>box(c.querySelector(".ph"),ov)),cell=$$(".pc",ov);
+  const mk=(d,cls)=>el("path",{d,class:cls,"marker-end":"url(#dap)"},sv);
+  const l1=mk(`M${B[0].x+B[0].w+6} ${B[0].y+B[0].h/2} H${B[1].x-8}`,"a"),
+   sy2=B[1].y+B[1].h+30,my=(sy2+B[2].y-6)/2,l2=mk(`M${B[1].x+B[1].w/2} ${sy2} V${my-12} Q${B[1].x+B[1].w/2} ${my} ${B[1].x+B[1].w/2-12} ${my} H${B[2].x+B[2].w/2+12} Q${B[2].x+B[2].w/2} ${my} ${B[2].x+B[2].w/2} ${my+12} V${B[2].y-6}`,"a"),
+   l3=mk(`M${B[2].x+B[2].w+6} ${B[2].y+B[2].h/2} H${B[3].x-8}`,"a");
+  const sc=B[3].w/W;
+  tl=gsap.timeline()
+   .set(cell,{opacity:0}).set(cell[3],{opacity:1}).set(cell[3].querySelector(".pt"),{opacity:0})
+   .fromTo(cell[3].querySelector(".ph"),{x:-B[3].x,y:-B[3].y,scale:1/sc,transformOrigin:"0 0"},{x:0,y:0,scale:1,duration:.8,ease:"power3.inOut"})
+   .set(cv,{opacity:0},"<.05")
+   .fromTo(cell[0],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},"+=.05")
+   .add(draw(l1,.4,0),">-.05")
+   .fromTo(cell[1],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l2,.7,0),">-.05")
+   .fromTo(cell[2],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l3,.4,0),">-.05")
+   .to(cell[3].querySelector(".pt"),{opacity:1,duration:.3},">-.1")
+   .fromTo(cell[3],{"--rg":"0px"},{"--rg":"6px",duration:.5,ease:"power2.out"})}
+ const show1=window.show;window.show=function(i,st){if(i!==i4)reset();show1(i,st)};show=window.show})();
+
+/* 10e. Tờ bìa phụ khi sang phần câu hỏi mới */
+const QS=$$(".qs .callout h3").map(h=>h.textContent);
+const iv=document.createElement("div");iv.id="iv";iv.setAttribute("aria-hidden","true");stage.insertBefore(iv,$("#notes"));
+function ivFill(a){iv.innerHTML=`<div class="ivn"><svg viewBox="0 0 420 420"><text x="210" y="360" text-anchor="middle">${a}</text></svg></div>
+ <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> Người ${slides.find(s=>+s.dataset.act===a).dataset.who}</div></div>`;split(iv.querySelector("h2"))}
+
 /* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
 const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);
 function leader(n){LS.innerHTML="";const d=$("#drawer");if(!d.classList.contains("on")||!motion&&false)return;
@@ -1372,7 +1491,23 @@ window.next=function(){fin();next0()};next=window.next;window.prev=function(){fi
 const wipe=document.createElement("div");wipe.id="wipe";stage.append(wipe);
 window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
  LS.innerHTML="";const back=i<cur,kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];const ns=slides[i];
- const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)";
+ const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)",na=+ns.dataset.act;
+ if(!back&&na>=1&&na<=3&&na!==+slides[cur].dataset.act){ivFill(na);const T=iv.querySelector(".ivn text"),L=iv.querySelector(".ivl path");
+  busy=gsap.timeline({onComplete(){busy=null;gsap.set(iv,{autoAlpha:0,clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
+   .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
+   .set(iv,{autoAlpha:1,clipPath:"inset(0 100% 0 0)"})
+   .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"})})
+   .to(iv,{clipPath:"inset(0 0% 0 0)",duration:.35,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.35,ease:"power2.inOut"},"<")
+   .set(wipe,{opacity:0})
+   .fromTo(T,{strokeDasharray:"2200 2200",strokeDashoffset:2200},{strokeDashoffset:0,duration:1,ease:"power1.inOut"},"<.1")
+   .add(heads(iv,0,iv),"<.1")
+   .fromTo(L,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.6,ease:"power2.inOut"},"<.3")
+   .fromTo(iv.querySelectorAll(".eb,.ivw"),{opacity:0,y:8},{opacity:1,y:0,duration:.35,stagger:.15},"<")
+   .add(()=>show(i),"+=.45")
+   .to(iv,{clipPath:"inset(0 0 0 100%)",duration:.5,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.5,ease:"power2.inOut"},"<")
+   .to(wipe,{opacity:0,duration:.15});return}
  busy=gsap.timeline({onComplete(){busy=null;gsap.set(ns,{clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
   .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
   .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"});gsap.set(ns,{clipPath:a});show(i)})
