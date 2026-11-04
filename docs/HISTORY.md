@@ -46,3 +46,9 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - GSAP 3.13 lưu trong `vendor/gsap` (chạy được khi không có mạng). Phần mới ở `src/soi-chi.part`, không sửa `app.part`; build ra `soi-chi.html` và `src/deck-soi-chi.html`. `index.html` chưa đổi.
 - Làm kỹ 3 slide: bìa (sợi chỉ gạch dưới tiêu đề rồi chạy vào đáy khung dệt), bốn cuộc cách mạng (trục thời gian vẽ dần theo 4 giai đoạn, nét đổi kiểu, cuối tỏa nhánh vào mạng lưới), c/v (đường cong c/v vẽ theo thanh trượt, số từ mô hình giả định sẵn có). Các slide khác: sợi chỉ gạch dưới tiêu đề, chuyển cảnh sợi chỉ rút ra. Chưa dùng View Transitions.
 - Link artifact cũ 7go3S9km... không đọc được từ phiên này. Bản thử đăng ở https://claude.ai/artifact/GHAYsKUXMt3XGWue1rbVNH
+
+## 04/11/2026: bản nháp B "Bản vẽ kỹ thuật động"
+- Người dùng chọn thử hướng B, cho phép đổi cả bố cục, màu, sơ đồ. Bản nháp riêng, chưa đưa về bản chính.
+- Nguồn: `src/b/slides.part` (bố cục mới, ghi chú để trống, lúc build tự lấy lời nói từ `src/slides.part` theo tên slide), `src/b/b.css.part`, `src/b/b.part`. Build ra `ban-b.html` và `src/deck-b.html`.
+- Ý tưởng: mỗi slide là một tờ bản vẽ (viền đôi, ô tọa độ 1–8, A–D, khung tên có số tờ và thanh tỉ lệ thay thanh tiến độ); số liệu dùng nét ghi kích thước (slide 6); khối quan trọng là mặt cắt gạch chéo; sơ đồ tự lắp bằng nét nối (slide 5, 10, 12, 17, 19); bánh răng ở tâm (10, 17); bậc thang và cú nhảy cho luận điểm (3, 21); đường c/v (14); số đếm lên.
+- Ba kiểu màu mới (phím D): Giấy can, Bản in xanh, Bàn vẽ đêm. Không thêm số liệu mới.

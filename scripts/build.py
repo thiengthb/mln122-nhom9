@@ -68,3 +68,14 @@ demo = body + "\n" + vend + (src / "soi-chi.part").read_text(encoding="utf8")
 (src / "deck-soi-chi.html").write_text(demo, encoding="utf8")
 (root / "soi-chi.html").write_text(page.replace(body, demo), encoding="utf8")
 print("OK soi-chi", len(demo))
+
+# Bản nháp B "Bản vẽ kỹ thuật động": bố cục riêng ở src/b/, lời nói lấy từ src/slides.part theo tên slide.
+notes = dict(re.findall(r'data-title="([^"]+)".*?<aside class="notes">(.*?)</aside>', src_slides, re.S))
+b_slides = (src / "b" / "slides.part").read_text(encoding="utf8")
+def fill(m):
+    return m.group(1) + notes.get(m.group(2), "") + m.group(3)
+b_slides = re.sub(r'(<section[^>]*data-title="([^"]+)".*?<aside class="notes">)(</aside>)', fill, b_slides, flags=re.S)
+b_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "b" / "b.css.part").read_text(encoding="utf8"), b_slides, (src / "app.part").read_text(encoding="utf8"), vend, (src / "b" / "b.part").read_text(encoding="utf8")])
+(src / "deck-b.html").write_text(b_body, encoding="utf8")
+(root / "ban-b.html").write_text(page.replace(body, b_body), encoding="utf8")
+print("OK ban-b", len(b_body), "ghi chú:", len(re.findall(r'<aside class="notes">[^<]', b_slides)))

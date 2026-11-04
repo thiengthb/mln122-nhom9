@@ -1,0 +1,108 @@
+<!-- Bản nháp B: khung bản vẽ, nét tự kẻ, số đếm lên, sơ đồ tự lắp. Chạy sau app.part và GSAP. Không sửa app.part. -->
+<script>
+(()=>{
+if(PRES||!window.gsap)return;
+const NS="http://www.w3.org/2000/svg",stage=$("#stage"),motion=!reduce;
+const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.append(e);return e};
+
+/* 1. Khung bản vẽ: viền đôi, ô tọa độ 1–8 và A–D, dấu tâm */
+const sh=el("svg",{id:"sheet",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.insertBefore(sh,$("#notes"));
+const fr=[el("rect",{class:"o",x:12,y:12,width:1576,height:876,pathLength:1},sh),el("rect",{class:"i",x:24,y:24,width:1552,height:852,pathLength:1},sh)];
+for(let k=0;k<8;k++){const x=24+k*194;if(k)[[x,12,x,24],[x,876,x,888]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
+ [18,882].forEach(y=>el("text",{x:x+97,y},sh).textContent=k+1)}
+for(let k=0;k<4;k++){const y=24+k*213;if(k)[[12,y,24,y],[1576,y,1588,y]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
+ [18,1582].forEach(x=>el("text",{x,y:y+106},sh).textContent="ABCD"[k])}
+[[800,24,800,40],[800,860,800,876],[24,450,40,450],[1560,450,1576,450]].forEach(([a,b,c,d])=>el("line",{class:"cm",x1:a,y1:b,x2:c,y2:d},sh));
+if(motion)gsap.fromTo(fr,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:1.6,ease:"power2.inOut",stagger:.2});
+
+/* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
+const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
+tb.innerHTML=`<div><small>HỌC PHẦN</small><span>MLN122 · ${CONFIG.group.toUpperCase()}</span></div><div><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div><small>TRÌNH BÀY</small><span id="tbw"></span></div><div><small>TỜ SỐ</small><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span></div>`;
+stage.insertBefore(tb,$("#notes"));
+function tbSet(i){const s=slides[i];$("#tbt").textContent=s.dataset.title;$("#tbw").textContent="Người "+s.dataset.who;
+ $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
+
+/* 3. Viền khối do JS kẻ, để có thể vẽ dần */
+const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
+function outline(root){$$(OL,root).forEach(b=>{if(b.querySelector(":scope>svg.ol"))return;const s=el("svg",{class:"ol","aria-hidden":"true"});el("rect",{x:0,y:0,width:"100%",height:"100%",pathLength:1},s);b.prepend(s)})}
+outline(stage);new MutationObserver(()=>outline($("#plan"))).observe($("#plan"),{childList:true});
+
+/* 4. Bánh răng ở tâm sơ đồ */
+function gearPath(n=18,R=146,r=130,c=150){let d="";for(let k=0;k<n;k++){const a=k/n*2*Math.PI,w=Math.PI/n;
+  const p=[[r,a-w*.55],[R,a-w*.32],[R,a+w*.32],[r,a+w*.55]].map(([q,t])=>`${(c+q*Math.cos(t)).toFixed(1)} ${(c+q*Math.sin(t)).toFixed(1)}`);
+  d+=(k?" L":"M")+p.join(" L")}return d+"Z"}
+$$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden":"true"});el("path",{class:"gear",d:gearPath()},s);
+ el("circle",{cx:150,cy:150,r:112,style:"fill:none;stroke:var(--son);stroke-width:1.2;stroke-dasharray:3 6"},s);g.prepend(s)});
+
+/* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
+$$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
+$$("#gauges .gc svg").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
+ el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}});
+
+/* 6. Đường c/v trong mô phỏng */
+(()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
+ const pts=[];for(let a=0;a<=100;a++){const o=window.__sim(a/100,false);pts.push([30+a*3.5,150-(o.r-1)/2.5*130])}
+ const d="M"+pts.map(q=>q.map(v=>v.toFixed(1)).join(" ")).join(" L"),rEnd=window.__sim(1,false).r;
+ let grid="";for(let k=0;k<=10;k++)grid+=`<line class="gr" x1="${30+k*35}" y1="14" x2="${30+k*35}" y2="150"/>`;for(let k=0;k<=5;k++)grid+=`<line class="gr" x1="30" y1="${150-k*26}" x2="380" y2="${150-k*26}"/>`;
+ w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Đường c/v tăng theo mức tự động hóa">${grid}<line class="ax" x1="30" y1="150" x2="384" y2="150"/><line class="ax" x1="30" y1="150" x2="30" y2="8"/><path class="cvg" d="${d}"/><path class="cv" d="${d}"/><circle class="hd" r="7" cx="30" cy="150"/><text x="30" y="172">0%</text><text x="380" y="172" text-anchor="end">100% tự động</text><text x="38" y="128">c/v = ${fmt(1,2)}</text><text class="re" x="372" y="22" text-anchor="end">c/v = ${fmt(rEnd,2)}</text></svg>`;
+ const cv=$(".cv",w),hd=$(".hd",w),re=$(".re",w),L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+ cv.style.strokeDasharray=L[100]+" "+L[100];
+ const upd=()=>{const a=Math.round(+$("#simA").value);cv.style.strokeDashoffset=L[100]-Math.max(.01,L[a]);hd.setAttribute("cx",pts[a][0]);hd.setAttribute("cy",pts[a][1]);re.style.opacity=a>=100?1:.25};
+ const base=runSim;window.runSim=function(){base();upd()};runSim=window.runSim;upd()})();
+
+/* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
+function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
+function elbow(sx,sy,ex,ey,vert){const r=12;
+ if(vert){if(Math.abs(ex-sx)<2)return`M${sx} ${sy} V${ey}`;const my=(sy+ey)/2,k=Math.min(r,Math.abs(ex-sx)/2,(ey-sy)/2),dx=Math.sign(ex-sx);
+  return`M${sx} ${sy} V${my-k} Q${sx} ${my} ${sx+dx*k} ${my} H${ex-dx*k} Q${ex} ${my} ${ex} ${my+k} V${ey}`}
+ if(Math.abs(ey-sy)<2)return`M${sx} ${sy} H${ex}`;const mx=(sx+ex)/2,k=Math.min(r,Math.abs(ey-sy)/2,(ex-sx)/2),dy=Math.sign(ey-sy);
+ return`M${sx} ${sy} H${mx-k} Q${mx} ${sy} ${mx} ${sy+dy*k} V${ey-dy*k} Q${mx} ${ey} ${mx+k} ${ey} H${ex}`}
+function links(s){if(!s.dataset.links)return[];let sv=s.querySelector(":scope>svg.links");if(sv)sv.remove();
+ sv=el("svg",{class:"links",viewBox:"0 0 1600 900","aria-hidden":"true"});s.prepend(sv);
+ return s.dataset.links.split(",").map(t=>{const acc=t.endsWith("!"),[a,b]=t.replace("!","").split(">"),A=box($("#"+a,s),s),B=box($("#"+b,s),s);
+  const vert=B.y>=A.y+A.h-2&&B.x<A.x+A.w;let sx,sy,ex,ey;
+  if(vert){sx=A.x+A.w/2;sy=A.y+A.h;ex=B.x+B.w/2;ey=B.y-2}else{sx=A.x+A.w;sy=A.y+A.h/2;ex=B.x-2;ey=B.y+B.h/2}
+  const p=el("path",{d:elbow(sx,sy,ex,ey,vert),class:acc?"a":"","marker-end":`url(#${acc?"dap":"da"})`},sv);const c=el("circle",{cx:sx,cy:sy,r:4},sv);return{p,c}})}
+
+/* 8. Vẽ dần một đường bằng mặt nạ, để cả nét đứt và đầu mũi tên cũng hiện theo */
+let mid=0;function maskFor(p){if(p.__m)return p.__m;const sv=p.ownerSVGElement;let defs=sv.querySelector("defs")||el("defs",{},sv);
+ const m=el("mask",{id:"mk"+(++mid),maskUnits:"userSpaceOnUse",x:-100,y:-100,width:2200,height:1200},defs);
+ const q=el("path",{d:p.getAttribute("d"),fill:"none",stroke:"#fff","stroke-width":34,"stroke-linecap":"round","stroke-linejoin":"round"},m);
+ p.setAttribute("mask",`url(#${m.id})`);const L=q.getTotalLength();q.style.strokeDasharray=L+" "+L;return p.__m={q,L}}
+function draw(p,dur,delay){const m=maskFor(p);return gsap.fromTo(m.q,{strokeDashoffset:m.L},{strokeDashoffset:0,duration:dur,delay,ease:"power1.inOut"})}
+
+/* 9. Số đếm lên, giữ đúng cách viết 1.220 · 4,53 · −48,34% · 2,2 triệu */
+const CNT=".big,.bar>span:last-child,.wb b,.lgt b.n,.cnt,.gv";
+function count(e,delay){if(e.children.length)return null;const o=e.dataset.o||(e.dataset.o=e.textContent);
+ const m=o.match(/^([^\d]*?)(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(.*)$/);if(!m)return null;
+ const th=m[2].includes("."),dec=m[3]?m[3].length:0,v=parseFloat(m[2].replace(/\./g,"")+(m[3]?"."+m[3]:"")),z={v:0};
+ const f=x=>{let s=x.toFixed(dec).split(".");if(th)s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,".");return m[1]+s[0]+(dec?","+s[1]:"")+m[4]};
+ e.textContent=f(0);return gsap.to(z,{v,duration:1.5,delay,ease:"power2.out",onUpdate(){e.textContent=f(z.v)},onComplete(){e.textContent=o}})}
+
+/* 10. Vào slide: khung tên, viền khối, nét kích thước, nét nối, số */
+let live=[];
+function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
+ const lk=links(s);
+ if(!motion)return;
+ const rects=$$("svg.ol rect",s).filter(r=>!r.closest(".st,[hidden]"));
+ live.push(gsap.fromTo(rects,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.9,ease:"power2.inOut",stagger:.05,delay:.25}));
+ $$("path.dr",s).forEach(p=>live.push(draw(p,+p.dataset.d||1.4,+p.dataset.w||.4)));
+ $$(".gr",s).forEach(r=>{const w=r.getAttribute("width");r.dataset.w=r.dataset.w||w;live.push(gsap.fromTo(r,{attr:{width:0}},{attr:{width:r.dataset.w},duration:.7,delay:/p/.test(r.className.baseVal)?2.3:2.3,ease:"power2.out"}))});
+ live.push(gsap.fromTo($$(".ex,.d-tx,.st-dot,.st-t",s),{opacity:0},{opacity:1,duration:.4,stagger:.08,delay:1}));
+ lk.forEach((l,k)=>{live.push(draw(l.p,.7,1+k*.12));live.push(gsap.fromTo(l.c,{opacity:0},{opacity:1,duration:.2,delay:1+k*.12}))});
+ $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
+ if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
+
+/* 11. Chuyển slide: nội dung lùi ra nhanh rồi tờ mới hiện */
+const show0=show,next0=next,prev0=prev;let busy=null;
+const fin=()=>{if(busy){busy.progress(1);busy=null}};
+window.show=function(i,st){show0(i,st);const go2=()=>{if(cur===i)enter(i)};document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready.then(go2):go2()};show=window.show;
+window.next=function(){fin();next0()};next=window.next;window.prev=function(){fin();prev0()};prev=window.prev;
+window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
+ const kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];
+ busy=gsap.timeline({onComplete(){busy=null;gsap.set(kids,{clearProps:"opacity,transform"});show(i)}})
+  .to(kids,{opacity:0,y:-14,duration:.22,stagger:.02,ease:"power2.in"})};go=window.go;
+addEventListener("resize",()=>{if(!busy)links(slides[cur])});
+enter(cur);
+})();
+</script>
