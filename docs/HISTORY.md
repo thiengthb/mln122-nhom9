@@ -40,3 +40,9 @@ Việc tiếp theo:
 4. Soạn mẫu Biên bản nhóm theo Tab 7.
 5. Tập nói, bấm giờ thật, thử trên máy chiếu; kiểm tra lại link GitHub Pages: https://thiengthb.github.io/mln122-nhom9/
 Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đăng lại `src/deck.html` với `url` này, chat mới phải đọc artifact trước khi đăng).
+
+## 04/11/2026: bản thử hướng "Sợi chỉ xuyên suốt"
+- Đề xuất 4 công nghệ (giữ khung cũ + GSAP và View Transitions; reveal.js; Slidev; Motion) và 3 phong cách. Người dùng chọn hướng A.
+- GSAP 3.13 lưu trong `vendor/gsap` (chạy được khi không có mạng). Phần mới ở `src/soi-chi.part`, không sửa `app.part`; build ra `soi-chi.html` và `src/deck-soi-chi.html`. `index.html` chưa đổi.
+- Làm kỹ 3 slide: bìa (sợi chỉ gạch dưới tiêu đề rồi chạy vào đáy khung dệt), bốn cuộc cách mạng (trục thời gian vẽ dần theo 4 giai đoạn, nét đổi kiểu, cuối tỏa nhánh vào mạng lưới), c/v (đường cong c/v vẽ theo thanh trượt, số từ mô hình giả định sẵn có). Các slide khác: sợi chỉ gạch dưới tiêu đề, chuyển cảnh sợi chỉ rút ra. Chưa dùng View Transitions.
+- Link artifact cũ 7go3S9km... không đọc được từ phiên này. Bản thử đăng ở https://claude.ai/artifact/GHAYsKUXMt3XGWue1rbVNH

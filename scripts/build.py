@@ -58,3 +58,13 @@ out += table + parts
 out.append("\n## Slide dự phòng\n\nSlide 22 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi. Phụ lục AI là file riêng, nộp qua email.\n")
 (root / "docs" / "06-kich-ban.md").write_text("".join(out), encoding="utf8")
 print("Kịch bản: %.1f phút" % total)
+
+# Bản thử hướng "Sợi chỉ xuyên suốt": thêm GSAP (lưu sẵn trong vendor/, chạy được khi không có mạng) và src/soi-chi.part.
+vend = "".join(
+    "<script>\n" + (root / "vendor" / "gsap" / n).read_text(encoding="utf8") + "\n</script>\n"
+    for n in ("gsap.min.js", "DrawSVGPlugin.min.js", "SplitText.min.js")
+)
+demo = body + "\n" + vend + (src / "soi-chi.part").read_text(encoding="utf8")
+(src / "deck-soi-chi.html").write_text(demo, encoding="utf8")
+(root / "soi-chi.html").write_text(page.replace(body, demo), encoding="utf8")
+print("OK soi-chi", len(demo))
