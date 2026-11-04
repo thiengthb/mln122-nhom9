@@ -228,26 +228,8 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
    Mỗi slide là một tờ bản vẽ: khung viền có ô tọa độ, khung tên ở góc phải dưới,
    số liệu là nét ghi kích thước, ô nhấn mạnh là mặt cắt gạch chéo, sơ đồ tự lắp bằng nét nối.
    Ba kiểu màu (phím D): Giấy can (mặc định), Bản in xanh, Bàn vẽ đêm. */
-:root{
-  --cham:#F3F4EF; --cham-2:#E8EAE3; --cham-3:#B9C0BB; --cham-deep:#FBFBF8;
-  --vai:#16202C; --vai-2:#3E4A57; --vai-3:#6E7A86;
-  --son:#1D4ED8; --nghe:#C8441A; --si:#0B7A6E;
-  --on-son:#FFFFFF; --on-nghe:#FFFFFF; --on-si:#FFFFFF; --on-vai:#FFFFFF;
-  --tex:rgba(29,78,216,.07); --tex2:rgba(29,78,216,.13); --ghost:rgba(22,32,44,.08);
-  --hatch:rgba(29,78,216,.16); --ln:var(--vai);
-}
-:root[data-look="reu"]{color-scheme:dark;
-  --cham:#123E7C; --cham-2:#1A4A8F; --cham-3:#5C83C0; --cham-deep:#0E3368;
-  --vai:#F2F6FF; --vai-2:#C9D8F2; --vai-3:#93AEDA;
-  --son:#FFD54A; --nghe:#FF9A6B; --si:#8BEBD6;
-  --on-son:#0E3368; --on-nghe:#0E3368; --on-si:#0E3368; --on-vai:#0E3368;
-  --tex:rgba(255,255,255,.07); --tex2:rgba(255,255,255,.13); --ghost:rgba(242,246,255,.1); --hatch:rgba(255,255,255,.16)}
-:root[data-look="cham"]{color-scheme:dark;
-  --cham:#17191D; --cham-2:#22252B; --cham-3:#4A4F58; --cham-deep:#111316;
-  --vai:#ECE9E1; --vai-2:#BDB9AF; --vai-3:#8C887F;
-  --son:#F4B43C; --nghe:#FF6A48; --si:#69D2BF;
-  --on-son:#17191D; --on-nghe:#17191D; --on-si:#17191D; --on-vai:#17191D;
-  --tex:rgba(244,180,60,.05); --tex2:rgba(244,180,60,.1); --ghost:rgba(236,233,225,.08); --hatch:rgba(244,180,60,.18)}
+:root{--tex2:color-mix(in srgb,var(--son) 9%,transparent);--hatch:color-mix(in srgb,var(--son) 15%,transparent);--ln:var(--vai);
+  --soft:color-mix(in srgb,var(--vai) 22%,transparent);--r:16px}
 
 #stage{background-color:var(--cham);
   background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),
@@ -504,6 +486,65 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .endg h2{font-size:64px!important}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
+
+/* ===== B mềm: bỏ khung bản vẽ, nền và màu của bản cũ, khối bo tròn có nền, nét mảnh màu nhạt ===== */
+#stage{background-image:linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);background-size:32px 32px;background-position:0 0}
+.s{padding:44px 76px 76px}
+#thread,#pg{display:block}
+.foot{left:76px;right:76px;bottom:44px;font-size:16px}.foot button{font-size:16px}
+.panel,.leaf,.wc{background:var(--cham-2);border-radius:var(--r)}
+.panel.dark{background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 12px),var(--cham-deep)}
+.leaf{border-radius:12px}
+svg.ol rect{stroke:var(--soft);stroke-width:1.5;rx:var(--r)}
+.leaf>svg.ol rect,.shift span>svg.ol rect,.chain b>svg.ol rect{rx:12px}
+.dark>svg.ol rect{stroke:color-mix(in srgb,var(--son) 45%,transparent);stroke-width:2}
+.fork{background:var(--cham-2);border-radius:12px;overflow:hidden}
+.fork::before{border-radius:0}
+.leaf.hi{background:var(--nghe);color:var(--on-nghe)}.leaf.hi2{background:var(--son);color:var(--on-son)}
+.leaf.hi>svg.ol,.leaf.hi2>svg.ol{display:none}
+.view{border-radius:var(--r);overflow:hidden;background:var(--cham-2)}
+.view .x{display:none}
+.view .cap{border-top:0;background:var(--cham-2);color:var(--vai-2)}
+.cover .meta{border:0;background:var(--cham-2);border-radius:var(--r);padding:8px 6px}
+.cover .meta b,.cover .meta span{border:0;border-bottom:1px solid var(--soft)}
+.cover .meta b:nth-last-child(2),.cover .meta span:last-child{border-bottom:0}
+.tag{background:var(--son);color:var(--on-son);border:0;border-radius:999px;padding:6px 11px}
+.tag.y{background:var(--nghe);color:var(--on-nghe)}.tag.m{background:var(--si);color:var(--on-si)}
+.chips button{border-radius:999px;border-color:var(--soft)}
+.toggle{border-radius:12px;border-color:var(--soft)}
+.blank{border-radius:var(--r);border-color:var(--soft);background:color-mix(in srgb,var(--cham-2) 50%,transparent)}
+.rv{border-radius:12px;border-bottom:0;margin-bottom:6px;background:var(--cham-2)}
+#revlist{border:0}
+.rvhd{border-bottom:0}
+.tlbar{border-radius:12px;border-width:0!important}
+.tlbar.a{background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 12px),var(--cham-2)!important}
+.tlbar.b{background:var(--son)!important;color:var(--on-son)!important}
+.tlaxis{border-bottom-color:var(--soft)}
+.lessons .panel{background:var(--cham-2)}
+.bar .f{border-radius:0 6px 6px 0}
+.bar .t{border-bottom-color:var(--soft)}
+.wb::before{border-radius:10px 10px 0 0}
+.wfall{border-bottom:2px solid var(--soft)}
+.fend{background:var(--son);color:var(--on-son);outline:0;border-radius:20px;box-shadow:0 0 0 8px color-mix(in srgb,var(--son) 18%,transparent)}
+.fend .eb{color:var(--on-son)}.fend .n{border-color:var(--on-son)}
+.gear{fill:var(--cham-2);stroke:var(--son)}
+svg.links path{stroke:var(--vai-3);stroke-linecap:round;stroke-linejoin:round}
+svg.links path.a{stroke:var(--son)}
+svg.links circle{fill:var(--cham);stroke:var(--vai-3)}
+.lgt{border-top:0;border-bottom:0;background:var(--cham-2);border-radius:var(--r);padding:6px 16px}
+.lgt>*{border-bottom-color:var(--soft)}
+.kv>*{border-bottom-color:var(--soft)}
+.shift span{background:var(--cham-deep);border-radius:12px}
+.chain b{background:var(--cham-deep);border-radius:12px}
+.chain i,.chain i::after{background:var(--nghe)}.chain i::after{background:none;border-left-color:var(--nghe)}
+.d-rg{stroke-linejoin:round}
+.d-ln{stroke-linecap:round}
+.st-step{stroke-linecap:round}
+#cvw .gr{stroke:var(--tex)}
+.neq{color:var(--nghe)}
+#refs p{border-bottom-color:var(--soft)}
+#drawer{border-left:6px solid var(--nghe)}
+#notes{border-top:3px solid var(--son)}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1158,22 +1199,8 @@ if(PRES||!window.gsap)return;
 const NS="http://www.w3.org/2000/svg",stage=$("#stage"),motion=!reduce;
 const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.append(e);return e};
 
-/* 1. Khung bản vẽ: viền đôi, ô tọa độ 1–8 và A–D, dấu tâm */
-const sh=el("svg",{id:"sheet",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.insertBefore(sh,$("#notes"));
-const fr=[el("rect",{class:"o",x:12,y:12,width:1576,height:876,pathLength:1},sh),el("rect",{class:"i",x:24,y:24,width:1552,height:852,pathLength:1},sh)];
-for(let k=0;k<8;k++){const x=24+k*194;if(k)[[x,12,x,24],[x,876,x,888]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
- [18,882].forEach(y=>el("text",{x:x+97,y},sh).textContent=k+1)}
-for(let k=0;k<4;k++){const y=24+k*213;if(k)[[12,y,24,y],[1576,y,1588,y]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
- [18,1582].forEach(x=>el("text",{x,y:y+106},sh).textContent="ABCD"[k])}
-[[800,24,800,40],[800,860,800,876],[24,450,40,450],[1560,450,1576,450]].forEach(([a,b,c,d])=>el("line",{class:"cm",x1:a,y1:b,x2:c,y2:d},sh));
-if(motion)gsap.fromTo(fr,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:1.6,ease:"power2.inOut",stagger:.2});
-
-/* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
-const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
-tb.innerHTML=`<div><small>HỌC PHẦN</small><span>MLN122 · ${CONFIG.group.toUpperCase()}</span></div><div><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div><small>TRÌNH BÀY</small><span id="tbw"></span></div><div><small>TỜ SỐ</small><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span></div>`;
-stage.insertBefore(tb,$("#notes"));
-function tbSet(i){const s=slides[i];$("#tbt").textContent=s.dataset.title;$("#tbw").textContent="Người "+s.dataset.who;
- $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
+/* 1–2. Bản mềm: không dựng khung bản vẽ và khung tên; dùng lại số slide và sợi chỉ tiến độ của bản cũ */
+const tbSet=()=>{};
 
 /* 3. Viền khối do JS kẻ, để có thể vẽ dần */
 const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
