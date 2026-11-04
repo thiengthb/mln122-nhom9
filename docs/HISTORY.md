@@ -129,3 +129,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 1: con thoi chạy theo hàng đang dệt, kéo theo sợi ngang; ở nửa trên (vải thành dữ liệu) con thoi thành chấm sáng. Tốc độ dệt chậm lại (110 ms mỗi hàng, đặt bằng `window.N9_LOOM` trong `src/slides.part`); `src/app.part` công bố hàng đang dệt qua `window.__loomY`.
 - Vị trí các cảnh đo bằng offset (không bị lệch khi khối đang trượt vào).
 
+## 04/11/2026: Ba cảnh động mới (slide 8, 10, 20)
+- Slide 8: ở khoảng trống bên phải thanh Nhật Bản, một cỗ máy hiện ra ("1 · NHẬP MÁY VỀ"), tách rời từng bộ phận, kính lúp soi qua ("2 · THÁO RA ĐỂ HỌC"), bánh răng cũ được thay bằng bánh răng mới màu nhấn, rồi lắp lại ("3 · LẮP LẠI, CẢI TIẾN"). Nhãn là lời ví von của nhóm, không phải trích dẫn.
+- Slide 10: bánh răng giữa vẫn quay như cũ; mỗi ô đặc điểm có một bánh răng nhỏ, bắt đầu quay ngược chiều khi nét nối vẽ tới ô đó.
+- Slide 20: con đường ngày 0 đến 90 ngay trên ba khung, cờ ở ngày 30, 60, 90. Lúc chạy, ba dòng trong khung 30 · 60 · 90 mờ đi; tới cờ nào thì dòng đó sáng lên và đổi màu nhấn. Đổi ngành vẫn giữ trạng thái.
+- Sửa lỗi cũ: dòng cát rơi trong đồng hồ cát slide 5 bị ẩn do trùng tên lớp `.st` (lớp này là chữ hiện dần). Đổi tên lớp, nay đã thấy.
+- Code ở `moreScenes()` trong `src/ban-ve.part`.
+

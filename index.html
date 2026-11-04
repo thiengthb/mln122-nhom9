@@ -688,7 +688,7 @@ svg.links .tip{fill:var(--cham)}
 #mq .hg{position:absolute;left:36px;right:36px;bottom:14px;width:auto;height:92px;overflow:visible}
 .hg .fr{fill:none;stroke:var(--vai);stroke-width:2.2;stroke-linecap:round}
 .hg .sd{fill:var(--nghe)}
-.hg .st{stroke:var(--nghe);stroke-width:2;stroke-dasharray:3 4}
+.hg .hgs{stroke:var(--nghe);stroke-width:2;stroke-dasharray:3 4}
 .hg .gr{fill:none;stroke:var(--son);stroke-width:.75;stroke-linecap:round}
 .hg .lk1{fill:none;stroke:var(--vai-2);stroke-width:1.6;stroke-dasharray:4 6}
 .hg .lk2{fill:none;stroke:var(--son);stroke-width:3;stroke-dasharray:10 4}
@@ -707,6 +707,33 @@ figure.view{position:relative}
 .shut .bb{fill:var(--nghe)}
 .shut .wf{stroke:var(--nghe);stroke-width:2;stroke-dasharray:4 3}
 .shut .dd{fill:var(--si);filter:drop-shadow(0 0 6px var(--si))}
+/* Cảnh động: tháo máy (8), bánh răng (10), con đường 90 ngày (20) */
+.s .mach,.s .road{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.mach .p,.mach .mb,.mach .lp{fill:none;stroke:var(--vai);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mach .bd rect,.mach .ck rect{fill:var(--cham)}
+.mach .go{stroke:var(--vai-2)}
+.mach .gn{stroke:var(--son);stroke-width:2.8}.mach .gn path{fill:color-mix(in srgb,var(--son) 16%,var(--cham))}
+.mach .halo{fill:none;stroke:var(--son);stroke-width:2}
+.mach .lp{stroke:var(--nghe);stroke-width:1.6}
+.mach .ml{font:700 15px var(--mono);letter-spacing:.06em;fill:var(--son)}
+.mach .ms{font:500 15px var(--body);fill:var(--vai-2)}
+.hubR .leaf{position:relative;padding-left:56px}
+.hubR .leaf .pgear{position:absolute;left:14px;top:50%;width:30px;height:30px;margin-top:-15px;overflow:visible}
+.pgear path,.pgear circle{fill:none;stroke:var(--son);stroke-width:1.7;stroke-linejoin:round}
+.road .rd{fill:none;stroke:var(--vai);stroke-width:3;stroke-linecap:round}
+.road .tk{stroke:var(--vai-3);stroke-width:2}
+.road .po{stroke:var(--vai);stroke-width:2}
+.road .fg{fill:var(--cham);stroke:var(--vai);stroke-width:1.6;transition:fill .3s}
+.road .fl text{font:700 12px var(--mono);fill:var(--vai);transition:fill .3s}
+.road .fl.on .fg{fill:var(--son);stroke:var(--son)}.road .fl.on text{fill:var(--on-son,var(--cham))}
+.road .d0{font:600 13px var(--mono);letter-spacing:.06em;fill:var(--vai-3)}
+.road .wk circle{fill:var(--son)}.road .wk .wr{fill:none;stroke:var(--son);stroke-width:2}
+.road .wk text{font:700 15px var(--mono);letter-spacing:.04em;fill:var(--son);text-anchor:middle;paint-order:stroke;stroke:var(--cham);stroke-width:5px}
+#plan .panel.dark p{transition:opacity .4s}
+#plan.run .panel.dark p{opacity:.35}
+#plan.d1 .panel.dark p:nth-of-type(1),#plan.d2 .panel.dark p:nth-of-type(2),#plan.d3 .panel.dark p:nth-of-type(3){opacity:1}
+#plan.d1 .panel.dark p:nth-of-type(1) b,#plan.d2 .panel.dark p:nth-of-type(2) b,#plan.d3 .panel.dark p:nth-of-type(3) b{color:var(--son)}
+#plan.d1 .panel.dark p:nth-of-type(1)::before,#plan.d2 .panel.dark p:nth-of-type(2)::before,#plan.d3 .panel.dark p:nth-of-type(3)::before{background:var(--son)}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1527,7 +1554,7 @@ function scenes(s){
  if(mq){let H=mq.querySelector(".hg");if(!H){mq.insertAdjacentHTML("beforeend",`<svg class="hg" viewBox="0 0 720 100" aria-hidden="true"><defs><clipPath id="hgT"><rect class="ct" x="20" y="10" width="60" height="40"/></clipPath><clipPath id="hgB"><rect class="cb" x="20" y="92" width="60" height="0"/></clipPath><marker id="hga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z"/></marker></defs>
    <path class="lk1" d="M70 10 C250 -4 470 -4 548 18"/><path class="lk2" marker-end="url(#hga)" d="M420 50 H540"/>
    <path class="fr" d="M24 6h52M24 94h52M30 6c0 26 16 36 18 44-2 8-18 18-18 44M70 6c0 26-16 36-18 44 2 8 18 18 18 44"/>
-   <path class="sd" clip-path="url(#hgT)" d="M33 12h34c-2 18-14 28-17 36-3-8-15-18-17-36z"/><path class="sd" clip-path="url(#hgB)" d="M33 92c2-14 12-22 17-26 5 4 15 12 17 26z"/><path class="st" d="M50 50v40"/>
+   <path class="sd" clip-path="url(#hgT)" d="M33 12h34c-2 18-14 28-17 36-3-8-15-18-17-36z"/><path class="sd" clip-path="url(#hgB)" d="M33 92c2-14 12-22 17-26 5 4 15 12 17 26z"/><path class="hgs" d="M50 50v40"/>
    <text x="92" y="46" class="hl">THỜI GIAN</text><text x="92" y="64" class="hl">LAO ĐỘNG</text>
    <g class="gr" transform="translate(268 50) scale(2.6)"><g class="rot">${IC.rang.replace(/<(circle|path)/g,'<$1 transform="translate(-12 -12)"')}</g></g>
    <text x="310" y="46" class="hl">KHOA HỌC</text><text x="310" y="64" class="hl">ỨNG DỤNG</text>
@@ -1577,6 +1604,67 @@ function shuttleScene(s){const cv=s.querySelector("#loom");if(!cv)return;const f
   sh.setAttribute("transform",`translate(${x} ${yy})${dir?" scale(-1 1)":""}`);sh.style.opacity=data?0:1;dd.setAttribute("cx",x);dd.setAttribute("cy",yy);dd.style.opacity=data?1:0;
   wf.setAttribute("x1",dir?760:0);wf.setAttribute("y1",yy);wf.setAttribute("x2",x);wf.setAttribute("y2",yy);wf.style.opacity=data?0:.9};
  gsap.ticker.add(f);live.push({kill(){gsap.ticker.remove(f)}})}
+
+
+/* 10i. Ba cảnh động mới: tháo máy học cải tiến (slide 8), bánh răng truyền động (slide 10), con đường 90 ngày (slide 20). Hình ví von, không có số liệu mới. */
+$$(".hubR .leaf").forEach(lf=>{if(!lf.querySelector(".pgear"))lf.insertAdjacentHTML("afterbegin",`<svg class="pgear" viewBox="-17 -17 34 34" aria-hidden="true"><g class="rot"><path d="${gearPath(9,15,11,0)}"/><circle r="4.2"/></g></svg>`)});
+function moreScenes(s){
+ /* Slide 8: máy nhập về, tháo ra để học, lắp lại với một bộ phận cải tiến (tô màu son) */
+ const ja=s.querySelector(".tlbar.a"),tl=s.querySelector(".tl");
+ if(ja&&tl){let M=s.querySelector(".mach");if(!M){M=el("svg",{class:"mach",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(M)}
+  const R0=box(ja.parentElement,s),T=box(tl,s),pc=v=>parseFloat(getComputedStyle(ja).getPropertyValue(v))||0,A={y:R0.y+(R0.h-ja.offsetHeight)/2,h:ja.offsetHeight},x0=R0.x+170+(R0.w-170)*(pc("--l")+pc("--w"))/100+34,x1=T.x+T.w,cy=A.y+A.h/2,cx=x1-212;
+  M.innerHTML=`<text class="ml" x="${x0}" y="${cy-6}"></text><text class="ms" x="${x0}" y="${cy+16}"></text>
+   <g transform="translate(${cx} ${cy})"><path class="mb" d="M-72 34H72M-62 34v8M62 34v8"/>
+    <g class="p ck"><rect x="-42" y="-44" width="14" height="26"/></g>
+    <g class="p bd"><rect x="-52" y="-18" width="66" height="50" rx="3"/><path d="M-42 -6h46M-42 4h30M-42 14h38"/></g>
+    <g class="p lv"><path d="M-4 -18 18 -40"/><circle cx="18" cy="-40" r="4.5"/></g>
+    <g class="p go"><g class="rot"><path d="${gearPath(10,22,16,0)}"/><circle r="5"/></g></g>
+    <g class="p gn"><circle class="halo" r="30"/><g class="rot"><path d="${gearPath(12,23,17,0)}"/><circle r="5"/></g></g>
+    <g class="lp"><g transform="translate(-14 -14) scale(1.6)">${IC.lup}</g></g></g>`;
+  const q=c=>M.querySelector(c),ml=q(".ml"),ms=q(".ms"),go=q(".go"),gn=q(".gn"),lp=q(".lp"),st=q(".ck"),bd=q(".bd"),lv=q(".lv"),halo=q(".halo");
+  const say=(a,b)=>()=>{ml.textContent=a;ms.textContent=b};
+  gsap.set([go,gn],{x:40,y:6});gsap.set(gn,{opacity:0,y:-60});gsap.set(lp,{opacity:0,x:-190,y:-6});gsap.set(halo,{opacity:0});gsap.set(M.querySelector("g"),{opacity:0});
+  live.push(gsap.fromTo(go.querySelector(".rot"),{rotation:0},{rotation:360,svgOrigin:"0 0",duration:5,ease:"none",repeat:-1}));
+  live.push(gsap.fromTo(gn.querySelector(".rot"),{rotation:0},{rotation:-360,svgOrigin:"0 0",duration:3.2,ease:"none",repeat:-1}));
+  const t=gsap.timeline({delay:2.2});
+  t.add(say("1 · NHẬP MÁY VỀ","mua công nghệ"))
+   .to(M.querySelector("g"),{opacity:1,duration:.6})
+   .add(say("2 · THÁO RA ĐỂ HỌC","hiểu từng bộ phận"),"+=1.2")
+   .to(st,{x:-140,y:-10,duration:.8,ease:"power2.inOut"},"<")
+   .to(bd,{x:-78,duration:.8,ease:"power2.inOut"},"<")
+   .to(lv,{x:46,y:-6,duration:.8,ease:"power2.inOut"},"<")
+   .to(go,{x:146,duration:.8,ease:"power2.inOut"},"<")
+   .to(lp,{opacity:1,duration:.3})
+   .to(lp,{x:150,duration:2,ease:"power1.inOut"},"<")
+   .to(lp,{opacity:0,duration:.3})
+   .to(go,{y:-50,opacity:0,duration:.6,ease:"power2.in"})
+   .set(gn,{x:146}).to(gn,{y:6,opacity:1,duration:.6,ease:"back.out(1.6)"})
+   .to([st,bd,lv],{x:0,y:0,duration:.8,ease:"power2.inOut"},"+=.3")
+   .to(gn,{x:40,duration:.8,ease:"power2.inOut"},"<")
+   .add(say("3 · LẮP LẠI, CẢI TIẾN","làm chủ rồi làm tốt hơn"))
+   .fromTo(halo,{opacity:.9,attr:{r:24}},{opacity:0,attr:{r:52},duration:1,ease:"power1.out"});
+  live.push(t)}
+ /* Slide 10: bánh răng giữa quay, truyền lực theo nét nối tới bốn bánh răng nhỏ của bốn đặc điểm */
+ const big=s.querySelector(".gearbox svg .gear");
+ if(big){/* bánh răng giữa đã quay bằng CSS (26 giây một vòng); bánh nhỏ 9 răng quay ngược, nhanh gấp đôi */
+  $$(".hubR .leaf",s).forEach((lf,k)=>{const g=lf.querySelector(".pgear");if(!g)return;const d=1+(2+k)*.12+.7;
+   live.push(gsap.fromTo(g,{opacity:.2},{opacity:1,duration:.3,delay:d}));
+   live.push(gsap.fromTo(g.querySelector(".rot"),{rotation:0},{rotation:-720,svgOrigin:"0 0",duration:26,ease:"none",repeat:-1,delay:d}))})}
+ /* Slide 20: con đường 90 ngày, tới cờ nào thì dòng kế hoạch đó sáng lên */
+ const pl=s.querySelector("#plan");
+ if(pl){pl.classList.remove("d1","d2","d3");pl.classList.add("run");let R=s.querySelector(".road");if(!R){R=el("svg",{class:"road",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(R)}
+  const P=box(pl,s),X0=P.x,X1=P.x+P.w,Y=P.y-30,xd=d=>X0+(X1-X0)*d/90;
+  let h=`<path class="rd" d="M${X0} ${Y}H${X1}"/>`;for(let d=10;d<90;d+=10)if(d%30)h+=`<path class="tk" d="M${xd(d)} ${Y-5}v10"/>`;
+  [30,60,90].forEach((d,k)=>{const x=xd(d);h+=`<g class="fl" data-k="${k+1}"><path class="po" d="M${x} ${Y}V${Y-62}"/><path class="fg" d="M${x} ${Y-62}h36l-7 8 7 8h-36z"/><text x="${x+5}" y="${Y-49.5}">${d}</text></g>`});
+  h+=`<g class="wk"><circle class="wr" r="15"/><circle r="8"/><text y="-22">NGÀY 0</text></g>`;R.innerHTML=h;
+  const rd=R.querySelector(".rd"),fl=$$(".fl",R),wk=R.querySelector(".wk"),wt=wk.querySelector("text"),z={d:0};
+  const put=()=>{const d=Math.round(z.d);wk.setAttribute("transform",`translate(${xd(z.d)} ${Y})`);wt.textContent="NGÀY "+d};put();gsap.set(wk,{opacity:0});
+  live.push(gsap.fromTo(rd,{strokeDashoffset:X1-X0,strokeDasharray:`${X1-X0} ${X1-X0}`},{strokeDashoffset:0,duration:1,delay:.8,ease:"power2.inOut",onComplete(){rd.style.strokeDasharray=""}}));
+  live.push(gsap.fromTo(fl,{opacity:0,y:10},{opacity:1,y:0,duration:.4,stagger:.15,delay:1.5,ease:"back.out(2)"}));
+  const t=gsap.timeline({delay:2.2});t.to(wk,{opacity:1,duration:.3});
+  [30,60,90].forEach((d,k)=>{t.to(z,{d,duration:1.9,ease:"power1.inOut",onUpdate:put}).add(()=>{pl.classList.add("d"+(k+1));fl[k].classList.add("on")}).to(wk.querySelector(".wr"),{keyframes:[{attr:{r:26},opacity:0,duration:.6}],ease:"power1.out"}).set(wk.querySelector(".wr"),{attr:{r:15},opacity:1})});
+  t.add(()=>pl.classList.remove("run"),"+=.6").to(wt,{opacity:0,duration:.4},"<");live.push(t)}
+}
 
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
@@ -1629,7 +1717,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);scenes(s);humanScene(s);shuttleScene(s);live.push(heads(s,.1));
+ extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */

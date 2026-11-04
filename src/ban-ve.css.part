@@ -463,7 +463,7 @@ svg.links .tip{fill:var(--cham)}
 #mq .hg{position:absolute;left:36px;right:36px;bottom:14px;width:auto;height:92px;overflow:visible}
 .hg .fr{fill:none;stroke:var(--vai);stroke-width:2.2;stroke-linecap:round}
 .hg .sd{fill:var(--nghe)}
-.hg .st{stroke:var(--nghe);stroke-width:2;stroke-dasharray:3 4}
+.hg .hgs{stroke:var(--nghe);stroke-width:2;stroke-dasharray:3 4}
 .hg .gr{fill:none;stroke:var(--son);stroke-width:.75;stroke-linecap:round}
 .hg .lk1{fill:none;stroke:var(--vai-2);stroke-width:1.6;stroke-dasharray:4 6}
 .hg .lk2{fill:none;stroke:var(--son);stroke-width:3;stroke-dasharray:10 4}
@@ -482,4 +482,31 @@ figure.view{position:relative}
 .shut .bb{fill:var(--nghe)}
 .shut .wf{stroke:var(--nghe);stroke-width:2;stroke-dasharray:4 3}
 .shut .dd{fill:var(--si);filter:drop-shadow(0 0 6px var(--si))}
+/* Cảnh động: tháo máy (8), bánh răng (10), con đường 90 ngày (20) */
+.s .mach,.s .road{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.mach .p,.mach .mb,.mach .lp{fill:none;stroke:var(--vai);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.mach .bd rect,.mach .ck rect{fill:var(--cham)}
+.mach .go{stroke:var(--vai-2)}
+.mach .gn{stroke:var(--son);stroke-width:2.8}.mach .gn path{fill:color-mix(in srgb,var(--son) 16%,var(--cham))}
+.mach .halo{fill:none;stroke:var(--son);stroke-width:2}
+.mach .lp{stroke:var(--nghe);stroke-width:1.6}
+.mach .ml{font:700 15px var(--mono);letter-spacing:.06em;fill:var(--son)}
+.mach .ms{font:500 15px var(--body);fill:var(--vai-2)}
+.hubR .leaf{position:relative;padding-left:56px}
+.hubR .leaf .pgear{position:absolute;left:14px;top:50%;width:30px;height:30px;margin-top:-15px;overflow:visible}
+.pgear path,.pgear circle{fill:none;stroke:var(--son);stroke-width:1.7;stroke-linejoin:round}
+.road .rd{fill:none;stroke:var(--vai);stroke-width:3;stroke-linecap:round}
+.road .tk{stroke:var(--vai-3);stroke-width:2}
+.road .po{stroke:var(--vai);stroke-width:2}
+.road .fg{fill:var(--cham);stroke:var(--vai);stroke-width:1.6;transition:fill .3s}
+.road .fl text{font:700 12px var(--mono);fill:var(--vai);transition:fill .3s}
+.road .fl.on .fg{fill:var(--son);stroke:var(--son)}.road .fl.on text{fill:var(--on-son,var(--cham))}
+.road .d0{font:600 13px var(--mono);letter-spacing:.06em;fill:var(--vai-3)}
+.road .wk circle{fill:var(--son)}.road .wk .wr{fill:none;stroke:var(--son);stroke-width:2}
+.road .wk text{font:700 15px var(--mono);letter-spacing:.04em;fill:var(--son);text-anchor:middle;paint-order:stroke;stroke:var(--cham);stroke-width:5px}
+#plan .panel.dark p{transition:opacity .4s}
+#plan.run .panel.dark p{opacity:.35}
+#plan.d1 .panel.dark p:nth-of-type(1),#plan.d2 .panel.dark p:nth-of-type(2),#plan.d3 .panel.dark p:nth-of-type(3){opacity:1}
+#plan.d1 .panel.dark p:nth-of-type(1) b,#plan.d2 .panel.dark p:nth-of-type(2) b,#plan.d3 .panel.dark p:nth-of-type(3) b{color:var(--son)}
+#plan.d1 .panel.dark p:nth-of-type(1)::before,#plan.d2 .panel.dark p:nth-of-type(2)::before,#plan.d3 .panel.dark p:nth-of-type(3)::before{background:var(--son)}
 </style>
