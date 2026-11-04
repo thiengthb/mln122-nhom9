@@ -16,7 +16,8 @@ Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng v
 - Mọi lần AI hỗ trợ phải ghi vào `docs/05-phu-luc-ai.md`. Nhóm phải tự giải thích được nội dung: nếu không, cả cấu phần có thể bị 0 điểm.
 
 ## Cấu trúc
-- Nguồn slide: `src/deck.css.part` (giao diện), `src/slides.part` (nội dung), `src/app.part` (dữ liệu nguồn, tương tác). `src/deck.html` và `index.html` là bản build: chạy `python3 scripts/build.py` rồi commit.
+- Giao diện chính là "Bản vẽ kỹ thuật động" (bản B, nhóm chốt 04/11/2026). Nguồn slide: `src/deck.css.part` (nền chung), `src/ban-ve.css.part` (giao diện bản vẽ), `src/slides.part` (nội dung và ghi chú), `src/app.part` (dữ liệu nguồn, tương tác), `src/ban-ve.part` (hoạt ảnh, dùng GSAP lưu sẵn trong `vendor/`). `src/deck.html` và `index.html` là bản build: chạy `python3 scripts/build.py` rồi commit. Slide 18 vẽ mặt đồng hồ trong `src/ban-ve.part` từ mảng `G` của `app.part`. Bản C (`src/c/`, `ban-c.html`) đã gác lại; `soi-chi.html` là bản thử cũ, không build lại.
+- Trước khi đăng: chạy kiểm tra đè chữ và chụp đủ 22 slide, kể cả trạng thái cuối của slide tương tác (slide 14 ở 100%).
 - Đầu `src/app.part` có `CONFIG`: tên thành viên, ngày, phần nhóm đã làm.
 - Kịch bản `docs/06` tự sinh từ ghi chú trong `src/slides.part`.
 - Phím trong slide: mũi tên, N ghi chú, P cửa sổ người nói, K soi nguồn, F toàn màn hình, T bấm đồng hồ, D đổi giao diện. Màu lấy từ biến CSS, không viết mã màu cứng.

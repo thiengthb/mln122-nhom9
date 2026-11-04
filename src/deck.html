@@ -221,15 +221,425 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 .toggle{cursor:default}
 </style>
 
+<style>
+/* ===== Bản nháp B: "Bản vẽ kỹ thuật động" =====
+   Mỗi slide là một tờ bản vẽ: khung viền có ô tọa độ, khung tên ở góc phải dưới,
+   số liệu là nét ghi kích thước, ô nhấn mạnh là mặt cắt gạch chéo, sơ đồ tự lắp bằng nét nối.
+   Ba kiểu màu (phím D): Giấy can (mặc định), Bản in xanh, Bàn vẽ đêm. */
+:root{
+  --cham:#F3F4EF; --cham-2:#E8EAE3; --cham-3:#B9C0BB; --cham-deep:#FBFBF8;
+  --vai:#16202C; --vai-2:#3E4A57; --vai-3:#6E7A86;
+  --son:#1D4ED8; --nghe:#C8441A; --si:#0B7A6E;
+  --on-son:#FFFFFF; --on-nghe:#FFFFFF; --on-si:#FFFFFF; --on-vai:#FFFFFF;
+  --tex:rgba(29,78,216,.07); --tex2:rgba(29,78,216,.13); --ghost:rgba(22,32,44,.08);
+  --hatch:rgba(29,78,216,.16); --ln:var(--vai);
+}
+:root[data-look="reu"]{color-scheme:dark;
+  --cham:#123E7C; --cham-2:#1A4A8F; --cham-3:#5C83C0; --cham-deep:#0E3368;
+  --vai:#F2F6FF; --vai-2:#C9D8F2; --vai-3:#93AEDA;
+  --son:#FFD54A; --nghe:#FF9A6B; --si:#8BEBD6;
+  --on-son:#0E3368; --on-nghe:#0E3368; --on-si:#0E3368; --on-vai:#0E3368;
+  --tex:rgba(255,255,255,.07); --tex2:rgba(255,255,255,.13); --ghost:rgba(242,246,255,.1); --hatch:rgba(255,255,255,.16)}
+:root[data-look="cham"]{color-scheme:dark;
+  --cham:#17191D; --cham-2:#22252B; --cham-3:#4A4F58; --cham-deep:#111316;
+  --vai:#ECE9E1; --vai-2:#BDB9AF; --vai-3:#8C887F;
+  --son:#F4B43C; --nghe:#FF6A48; --si:#69D2BF;
+  --on-son:#17191D; --on-nghe:#17191D; --on-si:#17191D; --on-vai:#17191D;
+  --tex:rgba(244,180,60,.05); --tex2:rgba(244,180,60,.1); --ghost:rgba(236,233,225,.08); --hatch:rgba(244,180,60,.18)}
+
+#stage{background-color:var(--cham);
+  background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),
+   linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px}
+.s{padding:58px 70px 92px}
+#thread,#warp,#pg{display:none}
+
+/* Khung bản vẽ và khung tên (B JS dựng) */
+#sheet{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;z-index:3;overflow:visible}
+#sheet .o{fill:none;stroke:var(--ln);stroke-width:1}
+#sheet .i{fill:none;stroke:var(--ln);stroke-width:2.5}
+#sheet .tk{stroke:var(--ln);stroke-width:1}
+#sheet text{fill:var(--vai-3);font:600 11px var(--mono);text-anchor:middle;dominant-baseline:middle}
+#sheet .cm{stroke:var(--vai-3);stroke-width:1}
+#tb{position:absolute;right:40px;bottom:30px;display:grid;grid-template-columns:auto auto auto auto;align-items:stretch;z-index:4;background:var(--cham);
+  border:2px solid var(--ln);font:600 13px/1.15 var(--mono);color:var(--vai-2);box-sizing:border-box}
+#tb>div{padding:6px 12px 7px;min-width:0;border-left:1px solid var(--ln);display:flex;flex-direction:column;justify-content:center;gap:2px;white-space:nowrap}
+#tb>div:first-child{border-left:0}
+#tb small{font:600 9px var(--mono);letter-spacing:.08em;color:var(--vai-3)}
+#tb .t{color:var(--vai);font:700 15px var(--body);max-width:300px;overflow:hidden;text-overflow:ellipsis}
+#tb .sc{display:flex;gap:2px;height:7px;margin-top:3px}
+#tb .sc i{width:6px;height:7px;box-sizing:border-box;border:1px solid var(--ln);transition:background-color .35s,border-color .35s}
+#tb .sc i.f{background:var(--ln)}
+#tb .sc i.c{background:var(--son);border-color:var(--son)}
+.foot{left:70px;right:700px;bottom:34px;font-size:15px}
+.foot button{font-size:15px}
+
+/* Chữ */
+.eb{font:600 16px/1.2 var(--mono);letter-spacing:.12em;color:var(--nghe);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.s>.eb::before{content:"";width:34px;height:0;border-top:2px solid currentColor}
+.tag{font:600 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;padding:6px 9px;background:transparent;color:var(--son);border:1.5px solid currentColor}
+.tag.y{color:var(--nghe);background:transparent}.tag.m{color:var(--si);background:transparent}
+h2{font-size:54px;position:relative;width:fit-content}
+h2 em,.cover h1 em{color:var(--son)}
+.s.on h2.r,.s.on h1.r{animation:plot 1.1s cubic-bezier(.5,0,.3,1) both;animation-delay:calc(var(--i,0)*90ms)}
+@keyframes plot{from{clip-path:inset(-10% 100% -10% 0)}to{clip-path:inset(-10% -2% -10% 0)}}
+.s.on h2.r::after,.s.on h1.r::after{content:"";position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px solid var(--nghe);left:0;animation:pen 1.1s cubic-bezier(.5,0,.3,1) both;animation-delay:calc(var(--i,0)*90ms)}
+@keyframes pen{0%{left:0;opacity:1}92%{left:100%;opacity:1}100%{left:100%;opacity:0}}
+.mono{font-family:var(--mono)}
+.lbl{font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-3);text-transform:uppercase}
+
+/* Khối: nền trong suốt, viền do JS kẻ; .dark = mặt cắt gạch chéo */
+.panel,.leaf,.fork,.tcol,.rv,.wc,.shift span,.chain b,.lg-box,.blank,.view,.callout{position:relative}
+.panel,.leaf,.fork,.wc{background:color-mix(in srgb,var(--cham) 82%,transparent)}
+.panel.dark,.leaf.hc{background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px),color-mix(in srgb,var(--cham) 82%,transparent)}
+svg.ol{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+svg.ol rect{fill:none;stroke:var(--ln);stroke-width:1.5;vector-effect:non-scaling-stroke}
+svg.ol path{fill:none;stroke:var(--ln);stroke-width:2.5}
+.dark>svg.ol rect,.hl>svg.ol rect{stroke-width:2.5}
+.leaf{margin:0;font-size:22px}
+.leaf.hi,.leaf.hi2{color:var(--vai);font-weight:600}
+.leaf.hi{background:color-mix(in srgb,var(--nghe) 16%,var(--cham))}.leaf.hi2{background:color-mix(in srgb,var(--son) 16%,var(--cham))}
+.fork{border-left:0;padding:16px 20px 16px 26px}.fork::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--son)}.fork.m::before{background:var(--si)}
+.bub{display:inline-grid;place-items:center;width:34px;height:34px;border:2px solid var(--ln);border-radius:50%;font:700 16px var(--mono);color:var(--vai);flex:none;background:var(--cham)}
+.bub.s1{border-color:var(--son);color:var(--son)}
+
+/* Nét nối sơ đồ (JS) */
+svg.links{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;overflow:visible;z-index:1}
+svg.links path{fill:none;stroke:var(--vai-2);stroke-width:2}
+svg.links path.a{stroke:var(--son);stroke-width:2.5}
+svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
+.s>*:not(svg.links){z-index:2}
+
+/* Bìa */
+.cover{grid-template-columns:840px 1fr;grid-template-rows:1fr auto;gap:22px 60px;padding-top:74px}
+.s.cover.on{display:grid}
+.cvl{display:flex;flex-direction:column;justify-content:center;gap:24px;min-width:0}
+.cover h1{font-size:110px}
+.cover .view{grid-row:1/3;grid-column:2;align-self:stretch;margin-bottom:-10px}
+.view{padding:0;display:flex;flex-direction:column}
+.view canvas{flex:1 1 0;min-height:0;width:100%;height:0;object-fit:cover;display:block;background:var(--cham-deep)}
+.view .cap{display:flex;justify-content:space-between;gap:12px;font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-2);padding:9px 12px;border-top:1.5px solid var(--ln)}
+.view .x{position:absolute;width:22px;height:22px;pointer-events:none}
+.view .x::before,.view .x::after{content:"";position:absolute;background:var(--nghe)}
+.view .x::before{left:10px;top:0;bottom:0;width:2px}.view .x::after{top:10px;left:0;right:0;height:2px}
+#loom{position:static;width:100%;height:100%}
+.cover .meta{display:grid;grid-template-columns:auto 1fr;gap:0;font-size:19px;max-width:none;width:100%;border-top:2.5px solid var(--ln);border-left:2.5px solid var(--ln)}
+.cover .meta b,.cover .meta span{padding:7px 12px;border-right:1px solid var(--ln);border-bottom:1px solid var(--ln)}
+.cover .meta b{font:600 12px/1.9 var(--mono);letter-spacing:.1em;color:var(--vai-3);white-space:nowrap}
+.cover .meta span:last-child,.cover .meta b:nth-last-child(2){border-bottom-width:2.5px}
+
+/* Câu hỏi mở */
+.blank{border:2px dashed var(--vai-3);padding:30px 34px;max-width:1100px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;min-height:180px}
+.blank .lbl{position:absolute;top:-10px;left:22px;background:var(--cham);padding:0 8px}
+.blank p{font-size:30px;color:var(--vai-2)}
+.cur{width:36px;height:36px;position:relative;flex:none;animation:blink 1.1s steps(2) infinite}
+.cur::before,.cur::after{content:"";position:absolute;background:var(--nghe)}.cur::before{left:17px;top:0;bottom:0;width:2px}.cur::after{top:17px;left:0;right:0;height:2px}
+@keyframes blink{50%{opacity:0}}
+
+/* Luận điểm: bậc thang và cú nhảy */
+.thesis{display:grid;grid-template-columns:1fr 520px;gap:40px;align-items:stretch}
+.thesis svg,.mini svg{width:100%;height:100%;overflow:visible}
+.st-step{fill:none;stroke:var(--vai);stroke-width:4;stroke-linejoin:round}
+.st-jump{fill:none;stroke:var(--nghe);stroke-width:3.5;stroke-dasharray:10 9}
+.st-g{stroke:var(--vai-3);stroke-width:1.5}
+.st-t{fill:var(--vai-2);font:600 17px var(--mono);letter-spacing:.06em}
+.st-t.b{fill:var(--vai);font:700 22px var(--body);letter-spacing:0}
+.st-t.o{fill:var(--nghe)}
+.st-dot{fill:var(--son)}
+.qs{display:flex;flex-direction:column;gap:14px;justify-content:center}
+.qs .callout{display:grid;grid-template-columns:34px 1fr;gap:16px;align-items:start}
+.qs h3{font-size:27px}
+
+/* Bốn cuộc cách mạng: bảng kê */
+.rv{grid-template-columns:52px 1fr;gap:10px;padding:12px 16px;margin:0;background:transparent;border-left:0;opacity:.5;border-bottom:1px solid var(--cham-3)}
+.rv b{font:700 30px/1 var(--mono);color:var(--vai-3)}
+.rv.on{background:color-mix(in srgb,var(--son) 10%,var(--cham));opacity:1}.rv.on b{color:var(--son)}
+.rv.done{opacity:.8}
+#revlist{border-top:2.5px solid var(--ln);border-bottom:2.5px solid var(--ln);align-self:center}
+.rvhd{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:6px 16px;font:600 12px var(--mono);letter-spacing:.1em;color:var(--vai-3);border-bottom:1px solid var(--ln)}
+
+/* Mác */
+.mq{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:34px 36px}
+.mq .qm{font:800 120px/0.6 var(--display);color:var(--son);height:44px}
+.chain{gap:0}.chain i{width:40px;height:2px;background:var(--vai-2);position:relative}.chain i::after{content:"";position:absolute;right:-1px;top:-5px;border-left:9px solid var(--vai-2);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.chain b{background:transparent;font:600 19px var(--body)}
+
+/* Ba mô hình: nét ghi kích thước */
+.dims{display:flex;flex-direction:column;gap:26px;flex:1;justify-content:center}
+.dimrow{display:grid;grid-template-columns:220px 820px 1fr;gap:26px;align-items:center}
+.dimrow>b{font:700 26px/1.15 var(--display)}
+.dimrow>span{font-size:21px;line-height:1.3;color:var(--vai-2)}
+.dimrow svg{width:820px;height:96px;overflow:visible}
+.dimrow.ax svg{height:40px}
+.d-ext{stroke:var(--vai-3);stroke-width:1.2}
+.d-ln{stroke:var(--vai);stroke-width:2.5;fill:none}
+.d-ln.p{stroke:var(--son)}
+.d-rg{stroke:var(--vai);stroke-width:1.5;fill:url(#hatchP)}
+.d-rg.p{stroke:var(--son)}
+.d-tx{font:700 28px var(--mono);fill:var(--vai);text-anchor:middle}
+.d-tx.p{fill:var(--son)}
+.d-ax{stroke:var(--vai-2);stroke-width:1.5}
+.d-at{font:600 15px var(--mono);fill:var(--vai-3);text-anchor:middle}
+.d-q{font:600 19px var(--body);fill:var(--vai-2)}
+.hp{stroke:var(--vai-2);stroke-width:1.5}
+
+/* Ba con đường */
+#waysvg .gridl{stroke:var(--tex2);stroke-width:1}
+#waysvg .axl{stroke:var(--vai-2);stroke-width:2;fill:none}
+.wc{border-left:0!important;padding-left:72px!important}
+.wc::before{content:"";position:absolute;left:18px;top:30px;width:40px;border-top:5px solid var(--c,var(--vai))}
+.wc0{--c:var(--vai)}.wc1{--c:var(--nghe)}.wc2{--c:var(--son)}
+
+/* Đông Á */
+.tlaxis{border-bottom:1.5px solid var(--vai-2);padding-bottom:4px;position:relative;background:linear-gradient(90deg,var(--vai-2) 1.5px,transparent 1.5px) 0 100%/calc(100%/12) 8px repeat-x}
+.tlbar{height:100px;background:transparent!important;color:var(--vai)!important;border:2px solid var(--c2,var(--vai))}
+.tlbar.a{--c2:var(--vai);background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px)!important}
+.tlbar.b{--c2:var(--son);background:color-mix(in srgb,var(--son) 12%,transparent)!important}
+.lessons .panel{flex-direction:row;align-items:flex-start;gap:14px;padding:18px}
+.lessons h3{font-size:23px}
+
+/* Thanh đo */
+.bar .t{background:linear-gradient(90deg,var(--vai-3) 1px,transparent 1px) 0 100%/10% 7px repeat-x;border-bottom:1px solid var(--vai-3)}
+.bar .f{border-radius:0;background:var(--vai)}
+.bar .f.p{background:var(--son)}.bar .f.w{background:var(--vai)}
+.bar .f.hc{background:repeating-linear-gradient(-45deg,var(--vai) 0 2px,transparent 2px 8px);outline:2px solid var(--vai);outline-offset:-2px}
+.bar>span:last-child{font:700 24px var(--mono);min-width:96px;text-align:right}
+.vc .bar>span:last-child{font-size:27px}
+
+/* Bánh răng trung tâm */
+.gearbox{position:relative;width:300px;height:300px;display:grid;place-items:center;text-align:center;justify-self:center}
+.gearbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.gear{fill:var(--cham);stroke:var(--son);stroke-width:3;transform-origin:150px 150px}
+.s.on .gear{animation:spin 26s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.gearbox .in{position:relative;padding:40px;display:flex;flex-direction:column;gap:6px;align-items:center}
+.gearbox b{font:800 28px/1.12 var(--display)}
+.gearbox span{font:600 14px var(--mono);letter-spacing:.08em;color:var(--son);text-transform:uppercase}
+.hub{grid-template-columns:1fr 300px 1fr;gap:70px}
+.hubR .leaf{border-left:0;font-size:23px}
+.hubL .panel p{font-size:24px}
+.nq{grid-template-columns:1fr 300px 1fr;gap:70px}
+
+/* Thực trạng */
+.wf i{outline:1px solid color-mix(in srgb,var(--vai) 25%,transparent);outline-offset:-1px}
+.lgt{display:grid;grid-template-columns:22px 1fr auto auto;gap:0 14px;font-size:20px;align-items:center;border-top:2px solid var(--ln);border-bottom:2px solid var(--ln)}
+.lgt>*{padding:9px 0;border-bottom:1px solid var(--cham-3)}
+.lgt i{width:18px;height:18px;padding:0;border:0}
+.lgt b{font:700 19px var(--mono);text-align:right}
+.lgt .h{font:600 11px var(--mono);letter-spacing:.1em;color:var(--vai-3)}
+
+/* Nội dung */
+.flow{display:grid;grid-template-columns:330px 1fr 430px;gap:80px;align-items:center}
+.fend{background:transparent;color:var(--vai);padding:30px;border:0;outline:2.5px solid var(--son);outline-offset:6px}
+.fend .eb{color:var(--son)}
+.fend .n{border-color:var(--vai-3)}
+
+/* 86% và 2% */
+.vs{display:grid;grid-template-columns:1fr 90px 1fr;align-items:stretch}
+.vs .neq{display:grid;place-items:center;font:800 76px var(--display);color:var(--nghe)}
+.big{font-family:var(--mono);font-weight:700;letter-spacing:-.04em}
+.ms{font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-3);border-top:1.5px solid var(--vai-3);padding-top:6px;margin-top:4px}
+
+/* Mô phỏng */
+#dots i{background:var(--vai)}
+#dots i.out{box-shadow:inset 0 0 0 1.5px var(--vai-3)}
+.toggle{background:transparent;border:1.5px solid var(--vai-3)}
+.kv{gap:0 18px}.kv>*{padding:9px 0;border-bottom:1px solid var(--cham-3)}
+.kv b{font-size:25px}
+#cvw svg{display:block;width:100%;height:auto;overflow:visible}
+#cvw .ax{stroke:var(--vai-2);stroke-width:1.5}
+#cvw .gr{stroke:var(--tex2);stroke-width:1}
+#cvw .cv{fill:none;stroke:var(--son);stroke-width:4;stroke-linecap:round}
+#cvw .cvg{fill:none;stroke:var(--vai-3);stroke-width:1.5;stroke-dasharray:4 6}
+#cvw text{fill:var(--vai-2);font:600 13px var(--mono)}
+#cvw .hd{fill:var(--nghe)}
+
+/* Logistics */
+.shift span{background:transparent}
+.shift i{border-left-color:var(--son)}
+
+/* Thác nước */
+.wb::before{background:var(--c);opacity:1}
+.wb.w::before{background:repeating-linear-gradient(-45deg,var(--vai) 0 2px,transparent 2px 8px);outline:2px solid var(--vai);outline-offset:-2px}
+.wb b{font-family:var(--mono)}
+.wfall{border-bottom:2px solid var(--ln)}
+
+/* Đồng hồ mục tiêu */
+.gc .gt{stroke:var(--cham-2)}
+.gc svg{overflow:visible}
+.gc .tk2 line{stroke:var(--vai-3);stroke-width:1.5}
+
+/* Sinh viên */
+.tcol{border-top:0;padding:16px 18px}
+.tri{gap:40px}
+.outs{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.outs .panel{flex-direction:row;align-items:center;gap:16px}
+
+/* 90 ngày */
+#plan .panel.dark p{padding-left:24px;position:relative}
+#plan .panel.dark p::before{content:"";position:absolute;left:4px;top:.45em;width:10px;height:10px;border:2px solid var(--son);border-radius:50%;background:var(--cham)}
+#plan .panel.dark{background:transparent}
+.chips button{background:transparent;border:1.5px solid var(--vai-3);font-family:var(--mono);font-size:17px}
+.chips button[aria-pressed=true]{background:var(--son);border-color:var(--son);color:var(--on-son)}
+
+/* Kết luận */
+.endg{display:grid;grid-template-columns:1fr 470px;gap:50px;align-items:center}
+.endg>div{display:flex;flex-direction:column;gap:26px}
+.mini{height:380px}
+
+/* Tài liệu */
+#refs{counter-reset:r}
+#refs p{counter-increment:r;padding-left:34px;text-indent:0;position:relative;border-bottom:1px solid var(--cham-3);padding-bottom:6px}
+#refs p::before{content:counter(r,decimal-leading-zero);position:absolute;left:0;font:600 12px/1.6 var(--mono);color:var(--son)}
+
+#drawer{border-left:2.5px solid var(--ln)}
+#notes{border-top:2.5px solid var(--ln)}
+@media (prefers-reduced-motion:reduce){.s.on h2.r::after,.s.on h1.r::after{display:none}}
+.mk{fill:var(--vai-2)}.mk.p{fill:var(--son)}.mk.o{fill:var(--nghe)}
+.cover .meta{grid-column:1}
+.big{white-space:nowrap}
+.vc .big{font-size:58px}
+.endg h2{font-size:64px!important}
+#refs p,#refs{font-size:14.5px;line-height:1.28}
+#refs p{margin-bottom:6px}
+/* Sửa lỗi bố cục 04/11/2026 */
+.vs{align-items:center}
+.vsp{gap:16px;padding:26px 28px}
+.vsh{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.vsh .big{font-size:88px;line-height:1}
+.vsb{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}
+.vsb .wf.sm8{max-width:230px;margin:0}
+.vsb p{font-size:21px;line-height:1.36;margin-top:8px}
+.stk{display:flex;flex-direction:column;justify-content:center;gap:110px}
+.tri{align-items:stretch}
+#plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
+#plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
+/* Tiểu tiết và hoạt ảnh thêm 04/11/2026 */
+@keyframes tbc{50%{opacity:.35}}
+/* Chuyển tờ: nét bút chạy ngang, tờ mới hiện sau nét bút */
+#wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--son);z-index:6;pointer-events:none;opacity:0;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--son) 25%,transparent),0 0 18px color-mix(in srgb,var(--son) 45%,transparent)}
+#wipe::before,#wipe::after{content:"";position:absolute;left:-7px;width:16px;height:2px;background:var(--son)}
+#wipe::before{top:58px}#wipe::after{bottom:92px}
+/* Nét nối nhấn: sau khi kẻ xong thì có dòng chảy chạy dọc */
+svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-15}}
+/* Số câu hỏi rất lớn, chỉ có nét viền mờ, nằm sau nội dung */
+.s>svg.ghostn{position:absolute;top:16px;right:60px;width:200px;height:200px;z-index:0;pointer-events:none;overflow:visible}
+.ghostn text{font:700 230px/1 var(--mono);fill:none;stroke:color-mix(in srgb,var(--son) 24%,transparent);stroke-width:1.5}
+.ghostn .gl{font:600 14px var(--mono);letter-spacing:.2em;fill:color-mix(in srgb,var(--son) 45%,transparent);stroke:none}
+.ghostn line{stroke:color-mix(in srgb,var(--son) 30%,transparent);stroke-width:1;stroke-dasharray:4 5}
+/* Slide 4: thanh thời gian của giai đoạn đang chạy */
+.rv{overflow:hidden}
+.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 6.75s linear forwards}
+@keyframes rvp{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.rv.on::after{animation:none;transform:none}}
+/* Thác nước: nét đứt nối đỉnh cột này sang cột sau */
+.wb.p::after,.wb.w::after{content:"";position:absolute;left:-18px;width:18px;height:0;border-top:2px dashed var(--vai-2);transform-origin:left;transform:scaleX(0)}
+.wb.p::after{bottom:98%}.wb.w::after{bottom:51.47%}
+.s.on .wb.p::after{animation:brg .35s 1.3s ease-out forwards}.s.on .wb.w::after{animation:brg .35s 2.5s ease-out forwards}
+@keyframes brg{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.wb.p::after,.wb.w::after{transform:none;animation:none!important}}
+/* Slide 12: ô kết luận nháy vòng sóng khi các nét nối chạm tới */
+.s.on .fend{animation:fpulse 1.4s 2.7s ease-out 2}
+@keyframes fpulse{0%{box-shadow:0 0 0 6px color-mix(in srgb,var(--son) 50%,transparent)}100%{box-shadow:0 0 0 30px transparent}}
+@media (prefers-reduced-motion:reduce){.s.on .fend{animation:none}}
+/* Đợt chi tiết 2 (04/11/2026) */
+.tip{fill:var(--cham);stroke:var(--nghe);stroke-width:2.5;pointer-events:none}
+svg.links .tip{fill:var(--cham)}
+/* Mặt cắt gạch chéo nằm ở lớp riêng để quét được */
+.panel.dark,.leaf.hc{isolation:isolate;background:color-mix(in srgb,var(--cham) 82%,transparent)}
+.panel.dark:not(.wc)::before,.leaf.hc::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px);clip-path:inset(0 var(--hx,0%) 0 0)}
+.wc.dark{background:repeating-linear-gradient(-45deg,var(--hatch) 0 1.5px,transparent 1.5px 11px),color-mix(in srgb,var(--cham) 82%,transparent)}
+/* Dấu khác vẽ bằng nét */
+.vs .neq svg{width:72px;height:90px;overflow:visible}
+.vs .neq path{fill:none;stroke:var(--nghe);stroke-width:6;stroke-linecap:round;stroke-dasharray:1 1}
+/* Ô để trống: viền đứt chạy vòng */
+.blank{border:0;background-image:linear-gradient(90deg,var(--vai-3) 50%,transparent 50%),linear-gradient(90deg,var(--vai-3) 50%,transparent 50%),linear-gradient(0deg,var(--vai-3) 50%,transparent 50%),linear-gradient(0deg,var(--vai-3) 50%,transparent 50%);
+  background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-size:18px 2px,18px 2px,2px 18px,2px 18px;background-position:0 0,0 100%,0 0,100% 0;animation:ants 1.2s linear infinite}
+@keyframes ants{to{background-position:18px 0,-18px 100%,0 -18px,100% 18px}}
+/* Bậc thang: chấm leo bậc và chấm đi tắt */
+.climb{fill:var(--son);stroke:var(--cham);stroke-width:3}
+.jumper{fill:var(--nghe);stroke:var(--cham);stroke-width:3}
+/* Slide 7: ngòi bút trên ba con đường */
+#waysvg .pen{fill:var(--cham);stroke-width:3}
+#waysvg .p0{stroke:var(--vai)}#waysvg .p1{stroke:var(--nghe)}#waysvg .p2{stroke:var(--son);fill:var(--son)}
+#waysvg .ring{fill:none;stroke:var(--son);stroke-width:2}
+/* Slide 18: vạch chia sáng theo cung, dấu đích ở đỉnh */
+.gc .tk2 line[data-on]{stroke:var(--c);stroke-width:2.5}
+.gc .tgt{fill:var(--nghe)}
+.gc svg:not(.ol){margin-top:12px}
+/* Đường dẫn từ con số ra ô nguồn */
+#lead{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;z-index:8;overflow:visible}
+#lead path{fill:none;stroke:var(--son);stroke-width:2;stroke-dasharray:1 1}
+#lead circle{fill:var(--cham);stroke:var(--son);stroke-width:2}
+@media (prefers-reduced-motion:reduce){.blank{animation:none}}
+/* Đợt 3 (04/11/2026) */
+/* Khung tên mới: phần đang nói, tên tờ, người nói, số tờ; hàng dưới là thanh tiến độ chia theo phần */
+/* Góc tờ tối giản: không khung, không nền, chữ mờ */
+#tb{display:flex;align-items:baseline;gap:10px;right:70px;bottom:34px;border:0;background:none;padding:0;box-shadow:none;font:400 15px/1.3 var(--body);color:var(--vai-3);white-space:nowrap}
+#tb #tbw{color:var(--vai-2)}
+#tb #tbn{font-variant-numeric:tabular-nums}
+#tb .sc{display:flex;gap:2px;height:8px;margin:0 0 0 2px;align-self:center}
+#tb .sc i{width:6px;height:8px;border:1px solid var(--vai-3)}
+#tb .sc i.f{background:var(--vai-3);border-color:var(--vai-3)}
+#tb .sc i.c{background:var(--son);border-color:var(--son)}
+.foot{right:420px}
+/* Tiêu đề tách từ */
+.s.on h2.r,.s.on h1.r{animation:none!important;clip-path:none}
+.s.on h2.r::after,.s.on h1.r::after{display:none!important}
+.w{display:inline-block;overflow:hidden;vertical-align:top;padding:.16em .03em .12em;margin:-.16em -.03em -.12em}
+.wi{display:inline-block}
+/* Slide 4: sơ đồ bốn hình */
+.view .proc{position:absolute;left:0;right:0;top:0;display:none;grid-template-columns:repeat(2,minmax(0,300px));grid-template-rows:auto auto;justify-content:center;align-content:center;gap:76px 64px;padding:10px 20px;z-index:2}
+.view .proc.on{display:grid}
+.pc{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pc .ph{position:relative;aspect-ratio:820/560;outline:1.5px solid var(--ln);background:var(--cham-deep)}
+.pc3 .ph{outline:2.5px solid var(--son);box-shadow:0 0 0 var(--rg,0px) color-mix(in srgb,var(--son) 22%,transparent)}
+.pc canvas{width:100%;height:100%;display:block}
+.pc .pt{display:flex;gap:8px;align-items:baseline;font:600 15px/1.2 var(--body);color:var(--vai)}
+.pc .pt b{font:700 14px var(--mono);color:var(--son)}
+.proc .pl{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none}
+.proc .pl>path{fill:none;stroke:var(--son);stroke-width:2.5}
+#morph{transform-origin:0 0}
+/* Tờ bìa phụ giữa các phần */
+#iv{position:absolute;inset:0;z-index:7;visibility:hidden;opacity:0;display:grid;grid-template-columns:420px 1fr;align-items:center;gap:60px;padding:0 120px;
+  background-color:var(--cham);background-image:linear-gradient(var(--tex2) 1px,transparent 1px),linear-gradient(90deg,var(--tex2) 1px,transparent 1px),linear-gradient(var(--tex) 1px,transparent 1px),linear-gradient(90deg,var(--tex) 1px,transparent 1px);
+  background-size:80px 80px,80px 80px,16px 16px,16px 16px;background-position:-2px -2px}
+#iv .ivn svg{width:420px;height:420px;overflow:visible}
+#iv .ivn text{font:700 400px/1 var(--mono);fill:none;stroke:var(--son);stroke-width:3}
+#iv .ivt{display:flex;flex-direction:column;gap:22px}
+#iv h2{font-size:64px;line-height:1.08;width:auto}
+#iv .ivl{width:820px;height:30px;overflow:visible}
+#iv .ivl path{fill:none;stroke:var(--vai-2);stroke-width:2}
+#iv .ivw{font:600 15px var(--mono);letter-spacing:.08em;color:var(--vai-2)}
+#iv .ivw span{color:var(--vai-3);margin-right:8px}
+#wipe{z-index:8}
+/* Slide 14: thu lưới chấm và đường c/v để ba khung không tràn xuống dòng giả định */
+#dots{width:340px;gap:8px}
+#cvw svg{height:150px}
+/* Slide 18: chừa chỗ cho tam giác mốc khi tên chỉ tiêu xuống hai dòng */
+.gc svg:not(.ol){margin-top:24px}
+</style>
+
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
 <div id="stage">
 <div id="pg" aria-label="Số slide"></div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="hatchP" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(45)"><line class="hp" x1="0" y1="0" x2="0" y2="9"/></pattern>
+  <marker id="da" viewBox="0 0 12 10" refX="11" refY="5" markerWidth="12" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="mk" d="M0 0L12 5L0 10z"/></marker>
+  <marker id="dap" viewBox="0 0 12 10" refX="11" refY="5" markerWidth="12" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path class="mk p" d="M0 0L12 5L0 10z"/></marker>
+  <marker id="dao" viewBox="0 0 12 10" refX="11" refY="5" markerWidth="14" markerHeight="12" markerUnits="userSpaceOnUse" orient="auto"><path class="mk o" d="M0 0L12 5L0 10z"/></marker>
+</defs></svg>
 
 <section class="s cover" data-act="0" data-who="1" data-min="1" data-title="Bìa">
-  <canvas id="loom" width="760" height="855" aria-hidden="true"></canvas>
-  <div class="eb r">ĐẠI HỌC FPT · MLN122 · KINH TẾ CHÍNH TRỊ MÁC - LÊNIN</div>
-  <h1 class="r" style="--i:1">Một sợi chỉ,<br><em>bốn cuộc</em><br><em>cách mạng</em></h1>
-  <p class="r" style="--i:2;max-width:780px;font-size:24px">Chủ đề 9. Công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh Cách mạng công nghiệp lần thứ tư: trí tuệ nhân tạo, chuyển đổi số và yêu cầu về nguồn nhân lực.</p>
+  <div class="cvl">
+    <div class="eb r">ĐẠI HỌC FPT · MLN122 · KINH TẾ CHÍNH TRỊ MÁC - LÊNIN</div>
+    <h1 class="r" style="--i:1">Một sợi chỉ,<br><em>bốn cuộc</em><br><em>cách mạng</em></h1>
+    <p class="r" style="--i:2;max-width:780px;font-size:24px">Chủ đề 9. Công nghiệp hóa, hiện đại hóa ở Việt Nam trong bối cảnh Cách mạng công nghiệp lần thứ tư: trí tuệ nhân tạo, chuyển đổi số và yêu cầu về nguồn nhân lực.</p>
+  </div>
+  <figure class="view r" style="--i:2;margin:0"><canvas id="loom" width="760" height="855" aria-hidden="true"></canvas><i class="x" style="left:-11px;top:-11px"></i><i class="x" style="right:-11px;top:-11px"></i><div class="cap"><span>CHI TIẾT A</span><span>TẤM VẢI ĐANG DỆT THÀNH DỮ LIỆU</span></div></figure>
   <div class="meta r" style="--i:3" id="covermeta"></div>
   <aside class="notes">Em chào thầy và các bạn. Em là [Người 1], đại diện Nhóm 9. [Nhìn lớp, không nhìn màn hình.] Hình bên phải là một tấm vải đang dệt, càng lên cao thì hoa văn càng biến thành những ô dữ liệu. Cuộc cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Gần 300 năm sau, dệt may lại xuất hiện trong đề của nhóm em, lần này như một lát cắt của AI và chuyển đổi số. Vì vậy bài có tên: một sợi chỉ, bốn cuộc cách mạng.</aside>
 </section>
@@ -237,18 +647,30 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s mid" data-act="0" data-who="1" data-min="1" data-title="Câu hỏi mở đầu">
   <div class="eb r">TRƯỚC KHI VÀO BÀI</div>
   <h2 class="r" style="--i:1;font-size:96px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
-  <p class="r" style="--i:2;font-size:30px;color:var(--vai-2)">Mời một, hai bạn chia sẻ.</p>
+  <div class="blank r" style="--i:2"><span class="lbl">Ô để trống · lớp điền vào</span><p>Mời một, hai bạn chia sẻ.</p><i class="cur" aria-hidden="true"></i></div>
   <aside class="notes">Trước khi vào bài, em hỏi các bạn một câu. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì tự nêu ba lựa chọn rồi đi tiếp.] Em cảm ơn bạn. Nhóm em giữ lại câu trả lời này, cuối bài mình sẽ quay lại.</aside>
 </section>
 
-<section class="s mid" data-act="0" data-who="1" data-min="1" data-title="Luận điểm và ba câu hỏi" data-refs="gt|tr. 158">
+<section class="s" data-act="0" data-who="1" data-min="1" data-title="Luận điểm và ba câu hỏi" data-refs="gt|tr. 158">
   <div class="eb r">LUẬN ĐIỂM CỦA BÀI <span class="tag">quan điểm nhóm</span></div>
-  <h2 class="r" style="--i:1;font-size:82px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
-  <p class="r" style="--i:2;max-width:1250px">Giáo trình viết: <span class="n" data-c="gt" data-l="tr. 158">"kết hợp quá trình phát triển tuần tự với đi tắt đón đầu"</span>.</p>
-  <div class="row c3 r" style="--i:3">
-    <div class="panel"><span class="eb">CÂU HỎI 1</span><h3>Việt Nam học được gì từ Nhật Bản và các nước công nghiệp mới?</h3></div>
-    <div class="panel"><span class="eb">CÂU HỎI 2</span><h3>AI tạo thêm việc làm hay thay thế người lao động?</h3></div>
-    <div class="panel"><span class="eb">CÂU HỎI 3</span><h3>Nghị quyết 57 đặt ra yêu cầu gì với sinh viên?</h3></div>
+  <h2 class="r" style="--i:1;font-size:72px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
+  <div class="thesis grow r" style="--i:2">
+    <svg viewBox="0 0 860 470" role="img" aria-label="Hình: công nghệ có thể nhảy tắt, năng lực phải leo từng bậc">
+      <line class="st-g" x1="20" y1="430" x2="850" y2="430"/>
+      <path class="st-step dr" data-d="2.6" data-w=".9" d="M70 430 L70 386 L158 386 L158 342 L246 342 L246 298 L334 298 L334 254 L422 254 L422 210 L510 210 L510 166 L598 166 L598 122 L686 122 L686 78 L800 78"/>
+      <path class="st-jump dr" data-d=".9" data-w=".3" marker-end="url(#dao)" d="M70 430 C150 40 520 0 780 70"/>
+      <circle class="st-dot" cx="800" cy="78" r="9"/>
+      <text class="st-t" x="845" y="32" text-anchor="end">TRÌNH ĐỘ CAO</text>
+      <text class="st-t" x="70" y="458">XUẤT PHÁT</text>
+      <text class="st-t b o" x="320" y="126" style="fill:var(--nghe)">Công nghệ</text><text class="st-t o" x="320" y="150">MUA ĐƯỢC · ĐI TẮT ĐƯỢC</text>
+      <text class="st-t b" x="470" y="350">Năng lực</text><text class="st-t" x="470" y="376">PHẢI LEO TỪNG BẬC</text>
+    </svg>
+    <div class="qs">
+      <p class="sm">Giáo trình viết: <span class="n" data-c="gt" data-l="tr. 158">"kết hợp quá trình phát triển tuần tự với đi tắt đón đầu"</span>.</p>
+      <div class="callout"><span class="bub s1">1</span><h3>Việt Nam học được gì từ Nhật Bản và các nước công nghiệp mới?</h3></div>
+      <div class="callout"><span class="bub s1">2</span><h3>AI tạo thêm việc làm hay thay thế người lao động?</h3></div>
+      <div class="callout"><span class="bub s1">3</span><h3>Nghị quyết 57 đặt ra yêu cầu gì với sinh viên?</h3></div>
+    </div>
   </div>
   <aside class="notes">Đây là kết luận nhóm em thống nhất: đi tắt được công nghệ. [Dừng một nhịp.] Nhưng không đi tắt được năng lực. Mua một cái máy thì chỉ cần tiền. Còn sửa được nó, cải tiến nó, rồi tự làm ra cái tốt hơn thì phải học và phải có thời gian. Nhóm em không phản đối đi tắt đón đầu. Giáo trình trang 158 viết "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu", tức là cần cả hai vế; nhóm em nhấn vào vế hay bị quên. Bài đi qua ba câu hỏi thầy giao trên màn hình. Trước hết, cách mạng công nghiệp là gì?</aside>
 </section>
@@ -256,24 +678,27 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="1" data-who="1" data-min="1.5" data-title="Bốn cuộc cách mạng" data-refs="gt|tr. 140–143;ieee">
   <div class="eb r">CÂU HỎI 1 · CÁCH MẠNG CÔNG NGHIỆP LÀ GÌ</div>
   <h2 class="r" style="--i:1">Mỗi cuộc cách mạng là một <em>bước nhảy về công cụ sản xuất</em></h2>
-  <div class="row grow r" style="--i:2;grid-template-columns:600px 1fr">
-    <div id="revlist"></div>
-    <canvas id="morph" width="820" height="560" aria-label="Hình động: tấm vải biến thành dây chuyền, vi mạch, rồi mạng lưới"></canvas>
+  <div class="row grow r" style="--i:2;grid-template-columns:620px 1fr;gap:44px">
+    <div style="display:flex;flex-direction:column;justify-content:center"><div class="rvhd"><span>SỐ</span><span>CÔNG CỤ SẢN XUẤT · THỜI GIAN · TRANG</span></div><div id="revlist"></div></div>
+    <figure class="view" style="margin:0"><canvas id="morph" width="820" height="560" aria-label="Hình động: tấm vải biến thành dây chuyền, vi mạch, rồi mạng lưới"></canvas><div class="cap"><span>HÌNH 1</span><span>VẢI · DÂY CHUYỀN · VI MẠCH · MẠNG LƯỚI</span></div></figure>
   </div>
   <aside class="notes">Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt về chất của tư liệu lao động, tức là máy móc, công cụ sản xuất. Bước nhảy đó làm thay đổi căn bản phân công lao động và đưa năng suất lên cao hơn hẳn. [Nói theo mốc đang sáng, không nói đè hình.] Lần một ở nước Anh, thế kỷ 18: máy dệt, máy hơi nước. Lần hai: điện và dây chuyền, sản xuất hàng loạt. Lần ba: máy tính và tự động hóa. Một chi tiết thú vị: năm 1804, máy dệt Jacquard dùng thẻ đục lỗ để điều khiển hoa văn, và được cho là đã gợi ý cho Babbage khi thiết kế máy tính. Nói vui thì máy dệt và máy tính có họ hàng; nói chính xác thì đó là tiền lệ của việc điều khiển máy bằng chương trình. Lần thứ tư là bây giờ: AI, dữ liệu lớn, Internet vạn vật, nối thế giới thực với thế giới số.</aside>
 </section>
 
-<section class="s" data-act="1" data-who="1" data-min="1" data-title="Dự báo của Mác" data-refs="mac;gt|tr. 143–148">
+<section class="s" data-act="1" data-who="1" data-min="1" data-title="Dự báo của Mác" data-refs="mac;gt|tr. 143–148" data-links="mq>fk1,mq>fk2">
   <div class="eb r">CÂU HỎI 1 · MÁC ĐÃ NÓI GÌ</div>
   <h2 class="r" style="--i:1">Mác từng dự báo: của cải sẽ ít phụ thuộc vào <em>thời gian lao động</em></h2>
-  <div class="row c2 grow r" style="--i:2">
-    <div class="panel dark" style="justify-content:center">
-      <p style="font-size:38px;line-height:1.28;font-family:var(--display);font-weight:600"><span class="n" data-c="mac">"việc tạo ra của cải sẽ trở nên ít phụ thuộc vào thời gian lao động và số lượng lao động đã chi phí mà phụ thuộc vào việc ứng dụng khoa học ấy vào sản xuất"</span></p>
+  <div class="row grow r" style="--i:2;grid-template-columns:1fr 600px;gap:90px">
+    <div class="panel dark mq" id="mq">
+      <span class="lbl">Ghi chú 1 · trích nguyên văn</span>
+      <span class="qm" aria-hidden="true">“</span>
+      <p style="font-size:34px;line-height:1.28;font-family:var(--display);font-weight:600"><span class="n" data-c="mac">"việc tạo ra của cải sẽ trở nên ít phụ thuộc vào thời gian lao động và số lượng lao động đã chi phí mà phụ thuộc vào việc ứng dụng khoa học ấy vào sản xuất"</span></p>
       <p class="sm">C.Mác và Ph.Ăngghen, Toàn tập, t.46, phần II, tr. 368–369, dẫn theo giáo trình tr. 144.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:18px;justify-content:center">
-      <div class="fork"><span class="eb">THÁCH THỨC</span><p>Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 144">"sẽ làm mất đi những lợi thế sản xuất truyền thống"</span> như nhân công rẻ, tài nguyên nhiều.</p></div>
-      <div class="fork m"><span class="eb">CƠ HỘI</span><p>Nước đi sau có thể <span class="n" data-c="gt" data-l="tr. 145">tận dụng thành tựu của nước đi trước</span> để rút ngắn khoảng cách.</p></div>
+      <div class="fork" id="fk1"><span class="eb">THÁCH THỨC</span><p>Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 144">"sẽ làm mất đi những lợi thế sản xuất truyền thống"</span> như nhân công rẻ, tài nguyên nhiều.</p></div>
+      <div class="fork m" id="fk2"><span class="eb" style="color:var(--si)">CƠ HỘI</span><p>Nước đi sau có thể <span class="n" data-c="gt" data-l="tr. 145">tận dụng thành tựu của nước đi trước</span> để rút ngắn khoảng cách.</p></div>
+      <span class="lbl" style="margin-top:8px">Kéo theo thay đổi</span>
       <div class="chain"><b>Lực lượng sản xuất</b><i></i><b>Quan hệ sản xuất</b><i></i><b>Cách quản trị</b></div>
     </div>
   </div>
@@ -283,11 +708,27 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="1" data-who="2" data-min="1" data-title="Ba mô hình công nghiệp hóa" data-refs="gt|tr. 151–153">
   <div class="eb r">CÂU HỎI 1 · BA MÔ HÌNH CÔNG NGHIỆP HÓA</div>
   <h2 class="r" style="--i:1">Từ 60–80 năm xuống còn <em>20–30 năm</em></h2>
-  <div class="race r" style="--i:2">
-    <div class="axis"><span>0</span><span>20</span><span>40</span><span>60</span><span>80 năm</span></div>
-    <div class="lane"><b>Nước Anh</b><div class="tr"><div class="bar1 v" style="--w:75%"></div><div class="bar2 v" style="--l:75%;--w:25%"></div></div><span>Đi từ công nghiệp nhẹ, trước hết là dệt. Vốn đến từ lao động làm thuê và thuộc địa.</span></div>
-    <div class="lane"><b>Liên Xô</b><div class="tr ghost">giáo trình ghi "trong một thời gian ngắn", không nêu số năm</div><span>Ưu tiên công nghiệp nặng, kế hoạch hóa tập trung. Về sau thích ứng chậm với tiến bộ kỹ thuật.</span></div>
-    <div class="lane"><b>Nhật Bản, các nước công nghiệp mới</b><div class="tr"><div class="bar1 p" style="--w:25%"></div><div class="bar2 p" style="--l:25%;--w:12.5%"></div></div><span>Đẩy mạnh xuất khẩu, tận dụng công nghệ của nước đi trước cùng nguồn lực trong nước.</span></div>
+  <div class="dims r" style="--i:2">
+    <div class="dimrow ax"><span></span><svg viewBox="0 0 820 40"><line class="d-ax" x1="10" y1="32" x2="810" y2="32"/>
+      <g class="tks"></g>
+      <text class="d-at" x="10" y="14">0</text><text class="d-at" x="210" y="14">20</text><text class="d-at" x="410" y="14">40</text><text class="d-at" x="610" y="14">60</text><text class="d-at" x="800" y="14">80 NĂM</text></svg><span class="lbl">Thời gian công nghiệp hóa</span></div>
+    <div class="dimrow"><b>Nước Anh</b><svg viewBox="0 0 820 96">
+      <line class="d-ext" x1="10" y1="12" x2="10" y2="92"/><line class="d-ext ex" x1="610" y1="30" x2="610" y2="92"/><line class="d-ext ex" x1="810" y1="40" x2="810" y2="92"/>
+      <path class="d-ln dr" data-d="1.8" data-w=".5" marker-start="url(#da)" marker-end="url(#da)" d="M10 64 L610 64"/>
+      <rect class="d-rg gr" x="610" y="54" width="200" height="20"/>
+      <text class="d-tx" x="310" y="48">60–80 năm</text></svg>
+      <span>Đi từ công nghiệp nhẹ, trước hết là dệt. Vốn đến từ lao động làm thuê và thuộc địa.</span></div>
+    <div class="dimrow"><b>Liên Xô</b><svg viewBox="0 0 820 96">
+      <line class="d-ext" x1="10" y1="12" x2="10" y2="92"/>
+      <path class="d-ext dr" data-d="1.2" data-w=".8" stroke-dasharray="6 8" d="M10 64 L800 64"/>
+      <text class="d-q" x="26" y="44">Giáo trình ghi "trong một thời gian ngắn", không nêu số năm</text></svg>
+      <span>Ưu tiên công nghiệp nặng, kế hoạch hóa tập trung. Về sau thích ứng chậm với tiến bộ kỹ thuật.</span></div>
+    <div class="dimrow"><b>Nhật Bản, các nước công nghiệp mới</b><svg viewBox="0 0 820 96">
+      <line class="d-ext" x1="10" y1="12" x2="10" y2="92"/><line class="d-ext ex" x1="210" y1="30" x2="210" y2="92"/><line class="d-ext ex" x1="310" y1="40" x2="310" y2="92"/>
+      <path class="d-ln p dr" data-d=".9" data-w="1.4" marker-start="url(#dap)" marker-end="url(#dap)" d="M10 64 L210 64"/>
+      <rect class="d-rg p gr" x="210" y="54" width="100" height="20"/>
+      <text class="d-tx p" x="110" y="48">20–30 năm</text></svg>
+      <span>Đẩy mạnh xuất khẩu, tận dụng công nghệ của nước đi trước cùng nguồn lực trong nước.</span></div>
   </div>
   <aside class="notes">Em là [Người 2]. Giáo trình nêu ba mô hình công nghiệp hóa. [Đếm bằng tay: một, hai, ba.] Một là nước Anh, đi từ công nghiệp nhẹ và mất khoảng 60 đến 80 năm. Vốn của họ đến từ lao động làm thuê và cướp bóc thuộc địa, con đường mình không thể và không nên đi. Hai là Liên Xô, ưu tiên công nghiệp nặng, đạt kết quả nhanh, Việt Nam cũng từng áp dụng từ những năm 1960. Nhưng về sau, cơ chế kế hoạch hóa tập trung bộc lộ hạn chế, không thích ứng kịp với tiến bộ kỹ thuật. Ba là Nhật Bản và các nước công nghiệp mới như Hàn Quốc, Singapore: chỉ khoảng 20 đến 30 năm. [Dừng.] Chưa bằng một nửa nước Anh. Họ làm cách nào?</aside>
 </section>
@@ -296,15 +737,17 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
   <div class="eb r">CÂU HỎI 1 · LÀM SAO ĐỂ CÓ CÔNG NGHỆ</div>
   <h2 class="r" style="--i:1">Họ chọn cách <em>vừa mua công nghệ, vừa tự nghiên cứu</em></h2>
   <div class="row r grow" style="--i:2;grid-template-columns:1fr 520px">
-    <svg viewBox="0 0 900 470" id="waysvg" style="width:100%;height:100%" role="img" aria-label="Ba con đường từ trình độ thấp đến trình độ cao">
-      <text class="svgt" x="10" y="462" font-size="22">trình độ thấp</text>
-      <text class="svgt" x="890" y="34" font-size="22" text-anchor="end">trình độ cao</text>
-      <path class="way w0" pathLength="1" d="M20 430 C120 430 90 330 200 340 S300 420 380 320 S480 230 560 260 S680 200 720 140 S820 110 880 70" fill="none" stroke-width="5"/>
-      <path class="way w1" pathLength="1" d="M20 430 L880 70" fill="none" stroke-width="5"/>
-      <path class="way w2" pathLength="1" d="M20 430 C110 340 170 420 260 330 S380 290 450 250 S570 240 640 170 S770 130 880 70" fill="none" stroke-width="7"/>
-      <path class="way w2" pathLength="1" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke-width="7"/>
+    <svg viewBox="0 0 900 480" id="waysvg" style="width:100%;height:100%;overflow:visible" role="img" aria-label="Ba con đường từ trình độ thấp đến trình độ cao">
+      <path class="axl" marker-end="url(#da)" d="M20 450 L20 20"/><path class="axl" marker-end="url(#da)" d="M20 450 L895 450"/>
+      <text class="svgt" x="34" y="30" font-size="15" letter-spacing="1.5">TRÌNH ĐỘ</text>
+      <text class="svgt" x="890" y="474" font-size="15" text-anchor="end" letter-spacing="1.5">THỜI GIAN</text>
+      <path class="way w0" pathLength="1" d="M20 430 C120 430 90 330 200 340 S300 420 380 320 S480 230 560 260 S680 200 720 140 S820 110 880 70" fill="none" stroke-width="4"/>
+      <path class="way w1" pathLength="1" d="M20 430 L880 70" fill="none" stroke-width="4" stroke-dasharray="1"/>
+      <path class="way w2" pathLength="1" d="M20 430 C110 340 170 420 260 330 S380 290 450 250 S570 240 640 170 S770 130 880 70" fill="none" stroke-width="6"/>
+      <path class="way w2" pathLength="1" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke-width="6"/>
+      <circle cx="880" cy="70" r="9" style="fill:var(--son)"/>
     </svg>
-    <div style="display:flex;flex-direction:column;gap:10px;justify-content:center">
+    <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
       <div class="panel wc wc0"><h3 style="font-size:26px">Tự nghiên cứu, tự chế tạo</h3><span class="wd">Mất nhiều thời gian, tốn kém khi thử nghiệm.</span></div>
       <div class="panel wc wc1"><h3 style="font-size:26px">Mua công nghệ của nước khác</h3><span class="wd">Cần nhiều vốn; dễ phụ thuộc nếu không nâng năng lực tiếp thu.</span></div>
       <div class="panel dark wc wc2"><h3 style="font-size:26px">Kết hợp cả hai</h3><span class="wd">Giáo trình gọi là chiến lược nhiều tầng: <span class="n" data-c="gt" data-l="tr. 153">"vừa cơ bản, lâu dài và vững chắc vừa đảm bảo đi tắt và bám đuổi"</span>.</span></div>
@@ -321,11 +764,11 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
     <div class="tlrow"><b>Nhật Bản</b><div class="tlbar a" style="--l:0%;--w:55.6%"><span>Nhập công nghệ máy móc, hóa chất rồi học để cải tiến; đầu tư cho giáo dục và kỹ sư</span></div></div>
     <div class="tlrow"><b>Hàn Quốc</b><div class="tlbar b" style="--l:33.3%;--w:66.7%"><span>Xuất khẩu buộc doanh nghiệp phải học nhanh; từ thập niên 1980 có viện nghiên cứu ngay trong doanh nghiệp, mời chuyên gia về nước</span></div></div>
   </div>
-  <div class="row c4 r" style="--i:3;gap:14px">
-    <div class="panel"><span class="eb">BÀI HỌC 1</span><h3 style="font-size:25px">Mua công nghệ rồi phải học để làm chủ</h3></div>
-    <div class="panel"><span class="eb">BÀI HỌC 2</span><h3 style="font-size:25px">Doanh nghiệp phải là nơi đi đầu đổi mới</h3></div>
-    <div class="panel"><span class="eb">BÀI HỌC 3</span><h3 style="font-size:25px">Đầu tư sớm cho con người</h3></div>
-    <div class="panel"><span class="eb">BÀI HỌC 4</span><h3 style="font-size:25px"><span class="n" data-c="gt" data-l="tr. 156">"không chủ quan, nóng vội"</span>, cũng không chậm trễ</h3></div>
+  <div class="row c4 r lessons" style="--i:3;gap:16px">
+    <div class="panel"><span class="bub s1">1</span><h3>Mua công nghệ rồi phải học để làm chủ</h3></div>
+    <div class="panel"><span class="bub s1">2</span><h3>Doanh nghiệp phải là nơi đi đầu đổi mới</h3></div>
+    <div class="panel"><span class="bub s1">3</span><h3>Đầu tư sớm cho con người</h3></div>
+    <div class="panel dark"><span class="bub s1">4</span><h3><span class="n" data-c="gt" data-l="tr. 156">"không chủ quan, nóng vội"</span>, cũng không chậm trễ</h3></div>
   </div>
   <aside class="notes">Lấy Hàn Quốc làm ví dụ. Đầu những năm 1960, theo Ngân hàng Thế giới, GDP bình quân đầu người của họ chưa tới 160 đô la một năm. Khoảng 20 năm sau, họ đã là nền kinh tế công nghiệp mới. [Chỉ vào thanh thời gian, không đọc hết chữ.] Nhật nhập công nghệ rồi học cách cải tiến, đầu tư mạnh cho giáo dục và kỹ sư. Hàn đẩy doanh nghiệp ra cạnh tranh xuất khẩu, muốn sống thì phải học nhanh. Nhóm em rút ra bốn bài học, gom thành hai cặp. Mua công nghệ thì phải học để làm chủ, và doanh nghiệp phải đi đầu đổi mới. Đầu tư sớm cho con người, và như giáo trình nói, không nóng vội nhưng cũng không chậm trễ. Đây là nguyên tắc để học, không phải công thức để chép.</aside>
 </section>
@@ -333,16 +776,16 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="1" data-who="2" data-min="1" data-title="Đầu tư cho năng lực" data-refs="wbrd;ifr26;nq57">
   <div class="eb r">CÂU HỎI 1 · KHOẢNG CÁCH VỀ ĐẦU TƯ</div>
   <h2 class="r" style="--i:1">Đi tắt nhưng vẫn phải <em>đầu tư cho năng lực</em></h2>
-  <div class="row c2 grow r vc" style="--i:2">
+  <div class="row c2 grow r vc" style="--i:2;gap:44px">
     <div class="panel">
-      <h3>Chi cho nghiên cứu và phát triển, % GDP, năm 2023</h3>
-      <div class="bar grow-in" style="--lab:240px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="--w:98.9%"></div></div><span class="n" data-c="wbrd">4,94</span></div>
-      <div class="bar grow-in" style="--lab:240px"><span>Nhật Bản</span><div class="t"><div class="f w" style="--w:68.8%"></div></div><span class="n" data-c="wbrd">3,44</span></div>
-      <div class="bar grow-in" style="--lab:240px"><span>Mục tiêu VN, 2030</span><div class="t"><div class="f p" style="--w:40%"></div></div><span class="n" data-c="nq57">2</span></div>
-      <div class="bar grow-in" style="--lab:240px"><span>Việt Nam</span><div class="t"><div class="f" style="--w:8.3%"></div></div><span class="n" data-c="wbrd">0,41</span></div>
+      <span class="lbl">Bảng đo 1</span><h3>Chi cho nghiên cứu và phát triển, % GDP, năm 2023</h3>
+      <div class="bar grow-in" style="--lab:230px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="--w:98.9%"></div></div><span class="n" data-c="wbrd">4,94</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>Nhật Bản</span><div class="t"><div class="f w" style="--w:68.8%"></div></div><span class="n" data-c="wbrd">3,44</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>Mục tiêu VN, 2030</span><div class="t"><div class="f hc" style="--w:40%"></div></div><span class="n" data-c="nq57">2</span></div>
+      <div class="bar grow-in" style="--lab:230px"><span>Việt Nam</span><div class="t"><div class="f p" style="--w:8.3%"></div></div><span class="n" data-c="wbrd" style="color:var(--son)">0,41</span></div>
     </div>
     <div class="panel">
-      <h3>Số robot trên 10.000 lao động ngành chế tạo, 2024</h3>
+      <span class="lbl">Bảng đo 2</span><h3>Số robot trên 10.000 lao động ngành chế tạo, 2024</h3>
       <div class="bar grow-in" style="--lab:170px"><span>Hàn Quốc</span><div class="t"><div class="f w" style="--w:96%"></div></div><span class="n" data-c="ifr26">1.220</span></div>
       <div class="bar grow-in" style="--lab:170px"><span>Singapore</span><div class="t"><div class="f w" style="--w:64.4%"></div></div><span class="n" data-c="ifr26">818</span></div>
       <div class="bar grow-in" style="--lab:170px"><span>Nhật Bản</span><div class="t"><div class="f w" style="--w:35.1%"></div></div><span class="n" data-c="ifr26">446</span></div>
@@ -353,22 +796,22 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
   <aside class="notes">Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời [Người 3].</aside>
 </section>
 
-<section class="s" data-act="1" data-who="3" data-min="1" data-title="Vì sao phải công nghiệp hóa" data-refs="gt|tr. 153–155">
+<section class="s" data-act="1" data-who="3" data-min="1" data-title="Vì sao phải công nghiệp hóa" data-refs="gt|tr. 153–155" data-links="hl1>hc,hl2>hc,hc>hr1!,hc>hr2!,hc>hr3!,hc>hr4!">
   <div class="eb r">CÂU HỎI 1 · VỀ VIỆT NAM</div>
   <h2 class="r" style="--i:1">Vì sao Việt Nam <em>phải</em> công nghiệp hóa, hiện đại hóa?</h2>
   <div class="hub grow r" style="--i:2">
     <div class="hubL">
-      <span class="eb">HAI LÝ DO</span>
-      <div class="panel"><p><span class="n" data-c="gt" data-l="tr. 153">"quy luật phổ biến"</span> mà mọi quốc gia đều trải qua</p></div>
-      <div class="panel"><p>Phải xây dựng cơ sở vật chất cho chủ nghĩa xã hội <span class="n" data-c="gt" data-l="tr. 154">từ đầu</span></p></div>
+      <span class="lbl">Đầu vào · hai lý do</span>
+      <div class="panel" id="hl1"><p><span class="n" data-c="gt" data-l="tr. 153">"quy luật phổ biến"</span> mà mọi quốc gia đều trải qua</p></div>
+      <div class="panel" id="hl2"><p>Phải xây dựng cơ sở vật chất cho chủ nghĩa xã hội <span class="n" data-c="gt" data-l="tr. 154">từ đầu</span></p></div>
     </div>
-    <div class="hubC"><b>Công nghiệp hóa, hiện đại hóa</b><span>ở Việt Nam</span></div>
+    <div class="gearbox" id="hc"><div class="in"><b>Công nghiệp hóa, hiện đại hóa</b><span>ở Việt Nam</span></div></div>
     <div class="hubR">
-      <span class="eb">BỐN ĐẶC ĐIỂM</span>
-      <div class="leaf">Theo định hướng xã hội chủ nghĩa</div>
-      <div class="leaf">Gắn với kinh tế tri thức</div>
-      <div class="leaf">Trong kinh tế thị trường định hướng xã hội chủ nghĩa</div>
-      <div class="leaf">Trong bối cảnh toàn cầu hóa, hội nhập</div>
+      <span class="lbl">Đầu ra · bốn đặc điểm</span>
+      <div class="leaf" id="hr1">Theo định hướng xã hội chủ nghĩa</div>
+      <div class="leaf" id="hr2">Gắn với kinh tế tri thức</div>
+      <div class="leaf" id="hr3">Trong kinh tế thị trường định hướng xã hội chủ nghĩa</div>
+      <div class="leaf" id="hr4">Trong bối cảnh toàn cầu hóa, hội nhập</div>
     </div>
   </div>
   <aside class="notes">Em là [Người 3]. Trước hết, công nghiệp hóa, hiện đại hóa là gì? [Nói chậm, gần nguyên văn.] Giáo trình trang 153 định nghĩa: đó là quá trình chuyển đổi căn bản, toàn diện các hoạt động sản xuất, kinh doanh, dịch vụ và quản lý, từ lao động thủ công là chính sang sử dụng phổ biến công nghệ, phương pháp tiên tiến, hiện đại, nhằm tạo ra năng suất lao động xã hội cao. Vì sao Việt Nam phải làm? Một, đây là quy luật phổ biến nước nào cũng trải qua, dù mỗi nước có cách đi riêng. Hai, mình đi lên chủ nghĩa xã hội từ nền kinh tế kém phát triển, nên cơ sở vật chất phải xây từ đầu. Bối cảnh riêng của Việt Nam là bốn đặc điểm bên phải. Vậy mình đang đứng ở đâu?</aside>
@@ -377,33 +820,35 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="1" data-who="3" data-min="1.5" data-title="Việt Nam đang ở đâu" data-refs="nso26q3;nso26ld;kts;gt|tr. 156">
   <div class="eb r">CÂU HỎI 1 · THỰC TRẠNG VIỆT NAM</div>
   <h2 class="r" style="--i:1">Việt Nam đang làm <em>hai việc cùng lúc</em>: đưa máy móc vào sản xuất và chuyển đổi số</h2>
-  <div class="row grow r" style="--i:2;grid-template-columns:1fr 1fr 370px;gap:28px">
-    <div><h3 style="font-size:25px;margin-bottom:10px">100 người lao động, quý III/2026</h3><div class="wf" data-wf="25.1:s,33.9:y,41:w"></div></div>
-    <div><h3 style="font-size:25px;margin-bottom:10px">100 đồng GDP, 9 tháng 2026</h3><div class="wf" data-wf="10.65:s,38.35:y,42.97:w,8.03:g"></div></div>
-    <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
-      <div class="lg"><i style="background:var(--son)"></i>Nông, lâm, thủy sản<b><span class="n" data-c="nso26ld">25,1%</span> · <span class="n" data-c="nso26q3">10,65%</span></b></div>
-      <div class="lg"><i style="background:var(--nghe)"></i>Công nghiệp, xây dựng<b><span class="n" data-c="nso26ld">33,9%</span> · <span class="n" data-c="nso26q3">38,35%</span></b></div>
-      <div class="lg"><i style="background:var(--vai)"></i>Dịch vụ<b><span class="n" data-c="nso26ld">41,0%</span> · <span class="n" data-c="nso26q3">42,97%</span></b></div>
-      <div class="lg"><i style="background:var(--cham-3)"></i>Thuế sản phẩm<b>– · <span class="n" data-c="nso26q3">8,03%</span></b></div>
-      <div class="panel dark" style="padding:14px 18px;margin-top:6px"><p style="font-size:22px"><b class="n" data-c="nso26ld">60,6%</b> lao động làm việc phi chính thức<br><b class="n" data-c="kts">14,02%</b> GDP đến từ kinh tế số, 2025</p></div>
+  <div class="row grow r" style="--i:2;grid-template-columns:400px 400px 1fr;gap:44px;align-items:center">
+    <div><span class="lbl">Hình 2 · 100 người lao động, quý III/2026</span><div class="wf" style="margin-top:12px" data-wf="25.1:s,33.9:y,41:w"></div></div>
+    <div><span class="lbl">Hình 3 · 100 đồng GDP, 9 tháng 2026</span><div class="wf" style="margin-top:12px" data-wf="10.65:s,38.35:y,42.97:w,8.03:g"></div></div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="lgt">
+        <span class="h"></span><span class="h">KHU VỰC</span><span class="h">LAO ĐỘNG</span><span class="h">GDP</span>
+        <i style="background:var(--son)"></i><span>Nông, lâm, thủy sản</span><b class="n" data-c="nso26ld">25,1%</b><b class="n" data-c="nso26q3">10,65%</b>
+        <i style="background:var(--nghe)"></i><span>Công nghiệp, xây dựng</span><b class="n" data-c="nso26ld">33,9%</b><b class="n" data-c="nso26q3">38,35%</b>
+        <i style="background:var(--vai)"></i><span>Dịch vụ</span><b class="n" data-c="nso26ld">41,0%</b><b class="n" data-c="nso26q3">42,97%</b>
+        <i style="background:var(--cham-3)"></i><span>Thuế sản phẩm</span><b>–</b><b class="n" data-c="nso26q3">8,03%</b>
+      </div>
+      <div class="panel dark" style="padding:16px 20px"><p style="font-size:22px"><b class="n cnt" data-c="nso26ld">60,6%</b> lao động làm việc phi chính thức<br><b class="n cnt" data-c="kts">14,02%</b> GDP đến từ kinh tế số, 2025</p></div>
     </div>
   </div>
   <p class="sm r" style="--i:3">Mỗi ô là một phần trăm, đã làm tròn. Hai lưới khác kỳ số liệu, nhóm đặt cạnh nhau để dễ so sánh.</p>
   <aside class="notes">Mỗi ô vuông là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.</aside>
 </section>
 
-<section class="s" data-act="1" data-who="3" data-min="1" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162">
+<section class="s" data-act="1" data-who="3" data-min="1" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162" data-links="fa>ft1,fa>ft2,fa>ft3,fa>ft4,ft1>fe!,ft2>fe!,ft3>fe!,ft4>fe!">
   <div class="eb r">CÂU HỎI 1 · VIỆT NAM CẦN LÀM GÌ</div>
   <h2 class="r" style="--i:1">Mọi nhiệm vụ cuối cùng đều cần đến <em>con người</em></h2>
-  <div class="funnel grow r" style="--i:2">
-    <div class="fcol"><span class="eb">TRƯỚC HẾT</span><div class="leaf">Tạo điều kiện về tư duy, thể chế, nguồn lực, môi trường quốc tế</div><p class="sm"><span class="n" data-c="gt" data-l="tr. 155">"không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện"</span></p></div>
-    <div class="fcol"><span class="eb">TIẾP THEO</span>
-      <div class="leaf">Ứng dụng khoa học, công nghệ; phát triển kinh tế tri thức</div>
-      <div class="leaf">Chuyển đổi cơ cấu kinh tế</div>
-      <div class="leaf">Hoàn thiện quan hệ sản xuất</div>
-      <div class="leaf">Thích ứng với 4.0: thể chế, ứng dụng, hạ tầng số</div></div>
-    <div class="farrow" aria-hidden="true"></div>
-    <div class="fend"><span class="eb fe">YẾU TỐ QUYẾT ĐỊNH</span><h3 style="font-size:40px">Nguồn nhân lực chất lượng cao</h3><p style="font-size:26px">Thích ứng với 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span></p></div>
+  <div class="flow grow r" style="--i:2">
+    <div style="display:flex;flex-direction:column;gap:12px"><span class="lbl">Bước 1 · trước hết</span><div class="leaf" id="fa">Tạo điều kiện về tư duy, thể chế, nguồn lực, môi trường quốc tế</div><p class="sm"><span class="n" data-c="gt" data-l="tr. 155">"không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện"</span></p></div>
+    <div style="display:flex;flex-direction:column;gap:12px"><span class="lbl">Bước 2 · tiếp theo</span>
+      <div class="leaf" id="ft1">Ứng dụng khoa học, công nghệ; phát triển kinh tế tri thức</div>
+      <div class="leaf" id="ft2">Chuyển đổi cơ cấu kinh tế</div>
+      <div class="leaf" id="ft3">Hoàn thiện quan hệ sản xuất</div>
+      <div class="leaf" id="ft4">Thích ứng với 4.0: thể chế, ứng dụng, hạ tầng số</div></div>
+    <div class="fend" id="fe"><span class="eb">YẾU TỐ QUYẾT ĐỊNH</span><h3 style="font-size:40px">Nguồn nhân lực chất lượng cao</h3><p style="font-size:25px">Thích ứng với 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span></p></div>
   </div>
   <aside class="notes">Vậy cần làm gì? Giáo trình chia hai phần. Trước hết là tạo điều kiện về tư duy, thể chế, nguồn lực, nhưng "không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện". Tiếp theo là các nhiệm vụ: ứng dụng khoa học công nghệ, chuyển đổi cơ cấu kinh tế, hoàn thiện quan hệ sản xuất, và thích ứng với Cách mạng 4.0. Hiện đại hóa không chỉ ở nhà máy hay nền tảng số, mà cả ở nông nghiệp, nông thôn, và ở cách trường học gắn với doanh nghiệp. [Nhấn: cùng một hệ thống.] Thể chế, hạ tầng, ứng dụng và nhân lực nằm trong cùng một hệ thống. Và giáo trình kết lại bằng một câu rất ngắn: thích ứng với 4.0 "phải do con người quyết định". Nếu con người là yếu tố quyết định, thì AI đang làm gì với công việc của họ?</aside>
 </section>
@@ -411,9 +856,10 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="2" data-who="3" data-min="1.25" data-title="86% hay dưới 2%" data-steps="1" data-refs="ilo16;ilo26;qlnn26">
   <div class="eb r">CÂU HỎI 2 · ĐỌC SỐ LIỆU CHO ĐÚNG</div>
   <h2 class="r" style="--i:1">Cùng là ILO, cùng nói về Việt Nam, sao lại có <em>hai con số</em>?</h2>
-  <div class="row c2 grow r" style="--i:2">
-    <div class="panel"><div style="display:flex;gap:24px;align-items:center"><span class="big bigs" style="font-size:96px">86%</span><span class="eb">ILO, 2016</span></div><div class="wf sm8" data-wf="86:s,14:o"></div><p class="st" data-s="1" style="font-size:22px">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div>
-    <div class="panel"><div style="display:flex;gap:24px;align-items:center"><span class="big bigm" style="font-size:96px">&lt; 2%</span><span class="eb">ILO, 2026</span></div><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><p class="st" data-s="1" style="font-size:22px">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> tự động hóa; khoảng một phần năm làm nghề có một phần công việc chịu tác động, không đồng nghĩa mất việc.</p></div>
+  <div class="vs grow r" style="--i:2">
+    <div class="panel vsp"><div class="vsh"><span class="big bigs">86%</span><span class="lbl">ILO, 2016</span></div><div class="vsb"><div class="wf sm8" data-wf="86:s,14:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div></div></div>
+    <div class="neq" aria-hidden="true">≠</div>
+    <div class="panel vsp"><div class="vsh"><span class="big bigm">&lt;2%</span><span class="lbl">ILO, 2026</span></div><div class="vsb"><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> tự động hóa; khoảng một phần năm làm nghề có một phần công việc chịu tác động, không đồng nghĩa mất việc.</p></div></div></div>
   </div>
   <p class="r st" data-s="1" style="--i:3"><span class="tag">quan điểm nhóm</span> Hai con số đo hai thứ khác nhau. Khi gặp một con số, hãy hỏi: đo ai, đo công nghệ nào, trong bao lâu?</p>
   <aside class="notes">Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời [Người 4].</aside>
@@ -422,13 +868,13 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="2" data-who="4" data-min="2" data-title="Mô phỏng c/v" data-steps="1" data-refs="gt|tr. 65, 68–69">
   <div class="eb r">CÂU HỎI 2 · VẬN DỤNG CHƯƠNG 3 <span class="tag y">mô hình minh họa, số giả định</span></div>
   <h2 class="r" style="--i:1">Trên một dây chuyền, máy càng nhiều thì <em>càng cần ít người</em></h2>
-  <div class="row r grow" style="--i:2;grid-template-columns:440px 1fr 500px">
-    <div class="panel dark"><h3>Công nhân trên một dây chuyền may: <span id="simN">100</span></h3><div id="dots" aria-hidden="true"></div></div>
-    <div class="panel" style="justify-content:center;gap:16px">
-      <label for="simA" style="font-size:24px">Mức tự động hóa: <b id="simAv">0%</b></label>
+  <div class="row r grow" style="--i:2;grid-template-columns:430px 1fr 470px;gap:30px">
+    <div class="panel"><span class="lbl">Hình 4 · dây chuyền may</span><h3>Công nhân: <span id="simN" class="mono">100</span></h3><div id="dots" aria-hidden="true"></div></div>
+    <div class="panel" style="justify-content:center;gap:14px">
+      <label for="simA" style="font-size:24px">Mức tự động hóa: <b id="simAv" class="mono">0%</b></label>
       <input id="simA" type="range" min="0" max="100" step="1" value="0">
       <div class="toggle" id="simAll" aria-pressed="false"></div>
-      <p class="sm" id="simText"></p>
+      <p class="sm" id="simText" style="font-size:19px"></p>
     </div>
     <div class="panel dark kv" style="align-content:center">
       <span>Tiền cho máy móc, nguyên liệu (c)</span><b id="simC"></b>
@@ -446,20 +892,20 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <section class="s" data-act="2" data-who="4" data-min="1.5" data-title="Dệt may và logistics" data-refs="blf25;qlnn26;bnews26;vna26">
   <div class="eb r">CÂU HỎI 2 · HAI NGÀNH ĐƯỢC HỎI</div>
   <h2 class="r" style="--i:1">Máy thay từng công đoạn; <em>điều còn thiếu là kỹ năng</em></h2>
-  <div class="row c2 grow r vc" style="--i:2">
+  <div class="row c2 grow r vc" style="--i:2;gap:44px">
     <div class="panel">
-      <h3>Dệt may</h3>
+      <span class="lbl">Ngành 1</span><h3>Dệt may</h3>
       <p class="sm"><span class="tag y">ví dụ đối chiếu, không phải số của Việt Nam</span> Bangladesh, khảo sát 429 công nhân năm 2024: số người trên dây chuyền giảm sau tự động hóa.</p>
       <div class="bar grow-in" style="--lab:170px"><span>Khâu cắt vải</span><div class="t"><div class="f p" style="--w:96.7%"></div></div><span class="n" data-c="blf25">−48,34%</span></div>
       <div class="bar grow-in" style="--lab:170px"><span>Cả dây chuyền</span><div class="t"><div class="f p" style="--w:61.2%"></div></div><span class="n" data-c="blf25">−30,58%</span></div>
       <div class="bar grow-in" style="--lab:170px"><span>Khâu may</span><div class="t"><div class="f p" style="--w:53.1%"></div></div><span class="n" data-c="blf25">−26,57%</span></div>
-      <p style="font-size:23px">Việt Nam: <span class="n" data-c="bnews26">hơn 3,3 triệu</span> lao động; <span class="n" data-c="qlnn26">67,1%</span> trong mẫu 1.770 lao động dệt may, da giày chưa từng được đào tạo kể từ khi đi làm.</p>
+      <p style="font-size:22px">Việt Nam: <span class="n" data-c="bnews26">hơn 3,3 triệu</span> lao động; <span class="n" data-c="qlnn26">67,1%</span> trong mẫu 1.770 lao động dệt may, da giày chưa từng được đào tạo kể từ khi đi làm.</p>
     </div>
     <div class="panel">
-      <h3>Logistics</h3>
+      <span class="lbl">Ngành 2</span><h3>Logistics</h3>
       <div><span class="big n" data-c="vna26">2,2 triệu</span><p class="sm">tổng nhu cầu lao động của ngành đến năm 2030, không phải số việc làm tăng thêm</p></div>
       <div class="shift"><span>Giấy tờ, kho bãi lặp đi lặp lại</span><i></i><span>Phân tích dữ liệu, vận hành hệ thống, xử lý sự cố</span></div>
-      <p style="font-size:23px">Người lao động chỉ chuyển được sang việc mới nếu có cơ hội đào tạo.</p>
+      <p style="font-size:22px">Người lao động chỉ chuyển được sang việc mới nếu có cơ hội đào tạo.</p>
     </div>
   </div>
   <aside class="notes">Dệt may trước. Nhóm chưa có số đo tương tự của Việt Nam, nên dùng một khảo sát 429 công nhân ở Bangladesh để đối chiếu, không áp sang mình. [Chỉ vào nhãn đối chiếu.] Sau tự động hóa, số người trên dây chuyền giảm khoảng 30%. Nhưng khâu cắt giảm gần một nửa, khâu may chỉ hơn một phần tư. Tức là máy thay từng công đoạn, không thay cả nghề một lần. Ở Việt Nam, trong một khảo sát 1.770 lao động dệt may, da giày, khoảng hai phần ba chưa từng được đào tạo kể từ khi đi làm. Sang logistics: Hiệp hội Logistics ước ngành cần khoảng 2,2 triệu lao động vào năm 2030. Đó là tổng nhu cầu, không phải 2,2 triệu việc làm tăng thêm. Việc giấy tờ, kho bãi lặp lại dễ tự động hóa hơn, nhu cầu có thể dịch sang phân tích dữ liệu, vận hành hệ thống, xử lý sự cố. Nhưng người lao động chỉ chuyển được nếu được đào tạo. Ở cả hai ngành, chỗ thiếu lớn nhất là kỹ năng.</aside>
@@ -467,10 +913,10 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 
 <section class="s" data-act="2" data-who="4" data-min="1.5" data-title="Câu trả lời" data-refs="wef25;wef25b;ilo26;unctad25;gt|tr. 69, 147;luatai">
   <div class="eb r">CÂU HỎI 2 · CÂU TRẢ LỜI CỦA NHÓM</div>
-  <h2 class="r" style="--i:1;font-size:52px">AI vừa thay thế vừa tạo việc làm, nhưng <em>cơ hội và lợi ích không tự chia đều</em></h2>
-  <div class="row c2 grow r" style="--i:2">
+  <h2 class="r" style="--i:1;font-size:50px">AI vừa thay thế vừa tạo việc làm, nhưng <em>cơ hội và lợi ích không tự chia đều</em></h2>
+  <div class="row c2 grow r" style="--i:2;gap:44px">
     <div class="panel">
-      <h3>Dự báo việc làm toàn cầu đến 2030, triệu việc</h3>
+      <span class="lbl">Biểu đồ 1</span><h3>Dự báo việc làm toàn cầu đến 2030, triệu việc</h3>
       <div class="wfall">
         <div class="wb m" style="--b:0%;--h:100%"><b class="n" data-c="wef25">+170</b><span>Tạo mới</span></div>
         <div class="wb p" style="--b:45.9%;--h:54.1%"><b class="n" data-c="wef25">−92</b><span>Mất đi</span></div>
@@ -478,8 +924,8 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
       </div>
       <p class="sm">Khảo sát doanh nghiệp của Diễn đàn Kinh tế Thế giới, gồm nhiều xu hướng, không riêng AI. Riêng AI và xử lý thông tin: <span class="n" data-c="wef25b">+11, −9</span>.</p>
     </div>
-    <div style="display:flex;flex-direction:column;gap:14px;justify-content:center">
-      <div class="panel"><span class="eb">NHÓM CHỊU ẢNH HƯỞNG NHIỀU HƠN</span><p>Ở Việt Nam: nữ <span class="n" data-c="ilo26">24,1%</span>, nam <span class="n" data-c="ilo26">17,8%</span></p></div>
+    <div style="display:flex;flex-direction:column;gap:16px;justify-content:center">
+      <div class="panel"><span class="eb">NHÓM CHỊU ẢNH HƯỞNG NHIỀU HƠN</span><p>Ở Việt Nam: nữ <span class="n cnt" data-c="ilo26">24,1%</span>, nam <span class="n cnt" data-c="ilo26">17,8%</span></p></div>
       <div class="panel"><span class="eb">NĂNG LỰC CÔNG NGHỆ TẬP TRUNG Ở ĐÂU</span><p><span class="n" data-c="unctad25">100 công ty</span> chiếm 40% chi nghiên cứu của doanh nghiệp toàn cầu</p></div>
       <div class="panel dark"><span class="tag" style="width:fit-content">quan điểm nhóm</span><p>Kết quả không do công nghệ tự quyết định. Giáo trình đã cảnh báo <span class="n" data-c="gt" data-l="tr. 147">thất nghiệp và phân hóa thu nhập</span>; Việt Nam cũng đã có <span class="n" data-c="luatai">Luật Trí tuệ nhân tạo</span>.</p></div>
     </div>
@@ -487,39 +933,39 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
   <aside class="notes">Vậy AI tạo việc hay lấy việc? Câu trả lời của nhóm: cả hai, cùng lúc. [Nhấn: cùng lúc.] Diễn đàn Kinh tế Thế giới khảo sát doanh nghiệp toàn cầu: đến 2030 tạo khoảng 170 triệu việc, mất 92 triệu, tăng thêm 78 triệu. Số này gộp nhiều xu hướng, không riêng AI. Nhưng người mất việc và người có việc mới thường không phải một. Ở Việt Nam, tỷ lệ lao động nữ chịu tác động của AI tạo sinh là 24,1%, cao hơn nam 17,8%. [Dừng.] Giáo trình trang 147 đã cảnh báo thất nghiệp và phân hóa thu nhập, buộc các nước điều chỉnh chính sách phân phối và an sinh. Nên theo nhóm em, cùng một công nghệ, kết quả khác nhau tùy cách doanh nghiệp triển khai, tiếng nói của người lao động, đào tạo lại và chính sách Nhà nước. Việc làm không do công nghệ tự quyết, nên phần cuối nhìn sang thể chế, Nghị quyết 57 và sinh viên. Em mời [Người 5].</aside>
 </section>
 
-<section class="s" data-act="3" data-who="5" data-min="1.25" data-title="Nghị quyết 57" data-refs="nq57">
+<section class="s" data-act="3" data-who="5" data-min="1.25" data-title="Nghị quyết 57" data-refs="nq57" data-links="nl1>nc,nl2>nc,nl3>nc,nl4>nc,nl5>nc,nc>nr1!,nc>nr2!,nc>nr3!,nc>nr4!">
   <div class="eb r">CÂU HỎI 3 · NGHỊ QUYẾT 57-NQ/TW, NGÀY 22/12/2024</div>
   <h2 class="r" style="--i:1">Nghị quyết 57 gọi đây là <em><span class="n" data-c="nq57">"đột phá quan trọng hàng đầu"</span></em></h2>
   <div class="nq grow r" style="--i:2">
-    <div class="nqcol"><span class="eb">NHÓM GOM THÀNH NĂM CỤM</span><div class="leaf hi">Thể chế, cần đi trước một bước</div><div class="leaf hi2">Nhân lực</div><div class="leaf">Hạ tầng</div><div class="leaf">Dữ liệu</div><div class="leaf">Công nghệ chiến lược</div></div>
-    <div class="nqc"><b>Khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số</b><span>động lực chính</span></div>
-    <div class="nqcol"><span class="eb">NHẰM</span><div class="leaf">Phát triển nhanh lực lượng sản xuất hiện đại</div><div class="leaf">Hoàn thiện quan hệ sản xuất</div><div class="leaf">Đổi mới phương thức quản trị quốc gia</div><div class="leaf">Ngăn chặn nguy cơ tụt hậu</div></div>
+    <div class="nqcol"><span class="lbl">Nhóm gom thành năm cụm</span><div class="leaf hi" id="nl1">Thể chế, cần đi trước một bước</div><div class="leaf hi2" id="nl2">Nhân lực</div><div class="leaf" id="nl3">Hạ tầng</div><div class="leaf" id="nl4">Dữ liệu</div><div class="leaf" id="nl5">Công nghệ chiến lược</div></div>
+    <div class="gearbox" id="nc"><div class="in"><b style="font-size:24px">Khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số</b><span>động lực chính</span></div></div>
+    <div class="nqcol"><span class="lbl">Nhằm</span><div class="leaf" id="nr1">Phát triển nhanh lực lượng sản xuất hiện đại</div><div class="leaf" id="nr2">Hoàn thiện quan hệ sản xuất</div><div class="leaf" id="nr3">Đổi mới phương thức quản trị quốc gia</div><div class="leaf" id="nr4">Ngăn chặn nguy cơ tụt hậu</div></div>
   </div>
-  <p class="r" style="--i:3"><b>Giống bài học ở câu 1:</b> <span class="n" data-c="nq57">"nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng"</span> thành tựu của thế giới, <span class="n" data-c="nq57">"từng bước tự chủ về công nghệ"</span>.</p>
+  <p class="r" style="--i:3;font-size:23px"><b>Giống bài học ở câu 1:</b> <span class="n" data-c="nq57">"nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng"</span> thành tựu của thế giới, <span class="n" data-c="nq57">"từng bước tự chủ về công nghệ"</span>.</p>
   <aside class="notes">Em là [Người 5]. Đề hỏi Nghị quyết xác định đột phá thế nào. Câu trả lời ở quan điểm đầu tiên: khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là "đột phá quan trọng hàng đầu", là động lực để phát triển lực lượng sản xuất, hoàn thiện quan hệ sản xuất, đổi mới quản trị quốc gia. Đó cũng là ba mặt [Người 1] đã nói ở đầu bài. Nghị quyết có bảy nhóm nhiệm vụ, nhóm em gom phần cốt lõi thành năm cụm bên trái. [Nhìn lớp.] Câu đáng đọc nhất ở dưới cùng: "nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng", "từng bước tự chủ về công nghệ". Mua về chưa xong, phải làm chủ, đúng bài học Đông Á.</aside>
 </section>
 
 <section class="s" data-act="3" data-who="5" data-min="1" data-title="Mục tiêu 2030" data-refs="nq57;nq14;kts;wbrd;nso26ld;nso25;gii26">
   <div class="eb r">CÂU HỎI 3 · CẦN ĐI BAO XA NỮA</div>
   <h2 class="r" style="--i:1">Bốn khoảng cách đến 2030, <em>mỗi cái một thước đo</em></h2>
-  <div class="row c4 grow r" style="--i:2;gap:18px" id="gauges"></div>
+  <div class="row c4 grow r" style="--i:2;gap:20px" id="gauges"></div>
   <p class="sm r" style="--i:3">Mỗi chỉ tiêu có đơn vị, năm và cách đo riêng, không so sánh với nhau và không tính phần trăm hoàn thành. <span class="n" data-c="gii26">Chỉ số Đổi mới sáng tạo toàn cầu 2026:</span> Việt Nam hạng 43/139, nhưng trụ cột vốn con người và nghiên cứu hạng 79.</p>
   <aside class="notes">Còn cách bao xa? Bốn con số này là bốn khoảng cách khác nhau, không dùng chung một thước đo, nên em chỉ nói hai. [Chỉ thẻ chi cho nghiên cứu.] Chi cho nghiên cứu năm 2023 là 0,41% GDP, mục tiêu 2030 là 2%. [Chỉ thẻ lao động.] Lao động có bằng cấp, chứng chỉ là 30,4%, mục tiêu 35 đến 40%. Nhìn bằng cấp thì khoảng cách không lớn. Nhưng có bằng chưa phải là có năng lực nghiên cứu và làm chủ công nghệ. Chỉ số Đổi mới sáng tạo toàn cầu 2026 xếp Việt Nam hạng 43 trên 139, nhưng trụ cột vốn con người và nghiên cứu chỉ hạng 79, thấp nhất trong các trụ cột. Và những con người đó, vài năm nữa, là chính chúng ta trong phòng này.</aside>
 </section>
 
-<section class="s" data-act="3" data-who="5" data-min="1" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;wef25;luatai">
+<section class="s" data-act="3" data-who="5" data-min="1" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;wef25;luatai" data-links="t1>o1!,t2>o2!,t3>o3!">
   <div class="eb r">CÂU HỎI 3 · YÊU CẦU VỚI SINH VIÊN</div>
   <h2 class="r" style="--i:1">Điều đó đòi hỏi gì ở <em>sinh viên chúng ta</em>?</h2>
-  <div class="tri grow r" style="--i:2">
-    <div class="tcol"><span class="eb">NGHỊ QUYẾT 57</span><p><span class="n" data-c="nq57">"nâng cao năng lực số trong xã hội"</span>; phong trào <span class="n" data-c="nq57">"học tập số"</span></p></div>
-    <div class="tcol"><span class="eb">GIÁO TRÌNH</span><p><span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span> được những tác động mới</p></div>
-    <div class="tcol"><span class="eb">DỰ BÁO</span><p><span class="n" data-c="wef25">59 trên 100</span> lao động cần được đào tạo lại hoặc nâng kỹ năng đến 2030</p></div>
+  <div class="stk grow"><div class="tri r" style="--i:2">
+    <div class="tcol panel" id="t1"><span class="eb">NGHỊ QUYẾT 57</span><p><span class="n" data-c="nq57">"nâng cao năng lực số trong xã hội"</span>; phong trào <span class="n" data-c="nq57">"học tập số"</span></p></div>
+    <div class="tcol panel" id="t2"><span class="eb">GIÁO TRÌNH</span><p><span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span> được những tác động mới</p></div>
+    <div class="tcol panel" id="t3"><span class="eb">DỰ BÁO</span><p><span class="n" data-c="wef25">59 trên 100</span> lao động cần được đào tạo lại hoặc nâng kỹ năng đến 2030</p></div>
   </div>
-  <div class="row c3 r" style="--i:3">
-    <div class="panel dark"><span class="tag" style="width:fit-content">nhóm suy ra</span><h3>Học đủ sâu để nhận ra khi AI sai</h3></div>
-    <div class="panel dark"><span class="tag" style="width:fit-content">nhóm suy ra</span><h3>Kiểm chứng trước khi dùng</h3></div>
-    <div class="panel dark"><span class="tag" style="width:fit-content">nhóm suy ra</span><h3>Chịu trách nhiệm trên môi trường số</h3></div>
-  </div>
+  <div class="outs r" style="--i:3">
+    <div class="panel dark" id="o1"><span class="bub s1">A</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Học đủ sâu để nhận ra khi AI sai</h3></div></div>
+    <div class="panel dark" id="o2"><span class="bub s1">B</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Kiểm chứng trước khi dùng</h3></div></div>
+    <div class="panel dark" id="o3"><span class="bub s1">C</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Chịu trách nhiệm trên môi trường số</h3></div></div>
+  </div></div>
   <aside class="notes">Nghị quyết không có danh sách yêu cầu riêng cho sinh viên; sinh viên chỉ được nhắc ở chính sách học bổng, tín dụng, học phí cho người giỏi. Hàng trên là hai căn cứ văn bản và một dự báo: Nghị quyết nói nâng cao năng lực số, học tập số; giáo trình nói "mỗi sinh viên cần ý thức" được tác động mới; Diễn đàn Kinh tế Thế giới dự báo 59 trên 100 lao động cần học lại. Hàng dưới là điều nhóm suy ra, các bạn có thể không đồng ý. [Nhấn ba ý.] Một, học đủ sâu để nhận ra khi AI sai. Hai, kiểm chứng trước khi dùng. Nhóm em làm bài này cũng dùng AI hỗ trợ, và khi kiểm lại đã thấy có số không khớp giữa các nguồn. Ba, chịu trách nhiệm về những gì mình làm ra trên môi trường số. Đây là phần sinh viên tự làm được; đào tạo, doanh nghiệp và chính sách vẫn phải cùng làm.</aside>
 </section>
 
@@ -533,10 +979,21 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 
 <section class="s mid" data-act="4" data-who="5" data-min="1" data-title="Kết luận" data-refs="baldwin;gt|tr. 158, 161–162">
   <div class="eb r">KẾT LUẬN</div>
-  <p class="r" style="--i:1;font-size:28px;color:var(--vai-2);max-width:1300px"><span class="n" data-c="baldwin">"It's somebody using AI that will take your job."</span> Đại ý: người biết dùng AI mới là người lấy việc của bạn. <span style="font-size:20px">(Richard Baldwin, nhà kinh tế; nhóm dịch; một lời nhắc, không phải bằng chứng)</span></p>
-  <h2 class="r" style="--i:2;font-size:84px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
-  <p class="r" style="--i:3;font-size:30px">Vì thích ứng với Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span>.</p>
-  <div class="panel dark r" style="--i:4"><span class="eb">CÂU HỎI CHO LỚP</span><p style="font-size:29px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>
+  <div class="endg">
+    <div>
+      <p class="r" style="--i:1;font-size:25px;color:var(--vai-2)"><span class="n" data-c="baldwin">"It's somebody using AI that will take your job."</span> Đại ý: người biết dùng AI mới là người lấy việc của bạn. <span style="font-size:19px">(Richard Baldwin, nhà kinh tế; nhóm dịch; một lời nhắc, không phải bằng chứng)</span></p>
+      <h2 class="r" style="--i:2;font-size:76px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
+      <p class="r" style="--i:3;font-size:28px">Vì thích ứng với Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span>.</p>
+    </div>
+    <div class="mini r" style="--i:2"><svg viewBox="0 0 860 470" aria-hidden="true">
+      <line class="st-g" x1="20" y1="430" x2="850" y2="430"/>
+      <path class="st-step dr" data-d="2" data-w=".6" d="M70 430 L70 386 L158 386 L158 342 L246 342 L246 298 L334 298 L334 254 L422 254 L422 210 L510 210 L510 166 L598 166 L598 122 L686 122 L686 78 L800 78"/>
+      <path class="st-jump" d="M70 430 C150 40 520 0 780 70" style="opacity:.35"/>
+      <circle class="st-dot" cx="800" cy="78" r="12"/>
+      <text class="st-t b" x="845" y="30" text-anchor="end">Con người</text>
+    </svg></div>
+  </div>
+  <div class="panel dark r" style="--i:4"><span class="eb">CÂU HỎI CHO LỚP</span><p style="font-size:28px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>
   <aside class="notes">Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có câu, đại ý: người lấy việc của bạn là người biết dùng AI. Đó là lời nhắc, không phải bằng chứng. Tóm lại ba ý. Mua được chưa phải dùng được, dùng được chưa phải làm chủ được. AI vừa thay vừa tạo việc, còn ai hưởng lợi thì tùy cách ta tổ chức. Và đột phá quốc gia phải đi qua năng lực của từng tổ chức, từng người. [Dừng trước câu cuối.] Đi tắt được công nghệ, không đi tắt được năng lực. Câu hỏi cho lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? [Nghe một câu trả lời.] Nhóm em cảm ơn thầy và các bạn.</aside>
 </section>
 
@@ -551,6 +1008,7 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 <div id="warp" aria-hidden="true"></div>
 <div id="drawer" role="dialog" aria-label="Chi tiết nguồn"></div>
 </div>
+<script>window.N9_STAGE=6750</script>
 <div id="pv">
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="pvt" style="font:800 40px var(--display)"></b><span class="time" id="pvc"></span></div>
   <div class="nt" id="pvn"></div>
@@ -765,4 +1223,287 @@ if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slide
 else{ch&&(ch.onmessage=e=>{if(e.data.t==="next")next();if(e.data.t==="prev")prev();if(e.data.t==="clock")t0=e.data.t0});
  const h=parseInt(location.hash.slice(1),10);cur=-1;show(h>=1&&h<=slides.length?h-1:0)}
 window.__sim=sim;
+</script>
+
+<script>
+/*!
+ * GSAP 3.13.0
+ * https://gsap.com
+ * 
+ * @license Copyright 2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license.
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t=t||self).window=t.window||{})}(this,function(e){"use strict";function _inheritsLoose(t,e){t.prototype=Object.create(e.prototype),(t.prototype.constructor=t).__proto__=e}function _assertThisInitialized(t){if(void 0===t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return t}function r(t){return"string"==typeof t}function s(t){return"function"==typeof t}function t(t){return"number"==typeof t}function u(t){return void 0===t}function v(t){return"object"==typeof t}function w(t){return!1!==t}function x(){return"undefined"!=typeof window}function y(t){return s(t)||r(t)}function P(t){return(i=yt(t,ot))&&ze}function Q(t,e){return console.warn("Invalid property",t,"set to",e,"Missing plugin? gsap.registerPlugin()")}function R(t,e){return!e&&console.warn(t)}function S(t,e){return t&&(ot[t]=e)&&i&&(i[t]=e)||ot}function T(){return 0}function ea(t){var e,r,i=t[0];if(v(i)||s(i)||(t=[t]),!(e=(i._gsap||{}).harness)){for(r=gt.length;r--&&!gt[r].targetTest(i););e=gt[r]}for(r=t.length;r--;)t[r]&&(t[r]._gsap||(t[r]._gsap=new Zt(t[r],e)))||t.splice(r,1);return t}function fa(t){return t._gsap||ea(Ot(t))[0]._gsap}function ga(t,e,r){return(r=t[e])&&s(r)?t[e]():u(r)&&t.getAttribute&&t.getAttribute(e)||r}function ha(t,e){return(t=t.split(",")).forEach(e)||t}function ia(t){return Math.round(1e5*t)/1e5||0}function ja(t){return Math.round(1e7*t)/1e7||0}function ka(t,e){var r=e.charAt(0),i=parseFloat(e.substr(2));return t=parseFloat(t),"+"===r?t+i:"-"===r?t-i:"*"===r?t*i:t/i}function la(t,e){for(var r=e.length,i=0;t.indexOf(e[i])<0&&++i<r;);return i<r}function ma(){var t,e,r=dt.length,i=dt.slice(0);for(ct={},t=dt.length=0;t<r;t++)(e=i[t])&&e._lazy&&(e.render(e._lazy[0],e._lazy[1],!0)._lazy=0)}function na(t){return!!(t._initted||t._startAt||t.add)}function oa(t,e,r,i){dt.length&&!L&&ma(),t.render(e,r,i||!!(L&&e<0&&na(t))),dt.length&&!L&&ma()}function pa(t){var e=parseFloat(t);return(e||0===e)&&(t+"").match(at).length<2?e:r(t)?t.trim():t}function qa(t){return t}function ra(t,e){for(var r in e)r in t||(t[r]=e[r]);return t}function ua(t,e){for(var r in e)"__proto__"!==r&&"constructor"!==r&&"prototype"!==r&&(t[r]=v(e[r])?ua(t[r]||(t[r]={}),e[r]):e[r]);return t}function va(t,e){var r,i={};for(r in t)r in e||(i[r]=t[r]);return i}function wa(t){var e=t.parent||I,r=t.keyframes?function _setKeyframeDefaults(i){return function(t,e){for(var r in e)r in t||"duration"===r&&i||"ease"===r||(t[r]=e[r])}}($(t.keyframes)):ra;if(w(t.inherit))for(;e;)r(t,e.vars.defaults),e=e.parent||e._dp;return t}function ya(t,e,r,i,n){void 0===r&&(r="_first"),void 0===i&&(i="_last");var a,s=t[i];if(n)for(a=e[n];s&&s[n]>a;)s=s._prev;return s?(e._next=s._next,s._next=e):(e._next=t[r],t[r]=e),e._next?e._next._prev=e:t[i]=e,e._prev=s,e.parent=e._dp=t,e}function za(t,e,r,i){void 0===r&&(r="_first"),void 0===i&&(i="_last");var n=e._prev,a=e._next;n?n._next=a:t[r]===e&&(t[r]=a),a?a._prev=n:t[i]===e&&(t[i]=n),e._next=e._prev=e.parent=null}function Aa(t,e){t.parent&&(!e||t.parent.autoRemoveChildren)&&t.parent.remove&&t.parent.remove(t),t._act=0}function Ba(t,e){if(t&&(!e||e._end>t._dur||e._start<0))for(var r=t;r;)r._dirty=1,r=r.parent;return t}function Da(t,e,r,i){return t._startAt&&(L?t._startAt.revert(ht):t.vars.immediateRender&&!t.vars.autoRevert||t._startAt.render(e,!0,i))}function Fa(t){return t._repeat?Tt(t._tTime,t=t.duration()+t._rDelay)*t:0}function Ha(t,e){return(t-e._start)*e._ts+(0<=e._ts?0:e._dirty?e.totalDuration():e._tDur)}function Ia(t){return t._end=ja(t._start+(t._tDur/Math.abs(t._ts||t._rts||U)||0))}function Ja(t,e){var r=t._dp;return r&&r.smoothChildTiming&&t._ts&&(t._start=ja(r._time-(0<t._ts?e/t._ts:((t._dirty?t.totalDuration():t._tDur)-e)/-t._ts)),Ia(t),r._dirty||Ba(r,t)),t}function Ka(t,e){var r;if((e._time||!e._dur&&e._initted||e._start<t._time&&(e._dur||!e.add))&&(r=Ha(t.rawTime(),e),(!e._dur||Mt(0,e.totalDuration(),r)-e._tTime>U)&&e.render(r,!0)),Ba(t,e)._dp&&t._initted&&t._time>=t._dur&&t._ts){if(t._dur<t.duration())for(r=t;r._dp;)0<=r.rawTime()&&r.totalTime(r._tTime),r=r._dp;t._zTime=-U}}function La(e,r,i,n){return r.parent&&Aa(r),r._start=ja((t(i)?i:i||e!==I?xt(e,i,r):e._time)+r._delay),r._end=ja(r._start+(r.totalDuration()/Math.abs(r.timeScale())||0)),ya(e,r,"_first","_last",e._sort?"_start":0),bt(r)||(e._recent=r),n||Ka(e,r),e._ts<0&&Ja(e,e._tTime),e}function Ma(t,e){return(ot.ScrollTrigger||Q("scrollTrigger",e))&&ot.ScrollTrigger.create(e,t)}function Na(t,e,r,i,n){return Wt(t,e,n),t._initted?!r&&t._pt&&!L&&(t._dur&&!1!==t.vars.lazy||!t._dur&&t.vars.lazy)&&f!==Rt.frame?(dt.push(t),t._lazy=[n,i],1):void 0:1}function Sa(t,e,r,i){var n=t._repeat,a=ja(e)||0,s=t._tTime/t._tDur;return s&&!i&&(t._time*=a/t._dur),t._dur=a,t._tDur=n?n<0?1e10:ja(a*(n+1)+t._rDelay*n):a,0<s&&!i&&Ja(t,t._tTime=t._tDur*s),t.parent&&Ia(t),r||Ba(t.parent,t),t}function Ta(t){return t instanceof Qt?Ba(t):Sa(t,t._dur)}function Wa(e,r,i){var n,a,s=t(r[1]),o=(s?2:1)+(e<2?0:1),u=r[o];if(s&&(u.duration=r[1]),u.parent=i,e){for(n=u,a=i;a&&!("immediateRender"in n);)n=a.vars.defaults||{},a=w(a.vars.inherit)&&a.parent;u.immediateRender=w(n.immediateRender),e<2?u.runBackwards=1:u.startAt=r[o-1]}return new Jt(r[0],u,r[1+o])}function Xa(t,e){return t||0===t?e(t):e}function Za(t,e){return r(t)&&(e=st.exec(t))?e[1]:""}function ab(t,e){return t&&v(t)&&"length"in t&&(!e&&!t.length||t.length-1 in t&&v(t[0]))&&!t.nodeType&&t!==h}function db(r){return r=Ot(r)[0]||R("Invalid scope")||{},function(t){var e=r.current||r.nativeElement||r;return Ot(t,e.querySelectorAll?e:e===r?R("Invalid scope")||a.createElement("div"):r)}}function eb(t){return t.sort(function(){return.5-Math.random()})}function fb(t){if(s(t))return t;var p=v(t)?t:{each:t},_=Yt(p.ease),m=p.from||0,g=parseFloat(p.base)||0,y={},e=0<m&&m<1,T=isNaN(m)||e,b=p.axis,w=m,x=m;return r(m)?w=x={center:.5,edges:.5,end:1}[m]||0:!e&&T&&(w=m[0],x=m[1]),function(t,e,r){var i,n,a,s,o,u,h,l,f,d=(r||p).length,c=y[d];if(!c){if(!(f="auto"===p.grid?0:(p.grid||[1,N])[1])){for(h=-N;h<(h=r[f++].getBoundingClientRect().left)&&f<d;);f<d&&f--}for(c=y[d]=[],i=T?Math.min(f,d)*w-.5:m%f,n=f===N?0:T?d*x/f-.5:m/f|0,l=N,u=h=0;u<d;u++)a=u%f-i,s=n-(u/f|0),c[u]=o=b?Math.abs("y"===b?s:a):G(a*a+s*s),h<o&&(h=o),o<l&&(l=o);"random"===m&&eb(c),c.max=h-l,c.min=l,c.v=d=(parseFloat(p.amount)||parseFloat(p.each)*(d<f?d-1:b?"y"===b?d/f:f:Math.max(f,d/f))||0)*("edges"===m?-1:1),c.b=d<0?g-d:g,c.u=Za(p.amount||p.each)||0,_=_&&d<0?jt(_):_}return d=(c[t]-c.min)/c.max||0,ja(c.b+(_?_(d):d)*c.v)+c.u}}function gb(i){var n=Math.pow(10,((i+"").split(".")[1]||"").length);return function(e){var r=ja(Math.round(parseFloat(e)/i)*i*n);return(r-r%1)/n+(t(e)?0:Za(e))}}function hb(h,e){var l,f,r=$(h);return!r&&v(h)&&(l=r=h.radius||N,h.values?(h=Ot(h.values),(f=!t(h[0]))&&(l*=l)):h=gb(h.increment)),Xa(e,r?s(h)?function(t){return f=h(t),Math.abs(f-t)<=l?f:t}:function(e){for(var r,i,n=parseFloat(f?e.x:e),a=parseFloat(f?e.y:0),s=N,o=0,u=h.length;u--;)(r=f?(r=h[u].x-n)*r+(i=h[u].y-a)*i:Math.abs(h[u]-n))<s&&(s=r,o=u);return o=!l||s<=l?h[o]:e,f||o===e||t(e)?o:o+Za(e)}:gb(h))}function ib(t,e,r,i){return Xa($(t)?!e:!0===r?!!(r=0):!i,function(){return $(t)?t[~~(Math.random()*t.length)]:(r=r||1e-5)&&(i=r<1?Math.pow(10,(r+"").length-2):1)&&Math.floor(Math.round((t-r/2+Math.random()*(e-t+.99*r))/r)*r*i)/i})}function mb(e,r,t){return Xa(t,function(t){return e[~~r(t)]})}function pb(t){for(var e,r,i,n,a=0,s="";~(e=t.indexOf("random(",a));)i=t.indexOf(")",e),n="["===t.charAt(e+7),r=t.substr(e+7,i-e-7).match(n?at:tt),s+=t.substr(a,e-a)+ib(n?r:+r[0],n?0:+r[1],+r[2]||1e-5),a=i+1;return s+t.substr(a,t.length-a)}function sb(t,e,r){var i,n,a,s=t.labels,o=N;for(i in s)(n=s[i]-e)<0==!!r&&n&&o>(n=Math.abs(n))&&(a=i,o=n);return a}function ub(t){return Aa(t),t.scrollTrigger&&t.scrollTrigger.kill(!!L),t.progress()<1&&Pt(t,"onInterrupt"),t}function xb(t){if(t)if(t=!t.name&&t.default||t,x()||t.headless){var e=t.name,r=s(t),i=e&&!r&&t.init?function(){this._props=[]}:t,n={init:T,render:ue,add:Vt,kill:de,modifier:he,rawVars:0},a={targetTest:0,get:0,getSetter:ie,aliases:{},register:0};if(Ft(),t!==i){if(pt[e])return;ra(i,ra(va(t,n),a)),yt(i.prototype,yt(n,va(t,a))),pt[i.prop=e]=i,t.targetTest&&(gt.push(i),ft[e]=1),e=("css"===e?"CSS":e.charAt(0).toUpperCase()+e.substr(1))+"Plugin"}S(e,i),t.register&&t.register(ze,i,ge)}else Ct.push(t)}function Ab(t,e,r){return(6*(t+=t<0?1:1<t?-1:0)<1?e+(r-e)*t*6:t<.5?r:3*t<2?e+(r-e)*(2/3-t)*6:e)*St+.5|0}function Bb(e,r,i){var n,a,s,o,u,h,l,f,d,c,p=e?t(e)?[e>>16,e>>8&St,e&St]:0:Dt.black;if(!p){if(","===e.substr(-1)&&(e=e.substr(0,e.length-1)),Dt[e])p=Dt[e];else if("#"===e.charAt(0)){if(e.length<6&&(e="#"+(n=e.charAt(1))+n+(a=e.charAt(2))+a+(s=e.charAt(3))+s+(5===e.length?e.charAt(4)+e.charAt(4):"")),9===e.length)return[(p=parseInt(e.substr(1,6),16))>>16,p>>8&St,p&St,parseInt(e.substr(7),16)/255];p=[(e=parseInt(e.substr(1),16))>>16,e>>8&St,e&St]}else if("hsl"===e.substr(0,3))if(p=c=e.match(tt),r){if(~e.indexOf("="))return p=e.match(et),i&&p.length<4&&(p[3]=1),p}else o=+p[0]%360/360,u=p[1]/100,n=2*(h=p[2]/100)-(a=h<=.5?h*(u+1):h+u-h*u),3<p.length&&(p[3]*=1),p[0]=Ab(o+1/3,n,a),p[1]=Ab(o,n,a),p[2]=Ab(o-1/3,n,a);else p=e.match(tt)||Dt.transparent;p=p.map(Number)}return r&&!c&&(n=p[0]/St,a=p[1]/St,s=p[2]/St,h=((l=Math.max(n,a,s))+(f=Math.min(n,a,s)))/2,l===f?o=u=0:(d=l-f,u=.5<h?d/(2-l-f):d/(l+f),o=l===n?(a-s)/d+(a<s?6:0):l===a?(s-n)/d+2:(n-a)/d+4,o*=60),p[0]=~~(o+.5),p[1]=~~(100*u+.5),p[2]=~~(100*h+.5)),i&&p.length<4&&(p[3]=1),p}function Cb(t){var r=[],i=[],n=-1;return t.split(zt).forEach(function(t){var e=t.match(rt)||[];r.push.apply(r,e),i.push(n+=e.length+1)}),r.c=i,r}function Db(t,e,r){var i,n,a,s,o="",u=(t+o).match(zt),h=e?"hsla(":"rgba(",l=0;if(!u)return t;if(u=u.map(function(t){return(t=Bb(t,e,1))&&h+(e?t[0]+","+t[1]+"%,"+t[2]+"%,"+t[3]:t.join(","))+")"}),r&&(a=Cb(t),(i=r.c).join(o)!==a.c.join(o)))for(s=(n=t.replace(zt,"1").split(rt)).length-1;l<s;l++)o+=n[l]+(~i.indexOf(l)?u.shift()||h+"0,0,0,0)":(a.length?a:u.length?u:r).shift());if(!n)for(s=(n=t.split(zt)).length-1;l<s;l++)o+=n[l]+u[l];return o+n[s]}function Gb(t){var e,r=t.join(" ");if(zt.lastIndex=0,zt.test(r))return e=Et.test(r),t[1]=Db(t[1],e),t[0]=Db(t[0],e,Cb(t[1])),!0}function Pb(t){var e=(t+"").split("("),r=Lt[e[0]];return r&&1<e.length&&r.config?r.config.apply(null,~t.indexOf("{")?[function _parseObjectInString(t){for(var e,r,i,n={},a=t.substr(1,t.length-3).split(":"),s=a[0],o=1,u=a.length;o<u;o++)r=a[o],e=o!==u-1?r.lastIndexOf(","):r.length,i=r.substr(0,e),n[s]=isNaN(i)?i.replace(Bt,"").trim():+i,s=r.substr(e+1).trim();return n}(e[1])]:function _valueInParentheses(t){var e=t.indexOf("(")+1,r=t.indexOf(")"),i=t.indexOf("(",e);return t.substring(e,~i&&i<r?t.indexOf(")",r+1):r)}(t).split(",").map(pa)):Lt._CE&&It.test(t)?Lt._CE("",t):r}function Rb(t,e){for(var r,i=t._first;i;)i instanceof Qt?Rb(i,e):!i.vars.yoyoEase||i._yoyo&&i._repeat||i._yoyo===e||(i.timeline?Rb(i.timeline,e):(r=i._ease,i._ease=i._yEase,i._yEase=r,i._yoyo=e)),i=i._next}function Tb(t,e,r,i){void 0===r&&(r=function easeOut(t){return 1-e(1-t)}),void 0===i&&(i=function easeInOut(t){return t<.5?e(2*t)/2:1-e(2*(1-t))/2});var n,a={easeIn:e,easeOut:r,easeInOut:i};return ha(t,function(t){for(var e in Lt[t]=ot[t]=a,Lt[n=t.toLowerCase()]=r,a)Lt[n+("easeIn"===e?".in":"easeOut"===e?".out":".inOut")]=Lt[t+"."+e]=a[e]}),a}function Ub(e){return function(t){return t<.5?(1-e(1-2*t))/2:.5+e(2*(t-.5))/2}}function Vb(r,t,e){function Lm(t){return 1===t?1:i*Math.pow(2,-10*t)*K((t-a)*n)+1}var i=1<=t?t:1,n=(e||(r?.3:.45))/(t<1?t:1),a=n/q*(Math.asin(1/i)||0),s="out"===r?Lm:"in"===r?function(t){return 1-Lm(1-t)}:Ub(Lm);return n=q/n,s.config=function(t,e){return Vb(r,t,e)},s}function Wb(e,r){function Tm(t){return t?--t*t*((r+1)*t+r)+1:0}void 0===r&&(r=1.70158);var t="out"===e?Tm:"in"===e?function(t){return 1-Tm(1-t)}:Ub(Tm);return t.config=function(t){return Wb(e,t)},t}var F,L,l,I,h,n,a,i,o,f,d,c,p,_,m,g,b,M,k,O,A,C,D,z,E,B,j,Y,X={autoSleep:120,force3D:"auto",nullTargetWarn:1,units:{lineHeight:""}},Z={duration:.5,overwrite:!1,delay:0},N=1e8,U=1/N,q=2*Math.PI,V=q/4,W=0,G=Math.sqrt,H=Math.cos,K=Math.sin,J="function"==typeof ArrayBuffer&&ArrayBuffer.isView||function(){},$=Array.isArray,tt=/(?:-?\.?\d|\.)+/gi,et=/[-+=.]*\d+[.e\-+]*\d*[e\-+]*\d*/g,rt=/[-+=.]*\d+[.e-]*\d*[a-z%]*/g,it=/[-+=.]*\d+\.?\d*(?:e-|e\+)?\d*/gi,nt=/[+-]=-?[.\d]+/,at=/[^,'"\[\]\s]+/gi,st=/^[+\-=e\s\d]*\d+[.\d]*([a-z]*|%)\s*$/i,ot={},ut={suppressEvents:!0,isStart:!0,kill:!1},ht={suppressEvents:!0,kill:!1},lt={suppressEvents:!0},ft={},dt=[],ct={},pt={},_t={},mt=30,gt=[],vt="",yt=function _merge(t,e){for(var r in e)t[r]=e[r];return t},Tt=function _animationCycle(t,e){var r=Math.floor(t=ja(t/e));return t&&r===t?r-1:r},bt=function _isFromOrFromStart(t){var e=t.data;return"isFromStart"===e||"isStart"===e},wt={_start:0,endTime:T,totalDuration:T},xt=function _parsePosition(t,e,i){var n,a,s,o=t.labels,u=t._recent||wt,h=t.duration()>=N?u.endTime(!1):t._dur;return r(e)&&(isNaN(e)||e in o)?(a=e.charAt(0),s="%"===e.substr(-1),n=e.indexOf("="),"<"===a||">"===a?(0<=n&&(e=e.replace(/=/,"")),("<"===a?u._start:u.endTime(0<=u._repeat))+(parseFloat(e.substr(1))||0)*(s?(n<0?u:i).totalDuration()/100:1)):n<0?(e in o||(o[e]=h),o[e]):(a=parseFloat(e.charAt(n-1)+e.substr(n+1)),s&&i&&(a=a/100*($(i)?i[0]:i).totalDuration()),1<n?_parsePosition(t,e.substr(0,n-1),i)+a:h+a)):null==e?h:+e},Mt=function _clamp(t,e,r){return r<t?t:e<r?e:r},kt=[].slice,Ot=function toArray(t,e,i){return l&&!e&&l.selector?l.selector(t):!r(t)||i||!n&&Ft()?$(t)?function _flatten(t,e,i){return void 0===i&&(i=[]),t.forEach(function(t){return r(t)&&!e||ab(t,1)?i.push.apply(i,Ot(t)):i.push(t)})||i}(t,i):ab(t)?kt.call(t,0):t?[t]:[]:kt.call((e||a).querySelectorAll(t),0)},At=function mapRange(e,t,r,i,n){var a=t-e,s=i-r;return Xa(n,function(t){return r+((t-e)/a*s||0)})},Pt=function _callback(t,e,r){var i,n,a,s=t.vars,o=s[e],u=l,h=t._ctx;if(o)return i=s[e+"Params"],n=s.callbackScope||t,r&&dt.length&&ma(),h&&(l=h),a=i?o.apply(n,i):o.call(n),l=u,a},Ct=[],St=255,Dt={aqua:[0,St,St],lime:[0,St,0],silver:[192,192,192],black:[0,0,0],maroon:[128,0,0],teal:[0,128,128],blue:[0,0,St],navy:[0,0,128],white:[St,St,St],olive:[128,128,0],yellow:[St,St,0],orange:[St,165,0],gray:[128,128,128],purple:[128,0,128],green:[0,128,0],red:[St,0,0],pink:[St,192,203],cyan:[0,St,St],transparent:[St,St,St,0]},zt=function(){var t,e="(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3,4}){1,2}\\b";for(t in Dt)e+="|"+t+"\\b";return new RegExp(e+")","gi")}(),Et=/hsl[a]?\(/,Rt=(k=Date.now,O=500,A=33,C=k(),D=C,E=z=1e3/240,g={time:0,frame:0,tick:function tick(){Al(!0)},deltaRatio:function deltaRatio(t){return b/(1e3/(t||60))},wake:function wake(){o&&(!n&&x()&&(h=n=window,a=h.document||{},ot.gsap=ze,(h.gsapVersions||(h.gsapVersions=[])).push(ze.version),P(i||h.GreenSockGlobals||!h.gsap&&h||{}),Ct.forEach(xb)),m="undefined"!=typeof requestAnimationFrame&&requestAnimationFrame,p&&g.sleep(),_=m||function(t){return setTimeout(t,E-1e3*g.time+1|0)},c=1,Al(2))},sleep:function sleep(){(m?cancelAnimationFrame:clearTimeout)(p),c=0,_=T},lagSmoothing:function lagSmoothing(t,e){O=t||1/0,A=Math.min(e||33,O)},fps:function fps(t){z=1e3/(t||240),E=1e3*g.time+z},add:function add(n,t,e){var a=t?function(t,e,r,i){n(t,e,r,i),g.remove(a)}:n;return g.remove(n),B[e?"unshift":"push"](a),Ft(),a},remove:function remove(t,e){~(e=B.indexOf(t))&&B.splice(e,1)&&e<=M&&M--},_listeners:B=[]}),Ft=function _wake(){return!c&&Rt.wake()},Lt={},It=/^[\d.\-M][\d.\-,\s]/,Bt=/["']/g,jt=function _invertEase(e){return function(t){return 1-e(1-t)}},Yt=function _parseEase(t,e){return t&&(s(t)?t:Lt[t]||Pb(t))||e};function Al(t){var e,r,i,n,a=k()-D,s=!0===t;if((O<a||a<0)&&(C+=a-A),(0<(e=(i=(D+=a)-C)-E)||s)&&(n=++g.frame,b=i-1e3*g.time,g.time=i/=1e3,E+=e+(z<=e?4:z-e),r=1),s||(p=_(Al)),r)for(M=0;M<B.length;M++)B[M](i,b,n,t)}function jn(t){return t<Y?j*t*t:t<.7272727272727273?j*Math.pow(t-1.5/2.75,2)+.75:t<.9090909090909092?j*(t-=2.25/2.75)*t+.9375:j*Math.pow(t-2.625/2.75,2)+.984375}ha("Linear,Quad,Cubic,Quart,Quint,Strong",function(t,e){var r=e<5?e+1:e;Tb(t+",Power"+(r-1),e?function(t){return Math.pow(t,r)}:function(t){return t},function(t){return 1-Math.pow(1-t,r)},function(t){return t<.5?Math.pow(2*t,r)/2:1-Math.pow(2*(1-t),r)/2})}),Lt.Linear.easeNone=Lt.none=Lt.Linear.easeIn,Tb("Elastic",Vb("in"),Vb("out"),Vb()),j=7.5625,Y=1/2.75,Tb("Bounce",function(t){return 1-jn(1-t)},jn),Tb("Expo",function(t){return Math.pow(2,10*(t-1))*t+t*t*t*t*t*t*(1-t)}),Tb("Circ",function(t){return-(G(1-t*t)-1)}),Tb("Sine",function(t){return 1===t?1:1-H(t*V)}),Tb("Back",Wb("in"),Wb("out"),Wb()),Lt.SteppedEase=Lt.steps=ot.SteppedEase={config:function config(t,e){void 0===t&&(t=1);var r=1/t,i=t+(e?0:1),n=e?1:0;return function(t){return((i*Mt(0,.99999999,t)|0)+n)*r}}},Z.ease=Lt["quad.out"],ha("onComplete,onUpdate,onStart,onRepeat,onReverseComplete,onInterrupt",function(t){return vt+=t+","+t+"Params,"});var Xt,Zt=function GSCache(t,e){this.id=W++,(t._gsap=this).target=t,this.harness=e,this.get=e?e.get:ga,this.set=e?e.getSetter:ie},Nt=((Xt=Animation.prototype).delay=function delay(t){return t||0===t?(this.parent&&this.parent.smoothChildTiming&&this.startTime(this._start+t-this._delay),this._delay=t,this):this._delay},Xt.duration=function duration(t){return arguments.length?this.totalDuration(0<this._repeat?t+(t+this._rDelay)*this._repeat:t):this.totalDuration()&&this._dur},Xt.totalDuration=function totalDuration(t){return arguments.length?(this._dirty=0,Sa(this,this._repeat<0?t:(t-this._repeat*this._rDelay)/(this._repeat+1))):this._tDur},Xt.totalTime=function totalTime(t,e){if(Ft(),!arguments.length)return this._tTime;var r=this._dp;if(r&&r.smoothChildTiming&&this._ts){for(Ja(this,t),!r._dp||r.parent||Ka(r,this);r&&r.parent;)r.parent._time!==r._start+(0<=r._ts?r._tTime/r._ts:(r.totalDuration()-r._tTime)/-r._ts)&&r.totalTime(r._tTime,!0),r=r.parent;!this.parent&&this._dp.autoRemoveChildren&&(0<this._ts&&t<this._tDur||this._ts<0&&0<t||!this._tDur&&!t)&&La(this._dp,this,this._start-this._delay)}return(this._tTime!==t||!this._dur&&!e||this._initted&&Math.abs(this._zTime)===U||!t&&!this._initted&&(this.add||this._ptLookup))&&(this._ts||(this._pTime=t),oa(this,t,e)),this},Xt.time=function time(t,e){return arguments.length?this.totalTime(Math.min(this.totalDuration(),t+Fa(this))%(this._dur+this._rDelay)||(t?this._dur:0),e):this._time},Xt.totalProgress=function totalProgress(t,e){return arguments.length?this.totalTime(this.totalDuration()*t,e):this.totalDuration()?Math.min(1,this._tTime/this._tDur):0<=this.rawTime()&&this._initted?1:0},Xt.progress=function progress(t,e){return arguments.length?this.totalTime(this.duration()*(!this._yoyo||1&this.iteration()?t:1-t)+Fa(this),e):this.duration()?Math.min(1,this._time/this._dur):0<this.rawTime()?1:0},Xt.iteration=function iteration(t,e){var r=this.duration()+this._rDelay;return arguments.length?this.totalTime(this._time+(t-1)*r,e):this._repeat?Tt(this._tTime,r)+1:1},Xt.timeScale=function timeScale(t,e){if(!arguments.length)return this._rts===-U?0:this._rts;if(this._rts===t)return this;var r=this.parent&&this._ts?Ha(this.parent._time,this):this._tTime;return this._rts=+t||0,this._ts=this._ps||t===-U?0:this._rts,this.totalTime(Mt(-Math.abs(this._delay),this.totalDuration(),r),!1!==e),Ia(this),function _recacheAncestors(t){for(var e=t.parent;e&&e.parent;)e._dirty=1,e.totalDuration(),e=e.parent;return t}(this)},Xt.paused=function paused(t){return arguments.length?(this._ps!==t&&((this._ps=t)?(this._pTime=this._tTime||Math.max(-this._delay,this.rawTime()),this._ts=this._act=0):(Ft(),this._ts=this._rts,this.totalTime(this.parent&&!this.parent.smoothChildTiming?this.rawTime():this._tTime||this._pTime,1===this.progress()&&Math.abs(this._zTime)!==U&&(this._tTime-=U)))),this):this._ps},Xt.startTime=function startTime(t){if(arguments.length){this._start=t;var e=this.parent||this._dp;return!e||!e._sort&&this.parent||La(e,this,t-this._delay),this}return this._start},Xt.endTime=function endTime(t){return this._start+(w(t)?this.totalDuration():this.duration())/Math.abs(this._ts||1)},Xt.rawTime=function rawTime(t){var e=this.parent||this._dp;return e?t&&(!this._ts||this._repeat&&this._time&&this.totalProgress()<1)?this._tTime%(this._dur+this._rDelay):this._ts?Ha(e.rawTime(t),this):this._tTime:this._tTime},Xt.revert=function revert(t){void 0===t&&(t=lt);var e=L;return L=t,na(this)&&(this.timeline&&this.timeline.revert(t),this.totalTime(-.01,t.suppressEvents)),"nested"!==this.data&&!1!==t.kill&&this.kill(),L=e,this},Xt.globalTime=function globalTime(t){for(var e=this,r=arguments.length?t:e.rawTime();e;)r=e._start+r/(Math.abs(e._ts)||1),e=e._dp;return!this.parent&&this._sat?this._sat.globalTime(t):r},Xt.repeat=function repeat(t){return arguments.length?(this._repeat=t===1/0?-2:t,Ta(this)):-2===this._repeat?1/0:this._repeat},Xt.repeatDelay=function repeatDelay(t){if(arguments.length){var e=this._time;return this._rDelay=t,Ta(this),e?this.time(e):this}return this._rDelay},Xt.yoyo=function yoyo(t){return arguments.length?(this._yoyo=t,this):this._yoyo},Xt.seek=function seek(t,e){return this.totalTime(xt(this,t),w(e))},Xt.restart=function restart(t,e){return this.play().totalTime(t?-this._delay:0,w(e)),this._dur||(this._zTime=-U),this},Xt.play=function play(t,e){return null!=t&&this.seek(t,e),this.reversed(!1).paused(!1)},Xt.reverse=function reverse(t,e){return null!=t&&this.seek(t||this.totalDuration(),e),this.reversed(!0).paused(!1)},Xt.pause=function pause(t,e){return null!=t&&this.seek(t,e),this.paused(!0)},Xt.resume=function resume(){return this.paused(!1)},Xt.reversed=function reversed(t){return arguments.length?(!!t!==this.reversed()&&this.timeScale(-this._rts||(t?-U:0)),this):this._rts<0},Xt.invalidate=function invalidate(){return this._initted=this._act=0,this._zTime=-U,this},Xt.isActive=function isActive(){var t,e=this.parent||this._dp,r=this._start;return!(e&&!(this._ts&&this._initted&&e.isActive()&&(t=e.rawTime(!0))>=r&&t<this.endTime(!0)-U))},Xt.eventCallback=function eventCallback(t,e,r){var i=this.vars;return 1<arguments.length?(e?(i[t]=e,r&&(i[t+"Params"]=r),"onUpdate"===t&&(this._onUpdate=e)):delete i[t],this):i[t]},Xt.then=function then(t){var i=this;return new Promise(function(e){function Eo(){var t=i.then;i.then=null,s(r)&&(r=r(i))&&(r.then||r===i)&&(i.then=t),e(r),i.then=t}var r=s(t)?t:qa;i._initted&&1===i.totalProgress()&&0<=i._ts||!i._tTime&&i._ts<0?Eo():i._prom=Eo})},Xt.kill=function kill(){ub(this)},Animation);function Animation(t){this.vars=t,this._delay=+t.delay||0,(this._repeat=t.repeat===1/0?-2:t.repeat||0)&&(this._rDelay=t.repeatDelay||0,this._yoyo=!!t.yoyo||!!t.yoyoEase),this._ts=1,Sa(this,+t.duration,1,1),this.data=t.data,l&&(this._ctx=l).data.push(this),c||Rt.wake()}ra(Nt.prototype,{_time:0,_start:0,_end:0,_tTime:0,_tDur:0,_dirty:0,_repeat:0,_yoyo:!1,parent:null,_initted:!1,_rDelay:0,_ts:1,_dp:0,ratio:0,_zTime:-U,_prom:0,_ps:!1,_rts:1});var Qt=function(i){function Timeline(t,e){var r;return void 0===t&&(t={}),(r=i.call(this,t)||this).labels={},r.smoothChildTiming=!!t.smoothChildTiming,r.autoRemoveChildren=!!t.autoRemoveChildren,r._sort=w(t.sortChildren),I&&La(t.parent||I,_assertThisInitialized(r),e),t.reversed&&r.reverse(),t.paused&&r.paused(!0),t.scrollTrigger&&Ma(_assertThisInitialized(r),t.scrollTrigger),r}_inheritsLoose(Timeline,i);var e=Timeline.prototype;return e.to=function to(t,e,r){return Wa(0,arguments,this),this},e.from=function from(t,e,r){return Wa(1,arguments,this),this},e.fromTo=function fromTo(t,e,r,i){return Wa(2,arguments,this),this},e.set=function set(t,e,r){return e.duration=0,e.parent=this,wa(e).repeatDelay||(e.repeat=0),e.immediateRender=!!e.immediateRender,new Jt(t,e,xt(this,r),1),this},e.call=function call(t,e,r){return La(this,Jt.delayedCall(0,t,e),r)},e.staggerTo=function staggerTo(t,e,r,i,n,a,s){return r.duration=e,r.stagger=r.stagger||i,r.onComplete=a,r.onCompleteParams=s,r.parent=this,new Jt(t,r,xt(this,n)),this},e.staggerFrom=function staggerFrom(t,e,r,i,n,a,s){return r.runBackwards=1,wa(r).immediateRender=w(r.immediateRender),this.staggerTo(t,e,r,i,n,a,s)},e.staggerFromTo=function staggerFromTo(t,e,r,i,n,a,s,o){return i.startAt=r,wa(i).immediateRender=w(i.immediateRender),this.staggerTo(t,e,i,n,a,s,o)},e.render=function render(t,e,r){var i,n,a,s,o,u,h,l,f,d,c,p,_=this._time,m=this._dirty?this.totalDuration():this._tDur,g=this._dur,v=t<=0?0:ja(t),y=this._zTime<0!=t<0&&(this._initted||!g);if(this!==I&&m<v&&0<=t&&(v=m),v!==this._tTime||r||y){if(_!==this._time&&g&&(v+=this._time-_,t+=this._time-_),i=v,f=this._start,u=!(l=this._ts),y&&(g||(_=this._zTime),!t&&e||(this._zTime=t)),this._repeat){if(c=this._yoyo,o=g+this._rDelay,this._repeat<-1&&t<0)return this.totalTime(100*o+t,e,r);if(i=ja(v%o),v===m?(s=this._repeat,i=g):((s=~~(d=ja(v/o)))&&s===d&&(i=g,s--),g<i&&(i=g)),d=Tt(this._tTime,o),!_&&this._tTime&&d!==s&&this._tTime-d*o-this._dur<=0&&(d=s),c&&1&s&&(i=g-i,p=1),s!==d&&!this._lock){var T=c&&1&d,b=T===(c&&1&s);if(s<d&&(T=!T),_=T?0:v%g?g:v,this._lock=1,this.render(_||(p?0:ja(s*o)),e,!g)._lock=0,this._tTime=v,!e&&this.parent&&Pt(this,"onRepeat"),this.vars.repeatRefresh&&!p&&(this.invalidate()._lock=1),_&&_!==this._time||u!=!this._ts||this.vars.onRepeat&&!this.parent&&!this._act)return this;if(g=this._dur,m=this._tDur,b&&(this._lock=2,_=T?g:-1e-4,this.render(_,!0),this.vars.repeatRefresh&&!p&&this.invalidate()),this._lock=0,!this._ts&&!u)return this;Rb(this,p)}}if(this._hasPause&&!this._forcing&&this._lock<2&&(h=function _findNextPauseTween(t,e,r){var i;if(e<r)for(i=t._first;i&&i._start<=r;){if("isPause"===i.data&&i._start>e)return i;i=i._next}else for(i=t._last;i&&i._start>=r;){if("isPause"===i.data&&i._start<e)return i;i=i._prev}}(this,ja(_),ja(i)))&&(v-=i-(i=h._start)),this._tTime=v,this._time=i,this._act=!l,this._initted||(this._onUpdate=this.vars.onUpdate,this._initted=1,this._zTime=t,_=0),!_&&v&&!e&&!d&&(Pt(this,"onStart"),this._tTime!==v))return this;if(_<=i&&0<=t)for(n=this._first;n;){if(a=n._next,(n._act||i>=n._start)&&n._ts&&h!==n){if(n.parent!==this)return this.render(t,e,r);if(n.render(0<n._ts?(i-n._start)*n._ts:(n._dirty?n.totalDuration():n._tDur)+(i-n._start)*n._ts,e,r),i!==this._time||!this._ts&&!u){h=0,a&&(v+=this._zTime=-U);break}}n=a}else{n=this._last;for(var w=t<0?t:i;n;){if(a=n._prev,(n._act||w<=n._end)&&n._ts&&h!==n){if(n.parent!==this)return this.render(t,e,r);if(n.render(0<n._ts?(w-n._start)*n._ts:(n._dirty?n.totalDuration():n._tDur)+(w-n._start)*n._ts,e,r||L&&na(n)),i!==this._time||!this._ts&&!u){h=0,a&&(v+=this._zTime=w?-U:U);break}}n=a}}if(h&&!e&&(this.pause(),h.render(_<=i?0:-U)._zTime=_<=i?1:-1,this._ts))return this._start=f,Ia(this),this.render(t,e,r);this._onUpdate&&!e&&Pt(this,"onUpdate",!0),(v===m&&this._tTime>=this.totalDuration()||!v&&_)&&(f!==this._start&&Math.abs(l)===Math.abs(this._ts)||this._lock||(!t&&g||!(v===m&&0<this._ts||!v&&this._ts<0)||Aa(this,1),e||t<0&&!_||!v&&!_&&m||(Pt(this,v===m&&0<=t?"onComplete":"onReverseComplete",!0),!this._prom||v<m&&0<this.timeScale()||this._prom())))}return this},e.add=function add(e,i){var n=this;if(t(i)||(i=xt(this,i,e)),!(e instanceof Nt)){if($(e))return e.forEach(function(t){return n.add(t,i)}),this;if(r(e))return this.addLabel(e,i);if(!s(e))return this;e=Jt.delayedCall(0,e)}return this!==e?La(this,e,i):this},e.getChildren=function getChildren(t,e,r,i){void 0===t&&(t=!0),void 0===e&&(e=!0),void 0===r&&(r=!0),void 0===i&&(i=-N);for(var n=[],a=this._first;a;)a._start>=i&&(a instanceof Jt?e&&n.push(a):(r&&n.push(a),t&&n.push.apply(n,a.getChildren(!0,e,r)))),a=a._next;return n},e.getById=function getById(t){for(var e=this.getChildren(1,1,1),r=e.length;r--;)if(e[r].vars.id===t)return e[r]},e.remove=function remove(t){return r(t)?this.removeLabel(t):s(t)?this.killTweensOf(t):(t.parent===this&&za(this,t),t===this._recent&&(this._recent=this._last),Ba(this))},e.totalTime=function totalTime(t,e){return arguments.length?(this._forcing=1,!this._dp&&this._ts&&(this._start=ja(Rt.time-(0<this._ts?t/this._ts:(this.totalDuration()-t)/-this._ts))),i.prototype.totalTime.call(this,t,e),this._forcing=0,this):this._tTime},e.addLabel=function addLabel(t,e){return this.labels[t]=xt(this,e),this},e.removeLabel=function removeLabel(t){return delete this.labels[t],this},e.addPause=function addPause(t,e,r){var i=Jt.delayedCall(0,e||T,r);return i.data="isPause",this._hasPause=1,La(this,i,xt(this,t))},e.removePause=function removePause(t){var e=this._first;for(t=xt(this,t);e;)e._start===t&&"isPause"===e.data&&Aa(e),e=e._next},e.killTweensOf=function killTweensOf(t,e,r){for(var i=this.getTweensOf(t,r),n=i.length;n--;)Ut!==i[n]&&i[n].kill(t,e);return this},e.getTweensOf=function getTweensOf(e,r){for(var i,n=[],a=Ot(e),s=this._first,o=t(r);s;)s instanceof Jt?la(s._targets,a)&&(o?(!Ut||s._initted&&s._ts)&&s.globalTime(0)<=r&&s.globalTime(s.totalDuration())>r:!r||s.isActive())&&n.push(s):(i=s.getTweensOf(a,r)).length&&n.push.apply(n,i),s=s._next;return n},e.tweenTo=function tweenTo(t,e){e=e||{};var r,i=this,n=xt(i,t),a=e.startAt,s=e.onStart,o=e.onStartParams,u=e.immediateRender,h=Jt.to(i,ra({ease:e.ease||"none",lazy:!1,immediateRender:!1,time:n,overwrite:"auto",duration:e.duration||Math.abs((n-(a&&"time"in a?a.time:i._time))/i.timeScale())||U,onStart:function onStart(){if(i.pause(),!r){var t=e.duration||Math.abs((n-(a&&"time"in a?a.time:i._time))/i.timeScale());h._dur!==t&&Sa(h,t,0,1).render(h._time,!0,!0),r=1}s&&s.apply(h,o||[])}},e));return u?h.render(0):h},e.tweenFromTo=function tweenFromTo(t,e,r){return this.tweenTo(e,ra({startAt:{time:xt(this,t)}},r))},e.recent=function recent(){return this._recent},e.nextLabel=function nextLabel(t){return void 0===t&&(t=this._time),sb(this,xt(this,t))},e.previousLabel=function previousLabel(t){return void 0===t&&(t=this._time),sb(this,xt(this,t),1)},e.currentLabel=function currentLabel(t){return arguments.length?this.seek(t,!0):this.previousLabel(this._time+U)},e.shiftChildren=function shiftChildren(t,e,r){void 0===r&&(r=0);for(var i,n=this._first,a=this.labels;n;)n._start>=r&&(n._start+=t,n._end+=t),n=n._next;if(e)for(i in a)a[i]>=r&&(a[i]+=t);return Ba(this)},e.invalidate=function invalidate(t){var e=this._first;for(this._lock=0;e;)e.invalidate(t),e=e._next;return i.prototype.invalidate.call(this,t)},e.clear=function clear(t){void 0===t&&(t=!0);for(var e,r=this._first;r;)e=r._next,this.remove(r),r=e;return this._dp&&(this._time=this._tTime=this._pTime=0),t&&(this.labels={}),Ba(this)},e.totalDuration=function totalDuration(t){var e,r,i,n=0,a=this,s=a._last,o=N;if(arguments.length)return a.timeScale((a._repeat<0?a.duration():a.totalDuration())/(a.reversed()?-t:t));if(a._dirty){for(i=a.parent;s;)e=s._prev,s._dirty&&s.totalDuration(),o<(r=s._start)&&a._sort&&s._ts&&!a._lock?(a._lock=1,La(a,s,r-s._delay,1)._lock=0):o=r,r<0&&s._ts&&(n-=r,(!i&&!a._dp||i&&i.smoothChildTiming)&&(a._start+=r/a._ts,a._time-=r,a._tTime-=r),a.shiftChildren(-r,!1,-Infinity),o=0),s._end>n&&s._ts&&(n=s._end),s=e;Sa(a,a===I&&a._time>n?a._time:n,1,1),a._dirty=0}return a._tDur},Timeline.updateRoot=function updateRoot(t){if(I._ts&&(oa(I,Ha(t,I)),f=Rt.frame),Rt.frame>=mt){mt+=X.autoSleep||120;var e=I._first;if((!e||!e._ts)&&X.autoSleep&&Rt._listeners.length<2){for(;e&&!e._ts;)e=e._next;e||Rt.sleep()}}},Timeline}(Nt);ra(Qt.prototype,{_lock:0,_hasPause:0,_forcing:0});function bc(t,e,i,n,a,o){var u,h,l,f;if(pt[t]&&!1!==(u=new pt[t]).init(a,u.rawVars?e[t]:function _processVars(t,e,i,n,a){if(s(t)&&(t=Gt(t,a,e,i,n)),!v(t)||t.style&&t.nodeType||$(t)||J(t))return r(t)?Gt(t,a,e,i,n):t;var o,u={};for(o in t)u[o]=Gt(t[o],a,e,i,n);return u}(e[t],n,a,o,i),i,n,o)&&(i._pt=h=new ge(i._pt,a,t,0,1,u.render,u,0,u.priority),i!==d))for(l=i._ptLookup[i._targets.indexOf(a)],f=u._props.length;f--;)l[u._props[f]]=h;return u}function hc(t,r,e,i){var n,a,s=r.ease||i||"power1.inOut";if($(r))a=e[t]||(e[t]=[]),r.forEach(function(t,e){return a.push({t:e/(r.length-1)*100,v:t,e:s})});else for(n in r)a=e[n]||(e[n]=[]),"ease"===n||a.push({t:parseFloat(t),v:r[n],e:s})}var Ut,qt,Vt=function _addPropTween(t,e,i,n,a,o,u,h,l,f){s(n)&&(n=n(a||0,t,o));var d,c=t[e],p="get"!==i?i:s(c)?l?t[e.indexOf("set")||!s(t["get"+e.substr(3)])?e:"get"+e.substr(3)](l):t[e]():c,_=s(c)?l?re:te:$t;if(r(n)&&(~n.indexOf("random(")&&(n=pb(n)),"="===n.charAt(1)&&(!(d=ka(p,n)+(Za(p)||0))&&0!==d||(n=d))),!f||p!==n||qt)return isNaN(p*n)||""===n?(c||e in t||Q(e,n),function _addComplexStringPropTween(t,e,r,i,n,a,s){var o,u,h,l,f,d,c,p,_=new ge(this._pt,t,e,0,1,oe,null,n),m=0,g=0;for(_.b=r,_.e=i,r+="",(c=~(i+="").indexOf("random("))&&(i=pb(i)),a&&(a(p=[r,i],t,e),r=p[0],i=p[1]),u=r.match(it)||[];o=it.exec(i);)l=o[0],f=i.substring(m,o.index),h?h=(h+1)%5:"rgba("===f.substr(-5)&&(h=1),l!==u[g++]&&(d=parseFloat(u[g-1])||0,_._pt={_next:_._pt,p:f||1===g?f:",",s:d,c:"="===l.charAt(1)?ka(d,l)-d:parseFloat(l)-d,m:h&&h<4?Math.round:0},m=it.lastIndex);return _.c=m<i.length?i.substring(m,i.length):"",_.fp=s,(nt.test(i)||c)&&(_.e=0),this._pt=_}.call(this,t,e,p,n,_,h||X.stringFilter,l)):(d=new ge(this._pt,t,e,+p||0,n-(p||0),"boolean"==typeof c?se:ne,0,_),l&&(d.fp=l),u&&d.modifier(u,this,t),this._pt=d)},Wt=function _initTween(t,e,r){var i,n,a,s,o,u,h,l,f,d,c,p,_,m=t.vars,g=m.ease,v=m.startAt,y=m.immediateRender,T=m.lazy,b=m.onUpdate,x=m.runBackwards,M=m.yoyoEase,k=m.keyframes,O=m.autoRevert,A=t._dur,P=t._startAt,C=t._targets,S=t.parent,D=S&&"nested"===S.data?S.vars.targets:C,z="auto"===t._overwrite&&!F,E=t.timeline;if(!E||k&&g||(g="none"),t._ease=Yt(g,Z.ease),t._yEase=M?jt(Yt(!0===M?g:M,Z.ease)):0,M&&t._yoyo&&!t._repeat&&(M=t._yEase,t._yEase=t._ease,t._ease=M),t._from=!E&&!!m.runBackwards,!E||k&&!m.stagger){if(p=(l=C[0]?fa(C[0]).harness:0)&&m[l.prop],i=va(m,ft),P&&(P._zTime<0&&P.progress(1),e<0&&x&&y&&!O?P.render(-1,!0):P.revert(x&&A?ht:ut),P._lazy=0),v){if(Aa(t._startAt=Jt.set(C,ra({data:"isStart",overwrite:!1,parent:S,immediateRender:!0,lazy:!P&&w(T),startAt:null,delay:0,onUpdate:b&&function(){return Pt(t,"onUpdate")},stagger:0},v))),t._startAt._dp=0,t._startAt._sat=t,e<0&&(L||!y&&!O)&&t._startAt.revert(ht),y&&A&&e<=0&&r<=0)return void(e&&(t._zTime=e))}else if(x&&A&&!P)if(e&&(y=!1),a=ra({overwrite:!1,data:"isFromStart",lazy:y&&!P&&w(T),immediateRender:y,stagger:0,parent:S},i),p&&(a[l.prop]=p),Aa(t._startAt=Jt.set(C,a)),t._startAt._dp=0,t._startAt._sat=t,e<0&&(L?t._startAt.revert(ht):t._startAt.render(-1,!0)),t._zTime=e,y){if(!e)return}else _initTween(t._startAt,U,U);for(t._pt=t._ptCache=0,T=A&&w(T)||T&&!A,n=0;n<C.length;n++){if(h=(o=C[n])._gsap||ea(C)[n]._gsap,t._ptLookup[n]=d={},ct[h.id]&&dt.length&&ma(),c=D===C?n:D.indexOf(o),l&&!1!==(f=new l).init(o,p||i,t,c,D)&&(t._pt=s=new ge(t._pt,o,f.name,0,1,f.render,f,0,f.priority),f._props.forEach(function(t){d[t]=s}),f.priority&&(u=1)),!l||p)for(a in i)pt[a]&&(f=bc(a,i,t,c,o,D))?f.priority&&(u=1):d[a]=s=Vt.call(t,o,a,"get",i[a],c,D,0,m.stringFilter);t._op&&t._op[n]&&t.kill(o,t._op[n]),z&&t._pt&&(Ut=t,I.killTweensOf(o,d,t.globalTime(e)),_=!t.parent,Ut=0),t._pt&&T&&(ct[h.id]=1)}u&&_e(t),t._onInit&&t._onInit(t)}t._onUpdate=b,t._initted=(!t._op||t._pt)&&!_,k&&e<=0&&E.render(N,!0,!0)},Gt=function _parseFuncOrString(t,e,i,n,a){return s(t)?t.call(e,i,n,a):r(t)&&~t.indexOf("random(")?pb(t):t},Ht=vt+"repeat,repeatDelay,yoyo,repeatRefresh,yoyoEase,autoRevert",Kt={};ha(Ht+",id,stagger,delay,duration,paused,scrollTrigger",function(t){return Kt[t]=1});var Jt=function(E){function Tween(e,r,i,n){var a;"number"==typeof r&&(i.duration=r,r=i,i=null);var s,o,u,h,l,f,d,c,p=(a=E.call(this,n?r:wa(r))||this).vars,_=p.duration,m=p.delay,g=p.immediateRender,T=p.stagger,b=p.overwrite,x=p.keyframes,M=p.defaults,k=p.scrollTrigger,O=p.yoyoEase,A=r.parent||I,P=($(e)||J(e)?t(e[0]):"length"in r)?[e]:Ot(e);if(a._targets=P.length?ea(P):R("GSAP target "+e+" not found. https://gsap.com",!X.nullTargetWarn)||[],a._ptLookup=[],a._overwrite=b,x||T||y(_)||y(m)){if(r=a.vars,(s=a.timeline=new Qt({data:"nested",defaults:M||{},targets:A&&"nested"===A.data?A.vars.targets:P})).kill(),s.parent=s._dp=_assertThisInitialized(a),s._start=0,T||y(_)||y(m)){if(h=P.length,d=T&&fb(T),v(T))for(l in T)~Ht.indexOf(l)&&((c=c||{})[l]=T[l]);for(o=0;o<h;o++)(u=va(r,Kt)).stagger=0,O&&(u.yoyoEase=O),c&&yt(u,c),f=P[o],u.duration=+Gt(_,_assertThisInitialized(a),o,f,P),u.delay=(+Gt(m,_assertThisInitialized(a),o,f,P)||0)-a._delay,!T&&1===h&&u.delay&&(a._delay=m=u.delay,a._start+=m,u.delay=0),s.to(f,u,d?d(o,f,P):0),s._ease=Lt.none;s.duration()?_=m=0:a.timeline=0}else if(x){wa(ra(s.vars.defaults,{ease:"none"})),s._ease=Yt(x.ease||r.ease||"none");var C,S,D,z=0;if($(x))x.forEach(function(t){return s.to(P,t,">")}),s.duration();else{for(l in u={},x)"ease"===l||"easeEach"===l||hc(l,x[l],u,x.easeEach);for(l in u)for(C=u[l].sort(function(t,e){return t.t-e.t}),o=z=0;o<C.length;o++)(D={ease:(S=C[o]).e,duration:(S.t-(o?C[o-1].t:0))/100*_})[l]=S.v,s.to(P,D,z),z+=D.duration;s.duration()<_&&s.to({},{duration:_-s.duration()})}}_||a.duration(_=s.duration())}else a.timeline=0;return!0!==b||F||(Ut=_assertThisInitialized(a),I.killTweensOf(P),Ut=0),La(A,_assertThisInitialized(a),i),r.reversed&&a.reverse(),r.paused&&a.paused(!0),(g||!_&&!x&&a._start===ja(A._time)&&w(g)&&function _hasNoPausedAncestors(t){return!t||t._ts&&_hasNoPausedAncestors(t.parent)}(_assertThisInitialized(a))&&"nested"!==A.data)&&(a._tTime=-U,a.render(Math.max(0,-m)||0)),k&&Ma(_assertThisInitialized(a),k),a}_inheritsLoose(Tween,E);var e=Tween.prototype;return e.render=function render(t,e,r){var i,n,a,s,o,u,h,l,f,d=this._time,c=this._tDur,p=this._dur,_=t<0,m=c-U<t&&!_?c:t<U?0:t;if(p){if(m!==this._tTime||!t||r||!this._initted&&this._tTime||this._startAt&&this._zTime<0!=_||this._lazy){if(i=m,l=this.timeline,this._repeat){if(s=p+this._rDelay,this._repeat<-1&&_)return this.totalTime(100*s+t,e,r);if(i=ja(m%s),m===c?(a=this._repeat,i=p):(a=~~(o=ja(m/s)))&&a===o?(i=p,a--):p<i&&(i=p),(u=this._yoyo&&1&a)&&(f=this._yEase,i=p-i),o=Tt(this._tTime,s),i===d&&!r&&this._initted&&a===o)return this._tTime=m,this;a!==o&&(l&&this._yEase&&Rb(l,u),this.vars.repeatRefresh&&!u&&!this._lock&&i!==s&&this._initted&&(this._lock=r=1,this.render(ja(s*a),!0).invalidate()._lock=0))}if(!this._initted){if(Na(this,_?t:i,r,e,m))return this._tTime=0,this;if(!(d===this._time||r&&this.vars.repeatRefresh&&a!==o))return this;if(p!==this._dur)return this.render(t,e,r)}if(this._tTime=m,this._time=i,!this._act&&this._ts&&(this._act=1,this._lazy=0),this.ratio=h=(f||this._ease)(i/p),this._from&&(this.ratio=h=1-h),!d&&m&&!e&&!o&&(Pt(this,"onStart"),this._tTime!==m))return this;for(n=this._pt;n;)n.r(h,n.d),n=n._next;l&&l.render(t<0?t:l._dur*l._ease(i/this._dur),e,r)||this._startAt&&(this._zTime=t),this._onUpdate&&!e&&(_&&Da(this,t,0,r),Pt(this,"onUpdate")),this._repeat&&a!==o&&this.vars.onRepeat&&!e&&this.parent&&Pt(this,"onRepeat"),m!==this._tDur&&m||this._tTime!==m||(_&&!this._onUpdate&&Da(this,t,0,!0),!t&&p||!(m===this._tDur&&0<this._ts||!m&&this._ts<0)||Aa(this,1),e||_&&!d||!(m||d||u)||(Pt(this,m===c?"onComplete":"onReverseComplete",!0),!this._prom||m<c&&0<this.timeScale()||this._prom()))}}else!function _renderZeroDurationTween(t,e,r,i){var n,a,s,o=t.ratio,u=e<0||!e&&(!t._start&&function _parentPlayheadIsBeforeStart(t){var e=t.parent;return e&&e._ts&&e._initted&&!e._lock&&(e.rawTime()<0||_parentPlayheadIsBeforeStart(e))}(t)&&(t._initted||!bt(t))||(t._ts<0||t._dp._ts<0)&&!bt(t))?0:1,h=t._rDelay,l=0;if(h&&t._repeat&&(l=Mt(0,t._tDur,e),a=Tt(l,h),t._yoyo&&1&a&&(u=1-u),a!==Tt(t._tTime,h)&&(o=1-u,t.vars.repeatRefresh&&t._initted&&t.invalidate())),u!==o||L||i||t._zTime===U||!e&&t._zTime){if(!t._initted&&Na(t,e,i,r,l))return;for(s=t._zTime,t._zTime=e||(r?U:0),r=r||e&&!s,t.ratio=u,t._from&&(u=1-u),t._time=0,t._tTime=l,n=t._pt;n;)n.r(u,n.d),n=n._next;e<0&&Da(t,e,0,!0),t._onUpdate&&!r&&Pt(t,"onUpdate"),l&&t._repeat&&!r&&t.parent&&Pt(t,"onRepeat"),(e>=t._tDur||e<0)&&t.ratio===u&&(u&&Aa(t,1),r||L||(Pt(t,u?"onComplete":"onReverseComplete",!0),t._prom&&t._prom()))}else t._zTime||(t._zTime=e)}(this,t,e,r);return this},e.targets=function targets(){return this._targets},e.invalidate=function invalidate(t){return t&&this.vars.runBackwards||(this._startAt=0),this._pt=this._op=this._onUpdate=this._lazy=this.ratio=0,this._ptLookup=[],this.timeline&&this.timeline.invalidate(t),E.prototype.invalidate.call(this,t)},e.resetTo=function resetTo(t,e,r,i,n){c||Rt.wake(),this._ts||this.play();var a,s=Math.min(this._dur,(this._dp._time-this._start)*this._ts);return this._initted||Wt(this,s),a=this._ease(s/this._dur),function _updatePropTweens(t,e,r,i,n,a,s,o){var u,h,l,f,d=(t._pt&&t._ptCache||(t._ptCache={}))[e];if(!d)for(d=t._ptCache[e]=[],l=t._ptLookup,f=t._targets.length;f--;){if((u=l[f][e])&&u.d&&u.d._pt)for(u=u.d._pt;u&&u.p!==e&&u.fp!==e;)u=u._next;if(!u)return qt=1,t.vars[e]="+=0",Wt(t,s),qt=0,o?R(e+" not eligible for reset"):1;d.push(u)}for(f=d.length;f--;)(u=(h=d[f])._pt||h).s=!i&&0!==i||n?u.s+(i||0)+a*u.c:i,u.c=r-u.s,h.e&&(h.e=ia(r)+Za(h.e)),h.b&&(h.b=u.s+Za(h.b))}(this,t,e,r,i,a,s,n)?this.resetTo(t,e,r,i,1):(Ja(this,0),this.parent||ya(this._dp,this,"_first","_last",this._dp._sort?"_start":0),this.render(0))},e.kill=function kill(t,e){if(void 0===e&&(e="all"),!(t||e&&"all"!==e))return this._lazy=this._pt=0,this.parent?ub(this):this.scrollTrigger&&this.scrollTrigger.kill(!!L),this;if(this.timeline){var i=this.timeline.totalDuration();return this.timeline.killTweensOf(t,e,Ut&&!0!==Ut.vars.overwrite)._first||ub(this),this.parent&&i!==this.timeline.totalDuration()&&Sa(this,this._dur*this.timeline._tDur/i,0,1),this}var n,a,s,o,u,h,l,f=this._targets,d=t?Ot(t):f,c=this._ptLookup,p=this._pt;if((!e||"all"===e)&&function _arraysMatch(t,e){for(var r=t.length,i=r===e.length;i&&r--&&t[r]===e[r];);return r<0}(f,d))return"all"===e&&(this._pt=0),ub(this);for(n=this._op=this._op||[],"all"!==e&&(r(e)&&(u={},ha(e,function(t){return u[t]=1}),e=u),e=function _addAliasesToVars(t,e){var r,i,n,a,s=t[0]?fa(t[0]).harness:0,o=s&&s.aliases;if(!o)return e;for(i in r=yt({},e),o)if(i in r)for(n=(a=o[i].split(",")).length;n--;)r[a[n]]=r[i];return r}(f,e)),l=f.length;l--;)if(~d.indexOf(f[l]))for(u in a=c[l],"all"===e?(n[l]=e,o=a,s={}):(s=n[l]=n[l]||{},o=e),o)(h=a&&a[u])&&("kill"in h.d&&!0!==h.d.kill(u)||za(this,h,"_pt"),delete a[u]),"all"!==s&&(s[u]=1);return this._initted&&!this._pt&&p&&ub(this),this},Tween.to=function to(t,e,r){return new Tween(t,e,r)},Tween.from=function from(t,e){return Wa(1,arguments)},Tween.delayedCall=function delayedCall(t,e,r,i){return new Tween(e,0,{immediateRender:!1,lazy:!1,overwrite:!1,delay:t,onComplete:e,onReverseComplete:e,onCompleteParams:r,onReverseCompleteParams:r,callbackScope:i})},Tween.fromTo=function fromTo(t,e,r){return Wa(2,arguments)},Tween.set=function set(t,e){return e.duration=0,e.repeatDelay||(e.repeat=0),new Tween(t,e)},Tween.killTweensOf=function killTweensOf(t,e,r){return I.killTweensOf(t,e,r)},Tween}(Nt);ra(Jt.prototype,{_targets:[],_lazy:0,_startAt:0,_op:0,_onInit:0}),ha("staggerTo,staggerFrom,staggerFromTo",function(r){Jt[r]=function(){var t=new Qt,e=kt.call(arguments,0);return e.splice("staggerFromTo"===r?5:4,0,0),t[r].apply(t,e)}});function pc(t,e,r){return t.setAttribute(e,r)}function xc(t,e,r,i){i.mSet(t,e,i.m.call(i.tween,r,i.mt),i)}var $t=function _setterPlain(t,e,r){return t[e]=r},te=function _setterFunc(t,e,r){return t[e](r)},re=function _setterFuncWithParam(t,e,r,i){return t[e](i.fp,r)},ie=function _getSetter(t,e){return s(t[e])?te:u(t[e])&&t.setAttribute?pc:$t},ne=function _renderPlain(t,e){return e.set(e.t,e.p,Math.round(1e6*(e.s+e.c*t))/1e6,e)},se=function _renderBoolean(t,e){return e.set(e.t,e.p,!!(e.s+e.c*t),e)},oe=function _renderComplexString(t,e){var r=e._pt,i="";if(!t&&e.b)i=e.b;else if(1===t&&e.e)i=e.e;else{for(;r;)i=r.p+(r.m?r.m(r.s+r.c*t):Math.round(1e4*(r.s+r.c*t))/1e4)+i,r=r._next;i+=e.c}e.set(e.t,e.p,i,e)},ue=function _renderPropTweens(t,e){for(var r=e._pt;r;)r.r(t,r.d),r=r._next},he=function _addPluginModifier(t,e,r,i){for(var n,a=this._pt;a;)n=a._next,a.p===i&&a.modifier(t,e,r),a=n},de=function _killPropTweensOf(t){for(var e,r,i=this._pt;i;)r=i._next,i.p===t&&!i.op||i.op===t?za(this,i,"_pt"):i.dep||(e=1),i=r;return!e},_e=function _sortPropTweensByPriority(t){for(var e,r,i,n,a=t._pt;a;){for(e=a._next,r=i;r&&r.pr>a.pr;)r=r._next;(a._prev=r?r._prev:n)?a._prev._next=a:i=a,(a._next=r)?r._prev=a:n=a,a=e}t._pt=i},ge=(PropTween.prototype.modifier=function modifier(t,e,r){this.mSet=this.mSet||this.set,this.set=xc,this.m=t,this.mt=r,this.tween=e},PropTween);function PropTween(t,e,r,i,n,a,s,o,u){this.t=e,this.s=i,this.c=n,this.p=r,this.r=a||ne,this.d=s||this,this.set=o||$t,this.pr=u||0,(this._next=t)&&(t._prev=this)}ha(vt+"parent,duration,ease,delay,overwrite,runBackwards,startAt,yoyo,immediateRender,repeat,repeatDelay,data,paused,reversed,lazy,callbackScope,stringFilter,id,yoyoEase,stagger,inherit,repeatRefresh,keyframes,autoRevert,scrollTrigger",function(t){return ft[t]=1}),ot.TweenMax=ot.TweenLite=Jt,ot.TimelineLite=ot.TimelineMax=Qt,I=new Qt({sortChildren:!1,defaults:Z,autoRemoveChildren:!0,id:"root",smoothChildTiming:!0}),X.stringFilter=Gb;function Fc(t){return(be[t]||Me).map(function(t){return t()})}function Gc(){var t=Date.now(),o=[];2<t-Oe&&(Fc("matchMediaInit"),Te.forEach(function(t){var e,r,i,n,a=t.queries,s=t.conditions;for(r in a)(e=h.matchMedia(a[r]).matches)&&(i=1),e!==s[r]&&(s[r]=e,n=1);n&&(t.revert(),i&&o.push(t))}),Fc("matchMediaRevert"),o.forEach(function(e){return e.onMatch(e,function(t){return e.add(null,t)})}),Oe=t,Fc("matchMedia"))}var ve,Te=[],be={},Me=[],Oe=0,Ae=0,Pe=((ve=Context.prototype).add=function add(t,i,n){function Iw(){var t,e=l,r=a.selector;return e&&e!==a&&e.data.push(a),n&&(a.selector=db(n)),l=a,t=i.apply(a,arguments),s(t)&&a._r.push(t),l=e,a.selector=r,a.isReverted=!1,t}s(t)&&(n=i,i=t,t=s);var a=this;return a.last=Iw,t===s?Iw(a,function(t){return a.add(null,t)}):t?a[t]=Iw:Iw},ve.ignore=function ignore(t){var e=l;l=null,t(this),l=e},ve.getTweens=function getTweens(){var e=[];return this.data.forEach(function(t){return t instanceof Context?e.push.apply(e,t.getTweens()):t instanceof Jt&&!(t.parent&&"nested"===t.parent.data)&&e.push(t)}),e},ve.clear=function clear(){this._r.length=this.data.length=0},ve.kill=function kill(i,t){var n=this;if(i?function(){for(var t,e=n.getTweens(),r=n.data.length;r--;)"isFlip"===(t=n.data[r]).data&&(t.revert(),t.getChildren(!0,!0,!1).forEach(function(t){return e.splice(e.indexOf(t),1)}));for(e.map(function(t){return{g:t._dur||t._delay||t._sat&&!t._sat.vars.immediateRender?t.globalTime(0):-1/0,t:t}}).sort(function(t,e){return e.g-t.g||-1/0}).forEach(function(t){return t.t.revert(i)}),r=n.data.length;r--;)(t=n.data[r])instanceof Qt?"nested"!==t.data&&(t.scrollTrigger&&t.scrollTrigger.revert(),t.kill()):t instanceof Jt||!t.revert||t.revert(i);n._r.forEach(function(t){return t(i,n)}),n.isReverted=!0}():this.data.forEach(function(t){return t.kill&&t.kill()}),this.clear(),t)for(var e=Te.length;e--;)Te[e].id===this.id&&Te.splice(e,1)},ve.revert=function revert(t){this.kill(t||{})},Context);function Context(t,e){this.selector=e&&db(e),this.data=[],this._r=[],this.isReverted=!1,this.id=Ae++,t&&this.add(t)}var Ce,Se=((Ce=MatchMedia.prototype).add=function add(t,e,r){v(t)||(t={matches:t});var i,n,a,s=new Pe(0,r||this.scope),o=s.conditions={};for(n in l&&!s.selector&&(s.selector=l.selector),this.contexts.push(s),e=s.add("onMatch",e),s.queries=t)"all"===n?a=1:(i=h.matchMedia(t[n]))&&(Te.indexOf(s)<0&&Te.push(s),(o[n]=i.matches)&&(a=1),i.addListener?i.addListener(Gc):i.addEventListener("change",Gc));return a&&e(s,function(t){return s.add(null,t)}),this},Ce.revert=function revert(t){this.kill(t||{})},Ce.kill=function kill(e){this.contexts.forEach(function(t){return t.kill(e,!0)})},MatchMedia);function MatchMedia(t){this.contexts=[],this.scope=t,l&&l.data.push(this)}var De={registerPlugin:function registerPlugin(){for(var t=arguments.length,e=new Array(t),r=0;r<t;r++)e[r]=arguments[r];e.forEach(function(t){return xb(t)})},timeline:function timeline(t){return new Qt(t)},getTweensOf:function getTweensOf(t,e){return I.getTweensOf(t,e)},getProperty:function getProperty(i,t,e,n){r(i)&&(i=Ot(i)[0]);var a=fa(i||{}).get,s=e?qa:pa;return"native"===e&&(e=""),i?t?s((pt[t]&&pt[t].get||a)(i,t,e,n)):function(t,e,r){return s((pt[t]&&pt[t].get||a)(i,t,e,r))}:i},quickSetter:function quickSetter(r,e,i){if(1<(r=Ot(r)).length){var n=r.map(function(t){return ze.quickSetter(t,e,i)}),a=n.length;return function(t){for(var e=a;e--;)n[e](t)}}r=r[0]||{};var s=pt[e],o=fa(r),u=o.harness&&(o.harness.aliases||{})[e]||e,h=s?function(t){var e=new s;d._pt=0,e.init(r,i?t+i:t,d,0,[r]),e.render(1,e),d._pt&&ue(1,d)}:o.set(r,u);return s?h:function(t){return h(r,u,i?t+i:t,o,1)}},quickTo:function quickTo(t,i,e){function ay(t,e,r){return n.resetTo(i,t,e,r)}var r,n=ze.to(t,ra(((r={})[i]="+=0.1",r.paused=!0,r.stagger=0,r),e||{}));return ay.tween=n,ay},isTweening:function isTweening(t){return 0<I.getTweensOf(t,!0).length},defaults:function defaults(t){return t&&t.ease&&(t.ease=Yt(t.ease,Z.ease)),ua(Z,t||{})},config:function config(t){return ua(X,t||{})},registerEffect:function registerEffect(t){var i=t.name,n=t.effect,e=t.plugins,a=t.defaults,r=t.extendTimeline;(e||"").split(",").forEach(function(t){return t&&!pt[t]&&!ot[t]&&R(i+" effect requires "+t+" plugin.")}),_t[i]=function(t,e,r){return n(Ot(t),ra(e||{},a),r)},r&&(Qt.prototype[i]=function(t,e,r){return this.add(_t[i](t,v(e)?e:(r=e)&&{},this),r)})},registerEase:function registerEase(t,e){Lt[t]=Yt(e)},parseEase:function parseEase(t,e){return arguments.length?Yt(t,e):Lt},getById:function getById(t){return I.getById(t)},exportRoot:function exportRoot(t,e){void 0===t&&(t={});var r,i,n=new Qt(t);for(n.smoothChildTiming=w(t.smoothChildTiming),I.remove(n),n._dp=0,n._time=n._tTime=I._time,r=I._first;r;)i=r._next,!e&&!r._dur&&r instanceof Jt&&r.vars.onComplete===r._targets[0]||La(n,r,r._start-r._delay),r=i;return La(I,n,0),n},context:function context(t,e){return t?new Pe(t,e):l},matchMedia:function matchMedia(t){return new Se(t)},matchMediaRefresh:function matchMediaRefresh(){return Te.forEach(function(t){var e,r,i=t.conditions;for(r in i)i[r]&&(i[r]=!1,e=1);e&&t.revert()})||Gc()},addEventListener:function addEventListener(t,e){var r=be[t]||(be[t]=[]);~r.indexOf(e)||r.push(e)},removeEventListener:function removeEventListener(t,e){var r=be[t],i=r&&r.indexOf(e);0<=i&&r.splice(i,1)},utils:{wrap:function wrap(e,t,r){var i=t-e;return $(e)?mb(e,wrap(0,e.length),t):Xa(r,function(t){return(i+(t-e)%i)%i+e})},wrapYoyo:function wrapYoyo(e,t,r){var i=t-e,n=2*i;return $(e)?mb(e,wrapYoyo(0,e.length-1),t):Xa(r,function(t){return e+(i<(t=(n+(t-e)%n)%n||0)?n-t:t)})},distribute:fb,random:ib,snap:hb,normalize:function normalize(t,e,r){return At(t,e,0,1,r)},getUnit:Za,clamp:function clamp(e,r,t){return Xa(t,function(t){return Mt(e,r,t)})},splitColor:Bb,toArray:Ot,selector:db,mapRange:At,pipe:function pipe(){for(var t=arguments.length,e=new Array(t),r=0;r<t;r++)e[r]=arguments[r];return function(t){return e.reduce(function(t,e){return e(t)},t)}},unitize:function unitize(e,r){return function(t){return e(parseFloat(t))+(r||Za(t))}},interpolate:function interpolate(e,i,t,n){var a=isNaN(e+i)?0:function(t){return(1-t)*e+t*i};if(!a){var s,o,u,h,l,f=r(e),d={};if(!0===t&&(n=1)&&(t=null),f)e={p:e},i={p:i};else if($(e)&&!$(i)){for(u=[],h=e.length,l=h-2,o=1;o<h;o++)u.push(interpolate(e[o-1],e[o]));h--,a=function func(t){t*=h;var e=Math.min(l,~~t);return u[e](t-e)},t=i}else n||(e=yt($(e)?[]:{},e));if(!u){for(s in i)Vt.call(d,e,s,"get",i[s]);a=function func(t){return ue(t,d)||(f?e.p:e)}}}return Xa(t,a)},shuffle:eb},install:P,effects:_t,ticker:Rt,updateRoot:Qt.updateRoot,plugins:pt,globalTimeline:I,core:{PropTween:ge,globals:S,Tween:Jt,Timeline:Qt,Animation:Nt,getCache:fa,_removeLinkedListItem:za,reverting:function reverting(){return L},context:function context(t){return t&&l&&(l.data.push(t),t._ctx=l),l},suppressOverwrites:function suppressOverwrites(t){return F=t}}};ha("to,from,fromTo,delayedCall,set,killTweensOf",function(t){return De[t]=Jt[t]}),Rt.add(Qt.updateRoot),d=De.to({},{duration:0});function Kc(t,e){for(var r=t._pt;r&&r.p!==e&&r.op!==e&&r.fp!==e;)r=r._next;return r}function Mc(t,a){return{name:t,headless:1,rawVars:1,init:function init(t,n,e){e._onInit=function(t){var e,i;if(r(n)&&(e={},ha(n,function(t){return e[t]=1}),n=e),a){for(i in e={},n)e[i]=a(n[i]);n=e}!function _addModifiers(t,e){var r,i,n,a=t._targets;for(r in e)for(i=a.length;i--;)(n=(n=t._ptLookup[i][r])&&n.d)&&(n._pt&&(n=Kc(n,r)),n&&n.modifier&&n.modifier(e[r],t,a[i],r))}(t,n)}}}}var ze=De.registerPlugin({name:"attr",init:function init(t,e,r,i,n){var a,s,o;for(a in this.tween=r,e)o=t.getAttribute(a)||"",(s=this.add(t,"setAttribute",(o||0)+"",e[a],i,n,0,0,a)).op=a,s.b=o,this._props.push(a)},render:function render(t,e){for(var r=e._pt;r;)L?r.set(r.t,r.p,r.b,r):r.r(t,r.d),r=r._next}},{name:"endArray",headless:1,init:function init(t,e){for(var r=e.length;r--;)this.add(t,r,t[r]||0,e[r],0,0,0,0,0,1)}},Mc("roundProps",gb),Mc("modifiers"),Mc("snap",hb))||De;Jt.version=Qt.version=ze.version="3.13.0",o=1,x()&&Ft();function wd(t,e){return e.set(e.t,e.p,Math.round(1e4*(e.s+e.c*t))/1e4+e.u,e)}function xd(t,e){return e.set(e.t,e.p,1===t?e.e:Math.round(1e4*(e.s+e.c*t))/1e4+e.u,e)}function yd(t,e){return e.set(e.t,e.p,t?Math.round(1e4*(e.s+e.c*t))/1e4+e.u:e.b,e)}function zd(t,e){var r=e.s+e.c*t;e.set(e.t,e.p,~~(r+(r<0?-.5:.5))+e.u,e)}function Ad(t,e){return e.set(e.t,e.p,t?e.e:e.b,e)}function Bd(t,e){return e.set(e.t,e.p,1!==t?e.b:e.e,e)}function Cd(t,e,r){return t.style[e]=r}function Dd(t,e,r){return t.style.setProperty(e,r)}function Ed(t,e,r){return t._gsap[e]=r}function Fd(t,e,r){return t._gsap.scaleX=t._gsap.scaleY=r}function Gd(t,e,r,i,n){var a=t._gsap;a.scaleX=a.scaleY=r,a.renderTransform(n,a)}function Hd(t,e,r,i,n){var a=t._gsap;a[e]=r,a.renderTransform(n,a)}function Kd(t,e){var r=this,i=this.target,n=i.style,a=i._gsap;if(t in sr&&n){if(this.tfm=this.tfm||{},"transform"===t)return cr.transform.split(",").forEach(function(t){return Kd.call(r,t,e)});if(~(t=cr[t]||t).indexOf(",")?t.split(",").forEach(function(t){return r.tfm[t]=Tr(i,t)}):this.tfm[t]=a.x?a[t]:Tr(i,t),t===_r&&(this.tfm.zOrigin=a.zOrigin),0<=this.props.indexOf(pr))return;a.svg&&(this.svgo=i.getAttribute("data-svg-origin"),this.props.push(_r,e,"")),t=pr}(n||e)&&this.props.push(t,e,n[t])}function Ld(t){t.translate&&(t.removeProperty("translate"),t.removeProperty("scale"),t.removeProperty("rotate"))}function Md(){var t,e,r=this.props,i=this.target,n=i.style,a=i._gsap;for(t=0;t<r.length;t+=3)r[t+1]?2===r[t+1]?i[r[t]](r[t+2]):i[r[t]]=r[t+2]:r[t+2]?n[r[t]]=r[t+2]:n.removeProperty("--"===r[t].substr(0,2)?r[t]:r[t].replace(lr,"-$1").toLowerCase());if(this.tfm){for(e in this.tfm)a[e]=this.tfm[e];a.svg&&(a.renderTransform(),i.setAttribute("data-svg-origin",this.svgo||"")),(t=Ye())&&t.isStart||n[pr]||(Ld(n),a.zOrigin&&n[_r]&&(n[_r]+=" "+a.zOrigin+"px",a.zOrigin=0,a.renderTransform()),a.uncache=1)}}function Nd(t,e){var r={target:t,props:[],revert:Md,save:Kd};return t._gsap||ze.core.getCache(t),e&&t.style&&t.nodeType&&e.split(",").forEach(function(t){return r.save(t)}),r}function Pd(t,e){var r=Re.createElementNS?Re.createElementNS((e||"http://www.w3.org/1999/xhtml").replace(/^https/,"http"),t):Re.createElement(t);return r&&r.style?r:Re.createElement(t)}function Qd(t,e,r){var i=getComputedStyle(t);return i[e]||i.getPropertyValue(e.replace(lr,"-$1").toLowerCase())||i.getPropertyValue(e)||!r&&Qd(t,gr(e)||e,1)||""}function Td(){(function _windowExists(){return"undefined"!=typeof window})()&&window.document&&(Ee=window,Re=Ee.document,Fe=Re.documentElement,Ie=Pd("div")||{style:{}},Pd("div"),pr=gr(pr),_r=pr+"Origin",Ie.style.cssText="border-width:0;line-height:0;position:absolute;padding:0",Xe=!!gr("perspective"),Ye=ze.core.reverting,Le=1)}function Ud(t){var e,r=t.ownerSVGElement,i=Pd("svg",r&&r.getAttribute("xmlns")||"http://www.w3.org/2000/svg"),n=t.cloneNode(!0);n.style.display="block",i.appendChild(n),Fe.appendChild(i);try{e=n.getBBox()}catch(t){}return i.removeChild(n),Fe.removeChild(i),e}function Vd(t,e){for(var r=e.length;r--;)if(t.hasAttribute(e[r]))return t.getAttribute(e[r])}function Wd(e){var r,i;try{r=e.getBBox()}catch(t){r=Ud(e),i=1}return r&&(r.width||r.height)||i||(r=Ud(e)),!r||r.width||r.x||r.y?r:{x:+Vd(e,["x","cx","x1"])||0,y:+Vd(e,["y","cy","y1"])||0,width:0,height:0}}function Xd(t){return!(!t.getCTM||t.parentNode&&!t.ownerSVGElement||!Wd(t))}function Yd(t,e){if(e){var r,i=t.style;e in sr&&e!==_r&&(e=pr),i.removeProperty?("ms"!==(r=e.substr(0,2))&&"webkit"!==e.substr(0,6)||(e="-"+e),i.removeProperty("--"===r?e:e.replace(lr,"-$1").toLowerCase())):i.removeAttribute(e)}}function Zd(t,e,r,i,n,a){var s=new ge(t._pt,e,r,0,1,a?Bd:Ad);return(t._pt=s).b=i,s.e=n,t._props.push(r),s}function ae(t,e,r,i){var n,a,s,o,u=parseFloat(r)||0,h=(r+"").trim().substr((u+"").length)||"px",l=Ie.style,f=fr.test(e),d="svg"===t.tagName.toLowerCase(),c=(d?"client":"offset")+(f?"Width":"Height"),p="px"===i,_="%"===i;if(i===h||!u||vr[i]||vr[h])return u;if("px"===h||p||(u=ae(t,e,r,"px")),o=t.getCTM&&Xd(t),(_||"%"===h)&&(sr[e]||~e.indexOf("adius")))return n=o?t.getBBox()[f?"width":"height"]:t[c],ia(_?u/n*100:u/100*n);if(l[f?"width":"height"]=100+(p?h:i),a="rem"!==i&&~e.indexOf("adius")||"em"===i&&t.appendChild&&!d?t:t.parentNode,o&&(a=(t.ownerSVGElement||{}).parentNode),a&&a!==Re&&a.appendChild||(a=Re.body),(s=a._gsap)&&_&&s.width&&f&&s.time===Rt.time&&!s.uncache)return ia(u/s.width*100);if(!_||"height"!==e&&"width"!==e)!_&&"%"!==h||yr[Qd(a,"display")]||(l.position=Qd(t,"position")),a===t&&(l.position="static"),a.appendChild(Ie),n=Ie[c],a.removeChild(Ie),l.position="absolute";else{var m=t.style[e];t.style[e]=100+i,n=t[c],m?t.style[e]=m:Yd(t,e)}return f&&_&&((s=fa(a)).time=Rt.time,s.width=a[c]),ia(p?n*u/100:n&&u?100/n*u:0)}function ce(t,e,r,i){if(!r||"none"===r){var n=gr(e,t,1),a=n&&Qd(t,n,1);a&&a!==r?(e=n,r=a):"borderColor"===e&&(r=Qd(t,"borderTopColor"))}var s,o,u,h,l,f,d,c,p,_,m,g=new ge(this._pt,t.style,e,0,1,oe),v=0,y=0;if(g.b=r,g.e=i,r+="","var(--"===(i+="").substring(0,6)&&(i=Qd(t,i.substring(4,i.indexOf(")")))),"auto"===i&&(f=t.style[e],t.style[e]=i,i=Qd(t,e)||i,f?t.style[e]=f:Yd(t,e)),Gb(s=[r,i]),i=s[1],u=(r=s[0]).match(rt)||[],(i.match(rt)||[]).length){for(;o=rt.exec(i);)d=o[0],p=i.substring(v,o.index),l?l=(l+1)%5:"rgba("!==p.substr(-5)&&"hsla("!==p.substr(-5)||(l=1),d!==(f=u[y++]||"")&&(h=parseFloat(f)||0,m=f.substr((h+"").length),"="===d.charAt(1)&&(d=ka(h,d)+m),c=parseFloat(d),_=d.substr((c+"").length),v=rt.lastIndex-_.length,_||(_=_||X.units[e]||m,v===i.length&&(i+=_,g.e+=_)),m!==_&&(h=ae(t,e,f,_)||0),g._pt={_next:g._pt,p:p||1===y?p:",",s:h,c:c-h,m:l&&l<4||"zIndex"===e?Math.round:0});g.c=v<i.length?i.substring(v,i.length):""}else g.r="display"===e&&"none"===i?Bd:Ad;return nt.test(i)&&(g.e=0),this._pt=g}function ee(t){var e=t.split(" "),r=e[0],i=e[1]||"50%";return"top"!==r&&"bottom"!==r&&"left"!==i&&"right"!==i||(t=r,r=i,i=t),e[0]=br[r]||r,e[1]=br[i]||i,e.join(" ")}function fe(t,e){if(e.tween&&e.tween._time===e.tween._dur){var r,i,n,a=e.t,s=a.style,o=e.u,u=a._gsap;if("all"===o||!0===o)s.cssText="",i=1;else for(n=(o=o.split(",")).length;-1<--n;)r=o[n],sr[r]&&(i=1,r="transformOrigin"===r?_r:pr),Yd(a,r);i&&(Yd(a,pr),u&&(u.svg&&a.removeAttribute("transform"),s.scale=s.rotate=s.translate="none",kr(a,1),u.uncache=1,Ld(s)))}}function je(t){return"matrix(1, 0, 0, 1, 0, 0)"===t||"none"===t||!t}function ke(t){var e=Qd(t,pr);return je(e)?xr:e.substr(7).match(et).map(ia)}function le(t,e){var r,i,n,a,s=t._gsap||fa(t),o=t.style,u=ke(t);return s.svg&&t.getAttribute("transform")?"1,0,0,1,0,0"===(u=[(n=t.transform.baseVal.consolidate().matrix).a,n.b,n.c,n.d,n.e,n.f]).join(",")?xr:u:(u!==xr||t.offsetParent||t===Fe||s.svg||(n=o.display,o.display="block",(r=t.parentNode)&&(t.offsetParent||t.getBoundingClientRect().width)||(a=1,i=t.nextElementSibling,Fe.appendChild(t)),u=ke(t),n?o.display=n:Yd(t,"display"),a&&(i?r.insertBefore(t,i):r?r.appendChild(t):Fe.removeChild(t))),e&&6<u.length?[u[0],u[1],u[4],u[5],u[12],u[13]]:u)}function me(t,e,r,i,n,a){var s,o,u,h=t._gsap,l=n||le(t,!0),f=h.xOrigin||0,d=h.yOrigin||0,c=h.xOffset||0,p=h.yOffset||0,_=l[0],m=l[1],g=l[2],v=l[3],y=l[4],T=l[5],b=e.split(" "),w=parseFloat(b[0])||0,x=parseFloat(b[1])||0;r?l!==xr&&(o=_*v-m*g)&&(u=w*(-m/o)+x*(_/o)-(_*T-m*y)/o,w=w*(v/o)+x*(-g/o)+(g*T-v*y)/o,x=u):(w=(s=Wd(t)).x+(~b[0].indexOf("%")?w/100*s.width:w),x=s.y+(~(b[1]||b[0]).indexOf("%")?x/100*s.height:x)),i||!1!==i&&h.smooth?(y=w-f,T=x-d,h.xOffset=c+(y*_+T*g)-y,h.yOffset=p+(y*m+T*v)-T):h.xOffset=h.yOffset=0,h.xOrigin=w,h.yOrigin=x,h.smooth=!!i,h.origin=e,h.originIsAbsolute=!!r,t.style[_r]="0px 0px",a&&(Zd(a,h,"xOrigin",f,w),Zd(a,h,"yOrigin",d,x),Zd(a,h,"xOffset",c,h.xOffset),Zd(a,h,"yOffset",p,h.yOffset)),t.setAttribute("data-svg-origin",w+" "+x)}function pe(t,e,r){var i=Za(e);return ia(parseFloat(e)+parseFloat(ae(t,"x",r+"px",i)))+i}function we(t,e,i,n,a){var s,o,u=360,h=r(a),l=parseFloat(a)*(h&&~a.indexOf("rad")?or:1)-n,f=n+l+"deg";return h&&("short"===(s=a.split("_")[1])&&(l%=u)!==l%180&&(l+=l<0?u:-u),"cw"===s&&l<0?l=(l+36e9)%u-~~(l/u)*u:"ccw"===s&&0<l&&(l=(l-36e9)%u-~~(l/u)*u)),t._pt=o=new ge(t._pt,e,i,n,l,xd),o.e=f,o.u="deg",t._props.push(i),o}function xe(t,e){for(var r in e)t[r]=e[r];return t}function ye(t,e,r){var i,n,a,s,o,u,h,l=xe({},r._gsap),f=r.style;for(n in l.svg?(a=r.getAttribute("transform"),r.setAttribute("transform",""),f[pr]=e,i=kr(r,1),Yd(r,pr),r.setAttribute("transform",a)):(a=getComputedStyle(r)[pr],f[pr]=e,i=kr(r,1),f[pr]=a),sr)(a=l[n])!==(s=i[n])&&"perspective,force3D,transformOrigin,svgOrigin".indexOf(n)<0&&(o=Za(a)!==(h=Za(s))?ae(r,n,a,h):parseFloat(a),u=parseFloat(s),t._pt=new ge(t._pt,i,n,o,u-o,wd),t._pt.u=h||0,t._props.push(n));xe(i,l)}var Ee,Re,Fe,Le,Ie,Be,Ye,Xe,Ze=Lt.Power0,Ne=Lt.Power1,Qe=Lt.Power2,Ue=Lt.Power3,qe=Lt.Power4,Ve=Lt.Linear,We=Lt.Quad,Ge=Lt.Cubic,He=Lt.Quart,Ke=Lt.Quint,Je=Lt.Strong,$e=Lt.Elastic,tr=Lt.Back,er=Lt.SteppedEase,rr=Lt.Bounce,ir=Lt.Sine,nr=Lt.Expo,ar=Lt.Circ,sr={},or=180/Math.PI,ur=Math.PI/180,hr=Math.atan2,lr=/([A-Z])/g,fr=/(left|right|width|margin|padding|x)/i,dr=/[\s,\(]\S/,cr={autoAlpha:"opacity,visibility",scale:"scaleX,scaleY",alpha:"opacity"},pr="transform",_r=pr+"Origin",mr="O,Moz,ms,Ms,Webkit".split(","),gr=function _checkPropPrefix(t,e,r){var i=(e||Ie).style,n=5;if(t in i&&!r)return t;for(t=t.charAt(0).toUpperCase()+t.substr(1);n--&&!(mr[n]+t in i););return n<0?null:(3===n?"ms":0<=n?mr[n]:"")+t},vr={deg:1,rad:1,turn:1},yr={grid:1,flex:1},Tr=function _get(t,e,r,i){var n;return Le||Td(),e in cr&&"transform"!==e&&~(e=cr[e]).indexOf(",")&&(e=e.split(",")[0]),sr[e]&&"transform"!==e?(n=kr(t,i),n="transformOrigin"!==e?n[e]:n.svg?n.origin:Or(Qd(t,_r))+" "+n.zOrigin+"px"):(n=t.style[e])&&"auto"!==n&&!i&&!~(n+"").indexOf("calc(")||(n=wr[e]&&wr[e](t,e,r)||Qd(t,e)||ga(t,e)||("opacity"===e?1:0)),r&&!~(n+"").trim().indexOf(" ")?ae(t,e,n,r)+r:n},br={top:"0%",bottom:"100%",left:"0%",right:"100%",center:"50%"},wr={clearProps:function clearProps(t,e,r,i,n){if("isFromStart"!==n.data){var a=t._pt=new ge(t._pt,e,r,0,0,fe);return a.u=i,a.pr=-10,a.tween=n,t._props.push(r),1}}},xr=[1,0,0,1,0,0],Mr={},kr=function _parseTransform(t,e){var r=t._gsap||new Zt(t);if("x"in r&&!e&&!r.uncache)return r;var i,n,a,s,o,u,h,l,f,d,c,p,_,m,g,v,y,T,b,w,x,M,k,O,A,P,C,S,D,z,E,R,F=t.style,L=r.scaleX<0,I="deg",B=getComputedStyle(t),j=Qd(t,_r)||"0";return i=n=a=u=h=l=f=d=c=0,s=o=1,r.svg=!(!t.getCTM||!Xd(t)),B.translate&&("none"===B.translate&&"none"===B.scale&&"none"===B.rotate||(F[pr]=("none"!==B.translate?"translate3d("+(B.translate+" 0 0").split(" ").slice(0,3).join(", ")+") ":"")+("none"!==B.rotate?"rotate("+B.rotate+") ":"")+("none"!==B.scale?"scale("+B.scale.split(" ").join(",")+") ":"")+("none"!==B[pr]?B[pr]:"")),F.scale=F.rotate=F.translate="none"),m=le(t,r.svg),r.svg&&(O=r.uncache?(A=t.getBBox(),j=r.xOrigin-A.x+"px "+(r.yOrigin-A.y)+"px",""):!e&&t.getAttribute("data-svg-origin"),me(t,O||j,!!O||r.originIsAbsolute,!1!==r.smooth,m)),p=r.xOrigin||0,_=r.yOrigin||0,m!==xr&&(T=m[0],b=m[1],w=m[2],x=m[3],i=M=m[4],n=k=m[5],6===m.length?(s=Math.sqrt(T*T+b*b),o=Math.sqrt(x*x+w*w),u=T||b?hr(b,T)*or:0,(f=w||x?hr(w,x)*or+u:0)&&(o*=Math.abs(Math.cos(f*ur))),r.svg&&(i-=p-(p*T+_*w),n-=_-(p*b+_*x))):(R=m[6],z=m[7],C=m[8],S=m[9],D=m[10],E=m[11],i=m[12],n=m[13],a=m[14],h=(g=hr(R,D))*or,g&&(O=M*(v=Math.cos(-g))+C*(y=Math.sin(-g)),A=k*v+S*y,P=R*v+D*y,C=M*-y+C*v,S=k*-y+S*v,D=R*-y+D*v,E=z*-y+E*v,M=O,k=A,R=P),l=(g=hr(-w,D))*or,g&&(v=Math.cos(-g),E=x*(y=Math.sin(-g))+E*v,T=O=T*v-C*y,b=A=b*v-S*y,w=P=w*v-D*y),u=(g=hr(b,T))*or,g&&(O=T*(v=Math.cos(g))+b*(y=Math.sin(g)),A=M*v+k*y,b=b*v-T*y,k=k*v-M*y,T=O,M=A),h&&359.9<Math.abs(h)+Math.abs(u)&&(h=u=0,l=180-l),s=ia(Math.sqrt(T*T+b*b+w*w)),o=ia(Math.sqrt(k*k+R*R)),g=hr(M,k),f=2e-4<Math.abs(g)?g*or:0,c=E?1/(E<0?-E:E):0),r.svg&&(O=t.getAttribute("transform"),r.forceCSS=t.setAttribute("transform","")||!je(Qd(t,pr)),O&&t.setAttribute("transform",O))),90<Math.abs(f)&&Math.abs(f)<270&&(L?(s*=-1,f+=u<=0?180:-180,u+=u<=0?180:-180):(o*=-1,f+=f<=0?180:-180)),e=e||r.uncache,r.x=i-((r.xPercent=i&&(!e&&r.xPercent||(Math.round(t.offsetWidth/2)===Math.round(-i)?-50:0)))?t.offsetWidth*r.xPercent/100:0)+"px",r.y=n-((r.yPercent=n&&(!e&&r.yPercent||(Math.round(t.offsetHeight/2)===Math.round(-n)?-50:0)))?t.offsetHeight*r.yPercent/100:0)+"px",r.z=a+"px",r.scaleX=ia(s),r.scaleY=ia(o),r.rotation=ia(u)+I,r.rotationX=ia(h)+I,r.rotationY=ia(l)+I,r.skewX=f+I,r.skewY=d+I,r.transformPerspective=c+"px",(r.zOrigin=parseFloat(j.split(" ")[2])||!e&&r.zOrigin||0)&&(F[_r]=Or(j)),r.xOffset=r.yOffset=0,r.force3D=X.force3D,r.renderTransform=r.svg?zr:Xe?Dr:Ar,r.uncache=0,r},Or=function _firstTwoOnly(t){return(t=t.split(" "))[0]+" "+t[1]},Ar=function _renderNon3DTransforms(t,e){e.z="0px",e.rotationY=e.rotationX="0deg",e.force3D=0,Dr(t,e)},Pr="0deg",Cr="0px",Sr=") ",Dr=function _renderCSSTransforms(t,e){var r=e||this,i=r.xPercent,n=r.yPercent,a=r.x,s=r.y,o=r.z,u=r.rotation,h=r.rotationY,l=r.rotationX,f=r.skewX,d=r.skewY,c=r.scaleX,p=r.scaleY,_=r.transformPerspective,m=r.force3D,g=r.target,v=r.zOrigin,y="",T="auto"===m&&t&&1!==t||!0===m;if(v&&(l!==Pr||h!==Pr)){var b,w=parseFloat(h)*ur,x=Math.sin(w),M=Math.cos(w);w=parseFloat(l)*ur,b=Math.cos(w),a=pe(g,a,x*b*-v),s=pe(g,s,-Math.sin(w)*-v),o=pe(g,o,M*b*-v+v)}_!==Cr&&(y+="perspective("+_+Sr),(i||n)&&(y+="translate("+i+"%, "+n+"%) "),!T&&a===Cr&&s===Cr&&o===Cr||(y+=o!==Cr||T?"translate3d("+a+", "+s+", "+o+") ":"translate("+a+", "+s+Sr),u!==Pr&&(y+="rotate("+u+Sr),h!==Pr&&(y+="rotateY("+h+Sr),l!==Pr&&(y+="rotateX("+l+Sr),f===Pr&&d===Pr||(y+="skew("+f+", "+d+Sr),1===c&&1===p||(y+="scale("+c+", "+p+Sr),g.style[pr]=y||"translate(0, 0)"},zr=function _renderSVGTransforms(t,e){var r,i,n,a,s,o=e||this,u=o.xPercent,h=o.yPercent,l=o.x,f=o.y,d=o.rotation,c=o.skewX,p=o.skewY,_=o.scaleX,m=o.scaleY,g=o.target,v=o.xOrigin,y=o.yOrigin,T=o.xOffset,b=o.yOffset,w=o.forceCSS,x=parseFloat(l),M=parseFloat(f);d=parseFloat(d),c=parseFloat(c),(p=parseFloat(p))&&(c+=p=parseFloat(p),d+=p),d||c?(d*=ur,c*=ur,r=Math.cos(d)*_,i=Math.sin(d)*_,n=Math.sin(d-c)*-m,a=Math.cos(d-c)*m,c&&(p*=ur,s=Math.tan(c-p),n*=s=Math.sqrt(1+s*s),a*=s,p&&(s=Math.tan(p),r*=s=Math.sqrt(1+s*s),i*=s)),r=ia(r),i=ia(i),n=ia(n),a=ia(a)):(r=_,a=m,i=n=0),(x&&!~(l+"").indexOf("px")||M&&!~(f+"").indexOf("px"))&&(x=ae(g,"x",l,"px"),M=ae(g,"y",f,"px")),(v||y||T||b)&&(x=ia(x+v-(v*r+y*n)+T),M=ia(M+y-(v*i+y*a)+b)),(u||h)&&(s=g.getBBox(),x=ia(x+u/100*s.width),M=ia(M+h/100*s.height)),s="matrix("+r+","+i+","+n+","+a+","+x+","+M+")",g.setAttribute("transform",s),w&&(g.style[pr]=s)};ha("padding,margin,Width,Radius",function(e,r){var t="Right",i="Bottom",n="Left",o=(r<3?["Top",t,i,n]:["Top"+n,"Top"+t,i+t,i+n]).map(function(t){return r<2?e+t:"border"+t+e});wr[1<r?"border"+e:e]=function(e,t,r,i,n){var a,s;if(arguments.length<4)return a=o.map(function(t){return Tr(e,t,r)}),5===(s=a.join(" ")).split(a[0]).length?a[0]:s;a=(i+"").split(" "),s={},o.forEach(function(t,e){return s[t]=a[e]=a[e]||a[(e-1)/2|0]}),e.init(t,s,n)}});var Er,Rr,Fr,Lr={name:"css",register:Td,targetTest:function targetTest(t){return t.style&&t.nodeType},init:function init(t,e,i,n,a){var s,o,u,h,l,f,d,c,p,_,m,g,v,y,T,b,w=this._props,x=t.style,M=i.vars.startAt;for(d in Le||Td(),this.styles=this.styles||Nd(t),b=this.styles.props,this.tween=i,e)if("autoRound"!==d&&(o=e[d],!pt[d]||!bc(d,e,i,n,t,a)))if(l=typeof o,f=wr[d],"function"===l&&(l=typeof(o=o.call(i,n,t,a))),"string"===l&&~o.indexOf("random(")&&(o=pb(o)),f)f(this,t,d,o,i)&&(T=1);else if("--"===d.substr(0,2))s=(getComputedStyle(t).getPropertyValue(d)+"").trim(),o+="",zt.lastIndex=0,zt.test(s)||(c=Za(s),p=Za(o)),p?c!==p&&(s=ae(t,d,s,p)+p):c&&(o+=c),this.add(x,"setProperty",s,o,n,a,0,0,d),w.push(d),b.push(d,0,x[d]);else if("undefined"!==l){if(M&&d in M?(s="function"==typeof M[d]?M[d].call(i,n,t,a):M[d],r(s)&&~s.indexOf("random(")&&(s=pb(s)),Za(s+"")||"auto"===s||(s+=X.units[d]||Za(Tr(t,d))||""),"="===(s+"").charAt(1)&&(s=Tr(t,d))):s=Tr(t,d),h=parseFloat(s),(_="string"===l&&"="===o.charAt(1)&&o.substr(0,2))&&(o=o.substr(2)),u=parseFloat(o),d in cr&&("autoAlpha"===d&&(1===h&&"hidden"===Tr(t,"visibility")&&u&&(h=0),b.push("visibility",0,x.visibility),Zd(this,x,"visibility",h?"inherit":"hidden",u?"inherit":"hidden",!u)),"scale"!==d&&"transform"!==d&&~(d=cr[d]).indexOf(",")&&(d=d.split(",")[0])),m=d in sr)if(this.styles.save(d),"string"===l&&"var(--"===o.substring(0,6)&&(o=Qd(t,o.substring(4,o.indexOf(")"))),u=parseFloat(o)),g||((v=t._gsap).renderTransform&&!e.parseTransform||kr(t,e.parseTransform),y=!1!==e.smoothOrigin&&v.smooth,(g=this._pt=new ge(this._pt,x,pr,0,1,v.renderTransform,v,0,-1)).dep=1),"scale"===d)this._pt=new ge(this._pt,v,"scaleY",v.scaleY,(_?ka(v.scaleY,_+u):u)-v.scaleY||0,wd),this._pt.u=0,w.push("scaleY",d),d+="X";else{if("transformOrigin"===d){b.push(_r,0,x[_r]),o=ee(o),v.svg?me(t,o,0,y,0,this):((p=parseFloat(o.split(" ")[2])||0)!==v.zOrigin&&Zd(this,v,"zOrigin",v.zOrigin,p),Zd(this,x,d,Or(s),Or(o)));continue}if("svgOrigin"===d){me(t,o,1,y,0,this);continue}if(d in Mr){we(this,v,d,h,_?ka(h,_+o):o);continue}if("smoothOrigin"===d){Zd(this,v,"smooth",v.smooth,o);continue}if("force3D"===d){v[d]=o;continue}if("transform"===d){ye(this,o,t);continue}}else d in x||(d=gr(d)||d);if(m||(u||0===u)&&(h||0===h)&&!dr.test(o)&&d in x)u=u||0,(c=(s+"").substr((h+"").length))!==(p=Za(o)||(d in X.units?X.units[d]:c))&&(h=ae(t,d,s,p)),this._pt=new ge(this._pt,m?v:x,d,h,(_?ka(h,_+u):u)-h,m||"px"!==p&&"zIndex"!==d||!1===e.autoRound?wd:zd),this._pt.u=p||0,c!==p&&"%"!==p&&(this._pt.b=s,this._pt.r=yd);else if(d in x)ce.call(this,t,d,s,_?_+o:o);else if(d in t)this.add(t,d,s||t[d],_?_+o:o,n,a);else if("parseTransform"!==d){Q(d,o);continue}m||(d in x?b.push(d,0,x[d]):"function"==typeof t[d]?b.push(d,2,t[d]()):b.push(d,1,s||t[d])),w.push(d)}T&&_e(this)},render:function render(t,e){if(e.tween._time||!Ye())for(var r=e._pt;r;)r.r(t,r.d),r=r._next;else e.styles.revert()},get:Tr,aliases:cr,getSetter:function getSetter(t,e,r){var i=cr[e];return i&&i.indexOf(",")<0&&(e=i),e in sr&&e!==_r&&(t._gsap.x||Tr(t,"x"))?r&&Be===r?"scale"===e?Fd:Ed:(Be=r||{})&&("scale"===e?Gd:Hd):t.style&&!u(t.style[e])?Cd:~e.indexOf("-")?Dd:ie(t,e)},core:{_removeProperty:Yd,_getMatrix:le}};ze.utils.checkPrefix=gr,ze.core.getStyleSaver=Nd,Fr=ha((Er="x,y,z,scale,scaleX,scaleY,xPercent,yPercent")+","+(Rr="rotation,rotationX,rotationY,skewX,skewY")+",transform,transformOrigin,svgOrigin,force3D,smoothOrigin,transformPerspective",function(t){sr[t]=1}),ha(Rr,function(t){X.units[t]="deg",Mr[t]=1}),cr[Fr[13]]=Er+","+Rr,ha("0:translateX,1:translateY,2:translateZ,8:rotate,8:rotationZ,8:rotateZ,9:rotateX,10:rotateY",function(t){var e=t.split(":");cr[e[1]]=Fr[e[0]]}),ha("x,y,z,top,right,bottom,left,width,height,fontSize,padding,margin,perspective",function(t){X.units[t]="px"}),ze.registerPlugin(Lr);var Ir=ze.registerPlugin(Lr)||ze,Br=Ir.core.Tween;e.Back=tr,e.Bounce=rr,e.CSSPlugin=Lr,e.Circ=ar,e.Cubic=Ge,e.Elastic=$e,e.Expo=nr,e.Linear=Ve,e.Power0=Ze,e.Power1=Ne,e.Power2=Qe,e.Power3=Ue,e.Power4=qe,e.Quad=We,e.Quart=He,e.Quint=Ke,e.Sine=ir,e.SteppedEase=er,e.Strong=Je,e.TimelineLite=Qt,e.TimelineMax=Qt,e.TweenLite=Jt,e.TweenMax=Br,e.default=Ir,e.gsap=Ir;if (typeof(window)==="undefined"||window!==e){Object.defineProperty(e,"__esModule",{value:!0})} else {delete e.default}});
+
+
+</script>
+<script>
+/*!
+ * DrawSVGPlugin 3.13.0
+ * https://gsap.com
+ * 
+ * @license Copyright 2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license.
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?t(exports):"function"==typeof define&&define.amd?define(["exports"],t):t((e=e||self).window=e.window||{})}(this,function(e){"use strict";function l(){return"undefined"!=typeof window}function m(){return t||l()&&(t=window.gsap)&&t.registerPlugin&&t}function p(e){return Math.round(1e4*e)/1e4}function q(e){return parseFloat(e)||0}function r(e,t){var r=q(e);return~e.indexOf("%")?r/100*t:r}function s(e,t){return q(e.getAttribute(t))}function u(e,t,r,n,s,i){return D(Math.pow((q(r)-q(e))*s,2)+Math.pow((q(n)-q(t))*i,2))}function v(e){return console.warn(e)}function w(e){return"non-scaling-stroke"===e.getAttribute("vector-effect")}function z(e){if(!(e=k(e)[0]))return 0;var t,r,n,i,o,a,f,h=e.tagName.toLowerCase(),l=e.style,d=1,c=1;w(e)&&(c=e.getScreenCTM(),d=D(c.a*c.a+c.b*c.b),c=D(c.d*c.d+c.c*c.c));try{r=e.getBBox()}catch(e){v("Some browsers won't measure invisible elements (like display:none or masks inside defs).")}var g=r||{x:0,y:0,width:0,height:0},_=g.x,y=g.y,x=g.width,m=g.height;if(r&&(x||m)||!M[h]||(x=s(e,M[h][0]),m=s(e,M[h][1]),"rect"!==h&&"line"!==h&&(x*=2,m*=2),"line"===h&&(_=s(e,"x1"),y=s(e,"y1"),x=Math.abs(x-_),m=Math.abs(m-y))),"path"===h)i=l.strokeDasharray,l.strokeDasharray="none",t=e.getTotalLength()||0,p(d)!==p(c)&&!b&&(b=1)&&v("Warning: <path> length cannot be measured when vector-effect is non-scaling-stroke and the element isn't proportionally scaled."),t*=(d+c)/2,l.strokeDasharray=i;else if("rect"===h)t=2*x*d+2*m*c;else if("line"===h)t=u(_,y,_+x,y+m,d,c);else if("polyline"===h||"polygon"===h)for(n=e.getAttribute("points").match(P)||[],"polygon"===h&&n.push(n[0],n[1]),t=0,o=2;o<n.length;o+=2)t+=u(n[o-2],n[o-1],n[o],n[o+1],d,c)||0;else"circle"!==h&&"ellipse"!==h||(a=x/2*d,f=m/2*c,t=Math.PI*(3*(a+f)-D((3*a+f)*(a+3*f))));return t||0}function A(e,t){if(!(e=k(e)[0]))return[0,0];t=t||z(e)+1;var r=f.getComputedStyle(e),n=r.strokeDasharray||"",s=q(r.strokeDashoffset),i=n.indexOf(",");return i<0&&(i=n.indexOf(" ")),t<(n=i<0?t:q(n.substr(0,i)))&&(n=t),[-s||0,n-s||0]}function B(){l()&&(f=window,d=t=m(),k=t.utils.toArray,c=t.core.getStyleSaver,g=t.core.reverting||function(){},h=-1!==((f.navigator||{}).userAgent||"").indexOf("Edge"))}var t,k,f,h,d,b,c,g,P=/[-+=\.]*\d+[\.e\-\+]*\d*[e\-\+]*\d*/gi,M={rect:["width","height"],circle:["r","r"],ellipse:["rx","ry"],line:["x2","y2"]},D=Math.sqrt,n={version:"3.13.0",name:"drawSVG",register:function register(e){t=e,B()},init:function init(e,t,n){if(!e.getBBox)return!1;d||B();var s,i,o,a=z(e);return this.styles=c&&c(e,"strokeDashoffset,strokeDasharray,strokeMiterlimit"),this.tween=n,this._style=e.style,this._target=e,t+""=="true"?t="0 100%":t?-1===(t+"").indexOf(" ")&&(t="0 "+t):t="0 0",i=function _parse(e,t,n){var s,i,o=e.indexOf(" ");return i=o<0?(s=void 0!==n?n+"":e,e):(s=e.substr(0,o),e.substr(o+1)),s=r(s,t),(i=r(i,t))<s?[i,s]:[s,i]}(t,a,(s=A(e,a))[0]),this._length=p(a),this._dash=p(s[1]-s[0]),this._offset=p(-s[0]),this._dashPT=this.add(this,"_dash",this._dash,p(i[1]-i[0]),0,0,0,0,0,1),this._offsetPT=this.add(this,"_offset",this._offset,p(-i[0]),0,0,0,0,0,1),h&&(o=f.getComputedStyle(e)).strokeLinecap!==o.strokeLinejoin&&(i=q(o.strokeMiterlimit),this.add(e.style,"strokeMiterlimit",i,i+.01)),this._live=w(e)||~(t+"").indexOf("live"),this._nowrap=~(t+"").indexOf("nowrap"),this._props.push("drawSVG"),1},render:function render(e,t){if(t.tween._time||!g()){var r,n,s,i,o=t._pt,a=t._style;if(o){for(t._live&&(r=z(t._target))!==t._length&&(n=r/t._length,t._length=r,t._offsetPT&&(t._offsetPT.s*=n,t._offsetPT.c*=n),t._dashPT?(t._dashPT.s*=n,t._dashPT.c*=n):t._dash*=n);o;)o.r(e,o.d),o=o._next;s=t._dash||e&&1!==e&&1e-4||0,r=t._length-s+.1,i=t._offset,s&&i&&s+Math.abs(i%t._length)>t._length-.05&&(i+=i<0?.005:-.005)&&(r+=.005),a.strokeDashoffset=s?i:i+.001,a.strokeDasharray=r<.1?"none":s?s+"px,"+(t._nowrap?999999:r)+"px":"0px, 999999px"}}else t.styles.revert()},getLength:z,getPosition:A};m()&&t.registerPlugin(n),e.DrawSVGPlugin=n,e.default=n;if (typeof(window)==="undefined"||window!==e){Object.defineProperty(e,"__esModule",{value:!0})} else {delete e.default}});
+
+
+</script>
+<script>
+/*!
+ * SplitText 3.13.0
+ * https://gsap.com
+ *
+ * @license Copyright 2025, GreenSock. All rights reserved. Subject to the terms at https://gsap.com/standard-license.
+ * @author: Jack Doyle
+ */
+
+(function(B,A){typeof exports=="object"&&typeof module!="undefined"?A(exports):typeof define=="function"&&define.amd?define(["exports"],A):(B=typeof globalThis!="undefined"?globalThis:B||self,A(B.window=B.window||{}))})(this,function(B){"use strict";let A,_,G,re=()=>G||U.register(window.gsap),V=typeof Intl!="undefined"?new Intl.Segmenter:0,P=e=>typeof e=="string"?P(document.querySelectorAll(e)):"length"in e?Array.from(e):[e],X=e=>P(e).filter(t=>t instanceof HTMLElement),J=[],K=function(){},oe=/\s+/g,Y=new RegExp("\\p{RI}\\p{RI}|\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?(\\u{200D}\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?)*|.","gu"),Z={left:0,top:0,width:0,height:0},ee=(e,t)=>{if(t){let s=new Set(e.join("").match(t)||J),i=e.length,o,c,n,a;if(s.size)for(;--i>-1;){c=e[i];for(n of s)if(n.startsWith(c)&&n.length>c.length){for(o=0,a=c;n.startsWith(a+=e[i+ ++o])&&a.length<n.length;);if(o&&a.length===n.length){e[i]=n,e.splice(i+1,o);break}}}}return e},te=e=>window.getComputedStyle(e).display==="inline"&&(e.style.display="inline-block"),z=(e,t,s)=>t.insertBefore(typeof e=="string"?document.createTextNode(e):e,s),Q=(e,t,s)=>{let i=t[e+"sClass"]||"",{tag:o="div",aria:c="auto",propIndex:n=!1}=t,a=e==="line"?"block":"inline-block",h=i.indexOf("++")>-1,b=x=>{let g=document.createElement(o),C=s.length+1;return i&&(g.className=i+(h?" "+i+C:"")),n&&g.style.setProperty("--"+e,C+""),c!=="none"&&g.setAttribute("aria-hidden","true"),o!=="span"&&(g.style.position="relative",g.style.display=a),g.textContent=x,s.push(g),g};return h&&(i=i.replace("++","")),b.collection=s,b},ae=(e,t,s,i)=>{let o=Q("line",s,i),c=window.getComputedStyle(e).textAlign||"left";return(n,a)=>{let h=o("");for(h.style.textAlign=c,e.insertBefore(h,t[n]);n<a;n++)h.appendChild(t[n]);h.normalize()}},ie=(e,t,s,i,o,c,n,a,h,b)=>{var x;let g=Array.from(e.childNodes),C=0,{wordDelimiter:R,reduceWhiteSpace:L=!0,prepareText:$}=t,q=e.getBoundingClientRect(),j=q,D=!L&&window.getComputedStyle(e).whiteSpace.substring(0,3)==="pre",E=0,v=s.collection,r,f,H,l,m,y,I,d,u,W,S,O,T,F,w,p,k,N;for(typeof R=="object"?(H=R.delimiter||R,f=R.replaceWith||""):f=R===""?"":R||" ",r=f!==" ";C<g.length;C++)if(l=g[C],l.nodeType===3){for(w=l.textContent||"",L?w=w.replace(oe," "):D&&(w=w.replace(/\n/g,f+`
+`)),$&&(w=$(w,e)),l.textContent=w,m=f||H?w.split(H||f):w.match(a)||J,k=m[m.length-1],d=r?k.slice(-1)===" ":!k,k||m.pop(),j=q,I=r?m[0].charAt(0)===" ":!m[0],I&&z(" ",e,l),m[0]||m.shift(),ee(m,h),c&&b||(l.textContent=""),u=1;u<=m.length;u++)if(p=m[u-1],!L&&D&&p.charAt(0)===`
+`&&((x=l.previousSibling)==null||x.remove(),z(document.createElement("br"),e,l),p=p.slice(1)),!L&&p==="")z(f,e,l);else if(p===" ")e.insertBefore(document.createTextNode(" "),l);else{if(r&&p.charAt(0)===" "&&z(" ",e,l),E&&u===1&&!I&&v.indexOf(E.parentNode)>-1?(y=v[v.length-1],y.appendChild(document.createTextNode(i?"":p))):(y=s(i?"":p),z(y,e,l),E&&u===1&&!I&&y.insertBefore(E,y.firstChild)),i)for(S=V?ee([...V.segment(p)].map(M=>M.segment),h):p.match(a)||J,N=0;N<S.length;N++)y.appendChild(S[N]===" "?document.createTextNode(" "):i(S[N]));if(c&&b){if(w=l.textContent=w.substring(p.length+1,w.length),W=y.getBoundingClientRect(),W.top>j.top&&W.left<=j.left){for(O=e.cloneNode(),T=e.childNodes[0];T&&T!==y;)F=T,T=T.nextSibling,O.appendChild(F);e.parentNode.insertBefore(O,e),o&&te(O)}j=W}(u<m.length||d)&&z(u>=m.length?" ":r&&p.slice(-1)===" "?" "+f:f,e,l)}e.removeChild(l),E=0}else l.nodeType===1&&(n&&n.indexOf(l)>-1?(v.indexOf(l.previousSibling)>-1&&v[v.length-1].appendChild(l),E=l):(ie(l,t,s,i,o,c,n,a,h,!0),E=0),o&&te(l))};const ne=class se{constructor(t,s){this.isSplit=!1,re(),this.elements=X(t),this.chars=[],this.words=[],this.lines=[],this.masks=[],this.vars=s,this._split=()=>this.isSplit&&this.split(this.vars);let i=[],o,c=()=>{let n=i.length,a;for(;n--;){a=i[n];let h=a.element.offsetWidth;if(h!==a.width){a.width=h,this._split();return}}};this._data={orig:i,obs:typeof ResizeObserver!="undefined"&&new ResizeObserver(()=>{clearTimeout(o),o=setTimeout(c,200)})},K(this),this.split(s)}split(t){this.isSplit&&this.revert(),this.vars=t=t||this.vars||{};let{type:s="chars,words,lines",aria:i="auto",deepSlice:o=!0,smartWrap:c,onSplit:n,autoSplit:a=!1,specialChars:h,mask:b}=this.vars,x=s.indexOf("lines")>-1,g=s.indexOf("chars")>-1,C=s.indexOf("words")>-1,R=g&&!C&&!x,L=h&&("push"in h?new RegExp("(?:"+h.join("|")+")","gu"):h),$=L?new RegExp(L.source+"|"+Y.source,"gu"):Y,q=!!t.ignore&&X(t.ignore),{orig:j,animTime:D,obs:E}=this._data,v;return(g||C||x)&&(this.elements.forEach((r,f)=>{j[f]={element:r,html:r.innerHTML,ariaL:r.getAttribute("aria-label"),ariaH:r.getAttribute("aria-hidden")},i==="auto"?r.setAttribute("aria-label",(r.textContent||"").trim()):i==="hidden"&&r.setAttribute("aria-hidden","true");let H=[],l=[],m=[],y=g?Q("char",t,H):null,I=Q("word",t,l),d,u,W,S;if(ie(r,t,I,y,R,o&&(x||R),q,$,L,!1),x){let O=P(r.childNodes),T=ae(r,O,t,m),F,w=[],p=0,k=O.map(M=>M.nodeType===1?M.getBoundingClientRect():Z),N=Z;for(d=0;d<O.length;d++)F=O[d],F.nodeType===1&&(F.nodeName==="BR"?(w.push(F),T(p,d+1),p=d+1,N=k[p]):(d&&k[d].top>N.top&&k[d].left<=N.left&&(T(p,d),p=d),N=k[d]));p<d&&T(p,d),w.forEach(M=>{var le;return(le=M.parentNode)==null?void 0:le.removeChild(M)})}if(!C){for(d=0;d<l.length;d++)if(u=l[d],g||!u.nextSibling||u.nextSibling.nodeType!==3)if(c&&!x){for(W=document.createElement("span"),W.style.whiteSpace="nowrap";u.firstChild;)W.appendChild(u.firstChild);u.replaceWith(W)}else u.replaceWith(...u.childNodes);else S=u.nextSibling,S&&S.nodeType===3&&(S.textContent=(u.textContent||"")+(S.textContent||""),u.remove());l.length=0,r.normalize()}this.lines.push(...m),this.words.push(...l),this.chars.push(...H)}),b&&this[b]&&this.masks.push(...this[b].map(r=>{let f=r.cloneNode();return r.replaceWith(f),f.appendChild(r),r.className&&(f.className=r.className.replace(/(\b\w+\b)/g,"$1-mask")),f.style.overflow="clip",f}))),this.isSplit=!0,_&&(a?_.addEventListener("loadingdone",this._split):_.status==="loading"&&console.warn("SplitText called before fonts loaded")),(v=n&&n(this))&&v.totalTime&&(this._data.anim=D?v.totalTime(D):v),x&&a&&this.elements.forEach((r,f)=>{j[f].width=r.offsetWidth,E&&E.observe(r)}),this}revert(){var t,s;let{orig:i,anim:o,obs:c}=this._data;return c&&c.disconnect(),i.forEach(({element:n,html:a,ariaL:h,ariaH:b})=>{n.innerHTML=a,h?n.setAttribute("aria-label",h):n.removeAttribute("aria-label"),b?n.setAttribute("aria-hidden",b):n.removeAttribute("aria-hidden")}),this.chars.length=this.words.length=this.lines.length=i.length=this.masks.length=0,this.isSplit=!1,_==null||_.removeEventListener("loadingdone",this._split),o&&(this._data.animTime=o.totalTime(),o.revert()),(s=(t=this.vars).onRevert)==null||s.call(t,this),this}static create(t,s){return new se(t,s)}static register(t){A=A||t||window.gsap,A&&(P=A.utils.toArray,K=A.core.context||K),!G&&window.innerWidth>0&&(_=document.fonts,G=!0)}};ne.version="3.13.0";let U=ne;B.SplitText=U,B.default=U,Object.defineProperty(B,"__esModule",{value:!0})});
+
+</script>
+
+<!-- Bản nháp B: khung bản vẽ, nét tự kẻ, số đếm lên, sơ đồ tự lắp. Chạy sau app.part và GSAP. Không sửa app.part. -->
+<script>
+(()=>{
+if(PRES||!window.gsap)return;
+const NS="http://www.w3.org/2000/svg",stage=$("#stage"),motion=!reduce;
+const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.append(e);return e};
+
+/* Đã bỏ khung viền ngoài theo góp ý của người dùng (04/11/2026). */
+
+/* 2. Góc tờ: chỉ người nói và số tờ, không khung, chữ mờ để ít gây chú ý */
+const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
+tb.innerHTML=`<span id="tbw"></span><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span>`;
+stage.insertBefore(tb,$("#notes"));
+function tbSet(i){const s=slides[i];$("#tbw").textContent="Người "+s.dataset.who;
+ $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
+
+/* 2b. Số câu hỏi rất lớn, nét viền mờ ở góc phải trên (chỉ ở ba phần câu hỏi) */
+slides.forEach(s=>{const a=+s.dataset.act;if(!(a>=1&&a<=3))return;const g=el("svg",{class:"ghostn",viewBox:"0 0 300 300","aria-hidden":"true"});
+ el("line",{x1:-40,y1:198,x2:200,y2:198},g);const t=el("text",{x:200,y:190,"text-anchor":"end"},g);t.textContent=a;
+ const l=el("text",{class:"gl",x:52,y:190,"text-anchor":"end"},g);l.textContent="CÂU HỎI";s.prepend(g)});
+
+/* 2c. Tách tiêu đề thành từng từ; các từ trong một cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng, phần in màu) hiện cùng lúc */
+function split(h){if(h.dataset.k)return+h.dataset.k;let k=0,has=false;
+ const walk=n=>{[...n.childNodes].forEach(c=>{
+  if(c.nodeType===3){const f=document.createDocumentFragment();
+   c.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}
+    const w=document.createElement("span");w.className="w";const wi=document.createElement("span");wi.className="wi";wi.textContent=t;wi.dataset.k=k;w.append(wi);f.append(w);has=true;
+    if(/[,;:?.!]["”]?$/.test(t)){k++;has=false}});c.replaceWith(f)}
+  else if(c.nodeName==="BR"){if(has){k++;has=false}}
+  else if(c.nodeName==="EM"){if(has){k++;has=false}walk(c);if(has){k++;has=false}}
+  else walk(c)})};
+ walk(h);h.dataset.k=k+1;return k+1}
+$$(".s h1,.s h2").forEach(split);
+function heads(s,t0,root){const tl=gsap.timeline({delay:t0});
+ $$("h1,h2",root||s).forEach((h,j)=>{const n=+h.dataset.k||split(h),at=j*.45;
+  for(let k=0;k<n;k++){const ws=$$(`.wi[data-k="${k}"]`,h);if(ws.length)tl.fromTo(ws,{yPercent:118},{yPercent:0,duration:.55,ease:"power3.out",stagger:.03},at+k*.3)}});
+ return tl}
+
+/* 3. Viền khối do JS kẻ, để có thể vẽ dần */
+const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
+function outline(root){$$(OL,root).forEach(b=>{if(b.querySelector(":scope>svg.ol"))return;const s=el("svg",{class:"ol","aria-hidden":"true"});el("rect",{x:0,y:0,width:"100%",height:"100%",pathLength:1},s);b.prepend(s)})}
+outline(stage);new MutationObserver(()=>outline($("#plan"))).observe($("#plan"),{childList:true});
+
+/* 4. Bánh răng ở tâm sơ đồ */
+function gearPath(n=18,R=146,r=130,c=150){let d="";for(let k=0;k<n;k++){const a=k/n*2*Math.PI,w=Math.PI/n;
+  const p=[[r,a-w*.55],[R,a-w*.32],[R,a+w*.32],[r,a+w*.55]].map(([q,t])=>`${(c+q*Math.cos(t)).toFixed(1)} ${(c+q*Math.sin(t)).toFixed(1)}`);
+  d+=(k?" L":"M")+p.join(" L")}return d+"Z"}
+$$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden":"true"});el("path",{class:"gear",d:gearPath()},s);
+ el("circle",{cx:150,cy:150,r:112,style:"fill:none;stroke:var(--son);stroke-width:1.2;stroke-dasharray:3 6"},s);g.prepend(s)});
+
+/* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
+$$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
+/* Slide 18: bản B giữ mặt đồng hồ như trước (người dùng chọn), dùng dữ liệu G mới của bản chính */
+(()=>{const gz=$("#gauges");if(!gz)return;gz.innerHTML=G.map(g=>{const p=Math.min(1,g[2]/g[3]),C=2*Math.PI*78;return`<div class="panel gc"><h3 style="font-size:25px;min-height:58px">${g[0]}</h3><svg viewBox="0 0 200 200" style="width:100%;max-width:230px;align-self:center"><circle class="gt" cx="100" cy="100" r="78" fill="none" stroke-width="20"/><circle class="arc" cx="100" cy="100" r="78" fill="none" stroke-width="20" transform="rotate(-90 100 100)" stroke-dasharray="${C}" style="stroke:var(${g[10]});--o:${C};--to:${C*(1-p)}"/><text class="gv" x="100" y="98" text-anchor="middle" font-size="34" font-weight="800" font-family="var(--display)">${g[4]}</text><text class="gs" x="100" y="124" text-anchor="middle" font-size="15">${g[5]}</text></svg><p style="font-size:24px">Mốc 2030: <b class="n" data-c="${g[9]}">${g[6]}</b></p><p class="sm" style="font-size:18px">Đơn vị: ${g[1]}. <span class="n" data-c="${g[8]}">Nguồn số hiện tại</span>. Mốc theo ${g[7]}.${g[11]?" "+g[11][0].toUpperCase()+g[11].slice(1)+".":""}</p></div>`}).join("")})();
+$$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
+ el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}
+ el("path",{class:"tgt",d:"M100 -9 l-7 -11 h14z"},s)});
+
+/* 6. Đường c/v trong mô phỏng */
+(()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
+ const pts=[];for(let a=0;a<=100;a++){const o=window.__sim(a/100,false);pts.push([30+a*3.5,150-(o.r-1)/2.5*130])}
+ const d="M"+pts.map(q=>q.map(v=>v.toFixed(1)).join(" ")).join(" L"),rEnd=window.__sim(1,false).r;
+ let grid="";for(let k=0;k<=10;k++)grid+=`<line class="gr" x1="${30+k*35}" y1="14" x2="${30+k*35}" y2="150"/>`;for(let k=0;k<=5;k++)grid+=`<line class="gr" x1="30" y1="${150-k*26}" x2="380" y2="${150-k*26}"/>`;
+ w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Đường c/v tăng theo mức tự động hóa">${grid}<line class="ax" x1="30" y1="150" x2="384" y2="150"/><line class="ax" x1="30" y1="150" x2="30" y2="8"/><path class="cvg" d="${d}"/><path class="cv" d="${d}"/><circle class="hd" r="7" cx="30" cy="150"/><text x="30" y="172">0%</text><text x="380" y="172" text-anchor="end">100% tự động</text><text x="38" y="128">c/v = ${fmt(1,2)}</text><text class="re" x="372" y="22" text-anchor="end">c/v = ${fmt(rEnd,2)}</text></svg>`;
+ const cv=$(".cv",w),hd=$(".hd",w),re=$(".re",w),L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+ cv.style.strokeDasharray=L[100]+" "+L[100];
+ const upd=()=>{const a=Math.round(+$("#simA").value);cv.style.strokeDashoffset=L[100]-Math.max(.01,L[a]);hd.setAttribute("cx",pts[a][0]);hd.setAttribute("cy",pts[a][1]);re.style.opacity=a>=100?1:.25};
+ const base=runSim;window.runSim=function(){base();upd()};runSim=window.runSim;upd()})();
+
+/* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
+function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
+function elbow(sx,sy,ex,ey,vert){const r=12;
+ if(vert){if(Math.abs(ex-sx)<2)return`M${sx} ${sy} V${ey}`;const my=(sy+ey)/2,k=Math.min(r,Math.abs(ex-sx)/2,(ey-sy)/2),dx=Math.sign(ex-sx);
+  return`M${sx} ${sy} V${my-k} Q${sx} ${my} ${sx+dx*k} ${my} H${ex-dx*k} Q${ex} ${my} ${ex} ${my+k} V${ey}`}
+ if(Math.abs(ey-sy)<2)return`M${sx} ${sy} H${ex}`;const mx=(sx+ex)/2,k=Math.min(r,Math.abs(ey-sy)/2,(ex-sx)/2),dy=Math.sign(ey-sy);
+ return`M${sx} ${sy} H${mx-k} Q${mx} ${sy} ${mx} ${sy+dy*k} V${ey-dy*k} Q${mx} ${ey} ${mx+k} ${ey} H${ex}`}
+function links(s){if(!s.dataset.links)return[];let sv=s.querySelector(":scope>svg.links");if(sv)sv.remove();
+ sv=el("svg",{class:"links",viewBox:"0 0 1600 900","aria-hidden":"true"});s.prepend(sv);
+ return s.dataset.links.split(",").map(t=>{const acc=t.endsWith("!"),[a,b]=t.replace("!","").split(">"),A=box($("#"+a,s),s),B=box($("#"+b,s),s);
+  const vert=B.y>=A.y+A.h-2&&B.x<A.x+A.w;let sx,sy,ex,ey;
+  if(vert){sx=A.x+A.w/2;sy=A.y+A.h;ex=B.x+B.w/2;ey=B.y-2}else{sx=A.x+A.w;sy=A.y+A.h/2;ex=B.x-2;ey=B.y+B.h/2}
+  const p=el("path",{d:elbow(sx,sy,ex,ey,vert),class:acc?"a":"","marker-end":`url(#${acc?"dap":"da"})`},sv);const c=el("circle",{cx:sx,cy:sy,r:4},sv);return{p,c}})}
+
+/* 8. Vẽ dần một đường bằng mặt nạ, để cả nét đứt và đầu mũi tên cũng hiện theo */
+let mid=0;function maskFor(p){if(p.__m)return p.__m;const sv=p.ownerSVGElement;let defs=sv.querySelector("defs")||el("defs",{},sv);
+ const m=el("mask",{id:"mk"+(++mid),maskUnits:"userSpaceOnUse",x:-100,y:-100,width:2200,height:1200},defs);
+ const q=el("path",{d:p.getAttribute("d"),fill:"none",stroke:"#fff","stroke-width":34,"stroke-linecap":"round","stroke-linejoin":"round"},m);
+ p.setAttribute("mask",`url(#${m.id})`);const L=q.getTotalLength();q.style.strokeDasharray=L+" "+L;return p.__m={q,L}}
+function draw(p,dur,delay,pen=true){const m=maskFor(p),z={f:0},P=p.getTotalLength();let tip=null;m.q.style.strokeDashoffset=m.L;
+ if(pen&&motion){tip=el("circle",{class:"tip",r:5},p.ownerSVGElement);tip.style.opacity=0}
+ const end=()=>{if(tip){const t=tip;tip=null;gsap.to(t,{opacity:0,duration:.3,onComplete:()=>t.remove()})}};
+ return gsap.to(z,{f:1,duration:dur,delay,ease:"power1.inOut",onStart(){if(tip)tip.style.opacity=1},
+  onUpdate(){m.q.style.strokeDashoffset=m.L*(1-z.f);if(tip){const q=p.getPointAtLength(P*z.f);tip.setAttribute("cx",q.x);tip.setAttribute("cy",q.y)}},onComplete:end,onInterrupt:end})}
+
+/* 9. Số đếm lên, giữ đúng cách viết 1.220 · 4,53 · −48,34% · 2,2 triệu */
+const CNT=".big,.bar>span:last-child,.wb b,.lgt b.n,.cnt,.gv";
+function count(e,delay){if(e.children.length)return null;const o=e.dataset.o||(e.dataset.o=e.textContent);
+ const m=o.match(/^([^\d]*?)(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(.*)$/);if(!m)return null;
+ const th=m[2].includes("."),dec=m[3]?m[3].length:0,v=parseFloat(m[2].replace(/\./g,"")+(m[3]?"."+m[3]:"")),z={v:0};
+ const f=x=>{let s=x.toFixed(dec).split(".");if(th)s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,".");return m[1]+s[0]+(dec?","+s[1]:"")+m[4]};
+ e.textContent=f(0);return gsap.to(z,{v,duration:1.5,delay,ease:"power2.out",onUpdate(){e.textContent=f(z.v)},onComplete(){e.textContent=o}})}
+
+/* 10. Vào slide: khung tên, viền khối, nét kích thước, nét nối, số */
+let live=[];
+function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
+ const lk=links(s);
+ if(!motion)return;
+ const rects=$$("svg.ol rect",s).filter(r=>!r.closest(".st,[hidden]"));
+ live.push(gsap.fromTo(rects,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.9,ease:"power2.inOut",stagger:.05,delay:.25}));
+ $$("path.dr",s).forEach(p=>live.push(draw(p,+p.dataset.d||1.4,+p.dataset.w||.4)));
+ $$(".gr",s).forEach(r=>{const w=r.getAttribute("width");r.dataset.w=r.dataset.w||w;live.push(gsap.fromTo(r,{attr:{width:0}},{attr:{width:r.dataset.w},duration:.7,delay:/p/.test(r.className.baseVal)?2.3:2.3,ease:"power2.out"}))});
+ live.push(gsap.fromTo($$(".ex,.d-tx,.st-dot,.st-t",s),{opacity:0},{opacity:1,duration:.4,stagger:.08,delay:1}));
+ lk.forEach((l,k)=>{const t=draw(l.p,.7,1+k*.12);if(l.p.classList.contains("a"))t.eventCallback("onComplete",()=>l.p.classList.add("flow"));live.push(t);live.push(gsap.fromTo(l.c,{opacity:0},{opacity:1,duration:.2,delay:1+k*.12}))});
+ const gh=s.querySelector(":scope>svg.ghostn"),h2=s.querySelector("h2");if(gh&&h2){const S=s.getBoundingClientRect(),k=S.width/1600,rg=document.createRange();rg.selectNodeContents(h2);gh.style.display=[...rg.getClientRects()].some(q=>(q.right-S.left)/k>1320&&(q.top-S.top)/k<230)?"none":""}
+ if(gh&&gh.style.display!=="none"){const t=gh.querySelector("text");live.push(gsap.fromTo(t,{strokeDasharray:"1400 1400",strokeDashoffset:1400},{strokeDashoffset:0,duration:2.4,ease:"power1.inOut",delay:.3}));
+  live.push(gsap.fromTo($$("line,.gl",gh),{opacity:0},{opacity:1,duration:.6,delay:1.2}))}
+ const bb=$$(".bub",s);if(bb.length)live.push(gsap.fromTo(bb,{scale:0,rotate:-90},{scale:1,rotate:0,duration:.55,ease:"back.out(2.2)",stagger:.14,delay:.9,clearProps:"transform"}));
+ $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
+  live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
+ $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
+ extras(s);live.push(heads(s,.1));
+ if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
+
+/* 10b. Chi tiết riêng từng slide */
+// Dấu khác: hai gạch ngang rồi nét chéo
+$$(".neq").forEach(n=>{n.innerHTML=`<svg viewBox="0 0 80 100" aria-hidden="true"><path pathLength="1" d="M10 40 H70"/><path pathLength="1" d="M10 62 H70"/><path pathLength="1" d="M56 14 L24 88"/></svg>`});
+function along(p,cls,dur,delay,ease){const sv=p.ownerSVGElement,c=el("circle",{class:cls,r:7},sv),P=p.getTotalLength(),z={f:0};c.style.opacity=0;
+ const t=gsap.to(z,{f:1,duration:dur,delay,ease,onStart(){c.style.opacity=1},onUpdate(){const q=p.getPointAtLength(P*z.f);c.setAttribute("cx",q.x);c.setAttribute("cy",q.y)},onInterrupt(){c.remove()}});t.dot=c;return t}
+function extras(s){
+ // Mặt cắt gạch chéo quét từ trái sang sau khi viền kẻ xong
+ const dk=$$(".panel.dark,.leaf.hc",s);if(dk.length)live.push(gsap.fromTo(dk,{"--hx":"100%"},{"--hx":"0%",duration:.8,ease:"power2.out",stagger:.12,delay:1.05}));
+ // Dấu khác ở slide 13
+ const nq=$$(".neq path",s);if(nq.length)live.push(gsap.fromTo(nq,{strokeDashoffset:1},{strokeDashoffset:0,duration:.35,stagger:.3,delay:1.2,ease:"power2.inOut"}));
+ // Bậc thang: một chấm leo từng bậc; ở slide 3 có thêm chấm "đi tắt" bay theo đường đứt
+ $$("path.st-step",s).forEach(st=>{const sv=st.ownerSVGElement;$$(".climb,.jumper",sv).forEach(e=>e.remove());
+  const pts=st.getAttribute("d").match(/[\d.]+ [\d.]+/g).map(v=>v.split(" ").map(Number));
+  const c=el("circle",{class:"climb",r:8,cx:pts[0][0],cy:pts[0][1]},sv);c.style.opacity=0;
+  const jp=st.classList.contains("dr")?sv.querySelector("path.st-jump"):null;
+  const t0=(+st.dataset.w||0)+(+st.dataset.d||1.4)+.4,tl=gsap.timeline({delay:t0,repeat:-1,repeatDelay:1.4});
+  if(jp){const j=el("circle",{class:"jumper",r:7},sv);j.style.opacity=0;const P=jp.getTotalLength(),z={f:0};
+   tl.set(j,{opacity:1}).fromTo(z,{f:0},{f:1,duration:1,ease:"power2.in",onUpdate(){const q=jp.getPointAtLength(P*z.f);j.setAttribute("cx",q.x);j.setAttribute("cy",q.y)}}).to(j,{opacity:.35,duration:.3})}
+  tl.set(c,{opacity:1,attr:{cx:pts[0][0],cy:pts[0][1]}});
+  pts.slice(1).forEach(q=>tl.to(c,{attr:{cx:q[0],cy:q[1]},duration:.2,ease:"power1.inOut"}));
+  tl.to(c,{attr:{r:12},duration:.2,yoyo:true,repeat:1}).to(sv.querySelectorAll(".climb,.jumper"),{opacity:0,duration:.4,delay:.9});
+  live.push(tl)});
+ // Slide 7: ngòi bút chạy theo ba con đường, đúng nhịp nét đang vẽ
+ const ws=$$("#waysvg .way",s);if(ws.length){$$("#waysvg .pen,#waysvg .ring").forEach(e=>e.remove());
+  [[ws[0],"pen p0",0,3.2],[ws[1],"pen p1",3.4,1.4],[ws[2],"pen p2",5.2,3.8]].forEach(([p,c,d,u])=>{const t=along(p,c,u,d,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:d+u+.1}))});
+  const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
+ $$("#gauges .gc",s).forEach((g,j)=>{const x=G[j],p=Math.min(1,x[2]/x[3]),tk=$$(".tk2 line",g),gg=g.querySelector(".tk2");if(!gg)return;gg.style.setProperty("--c",`var(${x[10]})`);
+  tk.forEach((l,k)=>{l.removeAttribute("data-on");const f=k/40;if(f>p)return;live.push(gsap.to(l,{duration:0,delay:.5+1.8*(1-Math.sqrt(1-f/p))*p,attr:{"data-on":1}}))})})
+}
+
+/* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */
+(()=>{const cv=$("#morph");if(!cv)return;const fig=cv.closest("figure"),rv=$$("#revlist .rv"),i4=slides.findIndex(s=>s.dataset.title==="Bốn cuộc cách mạng");
+ const ov=document.createElement("div");ov.className="proc";ov.setAttribute("aria-hidden","true");fig.append(ov);
+ let snaps=[],tmr=null,tl=null;
+ const snap=j=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);snaps[j]=c};
+ const reset=()=>{clearTimeout(tmr);tmr=null;if(tl)tl.kill();snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ new MutationObserver(()=>{const j=rv.findIndex(e=>e.classList.contains("on"));if(j<0||cur!==i4)return;
+  if(j===0){reset();return}if(!snaps[j-1])snap(j-1);
+  if(j===3&&!tmr){tmr=setTimeout(()=>{snap(3);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
+ function build(){if(cur!==i4||!motion||snaps.filter(Boolean).length<4)return;
+  const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");
+  ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
+  $$(".ph",ov).forEach((p,j)=>{snaps[j].className="";p.append(snaps[j])});
+  const sv=$(".pl",ov);sv.setAttribute("viewBox",`0 0 ${ov.offsetWidth} ${H}`);
+  const B=$$(".pc",ov).map(c=>box(c.querySelector(".ph"),ov)),cell=$$(".pc",ov);
+  const mk=(d,cls)=>el("path",{d,class:cls,"marker-end":"url(#dap)"},sv);
+  const l1=mk(`M${B[0].x+B[0].w+6} ${B[0].y+B[0].h/2} H${B[1].x-8}`,"a"),
+   sy2=B[1].y+B[1].h+30,my=(sy2+B[2].y-6)/2,l2=mk(`M${B[1].x+B[1].w/2} ${sy2} V${my-12} Q${B[1].x+B[1].w/2} ${my} ${B[1].x+B[1].w/2-12} ${my} H${B[2].x+B[2].w/2+12} Q${B[2].x+B[2].w/2} ${my} ${B[2].x+B[2].w/2} ${my+12} V${B[2].y-6}`,"a"),
+   l3=mk(`M${B[2].x+B[2].w+6} ${B[2].y+B[2].h/2} H${B[3].x-8}`,"a");
+  const sc=B[3].w/W;
+  tl=gsap.timeline()
+   .set(cell,{opacity:0}).set(cell[3],{opacity:1}).set(cell[3].querySelector(".pt"),{opacity:0})
+   .fromTo(cell[3].querySelector(".ph"),{x:-B[3].x,y:-B[3].y,scale:1/sc,transformOrigin:"0 0"},{x:0,y:0,scale:1,duration:.8,ease:"power3.inOut"})
+   .set(cv,{opacity:0},"<.05")
+   .fromTo(cell[0],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},"+=.05")
+   .add(draw(l1,.4,0),">-.05")
+   .fromTo(cell[1],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l2,.7,0),">-.05")
+   .fromTo(cell[2],{opacity:0,scale:.85},{opacity:1,scale:1,duration:.4,ease:"back.out(1.8)"},">-.1")
+   .add(draw(l3,.4,0),">-.05")
+   .to(cell[3].querySelector(".pt"),{opacity:1,duration:.3},">-.1")
+   .fromTo(cell[3],{"--rg":"0px"},{"--rg":"6px",duration:.5,ease:"power2.out"})}
+ const show1=window.show;window.show=function(i,st){if(i!==i4)reset();show1(i,st)};show=window.show})();
+
+/* 10e. Tờ bìa phụ khi sang phần câu hỏi mới */
+const QS=$$(".qs .callout h3").map(h=>h.textContent);
+const iv=document.createElement("div");iv.id="iv";iv.setAttribute("aria-hidden","true");stage.insertBefore(iv,$("#notes"));
+function ivFill(a){iv.innerHTML=`<div class="ivn"><svg viewBox="0 0 420 420"><text x="210" y="360" text-anchor="middle">${a}</text></svg></div>
+ <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> Người ${slides.find(s=>+s.dataset.act===a).dataset.who}</div></div>`;split(iv.querySelector("h2"))}
+
+/* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
+const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);
+function leader(n){LS.innerHTML="";const d=$("#drawer");if(!d.classList.contains("on")||!motion&&false)return;
+ const S=stage.getBoundingClientRect(),k=S.width/1600,r=n.getBoundingClientRect(),h=d.querySelector("h3");
+ const sx=((r.left+r.right)/2-S.left)/k,sy=(r.bottom-S.top)/k;if(sx>930||!h)return;
+ const ty=h.offsetTop+h.offsetHeight/2,lane=Math.min(sy+18,884);
+ const p=el("path",{d:`M${sx} ${sy+2} V${lane} H930 V${ty} H954`,"marker-end":"url(#dap)",pathLength:1},LS);el("circle",{cx:sx,cy:sy+2,r:4},LS);
+ if(motion)gsap.fromTo(p,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.6,delay:.15,ease:"power2.inOut"})}
+document.addEventListener("click",e=>{const n=e.target.closest("[data-c]");if(!n||n.closest("#drawer"))return;requestAnimationFrame(()=>leader(n))},true);
+new MutationObserver(()=>{if(!$("#drawer").classList.contains("on"))LS.innerHTML=""}).observe($("#drawer"),{attributes:true,attributeFilter:["class"]});
+
+/* 11. Chuyển slide: nội dung lùi ra nhanh rồi tờ mới hiện */
+const show0=show,next0=next,prev0=prev;let busy=null;
+const fin=()=>{if(busy){busy.progress(1);busy=null}};
+window.show=function(i,st){show0(i,st);const go2=()=>{if(cur===i)enter(i)};document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready.then(go2):go2()};show=window.show;
+window.next=function(){fin();next0()};next=window.next;window.prev=function(){fin();prev0()};prev=window.prev;
+const wipe=document.createElement("div");wipe.id="wipe";stage.append(wipe);
+window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
+ LS.innerHTML="";const back=i<cur,kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];const ns=slides[i];
+ const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)",na=+ns.dataset.act;
+ if(!back&&na>=1&&na<=3&&na!==+slides[cur].dataset.act){ivFill(na);const T=iv.querySelector(".ivn text"),L=iv.querySelector(".ivl path");
+  busy=gsap.timeline({onComplete(){busy=null;gsap.set(iv,{autoAlpha:0,clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
+   .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
+   .set(iv,{autoAlpha:1,clipPath:"inset(0 100% 0 0)"})
+   .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"})})
+   .to(iv,{clipPath:"inset(0 0% 0 0)",duration:.35,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.35,ease:"power2.inOut"},"<")
+   .set(wipe,{opacity:0})
+   .fromTo(T,{strokeDasharray:"2200 2200",strokeDashoffset:2200},{strokeDashoffset:0,duration:1,ease:"power1.inOut"},"<.1")
+   .add(heads(iv,0,iv),"<.1")
+   .fromTo(L,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.6,ease:"power2.inOut"},"<.3")
+   .fromTo(iv.querySelectorAll(".eb,.ivw"),{opacity:0,y:8},{opacity:1,y:0,duration:.35,stagger:.15},"<")
+   .add(()=>show(i),"+=.45")
+   .to(iv,{clipPath:"inset(0 0 0 100%)",duration:.5,ease:"power2.inOut"})
+   .fromTo(wipe,{x:0,opacity:1},{x:1598,duration:.5,ease:"power2.inOut"},"<")
+   .to(wipe,{opacity:0,duration:.15});return}
+ busy=gsap.timeline({onComplete(){busy=null;gsap.set(ns,{clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
+  .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
+  .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"});gsap.set(ns,{clipPath:a});show(i)})
+  .fromTo(ns,{clipPath:a},{clipPath:"inset(0 0% 0 0%)",duration:.6,ease:"power2.inOut"})
+  .fromTo(wipe,{x:back?1598:0,opacity:1},{x:back?0:1598,duration:.6,ease:"power2.inOut"},"<")
+  .to(wipe,{opacity:0,duration:.15})};go=window.go;
+addEventListener("resize",()=>{if(!busy)links(slides[cur])});
+tbSet(cur);(document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready:Promise.resolve()).then(()=>enter(cur));
+})();
 </script>

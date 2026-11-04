@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Ghép các phần trong src/ thành src/deck.html và index.html.
 
+Giao diện chính là "Bản vẽ kỹ thuật động" (trước gọi là bản B): deck.css.part là nền chung,
+ban-ve.css.part là giao diện, slides.part là nội dung kèm ghi chú, app.part là dữ liệu và tương tác,
+GSAP lưu sẵn trong vendor/, ban-ve.part là hoạt ảnh.
+
 src/deck.html: bản không có khung trang, để đăng làm Artifact.
 index.html: bản đầy đủ, để GitHub Pages và Vercel phục vụ.
 """
@@ -8,8 +12,12 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parent.parent
 src = root / "src"
-parts = [(src / n).read_text(encoding="utf8") for n in ("deck.css.part", "slides.part", "app.part")]
-body = "\n".join(parts)
+vend = "".join(
+    "<script>\n" + (root / "vendor" / "gsap" / n).read_text(encoding="utf8") + "\n</script>\n"
+    for n in ("gsap.min.js", "DrawSVGPlugin.min.js", "SplitText.min.js")
+)
+rd = lambda n: (src / n).read_text(encoding="utf8")
+body = "\n".join([rd("deck.css.part"), rd("ban-ve.css.part"), rd("slides.part"), rd("app.part"), vend, rd("ban-ve.part")])
 (src / "deck.html").write_text(body, encoding="utf8")
 page = (
     '<!doctype html>\n<html lang="vi"><head><meta charset="utf-8">'
@@ -60,30 +68,18 @@ out.append("\n## Slide dự phòng\n\nSlide 22 (Tài liệu tham khảo) không 
 (root / "docs" / "06-kich-ban.md").write_text("".join(out), encoding="utf8")
 print("Kịch bản: %.1f phút" % total)
 
-# Bản thử hướng "Sợi chỉ xuyên suốt": thêm GSAP (lưu sẵn trong vendor/, chạy được khi không có mạng) và src/soi-chi.part.
-vend = "".join(
-    "<script>\n" + (root / "vendor" / "gsap" / n).read_text(encoding="utf8") + "\n</script>\n"
-    for n in ("gsap.min.js", "DrawSVGPlugin.min.js", "SplitText.min.js")
-)
-demo = body + "\n" + vend + (src / "soi-chi.part").read_text(encoding="utf8")
-(src / "deck-soi-chi.html").write_text(demo, encoding="utf8")
-(root / "soi-chi.html").write_text(page.replace(body, demo), encoding="utf8")
-print("OK soi-chi", len(demo))
+# Các bản thử cũ: soi-chi.html (hướng "Sợi chỉ xuyên suốt") giữ nguyên file đã sinh, không build lại.
+# ban-b.html chỉ còn chuyển hướng sang index.html vì bản B đã thành bản chính (04/11/2026).
+(root / "ban-b.html").write_text('<!doctype html><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=./"><title>Chuyển sang slide chính</title><a href="./">Slide chính</a>\n', encoding="utf8")
+(src / "deck-b.html").unlink(missing_ok=True)
 
-# Bản nháp B "Bản vẽ kỹ thuật động": bố cục riêng ở src/b/, lời nói lấy từ src/slides.part theo tên slide.
 notes = dict(re.findall(r'data-title="([^"]+)".*?<aside class="notes">(.*?)</aside>', src_slides, re.S))
-b_slides = (src / "b" / "slides.part").read_text(encoding="utf8")
 def fill(m):
     return m.group(1) + notes.get(m.group(2), "") + m.group(3)
-b_slides = re.sub(r'(<section[^>]*data-title="([^"]+)".*?<aside class="notes">)(</aside>)', fill, b_slides, flags=re.S)
-b_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "b" / "b.css.part").read_text(encoding="utf8"), b_slides, (src / "app.part").read_text(encoding="utf8"), vend, (src / "b" / "b.part").read_text(encoding="utf8")])
-(src / "deck-b.html").write_text(b_body, encoding="utf8")
-(root / "ban-b.html").write_text(page.replace(body, b_body), encoding="utf8")
-print("OK ban-b", len(b_body), "ghi chú:", len(re.findall(r'<aside class="notes">[^<]', b_slides)))
 
-# Bản nháp C "Báo chí dữ liệu": dùng lại bố cục bản B (src/c/slides.part chép từ src/b/slides.part), giao diện và hoạt ảnh riêng ở src/c/.
+# Bản nháp C "Báo chí dữ liệu" (đã gác lại): dùng lại bố cục bản chính (src/c/slides.part là bản chép), giao diện và hoạt ảnh riêng ở src/c/.
 c_slides = re.sub(r'(<section[^>]*data-title="([^"]+)".*?<aside class="notes">)(</aside>)', fill, (src / "c" / "slides.part").read_text(encoding="utf8"), flags=re.S)
-c_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "b" / "b.css.part").read_text(encoding="utf8"), (src / "c" / "c.css.part").read_text(encoding="utf8"), c_slides, (src / "app.part").read_text(encoding="utf8"), vend, (src / "c" / "c.part").read_text(encoding="utf8")])
+c_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "ban-ve.css.part").read_text(encoding="utf8"), (src / "c" / "c.css.part").read_text(encoding="utf8"), c_slides, (src / "app.part").read_text(encoding="utf8"), vend, (src / "c" / "c.part").read_text(encoding="utf8")])
 (src / "deck-c.html").write_text(c_body, encoding="utf8")
 (root / "ban-c.html").write_text(page.replace(body, c_body), encoding="utf8")
 print("OK ban-c", len(c_body), "ghi chú:", len(re.findall(r'<aside class="notes">[^<]', c_slides)))

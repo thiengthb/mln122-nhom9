@@ -95,3 +95,11 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Khung tên thu gọn: chỉ còn "Người n", số tờ "NN / 22" và dãy 22 ô nhỏ ở góc phải dưới; không khung, không nền, chữ mờ. Bỏ ô PHẦN, tên tờ, chấm người nói, thanh chia phần.
 - Chỗ đè chữ: slide 14 khi kéo mức tự động hóa lên 100% thì ba khung cao hơn hàng, đè lên dòng "Giả định". Thu lưới chấm (390 → 340px) và đường c/v (cao 150px). Đã chụp lại 22 slide ở ba giao diện và chạy kiểm tra đè chữ.
 - Góc tờ (sau nhận xét "hơi nhạt và nhỏ"): cùng cỡ chữ 15px, cùng phông và màu với dòng Nguồn, cùng đường chân chữ và lề phải 70px đối xứng với lề trái; bỏ độ mờ.
+
+## 04/11/2026: Chốt bản B làm bản chính
+- Người dùng chốt "Bản vẽ kỹ thuật động" (bản B) là giao diện chính. `index.html` và `src/deck.html` giờ giống hệt bản B đã đăng (đã so từng byte).
+- Cấu trúc: `src/b/slides.part` thay `src/slides.part` (đã ghép lại ghi chú của 22 slide, kịch bản `docs/06` không đổi); `src/b/b.css.part` → `src/ban-ve.css.part`; `src/b/b.part` → `src/ban-ve.part`. `scripts/build.py` build bản chính từ các file này.
+- `ban-b.html` chỉ còn chuyển hướng sang trang chính. `soi-chi.html` giữ nguyên, không build lại. Bản C vẫn build được nhưng đã gác lại.
+- Từ nay sửa chữ trên slide chỉ cần sửa `src/slides.part` (không còn bản chép riêng cho B).
+- Còn treo: câu chú thích slide 18 "không tính phần trăm hoàn thành" trong khi slide dùng vòng tròn; chưa có bản PDF để nộp.
+
