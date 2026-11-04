@@ -53,3 +53,4 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Ý tưởng: mỗi slide là một tờ bản vẽ (viền đôi, ô tọa độ 1–8, A–D, khung tên có số tờ và thanh tỉ lệ thay thanh tiến độ); số liệu dùng nét ghi kích thước (slide 6); khối quan trọng là mặt cắt gạch chéo; sơ đồ tự lắp bằng nét nối (slide 5, 10, 12, 17, 19); bánh răng ở tâm (10, 17); bậc thang và cú nhảy cho luận điểm (3, 21); đường c/v (14); số đếm lên.
 - Ba kiểu màu mới (phím D): Giấy can, Bản in xanh, Bàn vẽ đêm. Không thêm số liệu mới.
 - Người dùng xem bản mềm và yêu cầu quay lại như cũ: đã hoàn tác, bản B giữ khung bản vẽ và khung tên như lần đăng đầu.
+- Sau đó người dùng yêu cầu chỉ bỏ khung viền ngoài: đã bỏ viền đôi và ô tọa độ, giữ khung tên (thêm viền đủ 4 cạnh), giữ màu và mọi thứ khác của bản B.

@@ -502,6 +502,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .endg h2{font-size:64px!important}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
+#tb{border:2px solid var(--ln);right:40px;bottom:30px}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1156,15 +1157,7 @@ if(PRES||!window.gsap)return;
 const NS="http://www.w3.org/2000/svg",stage=$("#stage"),motion=!reduce;
 const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.append(e);return e};
 
-/* 1. Khung bản vẽ: viền đôi, ô tọa độ 1–8 và A–D, dấu tâm */
-const sh=el("svg",{id:"sheet",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.insertBefore(sh,$("#notes"));
-const fr=[el("rect",{class:"o",x:12,y:12,width:1576,height:876,pathLength:1},sh),el("rect",{class:"i",x:24,y:24,width:1552,height:852,pathLength:1},sh)];
-for(let k=0;k<8;k++){const x=24+k*194;if(k)[[x,12,x,24],[x,876,x,888]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
- [18,882].forEach(y=>el("text",{x:x+97,y},sh).textContent=k+1)}
-for(let k=0;k<4;k++){const y=24+k*213;if(k)[[12,y,24,y],[1576,y,1588,y]].forEach(([a,b,c,d])=>el("line",{class:"tk",x1:a,y1:b,x2:c,y2:d},sh));
- [18,1582].forEach(x=>el("text",{x,y:y+106},sh).textContent="ABCD"[k])}
-[[800,24,800,40],[800,860,800,876],[24,450,40,450],[1560,450,1576,450]].forEach(([a,b,c,d])=>el("line",{class:"cm",x1:a,y1:b,x2:c,y2:d},sh));
-if(motion)gsap.fromTo(fr,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:1.6,ease:"power2.inOut",stagger:.2});
+/* Đã bỏ khung viền ngoài theo góp ý của người dùng (04/11/2026). */
 
 /* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
 const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");

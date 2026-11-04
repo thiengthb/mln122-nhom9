@@ -279,4 +279,5 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .endg h2{font-size:64px!important}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
+#tb{border:2px solid var(--ln);right:40px;bottom:30px}
 </style>
