@@ -118,3 +118,9 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 7: kính hiển vi (tự nghiên cứu), thùng hàng (mua), hai bánh răng (kết hợp). Slide 15: áo, xe tải, kéo, băng chuyền, kim chỉ, tờ giấy, màn hình biểu đồ. Slide 19: cuốn luật, sách, biểu đồ cho ba nguồn; kính lúp, khiên dấu tích, chìa khóa cho ba yêu cầu A, B, C.
 - Số liệu và chữ trên slide không đổi.
 
+## 04/11/2026: Làm thử ba cảnh động (chưa đưa lên main)
+- Slide 13: kính lúp soi lưới dệt may, da giày (nhãn "Mẫu số: dệt may, da giày"), rồi bay qua dấu khác sang lưới cả nước, lưới đó lùi ra (thu nhỏ về cỡ thật) với nhãn "Mẫu số: cả nước"; kính mờ đi sau khoảng 8 giây. Chỉ đổi mẫu số, không thêm số.
+- Slide 5: dải hình ở đáy khung trích Mác: đồng hồ cát (thời gian lao động) chảy hết dần, nét nối từ nó sang của cải mờ dần; bánh răng (khoa học ứng dụng) quay, mũi tên sang của cải chạy đều; thùng hàng chồng lên. Lặp lại. Hình ví von, không có số.
+- Slide 21: sợi chỉ đi lên từ đáy slide, khâu mũi chỉ dưới dòng "không đi tắt được năng lực." rồi thắt nút.
+- Code ở `scenes()` trong `src/ban-ve.part`. Chỉ chạy khi máy cho phép chuyển động.
+
