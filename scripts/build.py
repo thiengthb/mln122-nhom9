@@ -29,11 +29,12 @@ items = re.findall(
     src_slides,
     re.S,
 )
-RATE = 170  # tiếng mỗi phút
+RATE = 150  # âm tiết mỗi phút: tốc độ nói chậm, có dừng; 170 là tốc độ nói nhanh
+CUE = re.compile(r"\[(?!Người)[^\]]*\]")  # bỏ chỉ dẫn trong ngoặc vuông khi đếm, giữ [Người N]
 out = [
     "# Kịch bản thuyết trình 5 người\n\n"
     "Tự sinh từ ghi chú trong `src/slides.part`; sửa ở đó rồi chạy `python3 scripts/build.py`. "
-    "Thời lượng ước tính theo tốc độ 170 tiếng mỗi phút, chưa tính nhịp dừng, nên phải bấm giờ khi tập.\n\n"
+    "Thời lượng ước tính theo tốc độ 150 âm tiết mỗi phút (nói chậm, có dừng), không đếm chỉ dẫn trong ngoặc vuông; ở 170 âm tiết mỗi phút thì nhân với 0,88. Phải bấm giờ khi tập.\n\n"
     "Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là nhịp bấm trong cùng slide. "
     "Hết mỗi đoạn thì bấm sang slide sau.\n"
 ]
@@ -45,7 +46,7 @@ table = ["\n| Người | Slide | Nội dung | Ước tính |\n|---|---|---|---|\
 parts = []
 for w, rows in sorted(who.items()):
     spoken = [r for r in rows if r[1] != "Tài liệu tham khảo"]
-    words = sum(len(n.split()) for _, _, n in spoken)
+    words = sum(len(CUE.sub("", n).split()) for _, _, n in spoken)
     mins = words / RATE
     total += mins
     a, b = spoken[0][0], spoken[-1][0]
@@ -53,7 +54,7 @@ for w, rows in sorted(who.items()):
     parts.append(f"\n## Người {w}: slide {a}–{b} (khoảng {mins:.1f} phút)\n")
     for i, title, n in spoken:
         parts.append(f"\n### Slide {i}. {title}\n\n{n}\n")
-table.append(f"| **Tổng phần nói** | | | **{total:.1f} phút** |\n")
+table.append(f"| **Tổng phần nói** | | | **{total:.1f} phút** (nói nhanh 170: {total*150/170:.1f} phút) |\n")
 out += table + parts
 out.append("\n## Slide dự phòng\n\nSlide 22 (Tài liệu tham khảo) không đọc, chỉ mở khi được hỏi. Phụ lục AI là file riêng, nộp qua email.\n")
 (root / "docs" / "06-kich-ban.md").write_text("".join(out), encoding="utf8")

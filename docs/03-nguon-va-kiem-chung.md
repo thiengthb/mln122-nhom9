@@ -50,3 +50,21 @@ Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại
 
 ## Ghi chú 04/11/2026
 Nghị quyết 57, mục III.4 là câu duy nhất nhắc đến sinh viên: "Có cơ chế, chính sách hấp dẫn về tín dụng, học bổng và học phí để thu hút học sinh, sinh viên giỏi" theo học các lĩnh vực then chốt. Đọc lại trên trang của Tạp chí Quản lý nhà nước ngày 04/11/2026. Dùng ở lời nói slide 19.
+
+## Cập nhật 04/11/2026 (kiểm lại review Codex, Claude mở nguồn)
+| Số liệu / trích dẫn | Giá trị | Nguồn | Trạng thái | Link |
+|---|---|---|---|---|
+| R&D % GDP, năm 2023 | Việt Nam 0,41 (2021: 0,42; 2019: 0,42); Hàn Quốc 4,94; Nhật Bản 3,44 | World Bank WDI, số của UIS | Gốc (API World Bank) | https://data.worldbank.org/indicator/GB.XPD.RSDV.GD.ZS?locations=VN-KR-JP |
+| GDP/người Hàn Quốc, USD hiện hành | 1960: 159; 1961: 94; 1962: 107; 1963: 147; 1964: 124 | World Bank WDI | Gốc (API World Bank) | https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=KR |
+| GII 2026 | Hạng 43/139; Human capital and research hạng 79, thấp nhất | WIPO, hồ sơ Việt Nam | Gốc | https://www.wipo.int/edocs/gii-ranking/2026/vn.pdf |
+| Luật Trí tuệ nhân tạo | Số 134/2025/QH15, ban hành 10/12/2025, hiệu lực 01/3/2026 | Cổng TTĐT Chính phủ, Công báo | Gốc | https://chinhphu.vn/?classid=1&docid=216334&orggroupid=1&pageid=27160 |
+| NQ57 toàn văn | Có đủ các cụm trích trên slide; phần III có 7 nhóm nhiệm vụ | Cổng TTĐT Chính phủ | Gốc | https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-quyet-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia-119241224180048642.htm |
+| Bangladesh | 429 công nhân, Dhaka, Gazipur, Narayanganj, 8–10/2024; −30,58% người/chuyền; cắt −48,34%; may −26,57% | Bangladesh Labour Foundation, BRAC University, 2/2025 | Gốc | https://blfbd.com/wp-content/uploads/2025/06/Study-Report_RMG_Automation_Impact_2025.pdf |
+| 67,1% chưa từng được đào tạo | Mẫu 1.770 lao động dệt may, da giày, 11 tỉnh, 2023–2024, chọn mẫu thuận tiện | Đề tài ĐTĐL.XH/15-22, qua Tạp chí QLNN | Dẫn lại | https://www.quanlynhanuoc.vn/?p=69421 |
+| WEF riêng AI | AI và xử lý thông tin: tạo 11 triệu, thay 9 triệu; robot: ròng −5 triệu | WEF, Future of Jobs 2025, chương 2 | Gốc | https://www.weforum.org/publications/the-future-of-jobs-report-2025/2-jobs-outlook |
+| ILO 2026, ý phụ | "Biến đổi nhiệm vụ" khả năng hơn thay thế hàng loạt; chưa thấy bằng chứng rõ việc làm giảm **cho lao động trẻ, trình độ cao** ở ngành phơi nhiễm cao 2022–2024 | ILO | Gốc | https://www.ilo.org/resource/news/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows |
+
+**Đã bỏ khỏi slide:** logistics 90,5% số hóa cơ bản và 5–7% đào tạo bài bản (bài Tạp chí Công Thương không ghi năm khảo sát, cỡ mẫu); số 79 USD của Hàn Quốc (thay bằng số World Bank).
+**Điểm Codex sai, đã kiểm:** bài JEB 700 lao động mà Codex dẫn cho số 67,1% không có số này (bài đó ghi gần 75% không học khóa nào trong 12 tháng). Số 94 USD năm 1961 là năm tỷ giá tụt, năm 1960 là 159 USD, nên slide chỉ nói "chưa tới 160 USD".
+**Số 2,2 triệu logistics:** bài TTXVN ghi "will require around 2.2 million workers by 2030", là tổng nhu cầu, không phải số tuyển mới. Chưa mở được kỷ yếu VLA gốc (lỗi tải).
+**Kinh tế số 14,02%:** trang Cục Thống kê bị lỗi khi mở lại, vẫn là số dẫn lại qua Báo Đầu tư.
