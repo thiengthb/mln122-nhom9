@@ -7,6 +7,9 @@ Slide web và tài liệu cho chủ đề 9, lớp SE1919: Công nghiệp hóa, 
 ## Phím trong slide
 Mũi tên, Space hoặc bút trình chiếu: chuyển nhịp · N: ghi chú · P: cửa sổ người nói · T: bắt đầu đồng hồ · K: soi tất cả số có nguồn · F: toàn màn hình. Bấm vào số có gạch chấm để xem nguồn.
 
+## Thành viên muốn sửa bài
+Đọc [`CONTRIBUTING.md`](CONTRIBUTING.md) trước. Mọi thay đổi đi qua nhánh riêng và Pull Request; trưởng nhóm duyệt rồi mới vào `main`. AI của bạn phải đọc [`AGENTS.md`](AGENTS.md) trước khi làm việc. Quy tắc chi tiết ở `docs/quy-trinh/`.
+
 ## Tài liệu
 - `docs/00-yeu-cau-mon-hoc.md`: rubric, quy định, cờ vi phạm
 - `docs/01-tom-tat-nhom-9.md`: tóm tắt nội dung
@@ -17,7 +20,8 @@ Mũi tên, Space hoặc bút trình chiếu: chuyển nhịp · N: ghi chú · P
 - `docs/06-kich-ban.md`: kịch bản 5 người, chia theo slide
 - `docs/09-kahoot.md`: câu hỏi Kahoot
 - `docs/07-cau-hoi-phan-bien.md`: luyện phản biện
-- `docs/HISTORY.md`: nhật ký. `CLAUDE.md`: hướng dẫn cho phiên Claude sau
+- `docs/quy-trinh/`: quy tắc nội dung, giao diện, phản biện của AI, cách duyệt PR
+- `docs/HISTORY.md`: nhật ký. `AGENTS.md`: quy tắc cho mọi AI. `CLAUDE.md`: hướng dẫn riêng cho Claude
 
 ## Việc nhóm phải làm trước khi nộp
 1. Mở lại từng link trong `docs/03` và đối chiếu số. Ưu tiên các dòng "Dẫn lại".

@@ -200,3 +200,13 @@ Người dùng gửi thứ tự: 1 Phạm Gia Huy (SE192867), 2 Trần Ngọc Th
 - Ghi chú lời nói: "Em là [Người n]" thành họ tên, "Em mời [Người n]" thành "Em mời bạn" + tên gọi.
 - `scripts/build.py` đọc tên từ `app.part`, kịch bản `docs/06` ghi "Người n (họ tên)". Phân slide giữ nguyên: 1–5, 6–9, 10–13, 14–16, 17–21.
 - Cập nhật cùng ngày (người dùng nhắc): tờ chuyển phần trước đây chỉ ghi người nói slide đầu của phần. Nay ghi mọi người nói trong phần, theo thứ tự, kèm số slide: Câu hỏi 1 là Huy (4–5), Thiên (6–9), Phương (10–12); Câu hỏi 2 là Phương (13), Vỹ (14–16); Câu hỏi 3 là Nghĩa (17–20). Hàm `actSpeakers()` trong `src/ban-ve.part`, tự tính từ `data-act` và `data-who`.
+
+## 04/11/2026: Quy trình nhiều người cùng sửa (QT-2026-11-04)
+Trưởng nhóm cho 4 thành viên vào repo, yêu cầu quy trình nghiêm ngặt: AI của thành viên phải đọc quy tắc trước và phản biện, không chiều theo; nguồn chính thống; sáng tạo trong khuôn khổ; `main` chỉ nhận PR do trưởng nhóm duyệt.
+- `AGENTS.md`: luật cho mọi AI (Claude, Codex, Cursor, Copilot, Gemini đọc tự động; `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` trỏ về). Bắt AI gửi phiếu xác nhận trước khi làm.
+- `docs/quy-trinh/`: `noi-dung.md` (luận điểm, ba câu hỏi, phân công đã khóa, chỗ được sáng tạo, bậc nguồn, rubric), `giao-dien.md` (công nghệ, màu, bố cục, hoạt ảnh), `ai-phan-bien.md` (phiếu phản biện bắt buộc, câu hỏi kiểm tra thành viên hiểu bài, các yêu cầu phải từ chối), `duyet-pr.md` (cài đặt GitHub, cách duyệt, lịch khóa nội dung).
+- `CONTRIBUTING.md`: các bước cho thành viên, cách gỡ xung đột file build.
+- `.github/`: mẫu PR, CODEOWNERS (`@thiengthb`), máy kiểm tra `kiem-tra.yml`.
+- `scripts/kiem-tra.py`: build khớp nguồn, 22 slide và phân công, ghi chú, khóa nguồn, trang bị cấm, màu viết cứng, tải từ mạng, thời lượng ≤ 20 phút, phiên bản quy tắc trong PR; báo slide nào của ai bị sửa, file khóa nào bị đụng. Trên GitHub chạy bản của `main`, để PR không tự nới luật.
+- `scripts/chup-slide.js`: chụp 22 slide ở hai kiểu màu, báo chữ đè, đính ảnh vào lần chạy.
+- Từ nay chính phiên Claude của trưởng nhóm cũng mở PR, không push thẳng `main`. Bảo vệ `main` phải bật trong Settings (hướng dẫn ở `duyet-pr.md`).
