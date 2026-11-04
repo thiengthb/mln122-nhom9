@@ -69,8 +69,8 @@ function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let
   for(let x=0;x<cols;x++){const px=x*C,py=y*C;g.clearRect(px,py,C,C);const col=mot(x,y);
    if(f<.5){if(col){g.fillStyle=CC[col];g.fillRect(px+1,py+3,C-2,C-6);g.fillRect(px+5,py+1,C-10,C-2)}else{g.fillStyle=CC["--cham-3"];g.globalAlpha=.35;g.fillRect(px+1,py+8,C-2,3);g.globalAlpha=1}}
    else{const on=col||Math.random()<.13;if(on){g.fillStyle=f<.68&&col?CC[col]:CC["--si"];g.globalAlpha=col?1:.5;g.fillRect(px+4,py+4,C-8,C-8);g.globalAlpha=1}}}}
- function tick(t){if(!run)return;if(t-last>60){last=t;if(row<rows){paint(rows-1-row);row++}else paint(Math.floor(rows*.4*Math.random()))}requestAnimationFrame(tick)}
- window.__loomReset=()=>{row=0;if(reduce)for(let y=rows-1;y>=0;y--)paint(y)};
+ function tick(t){if(!run)return;if(t-last>(window.N9_LOOM||60)){last=t;if(row<rows){paint(rows-1-row);window.__loomY=rows-1-row;row++}else{window.__loomY=-1;paint(Math.floor(rows*.4*Math.random()))}}requestAnimationFrame(tick)}
+ window.__loomReset=()=>{row=0;window.__loomY=null;if(reduce)for(let y=rows-1;y>=0;y--)paint(y)};
  if(reduce){for(let y=rows-1;y>=0;y--)paint(y);return{stop(){},start(){}}}
  requestAnimationFrame(tick);
  return{stop(){run=false},start(){if(!run){run=true;requestAnimationFrame(tick)}}}}

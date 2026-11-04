@@ -697,6 +697,14 @@ svg.links .tip{fill:var(--cham)}
 .stitch .sti{fill:none;stroke:var(--son);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:16 9}
 .stitch .kn{fill:none;stroke:var(--son);stroke-width:3.2;stroke-linecap:round}
 .stitch .knd{fill:var(--nghe)}
+.s .hum{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.hum .hgnd{fill:none;stroke:var(--son);stroke-width:1.5;opacity:.6}
+figure.view{position:relative}
+.view .shut{position:absolute;pointer-events:none;overflow:visible;transition:opacity .4s}
+.shut .bd{fill:var(--cham);stroke:var(--vai);stroke-width:2.2}
+.shut .bb{fill:var(--nghe)}
+.shut .wf{stroke:var(--nghe);stroke-width:2;stroke-dasharray:4 3}
+.shut .dd{fill:var(--si);filter:drop-shadow(0 0 6px var(--si))}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1084,7 +1092,7 @@ svg.links .tip{fill:var(--cham)}
 <div id="warp" aria-hidden="true"></div>
 <div id="drawer" role="dialog" aria-label="Chi tiết nguồn"></div>
 </div>
-<script>window.N9_STAGE=6750</script>
+<script>window.N9_STAGE=6750;window.N9_LOOM=110</script>
 <div id="pv">
   <div style="display:flex;justify-content:space-between;align-items:center"><b id="pvt" style="font:800 40px var(--display)"></b><span class="time" id="pvc"></span></div>
   <div class="nt" id="pvn"></div>
@@ -1163,8 +1171,8 @@ function loom(){const c=$("#loom"),g=c.getContext("2d"),C=19,cols=40,rows=45;let
   for(let x=0;x<cols;x++){const px=x*C,py=y*C;g.clearRect(px,py,C,C);const col=mot(x,y);
    if(f<.5){if(col){g.fillStyle=CC[col];g.fillRect(px+1,py+3,C-2,C-6);g.fillRect(px+5,py+1,C-10,C-2)}else{g.fillStyle=CC["--cham-3"];g.globalAlpha=.35;g.fillRect(px+1,py+8,C-2,3);g.globalAlpha=1}}
    else{const on=col||Math.random()<.13;if(on){g.fillStyle=f<.68&&col?CC[col]:CC["--si"];g.globalAlpha=col?1:.5;g.fillRect(px+4,py+4,C-8,C-8);g.globalAlpha=1}}}}
- function tick(t){if(!run)return;if(t-last>60){last=t;if(row<rows){paint(rows-1-row);row++}else paint(Math.floor(rows*.4*Math.random()))}requestAnimationFrame(tick)}
- window.__loomReset=()=>{row=0;if(reduce)for(let y=rows-1;y>=0;y--)paint(y)};
+ function tick(t){if(!run)return;if(t-last>(window.N9_LOOM||60)){last=t;if(row<rows){paint(rows-1-row);window.__loomY=rows-1-row;row++}else{window.__loomY=-1;paint(Math.floor(rows*.4*Math.random()))}}requestAnimationFrame(tick)}
+ window.__loomReset=()=>{row=0;window.__loomY=null;if(reduce)for(let y=rows-1;y>=0;y--)paint(y)};
  if(reduce){for(let y=rows-1;y>=0;y--)paint(y);return{stop(){},start(){}}}
  requestAnimationFrame(tick);
  return{stop(){run=false},start(){if(!run){run=true;requestAnimationFrame(tick)}}}}
@@ -1500,7 +1508,7 @@ function scenes(s){
  /* Kính lúp: soi nhóm dệt may, da giày (86%), rồi lùi ra cả nước (dưới 2%). Không thêm số: chỉ đổi mẫu số. */
  const vs=s.querySelector(".vs");
  if(vs){let L=vs.querySelector(".lens");if(!L){vs.insertAdjacentHTML("beforeend",`<div class="lens" aria-hidden="true"><svg viewBox="-70 -70 170 170"><circle class="lg" r="58"/><circle class="lr" r="58"/><circle class="lp" r="58"/><path class="lh" d="M42 42 L88 88"/></svg><span class="lt"></span></div>`);L=vs.querySelector(".lens")}
-  const g=$$(".wf",vs),lt=L.querySelector(".lt"),lp=L.querySelector(".lp");if(g.length===2){const c=g.map(e=>{const b=relBox(e,vs);return[b.x+b.w/2,b.y+b.h/2]});
+  const g=$$(".wf",vs),lt=L.querySelector(".lt"),lp=L.querySelector(".lp");if(g.length===2){const c=g.map(e=>{const b=box(e,vs);return[b.x+b.w/2,b.y+b.h/2]});
    const tl=gsap.timeline({delay:2.4});gsap.set(L,{x:c[0][0]-260,y:c[0][1]+40,opacity:0,scale:.8});gsap.set(g[1],{scale:1});
    tl.to(L,{x:c[0][0],y:c[0][1],opacity:1,scale:1,duration:1,ease:"power2.out",onStart(){lt.textContent="Mẫu số: dệt may, da giày"}})
     .fromTo(lp,{attr:{r:58},opacity:.9},{attr:{r:84},opacity:0,duration:.9,ease:"power1.out"})
@@ -1542,6 +1550,31 @@ function scenes(s){
   const p=el("path",{class:"sti",d},K),kn=el("path",{class:"kn",d:`M${x1+6} ${y} c16 0 24-12 15-21 s-21 3-9 16 l13 9`},K),dot=el("circle",{class:"knd",cx:x1+25,cy:y+4,r:0},K);
   live.push(draw(p,2.6,1.6));live.push(draw(kn,.6,4.25,false));live.push(gsap.to(dot,{attr:{r:6},duration:.35,delay:4.8,ease:"back.out(3)"}))}
 }
+
+
+/* 10g. Slide 12: hạt từ bốn nhiệm vụ bay về, ghép thành hình người đứng trên ô "Nguồn nhân lực chất lượng cao" */
+function humanScene(s){const fe=s.querySelector("#fe"),ft=["#ft1","#ft2","#ft3","#ft4"].map(q=>s.querySelector(q));if(!fe||ft.some(x=>!x))return;
+ let K=s.querySelector(".hum");if(!K){K=el("svg",{class:"hum",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(K)}K.innerHTML="";
+ const F=box(fe,s),cx=F.x+F.w/2,base=F.y-34,pts=[],sp=8;
+ for(let y=base-182;y<=base;y+=sp)for(let x=cx-60;x<=cx+60;x+=sp){const hx=x-cx,hy=y-(base-148);
+  const head=hx*hx+hy*hy<=26*26,by=y-(base-110),r=28,half=48,ax=Math.abs(hx),body=by>=0&&ax<=half&&!(by<r&&ax>half-r&&(ax-(half-r))**2+(r-by)**2>r*r);
+  if(head||body)pts.push([x,y])}
+ const src=ft.map(e=>{const b=box(e,s);return[b.x+b.w,b.y+b.h/2]}),COL=["--son","--si","--nghe","--vai"];
+ pts.forEach(([x,y],j)=>{const k=j%4,[sx,sy]=src[k],c=el("circle",{cx:sx,cy:sy+(Math.random()-.5)*20,r:3,style:`fill:var(${COL[k]})`},K);c.style.opacity=0;
+  const mx=sx+70+Math.random()*30,my=sy,d=1.6+Math.random()*1.4;
+  live.push(gsap.timeline({delay:d}).to(c,{opacity:1,duration:.15}).to(c,{attr:{cx:mx,cy:my},duration:.45,ease:"power1.in"}).to(c,{attr:{cx:x,cy:y},duration:1.1,ease:"power2.out"}).to(c,{style:"fill:var(--son)",duration:.6},"+=.3"))});
+ const ring=el("ellipse",{class:"hgnd",cx,cy:base+12,rx:0,ry:0},K);live.push(gsap.to(ring,{attr:{rx:80,ry:7},duration:.6,delay:4.6,ease:"power2.out"}))}
+
+/* 10h. Slide 1: con thoi chạy theo hàng đang dệt; ở nửa trên (vải thành dữ liệu) con thoi thành một chấm sáng */
+function shuttleScene(s){const cv=s.querySelector("#loom");if(!cv)return;const fig=cv.closest("figure");
+ let K=fig.querySelector(".shut");if(!K){fig.insertAdjacentHTML("beforeend",`<svg class="shut" viewBox="0 0 760 855" preserveAspectRatio="none" aria-hidden="true"><line class="wf"/><g class="sh"><path class="bd" d="M-26 0 C-14 -8 14 -8 26 0 C14 8 -14 8 -26 0z"/><rect class="bb" x="-7" y="-3" width="14" height="6" rx="2"/></g><circle class="dd" r="6"/></svg>`);K=fig.querySelector(".shut")}
+ const b=relBox(cv,fig);Object.assign(K.style,{left:b.x+"px",top:b.y+"px",width:b.w+"px",height:b.h+"px"});
+ const sh=K.querySelector(".sh"),dd=K.querySelector(".dd"),wf=K.querySelector(".wf");let ly=null,t0=0;K.style.opacity=1;
+ const f=()=>{const y=window.__loomY;if(y==null)return;if(y<0){K.style.opacity=0;return}if(y!==ly){ly=y;t0=performance.now()}
+  const p=Math.min(1,(performance.now()-t0)/(window.N9_LOOM||60)),dir=y%2,x=dir?760-p*760:p*760,yy=y*19+9.5,data=y<45*.5;
+  sh.setAttribute("transform",`translate(${x} ${yy})${dir?" scale(-1 1)":""}`);sh.style.opacity=data?0:1;dd.setAttribute("cx",x);dd.setAttribute("cy",yy);dd.style.opacity=data?1:0;
+  wf.setAttribute("x1",dir?760:0);wf.setAttribute("y1",yy);wf.setAttribute("x2",x);wf.setAttribute("y2",yy);wf.style.opacity=data?0:.9};
+ gsap.ticker.add(f);live.push({kill(){gsap.ticker.remove(f)}})}
 
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
@@ -1594,7 +1627,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);scenes(s);live.push(heads(s,.1));
+ extras(s);scenes(s);humanScene(s);shuttleScene(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */

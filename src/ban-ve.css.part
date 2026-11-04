@@ -474,4 +474,12 @@ svg.links .tip{fill:var(--cham)}
 .stitch .sti{fill:none;stroke:var(--son);stroke-width:3.2;stroke-linecap:round;stroke-dasharray:16 9}
 .stitch .kn{fill:none;stroke:var(--son);stroke-width:3.2;stroke-linecap:round}
 .stitch .knd{fill:var(--nghe)}
+.s .hum{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
+.hum .hgnd{fill:none;stroke:var(--son);stroke-width:1.5;opacity:.6}
+figure.view{position:relative}
+.view .shut{position:absolute;pointer-events:none;overflow:visible;transition:opacity .4s}
+.shut .bd{fill:var(--cham);stroke:var(--vai);stroke-width:2.2}
+.shut .bb{fill:var(--nghe)}
+.shut .wf{stroke:var(--nghe);stroke-width:2;stroke-dasharray:4 3}
+.shut .dd{fill:var(--si);filter:drop-shadow(0 0 6px var(--si))}
 </style>
