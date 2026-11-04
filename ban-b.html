@@ -263,14 +263,14 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
 #sheet .tk{stroke:var(--ln);stroke-width:1}
 #sheet text{fill:var(--vai-3);font:600 11px var(--mono);text-anchor:middle;dominant-baseline:middle}
 #sheet .cm{stroke:var(--vai-3);stroke-width:1}
-#tb{position:absolute;right:30px;bottom:30px;height:46px;display:grid;grid-template-columns:auto auto auto auto;z-index:4;background:var(--cham);
-  border-left:2.5px solid var(--ln);border-top:2.5px solid var(--ln);font:600 13px/1.15 var(--mono);color:var(--vai-2)}
-#tb>div{padding:5px 12px;border-left:1px solid var(--ln);display:flex;flex-direction:column;justify-content:center;gap:2px;white-space:nowrap}
+#tb{position:absolute;right:40px;bottom:30px;display:grid;grid-template-columns:auto auto auto auto;align-items:stretch;z-index:4;background:var(--cham);
+  border:2px solid var(--ln);font:600 13px/1.15 var(--mono);color:var(--vai-2);box-sizing:border-box}
+#tb>div{padding:6px 12px 7px;min-width:0;border-left:1px solid var(--ln);display:flex;flex-direction:column;justify-content:center;gap:2px;white-space:nowrap}
 #tb>div:first-child{border-left:0}
 #tb small{font:600 9px var(--mono);letter-spacing:.08em;color:var(--vai-3)}
 #tb .t{color:var(--vai);font:700 15px var(--body);max-width:300px;overflow:hidden;text-overflow:ellipsis}
-#tb .sc{display:flex;gap:2px;height:9px;margin-top:2px}
-#tb .sc i{width:7px;border:1px solid var(--ln)}
+#tb .sc{display:flex;gap:2px;height:7px;margin-top:3px}
+#tb .sc i{width:6px;height:7px;box-sizing:border-box;border:1px solid var(--ln);transition:background-color .35s,border-color .35s}
 #tb .sc i.f{background:var(--ln)}
 #tb .sc i.c{background:var(--son);border-color:var(--son)}
 .foot{left:70px;right:700px;bottom:34px;font-size:15px}
@@ -504,7 +504,6 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .endg h2{font-size:64px!important}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
-#tb{border:2px solid var(--ln);right:40px;bottom:30px}
 /* Sửa lỗi bố cục 04/11/2026 */
 .vs{align-items:center}
 .vsp{gap:16px;padding:26px 28px}
@@ -517,6 +516,37 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .tri{align-items:stretch}
 #plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
 #plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
+/* Tiểu tiết và hoạt ảnh thêm 04/11/2026 */
+#tb .sc i.c{animation:tbc 1.6s ease-in-out infinite}
+@keyframes tbc{50%{opacity:.35}}
+/* Chuyển tờ: nét bút chạy ngang, tờ mới hiện sau nét bút */
+#wipe{position:absolute;top:0;bottom:0;left:0;width:2px;background:var(--son);z-index:6;pointer-events:none;opacity:0;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--son) 25%,transparent),0 0 18px color-mix(in srgb,var(--son) 45%,transparent)}
+#wipe::before,#wipe::after{content:"";position:absolute;left:-7px;width:16px;height:2px;background:var(--son)}
+#wipe::before{top:58px}#wipe::after{bottom:92px}
+/* Nét nối nhấn: sau khi kẻ xong thì có dòng chảy chạy dọc */
+svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-15}}
+/* Số câu hỏi rất lớn, chỉ có nét viền mờ, nằm sau nội dung */
+.s>svg.ghostn{position:absolute;top:16px;right:60px;width:200px;height:200px;z-index:0;pointer-events:none;overflow:visible}
+.ghostn text{font:700 230px/1 var(--mono);fill:none;stroke:color-mix(in srgb,var(--son) 24%,transparent);stroke-width:1.5}
+.ghostn .gl{font:600 14px var(--mono);letter-spacing:.2em;fill:color-mix(in srgb,var(--son) 45%,transparent);stroke:none}
+.ghostn line{stroke:color-mix(in srgb,var(--son) 30%,transparent);stroke-width:1;stroke-dasharray:4 5}
+/* Slide 4: thanh thời gian của giai đoạn đang chạy */
+.rv{overflow:hidden}
+.rv.on::after{content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;background:var(--son);transform-origin:left;transform:scaleX(0);animation:rvp 13.5s linear forwards}
+@keyframes rvp{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.rv.on::after{animation:none;transform:none}}
+/* Thác nước: nét đứt nối đỉnh cột này sang cột sau */
+.wb.p::after,.wb.w::after{content:"";position:absolute;left:-18px;width:18px;height:0;border-top:2px dashed var(--vai-2);transform-origin:left;transform:scaleX(0)}
+.wb.p::after{bottom:98%}.wb.w::after{bottom:51.47%}
+.s.on .wb.p::after{animation:brg .35s 1.3s ease-out forwards}.s.on .wb.w::after{animation:brg .35s 2.5s ease-out forwards}
+@keyframes brg{to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.wb.p::after,.wb.w::after{transform:none;animation:none!important}}
+/* Slide 12: ô kết luận nháy vòng sóng khi các nét nối chạm tới */
+.s.on .fend{animation:fpulse 1.4s 2.7s ease-out 2}
+@keyframes fpulse{0%{box-shadow:0 0 0 6px color-mix(in srgb,var(--son) 50%,transparent)}100%{box-shadow:0 0 0 30px transparent}}
+@media (prefers-reduced-motion:reduce){.s.on .fend{animation:none}}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1179,6 +1209,11 @@ stage.insertBefore(tb,$("#notes"));
 function tbSet(i){const s=slides[i];$("#tbt").textContent=s.dataset.title;$("#tbw").textContent="Người "+s.dataset.who;
  $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
 
+/* 2b. Số câu hỏi rất lớn, nét viền mờ ở góc phải trên (chỉ ở ba phần câu hỏi) */
+slides.forEach(s=>{const a=+s.dataset.act;if(!(a>=1&&a<=3))return;const g=el("svg",{class:"ghostn",viewBox:"0 0 300 300","aria-hidden":"true"});
+ el("line",{x1:-40,y1:198,x2:200,y2:198},g);const t=el("text",{x:200,y:190,"text-anchor":"end"},g);t.textContent=a;
+ const l=el("text",{class:"gl",x:52,y:190,"text-anchor":"end"},g);l.textContent="CÂU HỎI";s.prepend(g)});
+
 /* 3. Viền khối do JS kẻ, để có thể vẽ dần */
 const OL=".panel,.leaf,.fork,.wc,.shift span,.chain b,.view";
 function outline(root){$$(OL,root).forEach(b=>{if(b.querySelector(":scope>svg.ol"))return;const s=el("svg",{class:"ol","aria-hidden":"true"});el("rect",{x:0,y:0,width:"100%",height:"100%",pathLength:1},s);b.prepend(s)})}
@@ -1246,7 +1281,13 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$("path.dr",s).forEach(p=>live.push(draw(p,+p.dataset.d||1.4,+p.dataset.w||.4)));
  $$(".gr",s).forEach(r=>{const w=r.getAttribute("width");r.dataset.w=r.dataset.w||w;live.push(gsap.fromTo(r,{attr:{width:0}},{attr:{width:r.dataset.w},duration:.7,delay:/p/.test(r.className.baseVal)?2.3:2.3,ease:"power2.out"}))});
  live.push(gsap.fromTo($$(".ex,.d-tx,.st-dot,.st-t",s),{opacity:0},{opacity:1,duration:.4,stagger:.08,delay:1}));
- lk.forEach((l,k)=>{live.push(draw(l.p,.7,1+k*.12));live.push(gsap.fromTo(l.c,{opacity:0},{opacity:1,duration:.2,delay:1+k*.12}))});
+ lk.forEach((l,k)=>{const t=draw(l.p,.7,1+k*.12);if(l.p.classList.contains("a"))t.eventCallback("onComplete",()=>l.p.classList.add("flow"));live.push(t);live.push(gsap.fromTo(l.c,{opacity:0},{opacity:1,duration:.2,delay:1+k*.12}))});
+ const gh=s.querySelector(":scope>svg.ghostn"),h2=s.querySelector("h2");if(gh&&h2){const S=s.getBoundingClientRect(),k=S.width/1600,rg=document.createRange();rg.selectNodeContents(h2);gh.style.display=[...rg.getClientRects()].some(q=>(q.right-S.left)/k>1320&&(q.top-S.top)/k<230)?"none":""}
+ if(gh&&gh.style.display!=="none"){const t=gh.querySelector("text");live.push(gsap.fromTo(t,{strokeDasharray:"1400 1400",strokeDashoffset:1400},{strokeDashoffset:0,duration:2.4,ease:"power1.inOut",delay:.3}));
+  live.push(gsap.fromTo($$("line,.gl",gh),{opacity:0},{opacity:1,duration:.6,delay:1.2}))}
+ const bb=$$(".bub",s);if(bb.length)live.push(gsap.fromTo(bb,{scale:0,rotate:-90},{scale:1,rotate:0,duration:.55,ease:"back.out(2.2)",stagger:.14,delay:.9,clearProps:"transform"}));
+ $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
+  live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
@@ -1255,12 +1296,18 @@ const show0=show,next0=next,prev0=prev;let busy=null;
 const fin=()=>{if(busy){busy.progress(1);busy=null}};
 window.show=function(i,st){show0(i,st);const go2=()=>{if(cur===i)enter(i)};document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready.then(go2):go2()};show=window.show;
 window.next=function(){fin();next0()};next=window.next;window.prev=function(){fin();prev0()};prev=window.prev;
+const wipe=document.createElement("div");wipe.id="wipe";stage.append(wipe);
 window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
- const kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];
- busy=gsap.timeline({onComplete(){busy=null;gsap.set(kids,{clearProps:"opacity,transform"});show(i)}})
-  .to(kids,{opacity:0,y:-14,duration:.22,stagger:.02,ease:"power2.in"})};go=window.go;
+ const back=i<cur,kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];const ns=slides[i];
+ const a=back?"inset(0 0 0 100%)":"inset(0 100% 0 0)";
+ busy=gsap.timeline({onComplete(){busy=null;gsap.set(ns,{clearProps:"clipPath"});gsap.set(wipe,{opacity:0})}})
+  .to(kids,{opacity:0,y:-14,duration:.2,stagger:.015,ease:"power2.in"})
+  .add(()=>{gsap.set(kids,{clearProps:"opacity,transform"});gsap.set(ns,{clipPath:a});show(i)})
+  .fromTo(ns,{clipPath:a},{clipPath:"inset(0 0% 0 0%)",duration:.6,ease:"power2.inOut"})
+  .fromTo(wipe,{x:back?1598:0,opacity:1},{x:back?0:1598,duration:.6,ease:"power2.inOut"},"<")
+  .to(wipe,{opacity:0,duration:.15})};go=window.go;
 addEventListener("resize",()=>{if(!busy)links(slides[cur])});
-enter(cur);
+tbSet(cur);(document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready:Promise.resolve()).then(()=>enter(cur));
 })();
 </script>
 
