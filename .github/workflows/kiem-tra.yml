@@ -1,0 +1,73 @@
+name: Kiểm tra
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, edited, ready_for_review]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kiem-tra-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  quy-tac:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # Dùng máy kiểm tra của main, để một PR không tự nới luật cho chính nó.
+      # PR đầu tiên (main chưa có máy kiểm tra) thì dùng bản trong PR.
+      - name: Lấy máy kiểm tra
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ -n "$BASE_REF" ] && git cat-file -e "origin/$BASE_REF:scripts/kiem-tra.py" 2>/dev/null; then
+            git show "origin/$BASE_REF:scripts/kiem-tra.py" > "$RUNNER_TEMP/kiem-tra.py"
+          else
+            cp scripts/kiem-tra.py "$RUNNER_TEMP/kiem-tra.py"
+          fi
+      - name: Kiểm tra quy tắc (PR)
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+          BASE_REF: ${{ github.base_ref }}
+          N9_ROOT: ${{ github.workspace }}
+        run: |
+          printf '%s' "$PR_BODY" > "$RUNNER_TEMP/pr-body.md"
+          python3 "$RUNNER_TEMP/kiem-tra.py" --base "origin/$BASE_REF" --pr-body "$RUNNER_TEMP/pr-body.md"
+      - name: Kiểm tra quy tắc (main)
+        if: github.event_name == 'push'
+        env:
+          N9_ROOT: ${{ github.workspace }}
+        run: python3 "$RUNNER_TEMP/kiem-tra.py"
+
+  chup-slide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Cài trình duyệt
+        run: |
+          npm install --no-save --no-package-lock playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Chụp 22 slide, tìm chỗ chữ đè
+        run: node scripts/chup-slide.js anh-slide giay,cham
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anh-22-slide
+          path: anh-slide
+          retention-days: 14

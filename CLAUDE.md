@@ -1,27 +1,27 @@
-# MLN122 - Nhóm 9: hướng dẫn cho phiên làm việc tiếp theo
+# MLN122 - Nhóm 9: hướng dẫn cho Claude
 
-Trả lời người dùng bằng tiếng Việt, viết dễ hiểu. Đọc theo thứ tự: file này, `docs/08-ra-soat-va-ke-hoach-v2.md`, `docs/HISTORY.md`, `docs/00-yeu-cau-mon-hoc.md`, `docs/03-nguon-va-kiem-chung.md`.
+@AGENTS.md
+
+Quy tắc ở `AGENTS.md` (nạp ở trên) áp dụng cho **mọi** phiên Claude, kể cả phiên của trưởng nhóm. Trả lời bằng tiếng Việt, viết dễ hiểu. Sau `AGENTS.md`, đọc thêm: `docs/08-ra-soat-va-ke-hoach-v2.md`, `docs/HISTORY.md`.
+
+## Bạn đang làm việc với ai
+
+- Hỏi tên nếu chưa rõ. Trưởng nhóm là **Trần Ngọc Thiên** (GitHub `thiengthb`), người duyệt và merge mọi PR.
+- Với thành viên khác: theo đúng `AGENTS.md`, phản biện, không viết hộ, chỉ sửa slide của họ.
+- Với trưởng nhóm: vẫn đi qua nhánh riêng và PR (không push thẳng `main`), vẫn chạy máy kiểm tra. Trưởng nhóm được đổi phần đã khóa; khi đổi luật thì tăng phiên bản quy tắc theo `docs/quy-trinh/duyet-pr.md` mục 4.
 
 ## Bối cảnh
 Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng viên BinhNV26. Nhóm 9, Slot 9, chủ đề 9 (CNH, HĐH trong CMCN 4.0, AI, chuyển đổi số, nhân lực). Nhóm phản biện: 10, 4, 5. Nhóm 6 cùng lớp đạt 10/10: https://presentation-group6-mln-122.vercel.app/
 
-## Ưu tiên của người dùng
+## Ưu tiên của trưởng nhóm
 1. Nội dung giáo trình và thực tiễn có trích dẫn. 2. Hệ thống, logic, quy chuẩn. 3. Thiết kế, chuyển động, sơ đồ.
-
-## Quy tắc bất di bất dịch
-- Không thêm số liệu nếu chưa mở nguồn và ghi vào `docs/03-nguon-va-kiem-chung.md`.
-- Số trang giáo trình theo bản PDF lớp (trang in = trang PDF + 2). File phân công dùng bản khác.
-- Không dùng Wikipedia, blog, mạng xã hội. Trích dẫn APA 7.
-- Không tạo ảnh AI lãnh tụ. Không quy chụp doanh nghiệp "bóc lột". Phân biệt rõ với cờ vi phạm ở `docs/00`.
-- Mọi lần AI hỗ trợ phải ghi vào `docs/05-phu-luc-ai.md`. Nhóm phải tự giải thích được nội dung: nếu không, cả cấu phần có thể bị 0 điểm.
 
 ## Cấu trúc
 - Giao diện chính là "Bản vẽ kỹ thuật động" (bản B, nhóm chốt 04/11/2026). Nguồn slide: `src/deck.css.part` (nền chung), `src/ban-ve.css.part` (giao diện bản vẽ), `src/slides.part` (nội dung và ghi chú), `src/app.part` (dữ liệu nguồn, tương tác), `src/ban-ve.part` (hoạt ảnh, dùng GSAP lưu sẵn trong `vendor/`). `src/deck.html` và `index.html` là bản build: chạy `python3 scripts/build.py` rồi commit. Slide 18 vẽ mặt đồng hồ trong `src/ban-ve.part` từ mảng `G` của `app.part`. Bản C (`src/c/`, `ban-c.html`) đã gác lại; `soi-chi.html` là bản thử cũ, không build lại.
-- Trước khi đăng: chạy kiểm tra đè chữ và chụp đủ 22 slide, kể cả trạng thái cuối của slide tương tác (slide 14 ở 100%).
-- Đầu `src/app.part` có `CONFIG`: tên thành viên, ngày, phần nhóm đã làm.
+- Kiểm tra: `python3 scripts/kiem-tra.py` (quy tắc) và `node scripts/chup-slide.js <thư mục> giay,reu,cham` (chụp 22 slide, tìm chỗ đè). Trên GitHub hai việc này tự chạy cho mỗi PR.
+- Đầu `src/app.part` có `CONFIG`: tên thành viên theo thứ tự nói, MSSV, ngày.
 - Kịch bản `docs/06` tự sinh từ ghi chú trong `src/slides.part`.
-- Phím trong slide: mũi tên, N ghi chú, P cửa sổ người nói, K soi nguồn, F toàn màn hình, T bấm đồng hồ, D đổi giao diện. Màu lấy từ biến CSS, không viết mã màu cứng.
-- Câu chữ: viết như sinh viên nói chuyện, không dùng từ người dùng chưa nghe bao giờ; thuật ngữ của môn phải giải thích trong lời nói.
+- Câu chữ: viết như sinh viên nói chuyện, không dùng từ người nghe chưa biết; thuật ngữ của môn phải giải thích trong lời nói.
 
 ## Liên kết
 - Sheet lớp: https://docs.google.com/spreadsheets/d/1EbCKDjwmWwk-oDGSOQbBcpIg0JYxn-2vS0e0khU8ucE
