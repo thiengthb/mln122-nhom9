@@ -1,4 +1,4 @@
-# Bảng nguồn và kiểm chứng (cập nhật 02/11/2026)
+# Bảng nguồn và kiểm chứng (cập nhật 04/11/2026)
 
 Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại** = đọc qua bài của cơ quan báo chí, tạp chí, chưa mở bản gốc. Toàn bộ do Claude mở bằng công cụ tóm tắt web, nên **nhóm phải tự mở lại từng link và đối chiếu từng con số trước khi nộp**.
 
@@ -11,7 +11,7 @@ Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại
 | Phi chính thức Q3/2026 | 60,6% | Cục Thống kê | Gốc | như trên |
 | Năng suất lao động 2025 | 245 triệu đồng, 9.809 USD | Cục Thống kê | Gốc | https://www.nso.gov.vn/tin-tuc-thong-ke/2026/01/thong-cao-bao-chi-tinh-hinh-kinh-te-xa-hoi-quy-iv-va-nam-2025/ |
 | GDP/người 2025 | 5.026 USD | Cục Thống kê | Gốc | như trên |
-| Kinh tế số 2025 | 14,02% GDP | Cục Thống kê qua Báo Đầu tư | Dẫn lại | https://baodautu.vn/kinh-te-so-chiem-1402-gdp-nam-2025-tro-thanh-dong-luc-tang-truong-quan-trong-d484834.html |
+| Kinh tế số 2025 | 14,02% GDP (giá trị tăng thêm), khoảng 72,1 tỷ USD | Cục Thống kê, thông cáo 05/01/2026 | Gốc (mở lại 04/11/2026) | https://www.nso.gov.vn/tin-tuc-thong-ke/2026/01/thong-cao-bao-chi-ty-trong-gia-tri-tang-them-cua-kinh-te-so-trong-gdp-grdp-giai-doan-2021-2025/ |
 | Mục tiêu NQ57 đến 2030 | KTS ≥30% GDP; R&D 2% GDP; 12 nhân lực NC/vạn dân; TFP >55% | Nghị quyết 57-NQ/TW | Gốc (đăng lại) | https://www.quanlynhanuoc.vn/2025/01/22/nghi-quyet-57-nq-tw-ve-dot-pha-phat-trien-khoa-hoc-cong-nghe-doi-moi-sang-tao-va-chuyen-doi-so-quoc-gia/ |
 | Mục tiêu ĐH XIV đến 2030 | Qua đào tạo 35–40%; GDP/người ~8.500 USD | Tuổi Trẻ tóm tắt NQ ĐH XIV | Dẫn lại, cần tìm bản gốc | https://tuoitre.vn/thong-qua-nghi-quyet-dai-hoi-xiv-cua-dang-xac-lap-mo-hinh-tang-truong-moi-dot-pha-manh-me-the-che-20260123162320197.htm |
 | GenAI ở VN | 11,5 triệu lao động phơi nhiễm; ~1 triệu, dưới 2% rủi ro tự động hóa cao; nữ 24,1%, nam 17,8% | ILO | Gốc | https://www.ilo.org/resource/news/generative-ai-could-transform-millions-jobs-viet-nam-new-ilo-brief-shows |
@@ -33,8 +33,8 @@ Cột "Trạng thái": **Gốc** = đọc ở nguồn phát hành; **Dẫn lại
 | R&D theo cùng một bảng | Hàn Quốc 4,53%, Nhật Bản 3,26% (2018); Việt Nam 0,53% (2019) | Nguyễn Hoàng Hải, Trần Anh Tuấn, Tạp chí QLNN 2026, số của NASATI 2021 | Dẫn lại | https://www.quanlynhanuoc.vn/?p=56875 |
 | Nhật Bản 1945–1970, Hàn Quốc 1960–1990 | Nhập để học cải tiến; viện nghiên cứu trong doanh nghiệp | như trên | Dẫn lại (tạp chí) | như trên |
 | Hàn Quốc đầu 1960 | GDP đầu người khoảng 79 USD/năm | Lê Đức Nguyên, TC KH&CN VN 12A/2024 | Dẫn lại, mới đọc tóm tắt | https://vjol.info.vn/khcn/article/view/106354 |
-| Mục tiêu ĐH XIV | 35–40%; 8.500 USD; kinh tế số khoảng 30% | Tạp chí Kinh tế - Tài chính, 23/01/2026 | Dẫn lại, cần văn kiện gốc | https://tapchikinhtetaichinh.vn/nghi-quyet-dai-hoi-xiv-cua-dang-xac-dinh-cac-muc-tieu-chien-luoc-phat-trien-dat-nuoc-142627.html |
-| Câu của R. Baldwin | "It's somebody using AI that will take your job." | Business Insider | Dẫn lại, chỉ là câu dẫn | https://www.businessinsider.in/tech/news/its-not-ai-that-is-going-to-take-you-job-but-someone-who-knows-how-to-use-ai-might-economist-says/articleshow/99957251.cms |
+| Mục tiêu ĐH XIV | "GDP bình quân đầu người đến năm 2030 đạt khoảng 8.500 USD"; "tỉ lệ lao động qua đào tạo có bằng cấp, chứng chỉ đạt 35-40%" | Toàn văn Nghị quyết Đại hội XIV, Trang thông tin Đại hội Đảng toàn quốc (đăng 06/02/2026) | Gốc (mở 04/11/2026) | https://daihoidangtoanquoc.vn/nghi-quyet-dai-hoi-dai-bieu-toan-quoc-lan-thu-xiv-cua-dang-post3297.html |
+| Câu của R. Baldwin | "AI won't take your job – it's someone using AI who will take your job" | WEF, thông cáo Growth Summit 2023, 03/05/2023 | Gốc (mở 04/11/2026), chỉ là câu dẫn | https://www.weforum.org/media/growth-summit-2023-job-creation-and-reskilling-must-be-central-to-growth-in-the-age-of-uncertainty-advancing-ai-and-the-green-transition |
 
 **NQ57 đã đọc nguyên văn ngày 04/11/2026** trên trang Tạp chí Quản lý nhà nước: các trích dẫn trên slide đúng từng chữ. Không có cụm "đi tắt", "đón đầu", "kỹ năng số". Có "năng lực số", "học tập số", "công dân số".
 **Chưa đọc được toàn văn Luật AI:** Thư viện Pháp luật chặn trình duyệt tự động. Cần nhóm mở và đối chiếu.
@@ -54,7 +54,7 @@ Nghị quyết 57, mục III.4 là câu duy nhất nhắc đến sinh viên: "C�
 ## Cập nhật 04/11/2026 (kiểm lại review Codex, Claude mở nguồn)
 | Số liệu / trích dẫn | Giá trị | Nguồn | Trạng thái | Link |
 |---|---|---|---|---|
-| R&D % GDP, năm 2023 | Việt Nam 0,41 (2021: 0,42; 2019: 0,42); Hàn Quốc 4,94; Nhật Bản 3,44 | World Bank WDI, số của UIS | Gốc (API World Bank) | https://data.worldbank.org/indicator/GB.XPD.RSDV.GD.ZS?locations=VN-KR-JP |
+| R&D % GDP, năm 2023 | Việt Nam 0,41 (2021: 0,42; 2019: 0,42); Hàn Quốc 4,94; Nhật Bản 3,44 | World Bank WDI, số của UIS | Gốc (API World Bank, mở lại 04/11/2026: 4,94352 / 3,44125 / 0,41456) | https://api.worldbank.org/v2/country/VN%3BKR%3BJP/indicator/GB.XPD.RSDV.GD.ZS?date=2023&format=json&per_page=100 |
 | GDP/người Hàn Quốc, USD hiện hành | 1960: 159; 1961: 94; 1962: 107; 1963: 147; 1964: 124 | World Bank WDI | Gốc (API World Bank) | https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=KR |
 | GII 2026 | Hạng 43/139; Human capital and research hạng 79, thấp nhất | WIPO, hồ sơ Việt Nam | Gốc | https://www.wipo.int/edocs/gii-ranking/2026/vn.pdf |
 | Luật Trí tuệ nhân tạo | Số 134/2025/QH15, ban hành 10/12/2025, hiệu lực 01/3/2026 | Cổng TTĐT Chính phủ, Công báo | Gốc | https://chinhphu.vn/?classid=1&docid=216334&orggroupid=1&pageid=27160 |
@@ -67,4 +67,13 @@ Nghị quyết 57, mục III.4 là câu duy nhất nhắc đến sinh viên: "C�
 **Đã bỏ khỏi slide:** logistics 90,5% số hóa cơ bản và 5–7% đào tạo bài bản (bài Tạp chí Công Thương không ghi năm khảo sát, cỡ mẫu); số 79 USD của Hàn Quốc (thay bằng số World Bank).
 **Điểm Codex sai, đã kiểm:** bài JEB 700 lao động mà Codex dẫn cho số 67,1% không có số này (bài đó ghi gần 75% không học khóa nào trong 12 tháng). Số 94 USD năm 1961 là năm tỷ giá tụt, năm 1960 là 159 USD, nên slide chỉ nói "chưa tới 160 USD".
 **Số 2,2 triệu logistics:** bài TTXVN ghi "will require around 2.2 million workers by 2030", là tổng nhu cầu, không phải số tuyển mới. Chưa mở được kỷ yếu VLA gốc (lỗi tải).
-**Kinh tế số 14,02%:** trang Cục Thống kê bị lỗi khi mở lại, vẫn là số dẫn lại qua Báo Đầu tư.
+**Kinh tế số 14,02%:** ngày 04/11/2026 đã mở được thông cáo gốc của Cục Thống kê (05/01/2026): "Tỷ trọng giá trị tăng thêm của kinh tế số trong GDP ước đạt 14,02%, tương đương khoảng 72,1 tỷ USD". Đã thay nguồn Báo Đầu tư bằng thông cáo này.
+
+## Rà review Codex về link trích dẫn (04/11/2026)
+Claude tự mở lại từng link; kết quả:
+- **Baldwin:** link Business Insider vẫn mở được với công cụ của Claude, nhưng đó là báo dẫn lại và không có ngày. Thay bằng thông cáo WEF 03/05/2023. Câu trên slide đổi theo đúng nguyên văn trong thông cáo WEF (câu cũ là bản ghi của Business Insider, chữ hơi khác).
+- **Mục tiêu ĐH XIV:** thay Tạp chí Kinh tế - Tài chính bằng toàn văn Nghị quyết; hai cụm 8.500 USD, 35-40% có nguyên văn.
+- **World Bank R&D:** link ghép VN-KR-JP lỗi khi mở; đổi sang API ba nước, số khớp.
+- **Năm của C.Mác:** đổi (k.n.) thành (1995). Claude **không mở được** PDF giáo trình (Drive chặn công cụ). Năm 1995 dựa vào review Codex và ghi chú cũ của nhóm ở `docs/02` ("H.1995?"). **Nhóm cần mở tr. 144 bản PDF để xác nhận.**
+- **Bangladesh:** báo cáo BLF tự ghi giả định câu trả lời là về "thời máy thủ công" và thiếu số liệu theo dõi từng nhà máy, nên đúng là khảo sát hồi tưởng. Đã sửa câu slide 15 và lời nói.
+- **Nguồn thừa:** slide 13 không có chữ nào dẫn `qlnn26`, slide 19 không có chữ nào dẫn `luatai`, đã bỏ khỏi dòng Nguồn của hai slide đó (hai nguồn vẫn dùng ở slide 15 và 16).
