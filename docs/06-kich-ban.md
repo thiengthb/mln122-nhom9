@@ -9,9 +9,9 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người 1 | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
 | Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.7 phút |
 | Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
-| Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.7 phút |
+| Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.9 phút |
 | Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 4.4 phút |
-| **Tổng phần nói** | | | **19.5 phút** (nói nhanh 170: 17.2 phút) |
+| **Tổng phần nói** | | | **19.8 phút** (nói nhanh 170: 17.5 phút) |
 
 ## Người 1: slide 1–5 (khoảng 3.6 phút)
 
@@ -71,7 +71,7 @@ Vậy cần làm gì? Giáo trình chia hai phần. Trước hết là tạo đi
 
 Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời [Người 4].
 
-## Người 4: slide 14–16 (khoảng 3.7 phút)
+## Người 4: slide 14–16 (khoảng 3.9 phút)
 
 ### Slide 14. Mô phỏng c/v
 
@@ -79,7 +79,7 @@ Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là gi�
 
 ### Slide 15. Dệt may và logistics
 
-Dệt may trước. Nhóm chưa có số đo tương tự của Việt Nam, nên dùng một khảo sát 429 công nhân ở Bangladesh để đối chiếu, không áp sang mình. [Chỉ vào nhãn đối chiếu.] Sau tự động hóa, số người trên dây chuyền giảm khoảng 30%. Nhưng khâu cắt giảm gần một nửa, khâu may chỉ hơn một phần tư. Tức là máy thay từng công đoạn, không thay cả nghề một lần. Ở Việt Nam, trong một khảo sát 1.770 lao động dệt may, da giày, khoảng hai phần ba chưa từng được đào tạo kể từ khi đi làm. Sang logistics: Hiệp hội Logistics ước ngành cần khoảng 2,2 triệu lao động vào năm 2030. Đó là tổng nhu cầu, không phải 2,2 triệu việc làm tăng thêm. Việc giấy tờ, kho bãi lặp lại dễ tự động hóa hơn, nhu cầu có thể dịch sang phân tích dữ liệu, vận hành hệ thống, xử lý sự cố. Nhưng người lao động chỉ chuyển được nếu được đào tạo. Ở cả hai ngành, chỗ thiếu lớn nhất là kỹ năng.
+Dệt may trước. Nhóm chưa có số đo tương tự của Việt Nam, nên dùng một khảo sát 429 công nhân ở Bangladesh để đối chiếu, không áp sang mình. [Chỉ vào nhãn đối chiếu.] Công nhân được hỏi nhớ lại thời còn máy thủ công rồi so với bây giờ: thời máy tự động, mỗi dây chuyền ít hơn khoảng 30% người. Đây là lời kể lại, không phải đo cùng một nhà máy trước và sau, nên chỉ coi là dấu hiệu. Khâu cắt ít hơn gần một nửa, khâu may chỉ hơn một phần tư. Tức là máy thay từng công đoạn, không thay cả nghề một lần. Ở Việt Nam, trong một khảo sát 1.770 lao động dệt may, da giày, khoảng hai phần ba chưa từng được đào tạo kể từ khi đi làm. Sang logistics: Hiệp hội Logistics ước ngành cần khoảng 2,2 triệu lao động vào năm 2030. Đó là tổng nhu cầu, không phải 2,2 triệu việc làm tăng thêm. Việc giấy tờ, kho bãi lặp lại dễ tự động hóa hơn, nhu cầu có thể dịch sang phân tích dữ liệu, vận hành hệ thống, xử lý sự cố. Nhưng người lao động chỉ chuyển được nếu được đào tạo. Ở cả hai ngành, chỗ thiếu lớn nhất là kỹ năng.
 
 ### Slide 16. Câu trả lời
 
@@ -105,7 +105,7 @@ Nhóm thử viết một kế hoạch 90 ngày, lấy ví dụ ngành Kỹ thu�
 
 ### Slide 21. Kết luận
 
-Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có câu, đại ý: người lấy việc của bạn là người biết dùng AI. Đó là lời nhắc, không phải bằng chứng. Tóm lại ba ý. Mua được chưa phải dùng được, dùng được chưa phải làm chủ được. AI vừa thay vừa tạo việc, còn ai hưởng lợi thì tùy cách ta tổ chức. Và đột phá quốc gia phải đi qua năng lực của từng tổ chức, từng người. [Dừng trước câu cuối.] Đi tắt được công nghệ, không đi tắt được năng lực. Câu hỏi cho lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? [Nghe một câu trả lời.] Nhóm em cảm ơn thầy và các bạn.
+Quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có câu, đại ý: AI không lấy việc của bạn, người biết dùng AI mới lấy. Đó là lời nhắc, không phải bằng chứng. Tóm lại ba ý. Mua được chưa phải dùng được, dùng được chưa phải làm chủ được. AI vừa thay vừa tạo việc, còn ai hưởng lợi thì tùy cách ta tổ chức. Và đột phá quốc gia phải đi qua năng lực của từng tổ chức, từng người. [Dừng trước câu cuối.] Đi tắt được công nghệ, không đi tắt được năng lực. Câu hỏi cho lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? [Nghe một câu trả lời.] Nhóm em cảm ơn thầy và các bạn.
 
 ## Slide dự phòng
 

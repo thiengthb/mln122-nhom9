@@ -172,3 +172,13 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 2: ô trống rộng hết khổ, chữ 36 px; thêm hàng "Nếu chưa ai nói: ba hướng gợi ý" gồm Thay bạn, Giúp bạn, Chẳng đổi gì nhiều (lấy từ ghi chú lời nói có sẵn).
 - Slide 14: chữ "c · máy móc", "v · tiền công" 17 px, đặt lệch ra ngoài để thanh cân nghiêng không đè lên; chú thích "mỗi hình = 20 đơn vị" 14 px.
 - Slide 19: khối ba nguồn, ba yêu cầu dồn lên trên; ba lô đặt cách đáy ô C khoảng 100 px thay vì cố định sát dòng Nguồn.
+
+## 04/11/2026: Sửa nguồn trích dẫn theo review Codex (đã tự mở lại từng link)
+- `baldwin`: Business Insider thay bằng thông cáo WEF 03/05/2023 (WEF, 2023). Câu trên slide 21 đổi theo nguyên văn của WEF: "AI won't take your job – it's someone using AI who will take your job."
+- `nq14`: Tạp chí Kinh tế - Tài chính thay bằng toàn văn Nghị quyết Đại hội XIV (Đảng Cộng sản Việt Nam, 2026).
+- `kts`: Báo Đầu tư thay bằng thông cáo gốc của Cục Thống kê 05/01/2026 (Cục Thống kê, 2026d).
+- `wbrd`: link ghép VN-KR-JP bị lỗi, đổi sang API World Bank cho ba nước; số không đổi.
+- `mac`: (k.n.) thành (1995). Chưa tự mở được PDF giáo trình; nhóm cần xem chân trang tr. 144 để xác nhận.
+- Slide 15: câu Bangladesh ghi rõ là lời công nhân nhớ lại (thời máy tự động so với thời máy thủ công), lời nói thêm một câu nhắc đây không phải đo trước, sau cùng một nhà máy.
+- Bỏ `qlnn26` khỏi dòng Nguồn slide 13 và `luatai` khỏi slide 19 (không có chữ nào trên hai slide đó dẫn tới).
+- Slide 22 tự đếm lại: văn bản, thống kê nhà nước 7; tổ chức, hiệp hội 12; tạp chí 3; báo, hãng tin 2; vẫn 26 nguồn.
