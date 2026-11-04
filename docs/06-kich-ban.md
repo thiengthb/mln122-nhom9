@@ -7,11 +7,11 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người | Slide | Nội dung | Ước tính |
 |---|---|---|---|
 | Người 1 | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
-| Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.6 phút |
+| Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.7 phút |
 | Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.0 phút |
 | Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.7 phút |
 | Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 4.4 phút |
-| **Tổng phần nói** | | | **19.2 phút** (nói nhanh 170: 16.9 phút) |
+| **Tổng phần nói** | | | **19.4 phút** (nói nhanh 170: 17.1 phút) |
 
 ## Người 1: slide 1–5 (khoảng 3.6 phút)
 
@@ -35,7 +35,7 @@ Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt
 
 Mác viết, và giáo trình dẫn ở trang 144: của cải sẽ ngày càng ít phụ thuộc vào số giờ lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. [Hạ giọng.] Mác không nói về AI. Nhưng câu này gợi cho nhóm em một cách đọc hôm nay: công nghệ đổi lực lượng sản xuất, rồi buộc quan hệ sản xuất và cách quản trị phải điều chỉnh theo. Với Việt Nam có hai mặt. Mặt khó: lợi thế nhân công rẻ yếu dần. Mặt thuận: nước đi sau có thể dùng thành tựu của nước đi trước để rút ngắn khoảng cách. Nhưng cơ hội đó chỉ thành thật nếu biết học từ người đi trước. [Người 2] sẽ bắt đầu từ ba mô hình công nghiệp hóa.
 
-## Người 2: slide 6–9 (khoảng 3.6 phút)
+## Người 2: slide 6–9 (khoảng 3.7 phút)
 
 ### Slide 6. Ba mô hình công nghiệp hóa
 
@@ -51,7 +51,7 @@ Lấy Hàn Quốc làm ví dụ. Đầu những năm 1960, theo Ngân hàng Th�
 
 ### Slide 9. Đầu tư cho năng lực
 
-Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời [Người 3].
+Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. Bên phải là số robot trên 10.000 lao động ngành chế tạo, mỗi hình robot là 100 robot: Hàn Quốc hơn 12 hình, Trung Quốc chưa tới 2 hình. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời [Người 3].
 
 ## Người 3: slide 10–13 (khoảng 4.0 phút)
 

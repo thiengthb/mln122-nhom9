@@ -136,3 +136,9 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Sửa lỗi cũ: dòng cát rơi trong đồng hồ cát slide 5 bị ẩn do trùng tên lớp `.st` (lớp này là chữ hiện dần). Đổi tên lớp, nay đã thấy.
 - Code ở `moreScenes()` trong `src/ban-ve.part`.
 
+## 04/11/2026: Ba cảnh động cuối (slide 2, 9, 17)
+- Slide 2: dòng "Mời một, hai bạn chia sẻ." được gõ ra từng chữ, con trỏ màu nhấn nháy ở cuối như đang chờ lớp trả lời.
+- Slide 9: bảng đo 2 vẽ bằng hình cánh tay robot thay cho thanh đặc, mỗi hình = 100 robot (Hàn Quốc 12,2 hình, Trung Quốc 1,66 hình; hình cuối bị cắt theo phần lẻ). Chỉ đổi cách vẽ số đã có, nguồn vẫn là IFR (2026). Nhãn "mỗi hình = 100 robot" nằm cạnh "Bảng đo 2". Ghi chú slide 9 thêm một câu giải thích hình robot.
+- Slide 17: sau khi nét nối vẽ xong, hạt chạy liên tục từ năm cụm vào bánh răng, rồi hạt màu nhấn chạy từ bánh răng ra bốn mục tiêu.
+- Code ở `isoRob()` và `lastScenes()` trong `src/ban-ve.part`.
+

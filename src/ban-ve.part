@@ -283,6 +283,25 @@ function moreScenes(s){
   t.add(()=>pl.classList.remove("run"),"+=.6").to(wt,{opacity:0,duration:.4},"<");live.push(t)}
 }
 
+
+/* 10j. Slide 9: biểu đồ robot vẽ bằng hình robot, mỗi hình = 100 robot (1.220 ứng với 96% vạch, nên 100 robot = 96%/12,2 bề rộng) */
+function isoRob(){const pn=$$(".panel").find(q=>q.querySelector('.bar .n[data-c="ifr26"]'));if(!pn)return;pn.classList.add("iso");
+ const t=pn.querySelector(".bar .t");if(t&&t.offsetWidth)pn.style.setProperty("--u",(t.offsetWidth*.96/12.2).toFixed(2)+"px");
+ const l=pn.querySelector(".lbl");if(l&&!l.querySelector(".isol"))l.insertAdjacentHTML("beforeend",`<span class="isol"> · mỗi hình = 100 robot</span>`)}
+isoRob();
+function lastScenes(s){
+ if(s.querySelector(".iso"))isoRob();
+ /* Slide 2: dòng mời lớp được gõ ra từng chữ, con trỏ nháy ở cuối như đang chờ lớp gõ tiếp */
+ const bp=s.querySelector(".blank p");
+ if(bp){const o=bp.dataset.o||(bp.dataset.o=bp.textContent);bp.innerHTML=`<span class="ty"></span><span class="caret" aria-hidden="true"></span>`;const ty=bp.firstChild,z={n:0};
+  live.push(gsap.to(z,{n:o.length,duration:o.length*.065,delay:1.5,ease:"none",onUpdate(){ty.textContent=o.slice(0,Math.round(z.n))},onInterrupt(){ty.textContent=o}}))}
+ /* Slide 17: hạt chạy từ năm cụm vào bánh răng, rồi từ bánh răng ra bốn mục tiêu */
+ if(s.dataset.title==="Nghị quyết 57"){const sv=s.querySelector(":scope>svg.links");if(sv){let ki=0,ko=0;
+  $$("path",sv).filter(p=>!p.closest("mask,defs,marker")).forEach(p=>{const out=p.classList.contains("a"),k=out?ko++:ki++,L=p.getTotalLength();
+   for(let j=0;j<3;j++){const c=el("circle",{class:"pk"+(out?" o":""),r:out?6:5},sv);c.style.opacity=0;const z={f:0};
+    live.push(gsap.to(z,{f:1,duration:out?1.5:1.3,ease:"none",repeat:-1,delay:(out?3.3:2.3)+j*(out?.5:.43)+k*.11,onStart(){c.style.opacity=1},onUpdate(){const q=p.getPointAtLength(L*z.f);c.setAttribute("cx",q.x);c.setAttribute("cy",q.y)}}))}})}}
+}
+
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
 function elbow(sx,sy,ex,ey,vert){const r=12;
@@ -334,7 +353,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);live.push(heads(s,.1));
+ extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
 
 /* 10b. Chi tiết riêng từng slide */
