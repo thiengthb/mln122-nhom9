@@ -503,6 +503,18 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
 #tb{border:2px solid var(--ln);right:40px;bottom:30px}
+/* Sửa lỗi bố cục 04/11/2026 */
+.vs{align-items:center}
+.vsp{gap:16px;padding:26px 28px}
+.vsh{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.vsh .big{font-size:88px;line-height:1}
+.vsb{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}
+.vsb .wf.sm8{max-width:230px;margin:0}
+.vsb p{font-size:21px;line-height:1.36;margin-top:8px}
+.stk{display:flex;flex-direction:column;justify-content:center;gap:110px}
+.tri{align-items:stretch}
+#plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
+#plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -542,9 +554,9 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
       <path class="st-step dr" data-d="2.6" data-w=".9" d="M70 430 L70 386 L158 386 L158 342 L246 342 L246 298 L334 298 L334 254 L422 254 L422 210 L510 210 L510 166 L598 166 L598 122 L686 122 L686 78 L800 78"/>
       <path class="st-jump dr" data-d=".9" data-w=".3" marker-end="url(#dao)" d="M70 430 C150 40 520 0 780 70"/>
       <circle class="st-dot" cx="800" cy="78" r="9"/>
-      <text class="st-t" x="800" y="50" text-anchor="end">TRÌNH ĐỘ CAO</text>
+      <text class="st-t" x="845" y="32" text-anchor="end">TRÌNH ĐỘ CAO</text>
       <text class="st-t" x="70" y="458">XUẤT PHÁT</text>
-      <text class="st-t b o" x="140" y="290" style="fill:var(--nghe)">Công nghệ</text><text class="st-t o" x="140" y="316">MUA ĐƯỢC · ĐI TẮT ĐƯỢC</text>
+      <text class="st-t b o" x="320" y="126" style="fill:var(--nghe)">Công nghệ</text><text class="st-t o" x="320" y="150">MUA ĐƯỢC · ĐI TẮT ĐƯỢC</text>
       <text class="st-t b" x="470" y="350">Năng lực</text><text class="st-t" x="470" y="376">PHẢI LEO TỪNG BẬC</text>
     </svg>
     <div class="qs">
@@ -739,9 +751,9 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
   <div class="eb r">CÂU HỎI 2 · ĐỌC SỐ LIỆU CHO ĐÚNG</div>
   <h2 class="r" style="--i:1">Cùng là ILO, cùng nói về Việt Nam, sao lại có <em>hai con số</em>?</h2>
   <div class="vs grow r" style="--i:2">
-    <div class="panel"><div style="display:flex;gap:24px;align-items:baseline;justify-content:space-between"><span class="big bigs" style="font-size:104px">86%</span><span class="lbl">ILO, 2016</span></div><div class="wf sm8" data-wf="86:s,14:o"></div><div class="ms">MẪU SỐ</div><p class="st" data-s="1" style="font-size:22px">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div>
+    <div class="panel vsp"><div class="vsh"><span class="big bigs">86%</span><span class="lbl">ILO, 2016</span></div><div class="vsb"><div class="wf sm8" data-wf="86:s,14:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div></div></div>
     <div class="neq" aria-hidden="true">≠</div>
-    <div class="panel"><div style="display:flex;gap:24px;align-items:baseline;justify-content:space-between"><span class="big bigm" style="font-size:104px">&lt; 2%</span><span class="lbl">ILO, 2026</span></div><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><div class="ms">MẪU SỐ</div><p class="st" data-s="1" style="font-size:22px">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> thay thế; khoảng một phần năm có công việc bị AI ảnh hưởng.</p></div>
+    <div class="panel vsp"><div class="vsh"><span class="big bigm">&lt;2%</span><span class="lbl">ILO, 2026</span></div><div class="vsb"><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> thay thế; khoảng một phần năm có công việc bị AI ảnh hưởng.</p></div></div></div>
   </div>
   <p class="r st" data-s="1" style="--i:3"><span class="tag">quan điểm nhóm</span> Hai con số đo hai thứ khác nhau. Khi gặp một con số, hãy hỏi: đo ai, đo công nghệ nào, trong bao lâu?</p>
   <aside class="notes">Cảm ơn [Người 3]. Em là [Người 4]. Câu hỏi AI có lấy mất việc không thì chắc ai cũng từng nghe rồi, và mình cũng từng nghe rất nhiều con số đáng sợ. Em đưa ra hai con số của cùng một tổ chức, Tổ chức Lao động Quốc tế, cùng nói về Việt Nam. Năm 2016 họ nói 86%. Năm 2026 họ nói dưới 2%. Theo các bạn, tổ chức này đã đổi ý, hay một trong hai số bị sai? [Dừng một nhịp, rồi bấm một lần.] Thật ra cả hai đều không sai, vì hai số đang đo hai thứ khác nhau. 86% là những người làm trong dệt may, da giày, tính xem công việc của họ về mặt kỹ thuật có thể bị máy làm thay hay không, trong khoảng hai chục năm. Còn dưới 2%, tức khoảng 1 triệu người, là tính trên toàn bộ lao động, và chỉ tính riêng AI tạo sinh. Nhưng cũng báo cáo đó nói có khoảng 11,5 triệu người có công việc bị AI ảnh hưởng theo một cách nào đó. Nên từ giờ nghe ai nói con số nào, mình nên hỏi lại: họ đang đo ai, đo công nghệ nào, trong bao lâu. Số liệu thì như vậy, còn về lý luận, tại sao máy móc lại ảnh hưởng đến việc làm? Chương 3 đã có câu trả lời.</aside>
@@ -841,17 +853,16 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 <section class="s" data-act="3" data-who="5" data-min="1" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;wef25;luatai" data-links="t1>o1!,t2>o2!,t3>o3!">
   <div class="eb r">CÂU HỎI 3 · YÊU CẦU VỚI SINH VIÊN</div>
   <h2 class="r" style="--i:1">Điều đó đòi hỏi gì ở <em>sinh viên chúng ta</em>?</h2>
-  <div class="tri r" style="--i:2">
+  <div class="stk grow"><div class="tri r" style="--i:2">
     <div class="tcol panel" id="t1"><span class="eb">NGHỊ QUYẾT 57</span><p><span class="n" data-c="nq57">"nâng cao năng lực số trong xã hội"</span>; phong trào <span class="n" data-c="nq57">"học tập số"</span></p></div>
     <div class="tcol panel" id="t2"><span class="eb">GIÁO TRÌNH</span><p><span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span> được những tác động mới</p></div>
     <div class="tcol panel" id="t3"><span class="eb">DỰ BÁO</span><p><span class="n" data-c="wef25">59 trên 100</span> lao động cần được đào tạo lại hoặc nâng kỹ năng đến 2030</p></div>
   </div>
-  <div class="grow" style="min-height:40px"></div>
   <div class="outs r" style="--i:3">
     <div class="panel dark" id="o1"><span class="bub s1">A</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Giỏi thật sự một lĩnh vực</h3></div></div>
     <div class="panel dark" id="o2"><span class="bub s1">B</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Dùng AI nhưng phải kiểm tra lại</h3></div></div>
     <div class="panel dark" id="o3"><span class="bub s1">C</span><div><span class="tag">nhóm suy ra</span><h3 style="margin-top:8px">Có trách nhiệm trên môi trường số</h3></div></div>
-  </div>
+  </div></div>
   <aside class="notes">Khi đọc Nghị quyết, nhóm em để ý là văn bản không có một danh sách yêu cầu riêng cho sinh viên. Sinh viên chỉ được nhắc đến ở chính sách tín dụng, học bổng và học phí, nhằm thu hút học sinh, sinh viên giỏi vào các ngành then chốt. Nên nhóm em tách rõ cho các bạn thấy. Hàng trên là những gì văn bản viết: nâng cao năng lực số trong xã hội, phong trào học tập số, và giáo trình thì nói thẳng "mỗi sinh viên cần ý thức" được những tác động mới. Hàng dưới là điều nhóm em suy ra từ đó, nên các bạn có thể đồng ý hoặc không. Một là phải giỏi thật sự một lĩnh vực, vì AI có thể làm nhanh, nhưng người chịu trách nhiệm cuối cùng vẫn là mình. Hai là dùng AI nhưng phải kiểm tra lại. Bản thân nhóm em khi làm bài này cũng dùng AI hỗ trợ, và khi kiểm tra lại đã thấy có những con số không khớp nhau giữa các nguồn. Ba là có trách nhiệm trên môi trường số, từ chuyện liêm chính học thuật đến tuân thủ pháp luật. Nói thì dễ, vậy bắt đầu từ đâu?</aside>
 </section>
 
@@ -876,7 +887,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
       <path class="st-step dr" data-d="2" data-w=".6" d="M70 430 L70 386 L158 386 L158 342 L246 342 L246 298 L334 298 L334 254 L422 254 L422 210 L510 210 L510 166 L598 166 L598 122 L686 122 L686 78 L800 78"/>
       <path class="st-jump" d="M70 430 C150 40 520 0 780 70" style="opacity:.35"/>
       <circle class="st-dot" cx="800" cy="78" r="12"/>
-      <text class="st-t b" x="800" y="40" text-anchor="end">Con người</text>
+      <text class="st-t b" x="845" y="30" text-anchor="end">Con người</text>
     </svg></div>
   </div>
   <div class="panel dark r" style="--i:4"><span class="eb">CÂU HỎI CHO LỚP</span><p style="font-size:28px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>
@@ -1180,7 +1191,7 @@ $$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden"
 
 /* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
 $$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
-$$("#gauges .gc svg").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
+$$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
  el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}});
 
 /* 6. Đường c/v trong mô phỏng */

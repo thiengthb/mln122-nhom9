@@ -280,4 +280,16 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 #refs p,#refs{font-size:14.5px;line-height:1.28}
 #refs p{margin-bottom:6px}
 #tb{border:2px solid var(--ln);right:40px;bottom:30px}
+/* Sửa lỗi bố cục 04/11/2026 */
+.vs{align-items:center}
+.vsp{gap:16px;padding:26px 28px}
+.vsh{display:flex;justify-content:space-between;align-items:baseline;gap:20px}
+.vsh .big{font-size:88px;line-height:1}
+.vsb{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:start}
+.vsb .wf.sm8{max-width:230px;margin:0}
+.vsb p{font-size:21px;line-height:1.36;margin-top:8px}
+.stk{display:flex;flex-direction:column;justify-content:center;gap:110px}
+.tri{align-items:stretch}
+#plan{flex:0 1 auto;align-self:stretch;margin-block:auto}
+#plan .panel{justify-content:flex-start;min-height:330px;padding:28px}
 </style>

@@ -28,7 +28,7 @@ $$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden"
 
 /* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
 $$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
-$$("#gauges .gc svg").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
+$$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
  el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}});
 
 /* 6. Đường c/v trong mô phỏng */

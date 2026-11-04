@@ -54,3 +54,4 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Ba kiểu màu mới (phím D): Giấy can, Bản in xanh, Bàn vẽ đêm. Không thêm số liệu mới.
 - Người dùng xem bản mềm và yêu cầu quay lại như cũ: đã hoàn tác, bản B giữ khung bản vẽ và khung tên như lần đăng đầu.
 - Sau đó người dùng yêu cầu chỉ bỏ khung viền ngoài: đã bỏ viền đôi và ô tọa độ, giữ khung tên (thêm viền đủ 4 cạnh), giữ màu và mọi thứ khác của bản B.
+- Rà lỗi giao diện bản B (quét tự động chữ đè chữ + xem ảnh 22 slide): sửa nhãn đè hình ở slide 3 và 21; slide 13 xếp lại số, lưới và lời giải thích để không tràn xuống câu dưới; slide 18 bỏ vòng vạch chia bị vẽ lệch; slide 19 bỏ khoảng trống quá lớn; slide 20 thu gọn ba khối.
