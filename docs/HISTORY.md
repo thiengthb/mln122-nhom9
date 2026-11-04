@@ -52,4 +52,4 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Nguồn: `src/b/slides.part` (bố cục mới, ghi chú để trống, lúc build tự lấy lời nói từ `src/slides.part` theo tên slide), `src/b/b.css.part`, `src/b/b.part`. Build ra `ban-b.html` và `src/deck-b.html`.
 - Ý tưởng: mỗi slide là một tờ bản vẽ (viền đôi, ô tọa độ 1–8, A–D, khung tên có số tờ và thanh tỉ lệ thay thanh tiến độ); số liệu dùng nét ghi kích thước (slide 6); khối quan trọng là mặt cắt gạch chéo; sơ đồ tự lắp bằng nét nối (slide 5, 10, 12, 17, 19); bánh răng ở tâm (10, 17); bậc thang và cú nhảy cho luận điểm (3, 21); đường c/v (14); số đếm lên.
 - Ba kiểu màu mới (phím D): Giấy can, Bản in xanh, Bàn vẽ đêm. Không thêm số liệu mới.
-- Góp ý của người dùng: thích sơ đồ của bản B nhưng bỏ khung viền ngoài, muốn mềm mại như bản cũ. Đã bỏ khung bản vẽ và khung tên, quay lại 3 kiểu màu cũ, nền lưới, số slide và sợi chỉ tiến độ; khối bo tròn có nền, nét nối màu nhạt. Phần "B mềm" nằm cuối `src/b/b.css.part`.
+- Người dùng xem bản mềm và yêu cầu quay lại như cũ: đã hoàn tác, bản B giữ khung bản vẽ và khung tên như lần đăng đầu.
