@@ -435,4 +435,20 @@ svg.links .tip{fill:var(--cham)}
 @keyframes dOut{from{transform:translate(25px,0);opacity:0}20%{opacity:1}to{transform:translate(12px,0)}}
 @keyframes dPl{from{transform:translate(24px,6px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.s.on .wb .door .wk,#cvw .ico g.in{animation:none}}
+/* Bộ biểu tượng nét */
+.ico24{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;overflow:visible}
+.ico24.lead{vertical-align:-.17em;margin-right:.45em;color:var(--son)}
+.leaf.hi .ico24.lead,.leaf.hi2 .ico24.lead{color:currentColor}
+.eb .ico24.lead{width:1.5em;height:1.5em;vertical-align:-.45em;color:currentColor}
+.bar>span:first-child .ico24.lead{color:var(--vai-2)}
+.shift span .ico24.lead{color:var(--vai-2)}
+#o1,#o2,#o3{position:relative}
+.ico24.big{position:absolute;right:18px;top:50%;width:44px;height:44px;margin-top:-22px;color:var(--son);stroke-width:1.6;opacity:.9}
+#gauges .gic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dimrow .veh{fill:none;stroke:var(--vai);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dimrow .veh.thuy{stroke:var(--son)}.dimrow .veh.may{stroke:var(--vai-2)}
+.dimrow .veh .khoi{fill:var(--vai-3);stroke:none;opacity:.7}
+.dimrow .rail{stroke:var(--vai-3);stroke-width:1.2;stroke-dasharray:2 4}
+.dimrow svg.tall{height:114px}
+.dimrow .veh{stroke-width:1.5}
 </style>

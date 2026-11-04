@@ -111,3 +111,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 16: cạnh nhãn mỗi cột có hình cửa: người bước vào (tạo mới), bước ra (mất đi), thêm một người (tăng thêm).
 - Hình vẽ bằng SVG và mặt nạ CSS trong `src/ban-ve.part`, `src/ban-ve.css.part`, màu lấy từ biến. Không dùng ảnh AI.
 
+## 04/11/2026: Thêm hình tượng (đề xuất 4–6)
+- Bộ biểu tượng nét (`IC` trong `src/ban-ve.part`), tự vẽ ra khi vào slide.
+- Slide 17: năm cụm có cuốn luật, mũ tốt nghiệp, cột sóng, trụ dữ liệu, con chip; bốn mục tiêu có bánh răng, hai người nối nhau, tòa nhà, khiên mũi tên lên. Slide 18: hình nhỏ giữa mỗi đồng hồ (điện thoại, bình thí nghiệm, mũ tốt nghiệp, đồng xu).
+- Slide 6: mỗi nước một phương tiện trên đường ray dưới thước: đầu máy hơi nước (Anh) và tàu container (Nhật Bản, nước công nghiệp mới) chạy cùng lúc với nét kích thước và dừng ở mốc đầu của khoảng năm; máy kéo (Liên Xô) đứng ở vạch xuất phát vì giáo trình không nêu số năm.
+- Slide 7: kính hiển vi (tự nghiên cứu), thùng hàng (mua), hai bánh răng (kết hợp). Slide 15: áo, xe tải, kéo, băng chuyền, kim chỉ, tờ giấy, màn hình biểu đồ. Slide 19: cuốn luật, sách, biểu đồ cho ba nguồn; kính lúp, khiên dấu tích, chìa khóa cho ba yêu cầu A, B, C.
+- Số liệu và chữ trên slide không đổi.
+

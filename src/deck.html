@@ -658,6 +658,22 @@ svg.links .tip{fill:var(--cham)}
 @keyframes dOut{from{transform:translate(25px,0);opacity:0}20%{opacity:1}to{transform:translate(12px,0)}}
 @keyframes dPl{from{transform:translate(24px,6px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.s.on .wb .door .wk,#cvw .ico g.in{animation:none}}
+/* Bộ biểu tượng nét */
+.ico24{width:1.1em;height:1.1em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none;overflow:visible}
+.ico24.lead{vertical-align:-.17em;margin-right:.45em;color:var(--son)}
+.leaf.hi .ico24.lead,.leaf.hi2 .ico24.lead{color:currentColor}
+.eb .ico24.lead{width:1.5em;height:1.5em;vertical-align:-.45em;color:currentColor}
+.bar>span:first-child .ico24.lead{color:var(--vai-2)}
+.shift span .ico24.lead{color:var(--vai-2)}
+#o1,#o2,#o3{position:relative}
+.ico24.big{position:absolute;right:18px;top:50%;width:44px;height:44px;margin-top:-22px;color:var(--son);stroke-width:1.6;opacity:.9}
+#gauges .gic{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dimrow .veh{fill:none;stroke:var(--vai);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.dimrow .veh.thuy{stroke:var(--son)}.dimrow .veh.may{stroke:var(--vai-2)}
+.dimrow .veh .khoi{fill:var(--vai-3);stroke:none;opacity:.7}
+.dimrow .rail{stroke:var(--vai-3);stroke-width:1.2;stroke-dasharray:2 4}
+.dimrow svg.tall{height:114px}
+.dimrow .veh{stroke-width:1.5}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1401,6 +1417,59 @@ $$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(l
  wb.forEach((b,j)=>{const sp=b.querySelector("span");if(!sp||sp.querySelector("svg"))return;const [k,ex]=ic[j];
   sp.insertAdjacentHTML("afterbegin",`<svg class="door ${k}" viewBox="0 0 33 24" aria-hidden="true">${k==="plus"?"":DOOR}${ex}${MAN.replace('class="wk"',`class="wk" style="--d:${1.6+j*1.2}s"`)}</svg>`)})})();
 
+/* 6c. Bộ biểu tượng nét (24×24, vẽ bằng nét theo màu chữ) gắn vào slide 6, 7, 15, 17, 18, 19 */
+const IC={
+ luat:'<path d="M5 3h11a2 2 0 0 1 2 2v16H7a2 2 0 0 1-2-2z"/><path d="M5 19a2 2 0 0 1 2-2h11"/><path d="M9 7.5h6M9 11h6"/>',
+ mu:'<path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2.5 9 2.5 12 0v-5"/><path d="M22 9v6"/>',
+ cot:'<path d="M12 10 7 22M12 10l5 12M8.6 18h6.8"/><circle cx="12" cy="8" r="1.6"/><path d="M8.2 4.6a5 5 0 0 0 0 6.8M15.8 4.6a5 5 0 0 1 0 6.8M5.3 2a9 9 0 0 0 0 12M18.7 2a9 9 0 0 1 0 12"/>',
+ dl:'<ellipse cx="12" cy="5" rx="7" ry="2.6"/><path d="M5 5v14c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6V5"/><path d="M5 12c0 1.4 3.1 2.6 7 2.6s7-1.2 7-2.6"/>',
+ chip:'<rect x="6" y="6" width="12" height="12" rx="1.5"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/>',
+ rang:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="6.6"/><path d="M12 2v3.4M12 18.6V22M2 12h3.4M18.6 12H22M4.9 4.9l2.4 2.4M16.7 16.7l2.4 2.4M4.9 19.1l2.4-2.4M16.7 7.3l2.4-2.4"/>',
+ noi:'<circle cx="6" cy="6" r="2.6"/><circle cx="18" cy="6" r="2.6"/><path d="M2 20v-4a4 4 0 0 1 8 0v4M14 20v-4a4 4 0 0 1 8 0v4M9 13h6"/>',
+ nha:'<path d="M3 21h18M5 21V10M9.7 21V10M14.3 21V10M19 21V10M3 10h18L12 3z"/>',
+ khien:'<path d="M12 2l8 3v6c0 5-3.4 9-8 11-4.6-2-8-6-8-11V5z"/><path d="M12 16V8M8.8 11 12 7.8l3.2 3.2"/>',
+ binh:'<path d="M9 2h6M10 2v6L4.5 19a2 2 0 0 0 1.8 3h11.4a2 2 0 0 0 1.8-3L14 8V2"/><path d="M7 15h10"/>',
+ dt:'<rect x="6.5" y="2" width="11" height="20" rx="2"/><path d="M11 18.5h2M9.5 7.5h5M9.5 11h5"/>',
+ xu:'<circle cx="12" cy="12" r="9"/><path d="M14.6 9c-.6-1-1.6-1.5-2.6-1.5-1.6 0-2.8.9-2.8 2.2 0 3 5.6 1.6 5.6 4.6 0 1.3-1.2 2.2-2.8 2.2-1.1 0-2.1-.5-2.7-1.4M12 5.5v13"/>',
+ kinh:'<path d="M6 21h12M8 21v-2.5h8V21"/><path d="M9.5 3.5l3.6 1.3-2.8 7.6-3.6-1.3z"/><path d="M8.2 12 7 16h4"/><path d="M14.5 9.5a5.5 5.5 0 0 1-1 9"/>',
+ thung:'<path d="M3 8l9-5 9 5v9l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v9"/>',
+ hai:'<circle cx="8.5" cy="9" r="4.4" stroke-dasharray="1.9 1.5" stroke-width="2.6"/><circle cx="8.5" cy="9" r="1.6"/><circle cx="16" cy="16" r="4.4" stroke-dasharray="1.9 1.5" stroke-width="2.6"/><circle cx="16" cy="16" r="1.6"/>',
+ keo:'<circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M8.6 7.5 20 18M8.6 16.5 20 6"/>',
+ bang:'<rect x="2" y="15" width="20" height="5" rx="2.5"/><circle cx="5.5" cy="17.5" r=".8"/><circle cx="12" cy="17.5" r=".8"/><circle cx="18.5" cy="17.5" r=".8"/><rect x="5" y="9" width="5" height="6"/><rect x="13" y="7" width="5" height="8"/>',
+ kim:'<path d="M4 20 18 6"/><path d="M16.3 5.1a1.8 1.8 0 1 1 2.6 2.6"/><path d="M19.5 5.5c2.5 3-1.5 6-5 5.5S7 12 7.5 17"/>',
+ ao:'<path d="M8 3 3 6l2 4 3-1.5V21h8V8.5l3 1.5 2-4-5-3c-.5 1.5-2 2.5-4 2.5S8.5 4.5 8 3z"/>',
+ xe:'<path d="M2 6h12v10H2zM14 9h4l3 3.5V16h-7"/><circle cx="6" cy="17.5" r="2"/><circle cx="17" cy="17.5" r="2"/>',
+ giay:'<rect x="5" y="4" width="14" height="18" rx="1.5"/><path d="M9 4V2.5h6V4M8.5 10h7M8.5 14h7M8.5 18h4"/>',
+ mh:'<rect x="2" y="3" width="20" height="14" rx="1.5"/><path d="M8 21h8M12 17v4M5.5 13l4-4 3 2.5 5-5"/>',
+ lup:'<circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.4v3.6M10.5 13.6v.1"/>',
+ tich:'<path d="M12 2l8 3v6c0 5-3.4 9-8 11-4.6-2-8-6-8-11V5z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+ khoa:'<circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3 20 3M16.5 6.5 19 9M14 9l2 2"/>',
+ sach:'<path d="M2 5c3-1.5 7-1.5 10 1 3-2.5 7-2.5 10-1v14c-3-1.5-7-1.5-10 1-3-2.5-7-2.5-10-1z"/><path d="M12 6v14"/>',
+ xh:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-7"/><path d="M16 7h4v4"/>'};
+const icon=(k,c="")=>`<svg class="ico24 ${c}" viewBox="0 0 24 24" aria-hidden="true">${IC[k]}</svg>`;
+const icAt=(sel,k,c)=>{const e=$(sel);if(e&&!e.querySelector(":scope>.ico24"))e.insertAdjacentHTML("afterbegin",icon(k,c))};
+/* Slide 17: năm cụm và bốn mục tiêu */
+[["#nl1","luat"],["#nl2","mu"],["#nl3","cot"],["#nl4","dl"],["#nl5","chip"],["#nr1","rang"],["#nr2","noi"],["#nr3","nha"],["#nr4","khien"]].forEach(([q,k])=>icAt(q,k,"lead"));
+/* Slide 7: ba con đường */
+[[".wc0 h3","kinh"],[".wc1 h3","thung"],[".wc2 h3","hai"]].forEach(([q,k])=>icAt(q,k,"lead"));
+/* Slide 15: hai ngành, ba khâu, hai loại việc */
+(()=>{const s=slides.find(x=>x.dataset.title&&$$(".bar",x).length===3&&x.querySelector(".shift"));if(!s)return;
+ const h=$$(".panel h3",s);if(h[0])h[0].insertAdjacentHTML("afterbegin",icon("ao","lead"));if(h[1])h[1].insertAdjacentHTML("afterbegin",icon("xe","lead"));
+ $$(".bar>span:first-child",s).forEach((e,j)=>{e.insertAdjacentHTML("afterbegin",icon(["keo","bang","kim"][j],"lead"));e.parentElement.style.setProperty("--lab","232px")});
+ $$(".shift span",s).forEach((e,j)=>e.insertAdjacentHTML("afterbegin",icon(["giay","mh"][j],"lead")))})();
+/* Slide 19: ba nguồn và ba yêu cầu */
+[["#t1 .eb","luat"],["#t2 .eb","sach"],["#t3 .eb","xh"]].forEach(([q,k])=>icAt(q,k,"lead"));
+[["#o1","lup"],["#o2","tich"],["#o3","khoa"]].forEach(([q,k])=>{const e=$(q);if(e&&!e.querySelector(".ico24"))e.insertAdjacentHTML("beforeend",icon(k,"big"))});
+/* Slide 18: hình nhỏ giữa mỗi đồng hồ */
+$$("#gauges .gc svg:not(.ol)").forEach((v,j)=>{if(!G[j])return;const k=["dt","binh","mu","xu"][j];v.insertAdjacentHTML("beforeend",`<g class="gic" transform="translate(90 40) scale(.85)" style="color:var(${G[j][10]})">${IC[k]}</g>`)});
+/* Slide 6: mỗi nước một phương tiện trên đường ray; Anh và Nhật Bản chạy hết đoạn thời gian của mình, Liên Xô đứng ở vạch xuất phát vì giáo trình không nêu số năm */
+const VEH={tau:'<path d="M2 18h34M5 18V9h11v9M16 18V5h8v13M24 12h9l2 6"/><path d="M7 9V4.5h3V9"/><circle cx="9" cy="20.5" r="2.4"/><circle cx="20" cy="20.5" r="2.4"/><circle cx="30" cy="20.5" r="2.4"/><circle class="khoi" cx="9" cy="1" r="1.6"/><circle class="khoi" cx="12.5" cy="-2" r="2.1"/>',
+ may:'<circle cx="10" cy="17" r="5"/><circle cx="29" cy="19" r="3.2"/><path d="M15 17h11M5 12V6h12l2 6h13v6"/><path d="M8 6V2.5"/>',
+ thuy:'<path d="M2 15h34l-4 6H6z"/><rect x="8" y="9" width="6.5" height="6"/><rect x="14.5" y="9" width="6.5" height="6"/><rect x="21" y="9" width="6.5" height="6"/><rect x="11.2" y="3" width="6.5" height="6"/><path d="M29.5 15V7h4v8"/>'};
+(()=>{const rows=$$(".dimrow:not(.ax) svg");if(rows.length!==3)return;
+ [["tau",610],["may",null],["thuy",210]].forEach(([k,x1],j)=>{const v=rows[j],ln=v.querySelector("path.d-ln");v.setAttribute("viewBox","0 0 820 114");v.classList.add("tall");
+  v.insertAdjacentHTML("beforeend",`${x1?`<line class="rail" x1="10" y1="110" x2="${x1}" y2="110"/>`:""}<g class="veh ${k}" data-x1="${x1||10}" data-d="${ln?ln.dataset.d:0}" data-w="${ln?ln.dataset.w:0}" transform="${x1?`translate(${x1-57} 73) scale(1.5)`:"translate(18 73) scale(1.5)"}">${VEH[k]}</g>`)})})();
+
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
 function elbow(sx,sy,ex,ey,vert){const r=12;
@@ -1483,6 +1552,9 @@ function extras(s){
   const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
  $$("#gauges .gc",s).forEach((g,j)=>{const x=G[j],p=Math.min(1,x[2]/x[3]),tk=$$(".tk2 line",g),gg=g.querySelector(".tk2");if(!gg)return;gg.style.setProperty("--c",`var(${x[10]})`);
   tk.forEach((l,k)=>{l.removeAttribute("data-on");const f=k/40;if(f>p)return;live.push(gsap.to(l,{duration:0,delay:.5+1.8*(1-Math.sqrt(1-f/p))*p,attr:{"data-on":1}}))})})
+ $$(".veh",s).forEach(g=>{const x1=+g.dataset.x1,d=+g.dataset.d;if(!d)return;const z={x:10};g.setAttribute("transform",`translate(${10-57} 73) scale(1.5)`);
+  live.push(gsap.to(z,{x:x1,duration:d,delay:+g.dataset.w,ease:"power1.inOut",onUpdate(){g.setAttribute("transform",`translate(${z.x-57} 73) scale(1.5)`)}}))});
+ const ics=$$(".ico24 > *, .gic > *",s);if(ics.length){ics.forEach(e=>e.setAttribute("pathLength","1"));live.push(gsap.fromTo(ics,{strokeDasharray:"1 1",strokeDashoffset:1},{strokeDashoffset:0,duration:.8,ease:"power1.inOut",stagger:.012,delay:.7,onComplete(){ics.forEach(e=>{e.style.strokeDasharray="";e.style.strokeDashoffset=""})}}))}
 }
 
 /* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */
