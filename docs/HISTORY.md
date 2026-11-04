@@ -190,3 +190,4 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 16: mũi tên nét bút từ −92 sang +78, ghi "= 170 − 92" (phép trừ ba số có sẵn).
 - Code ở `penScenes()` trong `src/ban-ve.part`.
 - Cập nhật cùng ngày (người dùng đồng ý, đưa lên main): slide 14 thêm chú thích viết tay "c/v: 1 → 3,50" ở góc trên khung số, mũi tên vòng ngoài khung xuống chỗ khoanh. Máy quay chậm ở slide 10, 12, 17: sau 5,5 giây cả tờ phóng gần 4% quanh bánh răng (10, 17) hoặc ô "Nguồn nhân lực chất lượng cao" (12) trong 5 giây, giữ 3 giây rồi lùi về; dòng Nguồn được thu ngược nên đứng yên. Chuyển slide giữa chừng thì tờ trở về bình thường. Slide 14 vẫn giữ một lần bấm để sang "cả ngành dùng máy".
+- Cập nhật cùng ngày: người dùng bỏ máy quay chậm ở slide 10, 12, 17; đã gỡ khỏi `penScenes()`.
