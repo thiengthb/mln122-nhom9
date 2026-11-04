@@ -9,9 +9,9 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người 1 | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
 | Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.6 phút |
 | Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.0 phút |
-| Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.5 phút |
+| Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.7 phút |
 | Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 4.4 phút |
-| **Tổng phần nói** | | | **19.0 phút** (nói nhanh 170: 16.8 phút) |
+| **Tổng phần nói** | | | **19.2 phút** (nói nhanh 170: 16.9 phút) |
 
 ## Người 1: slide 1–5 (khoảng 3.6 phút)
 
@@ -61,7 +61,7 @@ Em là [Người 3]. Trước hết, công nghiệp hóa, hiện đại hóa là
 
 ### Slide 11. Việt Nam đang ở đâu
 
-Mỗi ô vuông là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.
+Mỗi hình là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.
 
 ### Slide 12. Nội dung CNH, HĐH
 
@@ -71,11 +71,11 @@ Vậy cần làm gì? Giáo trình chia hai phần. Trước hết là tạo đi
 
 Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời [Người 4].
 
-## Người 4: slide 14–16 (khoảng 3.5 phút)
+## Người 4: slide 14–16 (khoảng 3.7 phút)
 
 ### Slide 14. Mô phỏng c/v
 
-Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các chấm là công nhân tắt dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?
+Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các hình người mờ dần là công nhân không còn cần. Nhìn cán cân ở giữa: bên c là máy móc, nặng dần; bên v là tiền công, nhẹ dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?
 
 ### Slide 15. Dệt may và logistics
 

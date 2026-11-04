@@ -196,21 +196,21 @@
   <div class="eb r">CÂU HỎI 1 · THỰC TRẠNG VIỆT NAM</div>
   <h2 class="r" style="--i:1">Việt Nam đang làm <em>hai việc cùng lúc</em>: đưa máy móc vào sản xuất và chuyển đổi số</h2>
   <div class="row grow r" style="--i:2;grid-template-columns:400px 400px 1fr;gap:44px;align-items:center">
-    <div><span class="lbl">Hình 2 · 100 người lao động, quý III/2026</span><div class="wf" style="margin-top:12px" data-wf="25.1:s,33.9:y,41:w"></div></div>
-    <div><span class="lbl">Hình 3 · 100 đồng GDP, 9 tháng 2026</span><div class="wf" style="margin-top:12px" data-wf="10.65:s,38.35:y,42.97:w,8.03:g"></div></div>
+    <div><span class="lbl">Hình 2 · 100 người lao động, quý III/2026</span><div class="wf ppl" style="margin-top:12px" data-wf="25.1:s,33.9:y,41:w"></div></div>
+    <div><span class="lbl">Hình 3 · 100 đồng GDP, 9 tháng 2026</span><div class="wf coin" style="margin-top:12px" data-wf="10.65:s,38.35:y,42.97:w,8.03:g"></div></div>
     <div style="display:flex;flex-direction:column;gap:18px">
       <div class="lgt">
         <span class="h"></span><span class="h">KHU VỰC</span><span class="h">LAO ĐỘNG</span><span class="h">GDP</span>
-        <i style="background:var(--son)"></i><span>Nông, lâm, thủy sản</span><b class="n" data-c="nso26ld">25,1%</b><b class="n" data-c="nso26q3">10,65%</b>
-        <i style="background:var(--nghe)"></i><span>Công nghiệp, xây dựng</span><b class="n" data-c="nso26ld">33,9%</b><b class="n" data-c="nso26q3">38,35%</b>
-        <i style="background:var(--vai)"></i><span>Dịch vụ</span><b class="n" data-c="nso26ld">41,0%</b><b class="n" data-c="nso26q3">42,97%</b>
-        <i style="background:var(--cham-3)"></i><span>Thuế sản phẩm</span><b>–</b><b class="n" data-c="nso26q3">8,03%</b>
+        <i class="ic lua" style="background:var(--son)"></i><span>Nông, lâm, thủy sản</span><b class="n" data-c="nso26ld">25,1%</b><b class="n" data-c="nso26q3">10,65%</b>
+        <i class="ic co" style="background:var(--nghe)"></i><span>Công nghiệp, xây dựng</span><b class="n" data-c="nso26ld">33,9%</b><b class="n" data-c="nso26q3">38,35%</b>
+        <i class="ic tui" style="background:var(--vai)"></i><span>Dịch vụ</span><b class="n" data-c="nso26ld">41,0%</b><b class="n" data-c="nso26q3">42,97%</b>
+        <i class="ic thue" style="background:var(--vai-3)"></i><span>Thuế sản phẩm</span><b>–</b><b class="n" data-c="nso26q3">8,03%</b>
       </div>
       <div class="panel dark" style="padding:16px 20px"><p style="font-size:22px"><b class="n cnt" data-c="nso26ld">60,6%</b> lao động làm việc phi chính thức<br><b class="n cnt" data-c="kts">14,02%</b> GDP đến từ kinh tế số, 2025</p></div>
     </div>
   </div>
-  <p class="sm r" style="--i:3">Mỗi ô là một phần trăm, đã làm tròn. Hai lưới khác kỳ số liệu, nhóm đặt cạnh nhau để dễ so sánh.</p>
-  <aside class="notes">Mỗi ô vuông là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.</aside>
+  <p class="sm r" style="--i:3">Mỗi hình người, mỗi đồng xu là một phần trăm, đã làm tròn. Hai lưới khác kỳ số liệu, nhóm đặt cạnh nhau để dễ so sánh.</p>
+  <aside class="notes">Mỗi hình là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.</aside>
 </section>
 
 <section class="s" data-act="1" data-who="3" data-min="1" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162" data-links="fa>ft1,fa>ft2,fa>ft3,fa>ft4,ft1>fe!,ft2>fe!,ft3>fe!,ft4>fe!">
@@ -232,9 +232,9 @@
   <div class="eb r">CÂU HỎI 2 · ĐỌC SỐ LIỆU CHO ĐÚNG</div>
   <h2 class="r" style="--i:1">Cùng là ILO, cùng nói về Việt Nam, sao lại có <em>hai con số</em>?</h2>
   <div class="vs grow r" style="--i:2">
-    <div class="panel vsp"><div class="vsh"><span class="big bigs">86%</span><span class="lbl">ILO, 2016</span></div><div class="vsb"><div class="wf sm8" data-wf="86:s,14:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div></div></div>
+    <div class="panel vsp"><div class="vsh"><span class="big bigs">86%</span><span class="lbl">ILO, 2016</span></div><div class="vsb"><div class="wf sm8 ppl" data-wf="86:s,14:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người làm công trong <b>dệt may, da giày</b>: rủi ro cao bị tự động hóa trong hai thập kỷ, tính theo khả năng kỹ thuật.</p></div></div></div>
     <div class="neq" aria-hidden="true">≠</div>
-    <div class="panel vsp"><div class="vsh"><span class="big bigm">&lt;2%</span><span class="lbl">ILO, 2026</span></div><div class="vsb"><div class="wf sm8" data-wf="2:m,18:g,80:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> tự động hóa; khoảng một phần năm làm nghề có một phần công việc chịu tác động, không đồng nghĩa mất việc.</p></div></div></div>
+    <div class="panel vsp"><div class="vsh"><span class="big bigm">&lt;2%</span><span class="lbl">ILO, 2026</span></div><div class="vsb"><div class="wf sm8 ppl" data-wf="2:m,18:g,80:o"></div><div><div class="ms">MẪU SỐ</div><p class="st" data-s="1">100 người lao động <b>trên cả nước</b>: dưới 2% có rủi ro cao bị <b>AI tạo sinh</b> tự động hóa; khoảng một phần năm làm nghề có một phần công việc chịu tác động, không đồng nghĩa mất việc.</p></div></div></div>
   </div>
   <p class="r st" data-s="1" style="--i:3"><span class="tag">quan điểm nhóm</span> Hai con số đo hai thứ khác nhau. Khi gặp một con số, hãy hỏi: đo ai, đo công nghệ nào, trong bao lâu?</p>
   <aside class="notes">Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời [Người 4].</aside>
@@ -261,7 +261,7 @@
     </div>
   </div>
   <p class="sm r" style="--i:3">Giả định: 100 sản phẩm; mỗi công nhân tạo ra 2 đơn vị giá trị và nhận 1; tự động hóa hoàn toàn còn 40 người, hao mòn máy tăng thêm 40 đơn vị. Không phải số liệu thực tế, không dự báo tổng việc làm của ngành.</p>
-  <aside class="notes">Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các chấm là công nhân tắt dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?</aside>
+  <aside class="notes">Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các hình người mờ dần là công nhân không còn cần. Nhìn cán cân ở giữa: bên c là máy móc, nặng dần; bên v là tiền công, nhẹ dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?</aside>
 </section>
 
 <section class="s" data-act="2" data-who="4" data-min="1.5" data-title="Dệt may và logistics" data-refs="blf25;qlnn26;bnews26;vna26">

@@ -104,3 +104,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Còn treo: câu chú thích slide 18 "không tính phần trăm hoàn thành" trong khi slide dùng vòng tròn; chưa có bản PDF để nộp.
 - Góc tờ: thay dãy 22 ô bằng sợi chỉ nhỏ (lấy ý từ sợi chỉ của bản cũ): nét lượn sóng đứt mờ, đoạn đã đi tô màu chính, chấm là chỗ đổi người nói (đặc khi đã qua).
 - Theo ý người dùng, sợi chỉ chạy hết chiều ngang đáy slide như bản đầu (x 30–1570, nét đứt mờ, đoạn đã đi tô màu chính, chấm ở chỗ đổi người nói). Góc phải chỉ còn chữ "Người n" và số tờ. Đã đo: mọi nội dung của 22 slide kết thúc trên y = 866, sợi chỉ bắt đầu từ y ≈ 878.
+
+## 04/11/2026: Thêm hình tượng (đề xuất 1–3)
+- Slide 14: đường c/v thay bằng cán cân. Đĩa trái là máy móc, nguyên liệu (c) vẽ bằng cánh tay robot, đĩa phải là tiền công (v) vẽ bằng người; mỗi hình là 20 đơn vị của mô hình giả định, hình cuối cắt theo phần lẻ; cán cân nghiêng theo (c − v)/(c + v). 100 chấm công nhân thành 100 hình người, người không còn cần thì mờ đi. Lời nói slide 14 thêm một câu chỉ vào cán cân.
+- Slide 11, 13: ô vuông thành hình người (lao động) và đồng xu (GDP); bảng chú thích slide 11 có biểu tượng bông lúa, cờ lê, túi hàng, tờ biên lai. Câu chú thích và lời nói đổi "mỗi ô" thành "mỗi hình". Số liệu không đổi.
+- Slide 16: cạnh nhãn mỗi cột có hình cửa: người bước vào (tạo mới), bước ra (mất đi), thêm một người (tăng thêm).
+- Hình vẽ bằng SVG và mặt nạ CSS trong `src/ban-ve.part`, `src/ban-ve.css.part`, màu lấy từ biến. Không dùng ảnh AI.
+

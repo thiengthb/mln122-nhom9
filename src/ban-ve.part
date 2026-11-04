@@ -64,16 +64,35 @@ $$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(l
  el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}
  el("path",{class:"tgt",d:"M100 -9 l-7 -11 h14z"},s)});
 
-/* 6. Đường c/v trong mô phỏng */
+/* 6. Cán cân c/v trong mô phỏng: đĩa trái là máy móc, nguyên liệu (c), đĩa phải là tiền công (v).
+   Mỗi hình là 20 đơn vị giá trị của mô hình giả định; hình cuối được cắt theo phần lẻ. Cán cân nghiêng theo (c − v)/(c + v). */
 (()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
- const pts=[];for(let a=0;a<=100;a++){const o=window.__sim(a/100,false);pts.push([30+a*3.5,150-(o.r-1)/2.5*130])}
- const d="M"+pts.map(q=>q.map(v=>v.toFixed(1)).join(" ")).join(" L"),rEnd=window.__sim(1,false).r;
- let grid="";for(let k=0;k<=10;k++)grid+=`<line class="gr" x1="${30+k*35}" y1="14" x2="${30+k*35}" y2="150"/>`;for(let k=0;k<=5;k++)grid+=`<line class="gr" x1="30" y1="${150-k*26}" x2="380" y2="${150-k*26}"/>`;
- w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Đường c/v tăng theo mức tự động hóa">${grid}<line class="ax" x1="30" y1="150" x2="384" y2="150"/><line class="ax" x1="30" y1="150" x2="30" y2="8"/><path class="cvg" d="${d}"/><path class="cv" d="${d}"/><circle class="hd" r="7" cx="30" cy="150"/><text x="30" y="172">0%</text><text x="380" y="172" text-anchor="end">100% tự động</text><text x="38" y="128">c/v = ${fmt(1,2)}</text><text class="re" x="372" y="22" text-anchor="end">c/v = ${fmt(rEnd,2)}</text></svg>`;
- const cv=$(".cv",w),hd=$(".hd",w),re=$(".re",w),L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
- cv.style.strokeDasharray=L[100]+" "+L[100];
- const upd=()=>{const a=Math.round(+$("#simA").value);cv.style.strokeDashoffset=L[100]-Math.max(.01,L[a]);hd.setAttribute("cx",pts[a][0]);hd.setAttribute("cy",pts[a][1]);re.style.opacity=a>=100?1:.25};
+ const ROB='<path d="M2 22h12M8 22v-4M8 18 5.5 10.5M5.5 10.5 14 5.5M14 5.5l3.6-2.4M14 5.5l3.8 1.4"/><circle cx="5.5" cy="10.5" r="1.7"/><circle cx="8" cy="18" r="1.7"/>',
+  MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>',ST=20,U=20,BY=104,AR=122;
+ w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Cán cân: bên trái máy móc, nguyên liệu (c), bên phải tiền công (v)"><defs><clipPath id="cpc"><rect y="-62" height="60"/></clipPath><clipPath id="cpv"><rect y="-62" height="60"/></clipPath></defs>
+  <path class="fu" d="M200 ${BY} L186 158 H214 Z"/><line class="ax" x1="160" y1="158" x2="240" y2="158"/>
+  <g class="bm"><line class="beam" x1="${-AR}" y1="0" x2="${AR}" y2="0"/><g class="pan" data-k="c"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpc)"></g><text class="pl" y="22" text-anchor="middle">c · máy móc</text></g><g class="pan" data-k="v"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpv)"></g><text class="pl" y="22" text-anchor="middle">v · tiền công</text></g></g>
+  <circle class="piv" cx="200" cy="${BY}" r="5"/>
+  <text class="ratio" x="200" y="16" text-anchor="middle"></text><text class="key" x="398" y="176" text-anchor="end">mỗi hình = 20 đơn vị (giả định)</text></svg>`;
+ const sv=$("svg",w),pans=$$(".pan",w),rt=$(".ratio",w),cl={c:$("#cpc rect",w),v:$("#cpv rect",w)},cnt={c:-1,v:-1},S={t:0};
+ const icons=(g,k,val)=>{const n=Math.ceil(val/U-1e-6),x0=-(n*ST)/2;
+  if(n!==cnt[k]){const old=cnt[k];g.innerHTML=Array.from({length:n},(_,j)=>`<g class="i${j>=old&&old>=0?" in":""}" transform="translate(${x0+j*ST} -46) scale(.9)">${k==="c"?ROB:MAN}</g>`).join("");cnt[k]=n}
+  cl[k].setAttribute("x",x0);cl[k].setAttribute("width",Math.max(0,val/U*ST))};
+ const draw=()=>{const th=S.t,cx=Math.cos(th),sn=Math.sin(th);
+  $(".bm",w).setAttribute("transform",`translate(200 ${BY}) rotate(${-th*180/Math.PI})`);
+  pans.forEach((g,j)=>{const x=(j?1:-1)*AR;g.setAttribute("transform",`translate(${x} 0) rotate(${th*180/Math.PI})`)})};
+ let tw=null;const upd=()=>{const a=+$("#simA").value/100,o=window.__sim(a,false);icons($(".ico",pans[0]),"c",o.c);icons($(".ico",pans[1]),"v",o.v);
+  rt.textContent=`c/v = ${fmt(o.r,2)}`;const t=((o.c-o.v)/(o.c+o.v))*20*Math.PI/180;
+  if(tw)tw.kill();if(window.gsap&&!reduce){tw=gsap.to(S,{t,duration:.5,ease:"power2.out",onUpdate:draw})}else{S.t=t;draw()}};
  const base=runSim;window.runSim=function(){base();upd()};runSim=window.runSim;upd()})();
+
+/* 6b. Slide 16: cửa ra vào cạnh nhãn từng cột: người bước vào (tạo mới), bước ra (mất đi), thêm một người (tăng thêm) */
+(()=>{const wb=$$(".wfall .wb");if(wb.length!==3)return;
+ const DOOR='<path class="dr" d="M20 22V3h9v19"/><path class="fl" d="M1 22h31"/>',
+  MAN='<g class="wk"><circle cx="0" cy="5" r="2.4"/><path d="M0 8l-.8 6.5M-.8 14.5-3.6 21.5M-.8 14.5 2.2 21.5M-.2 10-3.4 13M-.2 10 3 12.6"/></g>';
+ const ic=[["in",'<path class="ar" d="M13 12l3 0M14.6 10.2 16.6 12 14.6 13.8"/>'],["out",'<path class="ar" d="M7 12H2.5M4.1 10.2 2.1 12 4.1 13.8"/>'],["plus",'<path class="ar" d="M12 8v8M8 12h8"/>']];
+ wb.forEach((b,j)=>{const sp=b.querySelector("span");if(!sp||sp.querySelector("svg"))return;const [k,ex]=ic[j];
+  sp.insertAdjacentHTML("afterbegin",`<svg class="door ${k}" viewBox="0 0 33 24" aria-hidden="true">${k==="plus"?"":DOOR}${ex}${MAN.replace('class="wk"',`class="wk" style="--d:${1.6+j*1.2}s"`)}</svg>`)})})();
 
 /* 7. Nét nối sơ đồ: từ data-links="a>b,c>d!" (! là nét nhấn) */
 function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
