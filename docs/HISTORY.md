@@ -57,3 +57,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Rà lỗi giao diện bản B (quét tự động chữ đè chữ + xem ảnh 22 slide): sửa nhãn đè hình ở slide 3 và 21; slide 13 xếp lại số, lưới và lời giải thích để không tràn xuống câu dưới; slide 18 bỏ vòng vạch chia bị vẽ lệch; slide 19 bỏ khoảng trống quá lớn; slide 20 thu gọn ba khối.
 - Sửa khung tên bị tràn (thanh tỉ lệ 22 ô lọt ra ngoài viền vì khung cao cố định 46px): bỏ chiều cao cố định, ô nhỏ lại, viền đủ 4 cạnh.
 - Thêm tiểu tiết và hoạt ảnh cho bản B, không thêm số liệu: chuyển slide bằng nét bút quét ngang (đi lùi thì quét ngược); số câu hỏi 1, 2, 3 rất lớn, nét viền mờ ở góc phải trên, tự ẩn khi tiêu đề dài chạm tới; nét nối nhấn có dòng chảy sau khi kẻ xong; bong bóng số bật ra; "60–80 năm", "20–30 năm" đếm lên; slide 4 có thanh thời gian chạy theo từng giai đoạn; slide 16 có nét đứt nối đỉnh các cột; slide 12 ô kết luận nháy vòng sóng; ô đang đứng ở thanh tỉ lệ nhấp nháy nhẹ. Tắt hết khi máy bật giảm chuyển động.
+
+## 04/11/2026: Bản nháp C "Báo chí dữ liệu"
+- Bản B được giữ nguyên (đường dẫn cũ). Bản C là bản riêng: `src/c/slides.part` chép từ bố cục bản B, giao diện ở `src/c/c.css.part` (nạp sau `deck.css.part` và `src/b/b.css.part`), hoạt ảnh ở `src/c/c.part`. Build ra `ban-c.html` và `src/deck-c.html`.
+- Kiểu mặt báo: tiêu đề dùng chữ có chân Newsreader (giấy phép OFL, lưu ở `fonts/`), dòng đầu trang ghi phần đang nói, người nói, số trang và vạch đỏ tiến độ; khối nội dung dùng gạch đầu thay cho hộp; biểu đồ dùng màu xám cho bối cảnh, một màu nhấn cho Việt Nam.
+- Tiêu đề hiện theo từng cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng hoặc phần in màu), rồi phần in màu được tô dần như bút dạ quang.
+- Biểu đồ tự chạy: thanh mọc dần và số đếm lên (slide 9, 15), ô vuông hiện lần lượt (11, 13), thác nước (16), nét kích thước (6), nét nối sơ đồ (5, 10, 12, 17, 19). Slide 18 đổi từ đồng hồ sang thanh đích: mỗi chỉ tiêu một thang riêng, phần gạch chéo là chặng còn lại.
+- Ba kiểu màu (phím D): Giấy báo, Bản tối, Xanh đêm. Không thêm số liệu mới.

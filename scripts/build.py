@@ -79,3 +79,10 @@ b_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "
 (src / "deck-b.html").write_text(b_body, encoding="utf8")
 (root / "ban-b.html").write_text(page.replace(body, b_body), encoding="utf8")
 print("OK ban-b", len(b_body), "ghi chú:", len(re.findall(r'<aside class="notes">[^<]', b_slides)))
+
+# Bản nháp C "Báo chí dữ liệu": dùng lại bố cục bản B (src/c/slides.part chép từ src/b/slides.part), giao diện và hoạt ảnh riêng ở src/c/.
+c_slides = re.sub(r'(<section[^>]*data-title="([^"]+)".*?<aside class="notes">)(</aside>)', fill, (src / "c" / "slides.part").read_text(encoding="utf8"), flags=re.S)
+c_body = "\n".join([(src / "deck.css.part").read_text(encoding="utf8"), (src / "b" / "b.css.part").read_text(encoding="utf8"), (src / "c" / "c.css.part").read_text(encoding="utf8"), c_slides, (src / "app.part").read_text(encoding="utf8"), vend, (src / "c" / "c.part").read_text(encoding="utf8")])
+(src / "deck-c.html").write_text(c_body, encoding="utf8")
+(root / "ban-c.html").write_text(page.replace(body, c_body), encoding="utf8")
+print("OK ban-c", len(c_body), "ghi chú:", len(re.findall(r'<aside class="notes">[^<]', c_slides)))

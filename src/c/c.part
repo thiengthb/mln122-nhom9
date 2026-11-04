@@ -1,0 +1,115 @@
+<!-- Bản nháp C: báo chí dữ liệu. Tiêu đề hiện theo cụm, biểu đồ tự chạy. Chạy sau app.part và GSAP. Không sửa app.part. -->
+<script>
+(()=>{
+if(PRES||!window.gsap)return;
+const NS="http://www.w3.org/2000/svg",stage=$("#stage"),motion=!reduce;
+const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k in at)e.setAttribute(k,at[k]);if(par)par.append(e);return e};
+
+/* 1. Dòng tiêu đề trang: tên học phần, phần đang nói, người nói và số trang; vạch đỏ cho biết đã đi được bao xa */
+const ACT=["Mở đầu","Câu hỏi 1 · Công nghiệp hóa, hiện đại hóa","Câu hỏi 2 · AI và việc làm","Câu hỏi 3 · Nghị quyết 57","Kết luận"];
+const mast=document.createElement("div");mast.id="mast";mast.setAttribute("aria-hidden","true");
+mast.innerHTML=`<span>MLN122 · ${CONFIG.group} · Chủ đề 9</span><span id="msa"></span><span id="msn"></span><i></i>`;
+stage.insertBefore(mast,$("#notes"));
+function mSet(i){const s=slides[i];$("#msa").textContent=ACT[+s.dataset.act]||"";
+ $("#msn").textContent="Người "+s.dataset.who+" · Trang "+(i+1)+"/"+slides.length;mast.style.setProperty("--p",i/(slides.length-1))}
+
+/* 2. Tách tiêu đề thành từng từ; các từ trong cùng một cụm (đến dấu phẩy, hai chấm, chấm hỏi, xuống dòng, hoặc phần in màu) hiện cùng lúc */
+function split(h){if(h.dataset.k)return+h.dataset.k;let k=0,has=false;
+ const walk=n=>{[...n.childNodes].forEach(c=>{
+  if(c.nodeType===3){const parts=c.textContent.split(/(\s+)/);const f=document.createDocumentFragment();
+   parts.forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}
+    const w=document.createElement("span");w.className="w";const wi=document.createElement("span");wi.className="wi";wi.textContent=t;wi.dataset.k=k;w.append(wi);f.append(w);has=true;
+    if(/[,;:?.!]["”]?$/.test(t)){k++;has=false}});c.replaceWith(f)}
+  else if(c.nodeName==="BR"){if(has){k++;has=false}}
+  else if(c.nodeName==="EM"){if(has){k++;has=false}walk(c);if(has){k++;has=false}}
+  else walk(c)})};
+ walk(h);h.dataset.k=k+1;return k+1}
+$$(".s h1,.s h2").forEach(split);
+function heads(s,t0){const tl=gsap.timeline({delay:t0});
+ $$("h1,h2",s).forEach((h,j)=>{const n=+h.dataset.k,at=j*.5;
+  for(let k=0;k<n;k++){const ws=$$(`.wi[data-k="${k}"]`,h);if(ws.length)tl.fromTo(ws,{yPercent:115},{yPercent:0,duration:.62,ease:"power3.out",stagger:.03},at+k*.34)}
+  const em=$$("em",h);if(em.length)tl.fromTo(em,{backgroundSize:"0% .34em"},{backgroundSize:"100% .34em",duration:.7,ease:"power2.inOut",stagger:.25},at+n*.34+.1)});
+ return tl}
+
+/* 3. Mục tiêu 2030 dạng thanh đích: mỗi dòng có thang riêng, vì đơn vị và năm khác nhau */
+(()=>{const g=$("#gauges");g.className="bullets grow r";g.style.cssText="--i:2";
+ g.innerHTML=G.map(x=>{const rg=x[6].match(/(\d+)–(\d+)/),t1=x[3],t2=rg?+rg[2]:t1,M=t2*1.45,P=v=>(v/M*100).toFixed(2)+"%";
+  return`<div class="bl" style="--c:var(${x[10]==="--vai"?"--vai-2":x[10]})"><div><h3>${x[0]}</h3><div class="u">Đơn vị: ${x[1]}</div><div class="s2"><span class="n" data-c="${x[8]}">Số hiện tại</span> · <span class="n" data-c="${x[9]}">Mục tiêu theo ${x[7]}</span></div></div>
+  <div class="blc"><div class="blt"></div><div class="blg" style="left:${P(x[2])};width:${(Math.max(0,t1-x[2])/M*100).toFixed(2)}%"></div><div class="blf" style="width:${P(x[2])}"></div>
+  <div class="blk${rg?" rg":""}" style="left:${P(t1)};${rg?"width:"+((t2-t1)/M*100).toFixed(2)+"%":""}"></div>
+  <span class="blv" style="left:${P(x[2])}"><span class="cnt">${x[4]}</span><small>${x[5]}</small></span>
+  <span class="blm" style="left:${P(t2)}">MỤC TIÊU 2030<b>${x[6]}</b></span>
+  <span class="rest" style="left:${((x[2]+t1)/2/M*100).toFixed(2)}%">CHẶNG CÒN LẠI</span></div></div>`}).join("");
+ $$(".n",g).forEach(n=>n.setAttribute("role","button"))})();
+
+/* 4. Đường c/v trong mô phỏng (như bản B) */
+(()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
+ const pts=[];for(let a=0;a<=100;a++){const o=window.__sim(a/100,false);pts.push([30+a*3.5,150-(o.r-1)/2.5*130])}
+ const d="M"+pts.map(q=>q.map(v=>v.toFixed(1)).join(" ")).join(" L"),rEnd=window.__sim(1,false).r;
+ let grid="";for(let k=0;k<=5;k++)grid+=`<line class="gr" x1="30" y1="${150-k*26}" x2="380" y2="${150-k*26}"/>`;
+ w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Đường c/v tăng theo mức tự động hóa">${grid}<line class="ax" x1="30" y1="150" x2="384" y2="150"/><path class="cvg" d="${d}"/><path class="cv" d="${d}"/><circle class="hd" r="7" cx="30" cy="150"/><text x="30" y="172">0%</text><text x="380" y="172" text-anchor="end">100% tự động</text><text x="38" y="128">c/v = ${fmt(1,2)}</text><text class="re" x="372" y="22" text-anchor="end">c/v = ${fmt(rEnd,2)}</text></svg>`;
+ const cv=$(".cv",w),hd=$(".hd",w),re=$(".re",w),L=[0];for(let i=1;i<pts.length;i++)L.push(L[i-1]+Math.hypot(pts[i][0]-pts[i-1][0],pts[i][1]-pts[i-1][1]));
+ cv.style.strokeDasharray=L[100]+" "+L[100];
+ const upd=()=>{const a=Math.round(+$("#simA").value);cv.style.strokeDashoffset=L[100]-Math.max(.01,L[a]);hd.setAttribute("cx",pts[a][0]);hd.setAttribute("cy",pts[a][1]);re.style.opacity=a>=100?1:.25};
+ const base=runSim;window.runSim=function(){base();upd()};runSim=window.runSim;upd()})();
+
+/* 5. Nét nối sơ đồ, từ data-links="a>b,c>d!" (! là nét nhấn) */
+function box(e,root){let x=0,y=0,n=e;while(n&&n!==root){x+=n.offsetLeft;y+=n.offsetTop;n=n.offsetParent}return{x,y,w:e.offsetWidth,h:e.offsetHeight}}
+function elbow(sx,sy,ex,ey,vert){const r=12;
+ if(vert){if(Math.abs(ex-sx)<2)return`M${sx} ${sy} V${ey}`;const my=(sy+ey)/2,k=Math.min(r,Math.abs(ex-sx)/2,(ey-sy)/2),dx=Math.sign(ex-sx);
+  return`M${sx} ${sy} V${my-k} Q${sx} ${my} ${sx+dx*k} ${my} H${ex-dx*k} Q${ex} ${my} ${ex} ${my+k} V${ey}`}
+ if(Math.abs(ey-sy)<2)return`M${sx} ${sy} H${ex}`;const mx=(sx+ex)/2,k=Math.min(r,Math.abs(ey-sy)/2,(ex-sx)/2),dy=Math.sign(ey-sy);
+ return`M${sx} ${sy} H${mx-k} Q${mx} ${sy} ${mx} ${sy+dy*k} V${ey-dy*k} Q${mx} ${ey} ${mx+k} ${ey} H${ex}`}
+function links(s){if(!s.dataset.links)return[];let sv=s.querySelector(":scope>svg.links");if(sv)sv.remove();
+ sv=el("svg",{class:"links",viewBox:"0 0 1600 900","aria-hidden":"true"});s.prepend(sv);
+ return s.dataset.links.split(",").map(t=>{const acc=t.endsWith("!"),[a,b]=t.replace("!","").split(">"),A=box($("#"+a,s),s),B=box($("#"+b,s),s);
+  const vert=B.y>=A.y+A.h-2&&B.x<A.x+A.w;let sx,sy,ex,ey;
+  if(vert){sx=A.x+A.w/2;sy=A.y+A.h;ex=B.x+B.w/2;ey=B.y-2}else{sx=A.x+A.w;sy=A.y+A.h/2;ex=B.x-2;ey=B.y+B.h/2}
+  const p=el("path",{d:elbow(sx,sy,ex,ey,vert),class:acc?"a":"","marker-end":`url(#${acc?"dap":"da"})`},sv);const c=el("circle",{cx:sx,cy:sy,r:3.5},sv);return{p,c}})}
+let mid=0;function maskFor(p){if(p.__m)return p.__m;const sv=p.ownerSVGElement;let defs=sv.querySelector("defs")||el("defs",{},sv);
+ const m=el("mask",{id:"mc"+(++mid),maskUnits:"userSpaceOnUse",x:-100,y:-100,width:2200,height:1200},defs);
+ const q=el("path",{d:p.getAttribute("d"),fill:"none",stroke:"#fff","stroke-width":34,"stroke-linecap":"round","stroke-linejoin":"round"},m);
+ p.setAttribute("mask",`url(#${m.id})`);const L=q.getTotalLength();q.style.strokeDasharray=L+" "+L;return p.__m={q,L}}
+function draw(p,dur,delay){const m=maskFor(p);return gsap.fromTo(m.q,{strokeDashoffset:m.L},{strokeDashoffset:0,duration:dur,delay,ease:"power1.inOut"})}
+
+/* 6. Số đếm lên, giữ đúng cách viết 1.220 · 4,53 · −48,34% · 2,2 triệu */
+const CNT=".big,.bar>span:last-child,.wb b,.lgt b.n,.cnt,.kvx";
+function count(e,delay,dur=1.4){if(e.children.length)return null;const o=e.dataset.o||(e.dataset.o=e.textContent);
+ const m=o.match(/^([^\d]*?)(\d{1,3}(?:\.\d{3})+|\d+)(?:,(\d+))?(.*)$/);if(!m)return null;
+ const th=m[2].includes("."),dec=m[3]?m[3].length:0,v=parseFloat(m[2].replace(/\./g,"")+(m[3]?"."+m[3]:"")),z={v:0};
+ const f=x=>{let s=x.toFixed(dec).split(".");if(th)s[0]=s[0].replace(/\B(?=(\d{3})+(?!\d))/g,".");return m[1]+s[0]+(dec?","+s[1]:"")+m[4]};
+ e.textContent=f(0);return gsap.to(z,{v,duration:dur,delay,ease:"power2.out",onUpdate(){e.textContent=f(z.v)},onComplete(){e.textContent=o}})}
+
+/* 7. Vào slide: tiêu đề theo cụm trước, rồi biểu đồ tự chạy */
+let live=[];
+function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];mSet(i);
+ const lk=links(s);
+ if(!motion)return;
+ const H=heads(s,.15);live.push(H);const t=Math.min(1.6,H.duration()*.55+.2);
+ const bars=$$(".bar .f",s);if(bars.length)live.push(gsap.fromTo(bars,{scaleX:0},{scaleX:1,duration:1.1,ease:"power3.out",stagger:.14,delay:t}));
+ $$(".blf",s).forEach((b,k)=>live.push(gsap.fromTo(b,{scaleX:0},{scaleX:1,duration:1.4,ease:"power3.out",delay:t+k*.25})));
+ const bg=$$(".blg,.blk,.blm,.rest",s);if(bg.length)live.push(gsap.fromTo(bg,{opacity:0},{opacity:1,duration:.5,stagger:.06,delay:t+1.3}));
+ $$("path.dr",s).forEach(p=>live.push(draw(p,+p.dataset.d||1.4,t+(+p.dataset.w||.2))));
+ $$(".gr",s).forEach(r=>{if(r.closest("#cvw"))return;r.dataset.w=r.dataset.w||r.getAttribute("width");live.push(gsap.fromTo(r,{attr:{width:0}},{attr:{width:r.dataset.w},duration:.7,delay:t+2,ease:"power2.out"}))});
+ const fx=$$(".ex,.st-dot,.st-t",s);if(fx.length)live.push(gsap.fromTo(fx,{opacity:0},{opacity:1,duration:.4,stagger:.08,delay:t+.6}));
+ $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
+  live.push(gsap.fromTo(e,{opacity:0},{opacity:1,duration:.3,delay:t+.8}));
+  live.push(gsap.to(z,{v:1,duration:1.4,delay:t+.8,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
+ lk.forEach((l,k)=>{const d=draw(l.p,.7,t+.3+k*.1);live.push(d);live.push(gsap.fromTo(l.c,{opacity:0},{opacity:1,duration:.2,delay:t+.3+k*.1}))});
+ $$(CNT,s).forEach((e,k)=>{const c=count(e,t+.1+k*.1);if(c)live.push(c)});
+ const bb=$$(".bub",s);if(bb.length)live.push(gsap.fromTo(bb,{scale:0},{scale:1,duration:.45,ease:"back.out(2)",stagger:.12,delay:t,clearProps:"transform"}));
+ const gb=$$(".gearbox",s);if(gb.length)live.push(gsap.fromTo(gb,{scale:.7,opacity:0},{scale:1,opacity:1,duration:.7,ease:"back.out(1.5)",delay:t}))}
+
+/* 8. Chuyển slide: nội dung cũ mờ đi rồi slide mới hiện */
+const show0=show,next0=next,prev0=prev;let busy=null;
+const fin=()=>{if(busy){busy.progress(1);busy=null}};
+window.show=function(i,st){show0(i,st);const go2=()=>{if(cur===i)enter(i)};document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready.then(go2):go2()};show=window.show;
+window.next=function(){fin();next0()};next=window.next;window.prev=function(){fin();prev0()};prev=window.prev;
+window.go=function(i){i=Math.max(0,Math.min(slides.length-1,i));fin();if(i===cur)return;if(!motion){show(i);return}
+ const kids=[...slides[cur].children].filter(e=>!e.matches(".notes,.foot"));live.forEach(t=>t.kill());live=[];
+ busy=gsap.timeline({onComplete(){busy=null;gsap.set(kids,{clearProps:"opacity,transform"});show(i)}})
+  .to(kids,{opacity:0,y:-10,duration:.22,stagger:.015,ease:"power2.in"})};go=window.go;
+addEventListener("resize",()=>{if(!busy)links(slides[cur])});
+mSet(cur);(document.fonts&&document.fonts.status!=="loaded"?document.fonts.ready:Promise.resolve()).then(()=>enter(cur));
+})();
+</script>
