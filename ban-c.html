@@ -806,6 +806,13 @@ h2 em.nl,.cover h1 em.nl{color:var(--nghe)}
 #cvw text{font-size:16px}#cvw text.pl{font-size:17px}#cvw text.key{font-size:14px}
 /* Slide 19: khối nội dung lên cao hơn để ba lô có chỗ, không sát dòng Nguồn */
 .stk{justify-content:flex-start;gap:84px;padding-top:36px}
+/* Nét bút giảng bài (tự chạy) */
+.s>svg.penv{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;z-index:5;overflow:visible}
+.penv .pk{fill:none;stroke:var(--si);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.penv .pkm{fill:var(--si)}
+.penv .pt{font:700 26px var(--display);fill:var(--si)}
+.penv .tip{stroke:var(--si)}
+.wf i.dm{filter:opacity(.22)}.wf i{transition:filter .5s}
 </style>
 
 <style>

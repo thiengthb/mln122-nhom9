@@ -182,3 +182,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 15: câu Bangladesh ghi rõ là lời công nhân nhớ lại (thời máy tự động so với thời máy thủ công), lời nói thêm một câu nhắc đây không phải đo trước, sau cùng một nhà máy.
 - Bỏ `qlnn26` khỏi dòng Nguồn slide 13 và `luatai` khỏi slide 19 (không có chữ nào trên hai slide đó dẫn tới).
 - Slide 22 tự đếm lại: văn bản, thống kê nhà nước 7; tổ chức, hiệp hội 12; tạp chí 3; báo, hãng tin 2; vẫn 26 nguồn.
+
+## 04/11/2026: Nét bút giảng bài tự chạy (bản thử, người dùng muốn trình diễn như video, không bấm thêm)
+- Người dùng bác hướng "bấm để lật, câu hỏi trên slide": người nói chỉ bấm chuyển slide, mọi hình phải tự chạy.
+- Slide 11: khoảng 3,4 giây sau khi vào, các khu vực khác mờ đi; nét bút màu `--si` khoanh 25 hình người, 11 đồng xu của nông, lâm, thủy sản, kéo mũi tên sang dòng đó trong bảng; khoảng 11,5 giây thì sáng lại. Làm thay động tác "chỉ vào màu nông nghiệp" trong lời nói.
+- Slide 14: thanh tự động hóa vốn đã tự chạy 0 đến 100% trong 9 giây; nay khi chạy xong, nét bút khoanh c/v và giá trị thặng dư siêu ngạch.
+- Slide 16: mũi tên nét bút từ −92 sang +78, ghi "= 170 − 92" (phép trừ ba số có sẵn).
+- Code ở `penScenes()` trong `src/ban-ve.part`.

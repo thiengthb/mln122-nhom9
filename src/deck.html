@@ -804,6 +804,13 @@ h2 em.nl,.cover h1 em.nl{color:var(--nghe)}
 #cvw text{font-size:16px}#cvw text.pl{font-size:17px}#cvw text.key{font-size:14px}
 /* Slide 19: khối nội dung lên cao hơn để ba lô có chỗ, không sát dòng Nguồn */
 .stk{justify-content:flex-start;gap:84px;padding-top:36px}
+/* Nét bút giảng bài (tự chạy) */
+.s>svg.penv{position:absolute;inset:0;width:1600px;height:900px;pointer-events:none;z-index:5;overflow:visible}
+.penv .pk{fill:none;stroke:var(--si);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.penv .pkm{fill:var(--si)}
+.penv .pt{font:700 26px var(--display);fill:var(--si)}
+.penv .tip{stroke:var(--si)}
+.wf i.dm{filter:opacity(.22)}.wf i{transition:filter .5s}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -1817,6 +1824,44 @@ const RK=[["sach","Sách, giáo trình",/Giáo trình|kinh điển/],["nha","Vă
 (()=>{const R=$("#refs");if(!R)return;const L=Object.values(S).slice().sort((a,b)=>a.apa.replace(/<[^>]+>/g,"").localeCompare(b.apa.replace(/<[^>]+>/g,""),"vi")),n=RK.map(()=>0);
  [...R.children].forEach((p,k)=>{const x=L[k];if(!x)return;const j=RK.findIndex(r=>r[2].test(x.kind));if(j<0)return;n[j]++;p.insertAdjacentHTML("afterbegin",`<svg class="rk" viewBox="0 0 24 24" aria-hidden="true">${IC[RK[j][0]]}</svg>`)});
  R.insertAdjacentHTML("afterend",`<div id="refsum">${RK.map((r,j)=>`<span><svg viewBox="0 0 24 24" aria-hidden="true">${IC[r[0]]}</svg>${r[1]}<b class="cnt">${n[j]}</b></span>`).join("")}<span class="tot">Tổng<b class="cnt">${n.reduce((a,b)=>a+b,0)}</b> nguồn</span></div>`)})();
+/* 10p. Nét bút giảng bài: tự khoanh, tự kéo mũi tên vào chỗ người nói đang chỉ (không cần bấm).
+   Chỉ khoanh và nối những số đã có trên slide, không thêm số mới. */
+function roughO(x,y,w,h,pad=12){const cx=x+w/2,cy=y+h/2,rx=w/2+pad,ry=h/2+pad,a0=-2.2;let d="";
+ for(let t=0;t<=2*Math.PI+.45;t+=.09){const j=1+.035*Math.sin(t*3.1+1)+.02*Math.sin(t*7.3),a=a0+t,X=cx+rx*j*Math.cos(a),Y=cy+ry*j*Math.sin(a)*(1+.04*t/6);d+=(d?"L":"M")+X.toFixed(1)+" "+Y.toFixed(1)}return d}
+function unionBox(els,s){const B=els.map(e=>box(e,s));const x=Math.min(...B.map(b=>b.x)),y=Math.min(...B.map(b=>b.y));return{x,y,w:Math.max(...B.map(b=>b.x+b.w))-x,h:Math.max(...B.map(b=>b.y+b.h))-y}}
+function rectPts(x,y,w,h){return[[x,y],[x+w,y],[x+w,y+h],[x,y+h]]}
+/* đường bao n ô đầu tiên của lưới 10 cột (hình chữ L khi hàng cuối chưa đủ) */
+function firstK(g,k,s,p){const c=[...g.children],B=j=>box(c[j],s),r=Math.floor(k/10),m=k%10,a=B(0),x0=a.x-p,y0=a.y-p,xr=B(9).x+B(9).w+p;
+ if(r===0){const e=B(m-1);return rectPts(x0,y0,e.x+e.w+p-x0,e.y+e.h+p-y0)}
+ const yb=B((r-1)*10).y+B((r-1)*10).h+p;if(!m)return rectPts(x0,y0,xr-x0,yb-y0);
+ const e=B(r*10+m-1),xm=e.x+e.w+p,yl=e.y+e.h+p;return[[x0,y0],[xr,y0],[xr,yb],[xm,yb],[xm,yl],[x0,yl]]}
+/* nét tay: chia nhỏ từng cạnh, lệch nhẹ, vẽ quá điểm đầu một đoạn như khi khoanh bằng bút */
+function roughPoly(P){let d="",k=0;const pts=P.concat([P[0],P[1]]);for(let i=0;i<pts.length-1;i++){const [x1,y1]=pts[i],[x2,y2]=pts[i+1],L=Math.hypot(x2-x1,y2-y1),n=Math.max(2,Math.round(L/40)),last=i===pts.length-2;
+  const nx=-(y2-y1)/(L||1),ny=(x2-x1)/(L||1),stop=last?Math.max(1,Math.round(n*.35)):n;
+  for(let j=(i?1:0);j<=stop;j++){const f=j/n,w=1.6*Math.sin(k++*1.7)+(i>=P.length?3:0)*f,X=x1+(x2-x1)*f+nx*w,Y=y1+(y2-y1)*f+ny*w;d+=(d?"L":"M")+X.toFixed(1)+" "+Y.toFixed(1)}}return d}
+function penLayer(s){let K=s.querySelector(":scope>svg.penv");if(!K){K=el("svg",{class:"penv",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(K)}K.innerHTML="";return K}
+function penScenes(s){if(!motion)return;const T=s.dataset.title;
+ /* Slide 11: tự "chỉ vào màu nông nghiệp" như lời nói: làm mờ các khu vực khác, khoanh 25 người, 11 đồng và dòng số trong bảng */
+ if(T==="Việt Nam đang ở đâu"){const pp=s.querySelector(".wf.ppl"),co=s.querySelector(".wf.coin"),row=s.querySelector(".lgt .ic.lua");if(!pp||!co||!row)return;
+  const K=penLayer(s),pi=[...pp.children],ci=[...co.children],ag=pi.slice(0,25),ac=ci.slice(0,11),rest=pi.slice(25).concat(ci.slice(11));
+  const rc=[row,row.nextElementSibling,row.nextElementSibling.nextElementSibling,row.nextElementSibling.nextElementSibling.nextElementSibling];
+  const o1=el("path",{class:"pk",d:roughPoly(firstK(pp,25,s,7))},K),o2=el("path",{class:"pk",d:roughPoly(firstK(co,11,s,7))},K),
+   B3=unionBox(rc,s),o3=el("path",{class:"pk",d:roughPoly(rectPts(B3.x-8,B3.y-4,B3.w+16,B3.h+8))},K);
+  const L=box(ci[9],s),ln=el("path",{class:"pk ar",d:`M${L.x+L.w+14} ${L.y+L.h/2} C${L.x+L.w+60} ${L.y-10} ${B3.x-60} ${B3.y-20} ${B3.x-16} ${B3.y+B3.h/2-4}`,"marker-end":"url(#pkh)"},K);
+  K.insertAdjacentHTML("afterbegin",'<defs><marker id="pkh" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" class="pkm"/></marker></defs>');
+  const dim=on=>rest.forEach(e=>e.classList.toggle("dm",on));dim(false);
+  live.push(gsap.delayedCall(3.4,()=>dim(true)),draw(o1,.9,3.9),draw(o2,.7,5),draw(ln,.6,5.8,false),draw(o3,.8,6.4),gsap.delayedCall(11.5,()=>dim(false)))}
+ /* Slide 16: nét bút nối −92 sang +78, ghi phép tính bằng đúng ba số trên biểu đồ */
+ if(T==="AI thay thế và tạo việc"||s.querySelector(".wfall")){const bm=s.querySelector(".wb.m b"),bp=s.querySelector(".wb.p b"),bw=s.querySelector(".wb.w b");if(!bm||!bp||!bw)return;
+  const K=penLayer(s),P=box(bp,s),W=box(bw,s),M=box(bm,s);
+  K.insertAdjacentHTML("afterbegin",'<defs><marker id="pkh2" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" class="pkm"/></marker></defs>');
+  const ar=el("path",{class:"pk ar",d:`M${P.x+P.w/2+40} ${P.y+6} C${P.x+P.w+30} ${P.y-36} ${W.x+W.w/2+10} ${W.y-110} ${W.x+W.w/2} ${W.y-70}`,"marker-end":"url(#pkh2)"},K);
+  const tx=el("text",{class:"pt",x:W.x+W.w/2,y:W.y-18,"text-anchor":"middle"},K);tx.textContent="= 170 − 92";tx.style.opacity=0;
+  live.push(draw(ar,.8,3.6,false),gsap.to(tx,{opacity:1,duration:.5,delay:4.3}))}
+ /* Slide 14: khi thanh tự kéo tới 100% thì khoanh c/v và giá trị thặng dư siêu ngạch */
+ if(T==="Mô phỏng c/v"){const r=s.querySelector("#simR"),x=s.querySelector("#simX");if(!r||!x)return;const K=penLayer(s);
+  const a=el("path",{class:"pk",d:roughO(...Object.values(box(r,s)),8)},K),b=el("path",{class:"pk",d:roughO(...Object.values(box(x,s)),8)},K);
+  live.push(draw(a,.7,9.7),draw(b,.7,10.5))}}
 function finalScenes(s){
  /* Slide 7: hai chấm chạy trên hai sợi xoắn của đường "kết hợp" */
  const ws=$$("#waysvg .way",s);if(ws.length>3){const t=along(ws[3],"pen p0",3.8,5.2,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:9.1}))}
@@ -1890,7 +1935,7 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
  $$(".d-tx",s).forEach(e=>{const o=e.dataset.o||(e.dataset.o=e.textContent),m=o.match(/^(\d+)–(\d+)(.*)$/);if(!m)return;const z={v:0};
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
- extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);climbScene(s);lineScene(s);finalScenes(s);live.push(heads(s,.1));
+ extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);climbScene(s);lineScene(s);finalScenes(s);penScenes(s);live.push(heads(s,.1));
  if(s.querySelector(".gearbox")){live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}));
   /* bánh răng 3D xoay từ thế nhìn gần như từ cạnh về thế nghiêng 3/4, rồi lắc nhẹ để thấy độ dày */
   const tl=$$(".gearbox>.g3>.tilt",s);live.push(gsap.timeline({delay:.4}).fromTo(tl,{rotationX:12,rotationY:-78},{rotationX:24,rotationY:-26,duration:1.8,ease:"power3.out"})
