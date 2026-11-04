@@ -794,6 +794,16 @@ h2 em.nl,.cover h1 em.nl{color:var(--nghe)}
 .w0{stroke:var(--nghe)}.w1{stroke:var(--son)}.w2b{stroke:var(--nghe)}
 /* Slide 12: hạ ô nhân lực xuống để hình người hạt đứng trên ô, không chen tiêu đề */
 .flow #fe{margin-top:190px}
+/* Slide 2: ô trống rộng hết khổ, thêm ba hướng gợi ý (lấy từ lời nói của Người 1) */
+.s.mid .blank{max-width:none;min-height:200px}.s.mid .blank p{font-size:36px}
+.hint3{display:grid;grid-template-columns:auto repeat(3,1fr);gap:22px;align-items:center}
+.hint3 .lbl{max-width:200px;line-height:1.4}
+.hint3 div{display:flex;align-items:center;gap:14px;font:600 28px var(--display);color:var(--vai-2);padding:16px 20px;border:1.5px solid var(--cham-3);background:color-mix(in srgb,var(--cham) 82%,transparent)}
+.hint3 b{display:inline-grid;place-items:center;width:34px;height:34px;border:2px solid var(--son);border-radius:50%;font:700 16px var(--mono);color:var(--son);flex:none}
+/* Slide 14: chữ trên cán cân c/v to hơn */
+#cvw text{font-size:16px}#cvw text.pl{font-size:17px}#cvw text.key{font-size:14px}
+/* Slide 19: khối nội dung lên cao hơn để ba lô có chỗ, không sát dòng Nguồn */
+.stk{justify-content:flex-start;gap:84px;padding-top:36px}
 </style>
 
 <div id="hint">Xoay ngang màn hình để xem rõ hơn</div>
@@ -821,6 +831,7 @@ h2 em.nl,.cover h1 em.nl{color:var(--nghe)}
   <div class="eb r">TRƯỚC KHI VÀO BÀI</div>
   <h2 class="r" style="--i:1;font-size:96px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
   <div class="blank r" style="--i:2"><span class="lbl">Ô để trống · lớp điền vào</span><p>Mời một, hai bạn chia sẻ.</p><i class="cur" aria-hidden="true"></i></div>
+  <div class="hint3 r" style="--i:3"><span class="lbl">Nếu chưa ai nói: ba hướng gợi ý</span><div><b>1</b>Thay bạn</div><div><b>2</b>Giúp bạn</div><div><b>3</b>Chẳng đổi gì nhiều</div></div>
   <aside class="notes">Trước khi vào bài, em hỏi các bạn một câu. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì tự nêu ba lựa chọn rồi đi tiếp.] Em cảm ơn bạn. Nhóm em giữ lại câu trả lời này, cuối bài mình sẽ quay lại.</aside>
 </section>
 
@@ -1524,7 +1535,7 @@ $$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(l
   MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>',ST=20,U=20,BY=104,AR=122;
  w.innerHTML=`<svg viewBox="0 0 400 178" aria-label="Cán cân: bên trái máy móc, nguyên liệu (c), bên phải tiền công (v)"><defs><clipPath id="cpc"><rect y="-62" height="60"/></clipPath><clipPath id="cpv"><rect y="-62" height="60"/></clipPath></defs>
   <path class="fu" d="M200 ${BY} L186 158 H214 Z"/><line class="ax" x1="160" y1="158" x2="240" y2="158"/>
-  <g class="bm"><line class="beam" x1="${-AR}" y1="0" x2="${AR}" y2="0"/><g class="pan" data-k="c"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpc)"></g><text class="pl" y="22" text-anchor="middle">c · máy móc</text></g><g class="pan" data-k="v"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpv)"></g><text class="pl" y="22" text-anchor="middle">v · tiền công</text></g></g>
+  <g class="bm"><line class="beam" x1="${-AR}" y1="0" x2="${AR}" y2="0"/><g class="pan" data-k="c"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpc)"></g><text class="pl" x="-8" y="24" text-anchor="end">c · máy móc</text></g><g class="pan" data-k="v"><line class="post" y1="0" y2="-24"/><path class="plate" d="M-76 -24 H76"/><g class="ico" clip-path="url(#cpv)"></g><text class="pl" x="8" y="24" text-anchor="start">v · tiền công</text></g></g>
   <circle class="piv" cx="200" cy="${BY}" r="5"/>
   <text class="ratio" x="200" y="16" text-anchor="middle"></text><text class="key" x="398" y="176" text-anchor="end">mỗi hình = 20 đơn vị (giả định)</text></svg>`;
  const sv=$("svg",w),pans=$$(".pan",w),rt=$(".ratio",w),cl={c:$("#cpc rect",w),v:$("#cpv rect",w)},cnt={c:-1,v:-1},S={t:0};
@@ -1811,7 +1822,7 @@ function finalScenes(s){
  const ws=$$("#waysvg .way",s);if(ws.length>3){const t=along(ws[3],"pen p0",3.8,5.2,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:9.1}))}
  /* Slide 19: ba món (kính lúp, khiên tích, chìa khóa) bay vào ba lô của một bạn sinh viên */
  if(s.dataset.title==="Yêu cầu với sinh viên"){let K=s.querySelector(".pack");if(!K){K=el("svg",{class:"pack",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(K)}
-  const O=[1,2,3].map(k=>s.querySelector("#o"+k));if(O.some(e=>!e))return;const bx=800,by=834,MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>';
+  const O=[1,2,3].map(k=>s.querySelector("#o"+k));if(O.some(e=>!e))return;const ob=Math.max(...O.map(e=>{const b=box(e,s);return b.y+b.h})),bx=800,by=Math.min(834,ob+100),MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>';
   K.innerHTML=`<g class="stu" transform="translate(${bx-96} ${by-60}) scale(2.5)">${MAN}</g><g class="bag" transform="translate(${bx} ${by})"><g class="bg"><path class="bb" d="M-27 0V-44a14 14 0 0 1 14-14h26a14 14 0 0 1 14 14V0z"/><path d="M-27 -36h54M-15 0v-17h30v17M-8 -58v-5a8 8 0 0 1 16 0v5"/></g></g><text class="pl" x="${bx+44}" y="${by-8}">HÀNH TRANG</text><g class="fl"></g>`;
   const bag=K.querySelector(".bg"),fl=K.querySelector(".fl");gsap.set(K.querySelectorAll(".stu,.bag,.pl"),{opacity:0});
   const t=gsap.timeline({delay:2});t.to(K.querySelectorAll(".stu,.bag,.pl"),{opacity:1,duration:.5,stagger:.1});

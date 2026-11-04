@@ -166,4 +166,9 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Quy ước hai màu theo luận điểm: "công nghệ" là màu nhấn (`--son`), "năng lực / con người" là màu cam (`--nghe`, lớp `em.nl` trong tiêu đề). Áp dụng: tiêu đề slide 3, 7, 8, 9, 12, 15, 19, 21; slide 3 và 21 bậc thang và người leo màu cam, đường đi tắt và gói công nghệ màu nhấn; slide 7 đường "tự nghiên cứu" cam, "mua" màu nhấn, "kết hợp" hai sợi hai màu; slide 12 ô "Nguồn nhân lực chất lượng cao" và hình người hạt màu cam; slide 17 ô "Nhân lực" tô cam, ô "Thể chế" tô xanh (đổi chỗ hai màu tô).
 - Slide 10, 17: bánh răng 380 px (trước 300), chữ trong ô to hơn, chữ giữa bánh răng không tràn ra răng.
 - Slide 12: ô nhân lực hạ xuống, hình người hạt đứng trên ô không chen tiêu đề và số câu hỏi mờ.
-- Chưa làm: slide 2 (nửa dưới trống), slide 14 (chú thích nhỏ), slide 19 (ba lô sát dòng Nguồn).
+
+
+## 04/11/2026: Bố cục slide 2, 14, 19; đưa cả đợt (bánh răng 3D, hai màu, bố cục) lên main
+- Slide 2: ô trống rộng hết khổ, chữ 36 px; thêm hàng "Nếu chưa ai nói: ba hướng gợi ý" gồm Thay bạn, Giúp bạn, Chẳng đổi gì nhiều (lấy từ ghi chú lời nói có sẵn).
+- Slide 14: chữ "c · máy móc", "v · tiền công" 17 px, đặt lệch ra ngoài để thanh cân nghiêng không đè lên; chú thích "mỗi hình = 20 đơn vị" 14 px.
+- Slide 19: khối ba nguồn, ba yêu cầu dồn lên trên; ba lô đặt cách đáy ô C khoảng 100 px thay vì cố định sát dòng Nguồn.

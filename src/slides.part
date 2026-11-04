@@ -23,6 +23,7 @@
   <div class="eb r">TRƯỚC KHI VÀO BÀI</div>
   <h2 class="r" style="--i:1;font-size:96px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
   <div class="blank r" style="--i:2"><span class="lbl">Ô để trống · lớp điền vào</span><p>Mời một, hai bạn chia sẻ.</p><i class="cur" aria-hidden="true"></i></div>
+  <div class="hint3 r" style="--i:3"><span class="lbl">Nếu chưa ai nói: ba hướng gợi ý</span><div><b>1</b>Thay bạn</div><div><b>2</b>Giúp bạn</div><div><b>3</b>Chẳng đổi gì nhiều</div></div>
   <aside class="notes">Trước khi vào bài, em hỏi các bạn một câu. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì tự nêu ba lựa chọn rồi đi tiếp.] Em cảm ơn bạn. Nhóm em giữ lại câu trả lời này, cuối bài mình sẽ quay lại.</aside>
 </section>
 
