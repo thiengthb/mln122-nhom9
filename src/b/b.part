@@ -7,19 +7,12 @@ const el=(tag,at={},par)=>{const e=document.createElementNS(NS,tag);for(const k 
 
 /* Đã bỏ khung viền ngoài theo góp ý của người dùng (04/11/2026). */
 
-/* 2. Khung tên: tên tờ, người trình bày, số tờ và thanh tỉ lệ cho biết đã đi được bao xa */
+/* 2. Góc tờ: chỉ người nói và số tờ, không khung, chữ mờ để ít gây chú ý */
 const tb=document.createElement("div");tb.id="tb";tb.setAttribute("aria-hidden","true");
-const PARTS=["Mở đầu","Câu hỏi 1","Câu hỏi 2","Câu hỏi 3","Kết luận"],NW=Math.max(...slides.map(s=>+s.dataset.who));
-const grp=[];slides.forEach((s,j)=>{const a=+s.dataset.act;(grp[a]=grp[a]||[]).push(j)});
-tb.innerHTML=`<div class="tbp"><small>PHẦN</small><span id="tbp"></span></div><div class="tbt"><small>TÊN TỜ</small><span class="t" id="tbt"></span></div><div class="tbw"><small>NGƯỜI NÓI</small><span class="wr"><span id="tbw"></span><span class="pp">${"<i></i>".repeat(NW)}</span></span></div><div class="tbn"><small>TỜ</small><span id="tbn"></span></div>
-<div class="tbs"><span class="gs">${grp.map((g,a)=>`<span class="g" data-a="${a}">${g.map(j=>`<i data-j="${j}"></i>`).join("")}</span>`).join("")}</span><span class="lab">MLN122 · ${CONFIG.group.toUpperCase()}</span></div>`;
+tb.innerHTML=`<span id="tbw"></span><span id="tbn"></span><span class="sc">${slides.map(()=>"<i></i>").join("")}</span>`;
 stage.insertBefore(tb,$("#notes"));
-let tbT=null;function tbSet(i){const s=slides[i],tt=$("#tbt"),txt=s.dataset.title;if(tbT)tbT.kill();
- if(motion&&window.gsap){const z={n:0};tt.textContent="";tbT=gsap.to(z,{n:txt.length,duration:Math.min(.9,txt.length*.035),delay:.2,ease:"none",onUpdate(){tt.textContent=txt.slice(0,Math.round(z.n))}})}else tt.textContent=txt;$("#tbw").textContent="Người "+s.dataset.who;
- const pa=$("#tbp"),np=PARTS[+s.dataset.act]||"";if(pa.textContent!==np){pa.textContent=np;if(motion&&window.gsap)gsap.fromTo(pa,{yPercent:-60,opacity:0},{yPercent:0,opacity:1,duration:.45,ease:"back.out(2)"})}
- $$("#tb .pp i").forEach((e,j)=>e.classList.toggle("on",j===+s.dataset.who-1));
- const nb=$("#tbn");nb.innerHTML=`<b>${String(i+1).padStart(2,"0")}</b><small>/${slides.length}</small>`;if(motion&&window.gsap)gsap.fromTo(nb.firstChild,{yPercent:70,opacity:0},{yPercent:0,opacity:1,duration:.35,ease:"power2.out"});
- $$("#tb .tbs i").forEach(e=>{const j=+e.dataset.j;e.className=j<i?"f":j===i?"c":""});$$("#tb .tbs .g").forEach(g=>g.classList.toggle("on",+g.dataset.a===+s.dataset.act))}
+function tbSet(i){const s=slides[i];$("#tbw").textContent="Người "+s.dataset.who;
+ $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;$$("#tb .sc i").forEach((e,j)=>{e.className=j<i?"f":j===i?"c":""})}
 
 /* 2b. Số câu hỏi rất lớn, nét viền mờ ở góc phải trên (chỉ ở ba phần câu hỏi) */
 slides.forEach(s=>{const a=+s.dataset.act;if(!(a>=1&&a<=3))return;const g=el("svg",{class:"ghostn",viewBox:"0 0 300 300","aria-hidden":"true"});
@@ -57,7 +50,11 @@ $$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden"
 
 /* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
 $$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
-/* Slide 18 dùng thẻ, không có mặt đồng hồ (bốn chỉ tiêu khác đơn vị, không tính phần trăm hoàn thành). */
+/* Slide 18: bản B giữ mặt đồng hồ như trước (người dùng chọn), dùng dữ liệu G mới của bản chính */
+(()=>{const gz=$("#gauges");if(!gz)return;gz.innerHTML=G.map(g=>{const p=Math.min(1,g[2]/g[3]),C=2*Math.PI*78;return`<div class="panel gc"><h3 style="font-size:25px;min-height:58px">${g[0]}</h3><svg viewBox="0 0 200 200" style="width:100%;max-width:230px;align-self:center"><circle class="gt" cx="100" cy="100" r="78" fill="none" stroke-width="20"/><circle class="arc" cx="100" cy="100" r="78" fill="none" stroke-width="20" transform="rotate(-90 100 100)" stroke-dasharray="${C}" style="stroke:var(${g[10]});--o:${C};--to:${C*(1-p)}"/><text class="gv" x="100" y="98" text-anchor="middle" font-size="34" font-weight="800" font-family="var(--display)">${g[4]}</text><text class="gs" x="100" y="124" text-anchor="middle" font-size="15">${g[5]}</text></svg><p style="font-size:24px">Mốc 2030: <b class="n" data-c="${g[9]}">${g[6]}</b></p><p class="sm" style="font-size:18px">Đơn vị: ${g[1]}. <span class="n" data-c="${g[8]}">Nguồn số hiện tại</span>. Mốc theo ${g[7]}.${g[11]?" "+g[11][0].toUpperCase()+g[11].slice(1)+".":""}</p></div>`}).join("")})();
+$$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
+ el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}
+ el("path",{class:"tgt",d:"M100 -9 l-7 -11 h14z"},s)});
 
 /* 6. Đường c/v trong mô phỏng */
 (()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
@@ -150,6 +147,8 @@ function extras(s){
  const ws=$$("#waysvg .way",s);if(ws.length){$$("#waysvg .pen,#waysvg .ring").forEach(e=>e.remove());
   [[ws[0],"pen p0",0,3.2],[ws[1],"pen p1",3.4,1.4],[ws[2],"pen p2",5.2,3.8]].forEach(([p,c,d,u])=>{const t=along(p,c,u,d,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:d+u+.1}))});
   const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
+ $$("#gauges .gc",s).forEach((g,j)=>{const x=G[j],p=Math.min(1,x[2]/x[3]),tk=$$(".tk2 line",g),gg=g.querySelector(".tk2");if(!gg)return;gg.style.setProperty("--c",`var(${x[10]})`);
+  tk.forEach((l,k)=>{l.removeAttribute("data-on");const f=k/40;if(f>p)return;live.push(gsap.to(l,{duration:0,delay:.5+1.8*(1-Math.sqrt(1-f/p))*p,attr:{"data-on":1}}))})})
 }
 
 /* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */

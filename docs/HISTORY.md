@@ -89,3 +89,9 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Khung tên mới: ô PHẦN (Mở đầu, Câu hỏi 1–3, Kết luận), tên tờ, người nói có 5 chấm, số tờ; hàng dưới là thanh tiến độ chia theo phần, phần đang nói được tô nền.
 - Tiêu đề hiện theo từng cụm (như bản C) nhưng giữ chữ và màu bản B.
 - Khi đi tới phần câu hỏi mới (slide 4, 13, 17) có tờ bìa phụ: số câu hỏi lớn được kẻ nét, câu hỏi hiện theo cụm, nét kích thước, tên người nói; khoảng 1,5 giây. Đi lùi thì không có tờ bìa phụ.
+
+## 04/11/2026: Bản B, sửa theo nhận xét sau đợt 3
+- Slide 18 bản B quay lại mặt đồng hồ (vòng, vạch chia sáng dần, tam giác đích) theo ý người dùng; dữ liệu lấy từ mảng `G` mới của bản chính, chữ "Mốc 2030", "Mốc theo" như bản chính, thêm ghi chú g[11]. Bản chính vẫn dùng thẻ. Lưu ý: vòng tô màu dễ làm người xem hiểu là phần trăm hoàn thành, trong khi chú thích dưới slide ghi "không tính phần trăm hoàn thành"; nhóm cần nói rõ điều này khi trình bày hoặc sửa câu chú thích.
+- Khung tên thu gọn: chỉ còn "Người n", số tờ "NN / 22" và dãy 22 ô nhỏ ở góc phải dưới; không khung, không nền, chữ mờ. Bỏ ô PHẦN, tên tờ, chấm người nói, thanh chia phần.
+- Chỗ đè chữ: slide 14 khi kéo mức tự động hóa lên 100% thì ba khung cao hơn hàng, đè lên dòng "Giả định". Thu lưới chấm (390 → 340px) và đường c/v (cao 150px). Đã chụp lại 22 slide ở ba giao diện và chạy kiểm tra đè chữ.
+
