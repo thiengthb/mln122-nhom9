@@ -2,6 +2,8 @@
 
 Phiên bản quy tắc: QT-2026-11-04. Trưởng nhóm, người duyệt và merge: **Trần Ngọc Thiên** (`thiengthb`).
 
+**Thuyết trình thứ Ba 10/11/2026. Hạn chót PR nội dung: thứ Bảy 07/11/2026**, sau đó chỉ nhận PR sửa lỗi.
+
 `main` là bản thuyết trình thật: trang https://thiengthb.github.io/mln122-nhom9/ chạy thẳng từ `main`. Vì vậy **không ai push thẳng lên `main`**. Mọi thay đổi đi qua nhánh riêng và Pull Request (PR), trưởng nhóm duyệt rồi mới vào.
 
 ## Lần đầu (làm một lần)
