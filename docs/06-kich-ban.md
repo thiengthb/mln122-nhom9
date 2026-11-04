@@ -6,18 +6,18 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 
 | Người | Slide | Nội dung | Ước tính |
 |---|---|---|---|
-| Người 1 | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
-| Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.7 phút |
-| Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
-| Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.9 phút |
-| Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 4.4 phút |
+| Người 1 (Phạm Gia Huy) | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
+| Người 2 (Trần Ngọc Thiên) | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.8 phút |
+| Người 3 (Vũ Huy Phương) | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
+| Người 4 (Mai Tuấn Vỹ) | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.9 phút |
+| Người 5 (Bùi Hiếu Nghĩa) | 17–21 | Nghị quyết 57 đến Kết luận | 4.5 phút |
 | **Tổng phần nói** | | | **19.8 phút** (nói nhanh 170: 17.5 phút) |
 
-## Người 1: slide 1–5 (khoảng 3.6 phút)
+## Người 1 (Phạm Gia Huy): slide 1–5 (khoảng 3.6 phút)
 
 ### Slide 1. Bìa
 
-Em chào thầy và các bạn. Em là [Người 1], đại diện Nhóm 9. [Nhìn lớp, không nhìn màn hình.] Hình bên phải là một tấm vải đang dệt, càng lên cao thì hoa văn càng biến thành những ô dữ liệu. Cuộc cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Gần 300 năm sau, dệt may lại xuất hiện trong đề của nhóm em, lần này như một lát cắt của AI và chuyển đổi số. Vì vậy bài có tên: một sợi chỉ, bốn cuộc cách mạng.
+Em chào thầy và các bạn. Em là Phạm Gia Huy, đại diện Nhóm 9. [Nhìn lớp, không nhìn màn hình.] Hình bên phải là một tấm vải đang dệt, càng lên cao thì hoa văn càng biến thành những ô dữ liệu. Cuộc cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Gần 300 năm sau, dệt may lại xuất hiện trong đề của nhóm em, lần này như một lát cắt của AI và chuyển đổi số. Vì vậy bài có tên: một sợi chỉ, bốn cuộc cách mạng.
 
 ### Slide 2. Câu hỏi mở đầu
 
@@ -33,13 +33,13 @@ Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt
 
 ### Slide 5. Dự báo của Mác
 
-Mác viết, và giáo trình dẫn ở trang 144: của cải sẽ ngày càng ít phụ thuộc vào số giờ lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. [Hạ giọng.] Mác không nói về AI. Nhưng câu này gợi cho nhóm em một cách đọc hôm nay: công nghệ đổi lực lượng sản xuất, rồi buộc quan hệ sản xuất và cách quản trị phải điều chỉnh theo. Với Việt Nam có hai mặt. Mặt khó: lợi thế nhân công rẻ yếu dần. Mặt thuận: nước đi sau có thể dùng thành tựu của nước đi trước để rút ngắn khoảng cách. Nhưng cơ hội đó chỉ thành thật nếu biết học từ người đi trước. [Người 2] sẽ bắt đầu từ ba mô hình công nghiệp hóa.
+Mác viết, và giáo trình dẫn ở trang 144: của cải sẽ ngày càng ít phụ thuộc vào số giờ lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. [Hạ giọng.] Mác không nói về AI. Nhưng câu này gợi cho nhóm em một cách đọc hôm nay: công nghệ đổi lực lượng sản xuất, rồi buộc quan hệ sản xuất và cách quản trị phải điều chỉnh theo. Với Việt Nam có hai mặt. Mặt khó: lợi thế nhân công rẻ yếu dần. Mặt thuận: nước đi sau có thể dùng thành tựu của nước đi trước để rút ngắn khoảng cách. Nhưng cơ hội đó chỉ thành thật nếu biết học từ người đi trước. Bạn Thiên sẽ bắt đầu từ ba mô hình công nghiệp hóa.
 
-## Người 2: slide 6–9 (khoảng 3.7 phút)
+## Người 2 (Trần Ngọc Thiên): slide 6–9 (khoảng 3.8 phút)
 
 ### Slide 6. Ba mô hình công nghiệp hóa
 
-Em là [Người 2]. Giáo trình nêu ba mô hình công nghiệp hóa. [Đếm bằng tay: một, hai, ba.] Một là nước Anh, đi từ công nghiệp nhẹ và mất khoảng 60 đến 80 năm. Vốn của họ đến từ lao động làm thuê và cướp bóc thuộc địa, con đường mình không thể và không nên đi. Hai là Liên Xô, ưu tiên công nghiệp nặng, đạt kết quả nhanh, Việt Nam cũng từng áp dụng từ những năm 1960. Nhưng về sau, cơ chế kế hoạch hóa tập trung bộc lộ hạn chế, không thích ứng kịp với tiến bộ kỹ thuật. Ba là Nhật Bản và các nước công nghiệp mới như Hàn Quốc, Singapore: chỉ khoảng 20 đến 30 năm. [Dừng.] Chưa bằng một nửa nước Anh. Họ làm cách nào?
+Em là Trần Ngọc Thiên. Giáo trình nêu ba mô hình công nghiệp hóa. [Đếm bằng tay: một, hai, ba.] Một là nước Anh, đi từ công nghiệp nhẹ và mất khoảng 60 đến 80 năm. Vốn của họ đến từ lao động làm thuê và cướp bóc thuộc địa, con đường mình không thể và không nên đi. Hai là Liên Xô, ưu tiên công nghiệp nặng, đạt kết quả nhanh, Việt Nam cũng từng áp dụng từ những năm 1960. Nhưng về sau, cơ chế kế hoạch hóa tập trung bộc lộ hạn chế, không thích ứng kịp với tiến bộ kỹ thuật. Ba là Nhật Bản và các nước công nghiệp mới như Hàn Quốc, Singapore: chỉ khoảng 20 đến 30 năm. [Dừng.] Chưa bằng một nửa nước Anh. Họ làm cách nào?
 
 ### Slide 7. Ba con đường công nghệ
 
@@ -51,13 +51,13 @@ Lấy Hàn Quốc làm ví dụ. Đầu những năm 1960, theo Ngân hàng Th�
 
 ### Slide 9. Đầu tư cho năng lực
 
-Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. Bên phải là số robot trên 10.000 lao động ngành chế tạo, mỗi hình robot là 100 robot: Hàn Quốc hơn 12 hình, Trung Quốc chưa tới 2 hình. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời [Người 3].
+Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. Bên phải là số robot trên 10.000 lao động ngành chế tạo, mỗi hình robot là 100 robot: Hàn Quốc hơn 12 hình, Trung Quốc chưa tới 2 hình. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời bạn Phương.
 
-## Người 3: slide 10–13 (khoảng 4.1 phút)
+## Người 3 (Vũ Huy Phương): slide 10–13 (khoảng 4.1 phút)
 
 ### Slide 10. Vì sao phải công nghiệp hóa
 
-Em là [Người 3]. Trước hết, công nghiệp hóa, hiện đại hóa là gì? [Nói chậm, gần nguyên văn.] Giáo trình trang 153 định nghĩa: đó là quá trình chuyển đổi căn bản, toàn diện các hoạt động sản xuất, kinh doanh, dịch vụ và quản lý, từ lao động thủ công là chính sang sử dụng phổ biến công nghệ, phương pháp tiên tiến, hiện đại, nhằm tạo ra năng suất lao động xã hội cao. Vì sao Việt Nam phải làm? Một, đây là quy luật phổ biến nước nào cũng trải qua, dù mỗi nước có cách đi riêng. Hai, mình đi lên chủ nghĩa xã hội từ nền kinh tế kém phát triển, nên cơ sở vật chất phải xây từ đầu. Bối cảnh riêng của Việt Nam là bốn đặc điểm bên phải. Vậy mình đang đứng ở đâu?
+Em là Vũ Huy Phương. Trước hết, công nghiệp hóa, hiện đại hóa là gì? [Nói chậm, gần nguyên văn.] Giáo trình trang 153 định nghĩa: đó là quá trình chuyển đổi căn bản, toàn diện các hoạt động sản xuất, kinh doanh, dịch vụ và quản lý, từ lao động thủ công là chính sang sử dụng phổ biến công nghệ, phương pháp tiên tiến, hiện đại, nhằm tạo ra năng suất lao động xã hội cao. Vì sao Việt Nam phải làm? Một, đây là quy luật phổ biến nước nào cũng trải qua, dù mỗi nước có cách đi riêng. Hai, mình đi lên chủ nghĩa xã hội từ nền kinh tế kém phát triển, nên cơ sở vật chất phải xây từ đầu. Bối cảnh riêng của Việt Nam là bốn đặc điểm bên phải. Vậy mình đang đứng ở đâu?
 
 ### Slide 11. Việt Nam đang ở đâu
 
@@ -69,13 +69,13 @@ Vậy cần làm gì? Giáo trình chia hai phần. Trước hết là tạo đi
 
 ### Slide 13. 86% hay dưới 2%
 
-Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời [Người 4].
+Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời bạn Vỹ.
 
-## Người 4: slide 14–16 (khoảng 3.9 phút)
+## Người 4 (Mai Tuấn Vỹ): slide 14–16 (khoảng 3.9 phút)
 
 ### Slide 14. Mô phỏng c/v
 
-Em là [Người 4]. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các hình người mờ dần là công nhân không còn cần. Nhìn cán cân ở giữa: bên c là máy móc, nặng dần; bên v là tiền công, nhẹ dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?
+Em là Mai Tuấn Vỹ. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các hình người mờ dần là công nhân không còn cần. Nhìn cán cân ở giữa: bên c là máy móc, nặng dần; bên v là tiền công, nhẹ dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?
 
 ### Slide 15. Dệt may và logistics
 
@@ -83,13 +83,13 @@ Dệt may trước. Nhóm chưa có số đo tương tự của Việt Nam, nên
 
 ### Slide 16. Câu trả lời
 
-Vậy AI tạo việc hay lấy việc? Câu trả lời của nhóm: cả hai, cùng lúc. [Nhấn: cùng lúc.] Diễn đàn Kinh tế Thế giới khảo sát doanh nghiệp toàn cầu: đến 2030 tạo khoảng 170 triệu việc, mất 92 triệu, tăng thêm 78 triệu. Số này gộp nhiều xu hướng, không riêng AI. Nhưng người mất việc và người có việc mới thường không phải một. Ở Việt Nam, tỷ lệ lao động nữ chịu tác động của AI tạo sinh là 24,1%, cao hơn nam 17,8%. [Dừng.] Giáo trình trang 147 đã cảnh báo thất nghiệp và phân hóa thu nhập, buộc các nước điều chỉnh chính sách phân phối và an sinh. Nên theo nhóm em, cùng một công nghệ, kết quả khác nhau tùy cách doanh nghiệp triển khai, tiếng nói của người lao động, đào tạo lại và chính sách Nhà nước. Việc làm không do công nghệ tự quyết, nên phần cuối nhìn sang thể chế, Nghị quyết 57 và sinh viên. Em mời [Người 5].
+Vậy AI tạo việc hay lấy việc? Câu trả lời của nhóm: cả hai, cùng lúc. [Nhấn: cùng lúc.] Diễn đàn Kinh tế Thế giới khảo sát doanh nghiệp toàn cầu: đến 2030 tạo khoảng 170 triệu việc, mất 92 triệu, tăng thêm 78 triệu. Số này gộp nhiều xu hướng, không riêng AI. Nhưng người mất việc và người có việc mới thường không phải một. Ở Việt Nam, tỷ lệ lao động nữ chịu tác động của AI tạo sinh là 24,1%, cao hơn nam 17,8%. [Dừng.] Giáo trình trang 147 đã cảnh báo thất nghiệp và phân hóa thu nhập, buộc các nước điều chỉnh chính sách phân phối và an sinh. Nên theo nhóm em, cùng một công nghệ, kết quả khác nhau tùy cách doanh nghiệp triển khai, tiếng nói của người lao động, đào tạo lại và chính sách Nhà nước. Việc làm không do công nghệ tự quyết, nên phần cuối nhìn sang thể chế, Nghị quyết 57 và sinh viên. Em mời bạn Nghĩa.
 
-## Người 5: slide 17–21 (khoảng 4.4 phút)
+## Người 5 (Bùi Hiếu Nghĩa): slide 17–21 (khoảng 4.5 phút)
 
 ### Slide 17. Nghị quyết 57
 
-Em là [Người 5]. Đề hỏi Nghị quyết xác định đột phá thế nào. Câu trả lời ở quan điểm đầu tiên: khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là "đột phá quan trọng hàng đầu", là động lực để phát triển lực lượng sản xuất, hoàn thiện quan hệ sản xuất, đổi mới quản trị quốc gia. Đó cũng là ba mặt [Người 1] đã nói ở đầu bài. Nghị quyết có bảy nhóm nhiệm vụ, nhóm em gom phần cốt lõi thành năm cụm bên trái. [Nhìn lớp.] Câu đáng đọc nhất ở dưới cùng: "nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng", "từng bước tự chủ về công nghệ". Mua về chưa xong, phải làm chủ, đúng bài học Đông Á.
+Em là Bùi Hiếu Nghĩa. Đề hỏi Nghị quyết xác định đột phá thế nào. Câu trả lời ở quan điểm đầu tiên: khoa học, công nghệ, đổi mới sáng tạo và chuyển đổi số là "đột phá quan trọng hàng đầu", là động lực để phát triển lực lượng sản xuất, hoàn thiện quan hệ sản xuất, đổi mới quản trị quốc gia. Đó cũng là ba mặt bạn Huy đã nói ở đầu bài. Nghị quyết có bảy nhóm nhiệm vụ, nhóm em gom phần cốt lõi thành năm cụm bên trái. [Nhìn lớp.] Câu đáng đọc nhất ở dưới cùng: "nhanh chóng tiếp thu, hấp thụ, làm chủ và ứng dụng", "từng bước tự chủ về công nghệ". Mua về chưa xong, phải làm chủ, đúng bài học Đông Á.
 
 ### Slide 18. Mục tiêu 2030
 

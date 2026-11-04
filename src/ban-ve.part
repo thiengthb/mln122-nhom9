@@ -17,7 +17,7 @@ let td="M30 16";for(let x=30,k=0;x<1570;x+=26,k++){const nx=Math.min(x+26,1570);
 const tf=[];slides.forEach((s,j)=>{if(!j||s.dataset.who!==slides[j-1].dataset.who)tf.push(j)});
 TH.innerHTML=`<svg viewBox="0 0 1600 32"><path class="tb0" d="${td}"/><path class="tb1" id="tbp" d="${td}" pathLength="100"/>${tf.map(j=>`<circle data-j="${j}" cx="${TX(j)}" cy="16" r="6"/>`).join("")}</svg>`;
 stage.insertBefore(TH,$("#notes"));
-function tbSet(i){const s=slides[i];$("#tbw").textContent="Người "+s.dataset.who;
+function tbSet(i){const s=slides[i];$("#tbw").textContent=who(s.dataset.who);
  $("#tbn").textContent=String(i+1).padStart(2,"0")+" / "+slides.length;
  const p=slides.length>1?i/(slides.length-1)*100:0;$("#tbp").style.strokeDasharray=`${p} 200`;
  $$("#th2 circle").forEach(c=>c.classList.toggle("on",+c.dataset.j<=i))}
@@ -557,7 +557,7 @@ function extras(s){
 const QS=$$(".qs .callout h3").map(h=>h.textContent);
 const iv=document.createElement("div");iv.id="iv";iv.setAttribute("aria-hidden","true");stage.insertBefore(iv,$("#notes"));
 function ivFill(a){iv.innerHTML=`<div class="ivn"><svg viewBox="0 0 420 420"><text x="210" y="360" text-anchor="middle">${a}</text></svg></div>
- <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> Người ${slides.find(s=>+s.dataset.act===a).dataset.who}</div></div>`;split(iv.querySelector("h2"))}
+ <div class="ivt"><div class="eb">PHẦN ${a} / 3 · CÂU HỎI ${a}</div><h2>${QS[a-1]||""}</h2><svg class="ivl" viewBox="0 0 820 30"><path d="M4 15 H816" marker-start="url(#dap)" marker-end="url(#dap)"/></svg><div class="ivw"><span>NGƯỜI NÓI</span> ${who(slides.find(s=>+s.dataset.act===a).dataset.who)}</div></div>`;split(iv.querySelector("h2"))}
 
 /* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
 const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);

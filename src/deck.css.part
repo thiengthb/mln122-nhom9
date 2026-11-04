@@ -101,6 +101,7 @@ aside.notes{display:none}
 .cover{justify-content:center;gap:26px}
 .cover .meta{display:grid;grid-template-columns:auto auto;gap:6px 22px;font-size:21px;width:fit-content;max-width:720px}
 .cover .meta b{font:600 16px/1.6 var(--mono);color:var(--vai-3)}
+.cover .meta .mem{display:grid;grid-template-columns:auto auto;gap:2px 26px}.cover .meta .mem i{font-style:normal;white-space:nowrap}.cover .meta .mem small{font:500 13px var(--mono);color:var(--vai-3);margin-left:4px}
 /* khảo sát */
 .opt{display:grid;grid-template-columns:430px 1fr 170px;gap:24px;align-items:center;margin-block:7px}
 .track{height:44px;background:var(--cham-deep)}

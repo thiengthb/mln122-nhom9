@@ -35,7 +35,7 @@ Xem mục "Việc nhóm phải làm" trong README.
 Người dùng đã chốt: giữ câu "nhóm dùng AI hỗ trợ" ở slide 19; không đọc câu mời phản biện và Kahoot ở cuối slide 21.
 Việc tiếp theo:
 1. Người dùng chọn kiểu màu (mặc định Giấy kỹ thuật) và góp ý lời nói.
-2. Sau 22h 04/11: nhận thứ tự 5 người, ngày thuyết trình. Thay `[Người 1]`...`[Người 5]` trong `src/slides.part`, điền `CONFIG.ngay` và phân công trong `src/app.part`.
+2. ~~Nhận thứ tự 5 người, thay `[Người 1]`...`[Người 5]`~~ (xong 04/11/2026, xem mục "Thứ tự thuyết trình"). Còn: ngày thuyết trình (`CONFIG.ngay`).
 3. Tạo file Word Phụ lục AI theo mẫu Tab 6 từ `docs/05`; cột kiểm chứng phải là thông tin thật do nhóm cung cấp, không tự điền.
 4. Soạn mẫu Biên bản nhóm theo Tab 7.
 5. Tập nói, bấm giờ thật, thử trên máy chiếu; kiểm tra lại link GitHub Pages: https://thiengthb.github.io/mln122-nhom9/
@@ -191,3 +191,11 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Code ở `penScenes()` trong `src/ban-ve.part`.
 - Cập nhật cùng ngày (người dùng đồng ý, đưa lên main): slide 14 thêm chú thích viết tay "c/v: 1 → 3,50" ở góc trên khung số, mũi tên vòng ngoài khung xuống chỗ khoanh. Máy quay chậm ở slide 10, 12, 17: sau 5,5 giây cả tờ phóng gần 4% quanh bánh răng (10, 17) hoặc ô "Nguồn nhân lực chất lượng cao" (12) trong 5 giây, giữ 3 giây rồi lùi về; dòng Nguồn được thu ngược nên đứng yên. Chuyển slide giữa chừng thì tờ trở về bình thường. Slide 14 vẫn giữ một lần bấm để sang "cả ngành dùng máy".
 - Cập nhật cùng ngày: người dùng bỏ máy quay chậm ở slide 10, 12, 17; đã gỡ khỏi `penScenes()`.
+
+## 04/11/2026: Thứ tự thuyết trình và tên thật
+Người dùng gửi thứ tự: 1 Phạm Gia Huy (SE192867), 2 Trần Ngọc Thiên (190533, ghi đúng như người dùng gửi), 3 Vũ Huy Phương (SE190742), 4 Mai Tuấn Vỹ (SE194261), 5 Bùi Hiếu Nghĩa (SE182016).
+- `CONFIG.thanhVien` trong `src/app.part` xếp lại theo thứ tự này (trước theo tab Extra points), thêm `CONFIG.mssv`. Phần tử thứ n ứng với `data-who="n"`.
+- Bìa: ô "Thành viên" chia hai cột, mỗi người một ô, số thứ tự và MSSV in nhỏ bên cạnh.
+- Góc mỗi tờ, tờ chuyển phần và cửa sổ người nói (phím P) hiện tên thật qua hàm `who(n)`; thiếu tên thì quay về "Người n".
+- Ghi chú lời nói: "Em là [Người n]" thành họ tên, "Em mời [Người n]" thành "Em mời bạn" + tên gọi.
+- `scripts/build.py` đọc tên từ `app.part`, kịch bản `docs/06` ghi "Người n (họ tên)". Phân slide giữ nguyên: 1–5, 6–9, 10–13, 14–16, 17–21.

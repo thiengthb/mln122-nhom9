@@ -46,6 +46,11 @@ out = [
     "Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là nhịp bấm trong cùng slide. "
     "Hết mỗi đoạn thì bấm sang slide sau.\n"
 ]
+_tv = re.search(r'thanhVien:\s*\[([^\]]*)\]', (src / "app.part").read_text(encoding="utf8"))
+NAMES = re.findall(r'"([^"]+)"', _tv.group(1)) if _tv else []
+def ten(w):
+    k = int(w) - 1
+    return f"Người {w} ({NAMES[k]})" if k < len(NAMES) else f"Người {w}"
 who = {}
 for i, (w, title, note) in enumerate(items, 1):
     who.setdefault(w, []).append((i, title, note.strip()))
@@ -58,8 +63,8 @@ for w, rows in sorted(who.items()):
     mins = words / RATE
     total += mins
     a, b = spoken[0][0], spoken[-1][0]
-    table.append(f"| Người {w} | {a}–{b} | {spoken[0][1]} đến {spoken[-1][1]} | {mins:.1f} phút |\n")
-    parts.append(f"\n## Người {w}: slide {a}–{b} (khoảng {mins:.1f} phút)\n")
+    table.append(f"| {ten(w)} | {a}–{b} | {spoken[0][1]} đến {spoken[-1][1]} | {mins:.1f} phút |\n")
+    parts.append(f"\n## {ten(w)}: slide {a}–{b} (khoảng {mins:.1f} phút)\n")
     for i, title, n in spoken:
         parts.append(f"\n### Slide {i}. {title}\n\n{n}\n")
 table.append(f"| **Tổng phần nói** | | | **{total:.1f} phút** (nói nhanh 170: {total*150/170:.1f} phút) |\n")

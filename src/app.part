@@ -6,7 +6,9 @@ const CONFIG = {
   giangVien: "BinhNV26",
   phanBien: "Nhóm 10, Nhóm 4, Nhóm 5",
   ngay: "",                 // ví dụ "10/11/2026"
-  thanhVien: ["Bùi Hiếu Nghĩa","Trần Ngọc Thiên","Vũ Huy Phương","Phạm Gia Huy","Mai Tuấn Vỹ"], // theo tab Extra points
+  // Theo thứ tự thuyết trình: phần tử thứ n là Người n (data-who="n" trong slides.part)
+  thanhVien: ["Phạm Gia Huy","Trần Ngọc Thiên","Vũ Huy Phương","Mai Tuấn Vỹ","Bùi Hiếu Nghĩa"],
+  mssv: ["SE192867","190533","SE190742","SE194261","SE182016"],
 };
 /* ============================ */
 
@@ -56,10 +58,15 @@ function setLook(l){if(l==="giay")document.documentElement.removeAttribute("data
 setLook((()=>{try{return localStorage.getItem("n9look")||"giay"}catch(e){return"giay"}})());
 delete S.XXdh14;
 
+/* Tên người nói theo số thứ tự; thiếu tên thì ghi "Người n" */
+function who(n){return (CONFIG.thanhVien&&CONFIG.thanhVien[n-1])||"Người "+n}
+
 /* Bìa */
 (()=>{const m=$("#covermeta");const a=[["NHÓM",CONFIG.group],["LỚP · GIẢNG VIÊN",CONFIG.lop+" · "+CONFIG.giangVien],["NHÓM PHẢN BIỆN",CONFIG.phanBien]];
- if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.join(" · ")]);
- a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");s.textContent=v;m.append(b,s)});
+ if(CONFIG.ngay)a.push(["NGÀY",CONFIG.ngay]);if(CONFIG.thanhVien.length)a.push(["THÀNH VIÊN",CONFIG.thanhVien.map((t,k)=>[`${k+1}. ${t}`,(CONFIG.mssv&&CONFIG.mssv[k])||""])]);
+ /* thành viên: mỗi người một ô, đúng thứ tự thuyết trình, MSSV in nhỏ bên cạnh */
+ a.forEach(([k,v])=>{const b=document.createElement("b");b.textContent=k;const s=document.createElement("span");
+  if(Array.isArray(v)){s.className="mem";v.forEach(([t,id])=>{const i=document.createElement("i");i.textContent=t;if(id){const q=document.createElement("small");q.textContent=id;i.append(" ",q)}s.append(i)})}else s.textContent=v;m.append(b,s)});
 })();
 
 /* Khung dệt trên bìa */
@@ -199,7 +206,7 @@ function fmtT(){if(!t0)return"00:00";const s=Math.floor((Date.now()-t0)/1000);re
 if(PRES)setInterval(()=>{$("#pvc").textContent=fmtT()},1000);
 
 /* Cửa sổ người nói */
-if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slides[i];$("#pvt").textContent=`Slide ${i+1}/${slides.length} · Người ${s.dataset.who} · ${s.dataset.title}`;$("#pvn").innerHTML=$(".notes",s)?.innerHTML||"";$("#pvm").textContent=`Dự kiến ${s.dataset.min||0} phút. Slide sau: ${slides[i+1]?.dataset.title||"hết"}.`};
+if(PRES){document.body.classList.add("pres");const paint=i=>{cur=i;const s=slides[i];$("#pvt").textContent=`Slide ${i+1}/${slides.length} · ${who(s.dataset.who)} · ${s.dataset.title}`;$("#pvn").innerHTML=$(".notes",s)?.innerHTML||"";$("#pvm").textContent=`Dự kiến ${s.dataset.min||0} phút. Slide sau: ${slides[i+1]?.dataset.title||"hết"}.`};
  ch&&(ch.onmessage=e=>{if(e.data.t==="at")paint(e.data.i);if(e.data.t==="clock")t0=e.data.t0});paint(0);
  $("#pvp").onclick=()=>ch&&ch.postMessage({t:"prev"});$("#pvx").onclick=()=>ch&&ch.postMessage({t:"next"});$("#pvr").onclick=startClock}
 else{ch&&(ch.onmessage=e=>{if(e.data.t==="next")next();if(e.data.t==="prev")prev();if(e.data.t==="clock")t0=e.data.t0});
