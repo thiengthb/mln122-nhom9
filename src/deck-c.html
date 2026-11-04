@@ -409,8 +409,15 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 /* Bánh răng trung tâm */
 .gearbox{position:relative;width:300px;height:300px;display:grid;place-items:center;text-align:center;justify-self:center}
 .gearbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.gear{fill:var(--cham);stroke:var(--son);stroke-width:3;transform-origin:150px 150px}
-.s.on .gear{animation:spin 26s linear infinite}
+.gear{fill:var(--cham);stroke:var(--son);stroke-width:3;stroke-linejoin:round}
+/* Bánh răng 3D: các lớp chồng theo chiều sâu, nghiêng trong phối cảnh */
+.g3{position:absolute;inset:0;perspective:1100px;pointer-events:none}
+.g3 .tilt,.g3 .spin{position:absolute;inset:0;transform-style:preserve-3d}
+.g3 .tilt{transform:rotateX(24deg) rotateY(-26deg)}
+.g3 .ly{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.g3 .ly.b path{stroke:color-mix(in srgb,var(--son) 60%,var(--vai));stroke-width:1.5}
+.s.on .gearbox .g3 .spin{animation:spin 26s linear infinite}
+@media (prefers-reduced-motion:reduce){.s.on .gearbox .g3 .spin{animation:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .gearbox .in{position:relative;padding:40px;display:flex;flex-direction:column;gap:6px;align-items:center}
 .gearbox b{font:800 28px/1.12 var(--display)}
@@ -717,7 +724,7 @@ figure.view{position:relative}
 .mach .ms{font:500 15px var(--body);fill:var(--vai-2)}
 .hubR .leaf{position:relative;padding-left:56px}
 .hubR .leaf .pgear{position:absolute;left:14px;top:50%;width:30px;height:30px;margin-top:-15px;overflow:visible}
-.pgear path,.pgear circle{fill:none;stroke:var(--son);stroke-width:1.7;stroke-linejoin:round}
+.pgear.g3{inset:auto}.pgear .f path{fill:var(--cham);stroke:var(--son);stroke-width:1.7;stroke-linejoin:round}.pgear .hole{fill:var(--cham-2);stroke:var(--son);stroke-width:1.4}
 .road .rd{fill:none;stroke:var(--vai);stroke-width:3;stroke-linecap:round}
 .road .tk{stroke:var(--vai-3);stroke-width:2}
 .road .po{stroke:var(--vai);stroke-width:2}

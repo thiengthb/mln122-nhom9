@@ -155,3 +155,8 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Slide 21: sau khi sợi chỉ thắt nút, con dấu "Luận điểm · Nhóm 9 · Đã chốt" đóng xuống phía trên bậc thang.
 - Slide 22: mỗi nguồn có biểu tượng loại dưới số thứ tự; dải cuối trang đếm số nguồn mỗi loại (sách, giáo trình 2; văn bản, thống kê nhà nước 5; tổ chức, hiệp hội 11; tạp chí 4; báo, hãng tin 4; tổng 26). Phân loại theo trường `kind` của từng nguồn trong `src/app.part`.
 
+## 04/11/2026: Bánh răng 3D ở slide 10 và 17 (người dùng chọn trong ba đề xuất 3D)
+- Bánh răng giữa thành vật thể 3D: 22 lớp cắt của cùng một bánh răng xếp theo chiều sâu (34 px, `translateZ`), nghiêng trong phối cảnh; mặt trước giữ nét bản vẽ, thành bên tô màu nhấn đậm dần về phía sau. Vẫn quay 26 giây một vòng quanh trục của nó.
+- Khi vào slide, bánh răng xoay từ thế nhìn gần như từ cạnh về thế nghiêng 3/4, rồi lắc nhẹ qua lại để thấy độ dày. Chữ ở giữa vẫn phẳng, dễ đọc.
+- Bốn bánh răng nhỏ của bốn đặc điểm (slide 10) cũng có độ dày (7 lớp).
+- Không dùng thư viện 3D, chỉ CSS 3D; hàm `gear3d()` trong `src/ban-ve.part`. Hai đề xuất 3D còn lại (người bằng hạt slide 12, khối slide 16) chưa làm.

@@ -53,8 +53,18 @@ outline(stage);new MutationObserver(()=>outline($("#plan"))).observe($("#plan"),
 function gearPath(n=18,R=146,r=130,c=150){let d="";for(let k=0;k<n;k++){const a=k/n*2*Math.PI,w=Math.PI/n;
   const p=[[r,a-w*.55],[R,a-w*.32],[R,a+w*.32],[r,a+w*.55]].map(([q,t])=>`${(c+q*Math.cos(t)).toFixed(1)} ${(c+q*Math.sin(t)).toFixed(1)}`);
   d+=(k?" L":"M")+p.join(" L")}return d+"Z"}
-$$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden":"true"});el("path",{class:"gear",d:gearPath()},s);
- el("circle",{cx:150,cy:150,r:112,style:"fill:none;stroke:var(--son);stroke-width:1.2;stroke-dasharray:3 6"},s);g.prepend(s)});
+/* Bánh răng 3D: chồng nhiều lớp cắt ngang của cùng một bánh răng theo chiều sâu (translateZ), nghiêng trong phối cảnh.
+   Mặt trước là nét bản vẽ, các lớp phía sau tô đậm dần thành thành bên của bánh răng. Quay quanh trục của chính nó. */
+function gear3d(o){const w=document.createElement("div");w.className="g3 "+(o.cls||"");w.setAttribute("aria-hidden","true");
+ const t=document.createElement("div"),sp=document.createElement("div");t.className="tilt";sp.className="spin";w.append(t);t.append(sp);
+ const L=o.layers,D=o.depth;for(let k=L-1;k>=0;k--){const v=el("svg",{viewBox:o.vb,class:"ly"+(k?"":" f")+(k===L-1?" b":"")});
+  v.style.transform=`translateZ(${(D/2-k*D/(L-1)).toFixed(2)}px)`;
+  el("path",{d:o.d,class:k?"":"gear",style:k?`fill:color-mix(in srgb,var(--son) ${Math.round(72-30*k/(L-1))}%,var(--vai))`:""},v);
+  if(!k&&o.face)o.face(v);sp.append(v)}
+ return w}
+$$(".gearbox").forEach(g=>{g.prepend(gear3d({vb:"0 0 300 300",d:gearPath(),layers:22,depth:34,
+ face:v=>{el("circle",{cx:150,cy:150,r:112,style:"fill:none;stroke:var(--son);stroke-width:1.2;stroke-dasharray:3 6"},v);
+  el("circle",{cx:150,cy:150,r:122,style:"fill:none;stroke:var(--son);stroke-width:.8;opacity:.5"},v)}}))});
 
 /* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
 $$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
@@ -227,7 +237,8 @@ function shuttleScene(s){const cv=s.querySelector("#loom");if(!cv)return;const f
 
 
 /* 10i. Ba cảnh động mới: tháo máy học cải tiến (slide 8), bánh răng truyền động (slide 10), con đường 90 ngày (slide 20). Hình ví von, không có số liệu mới. */
-$$(".hubR .leaf").forEach(lf=>{if(!lf.querySelector(".pgear"))lf.insertAdjacentHTML("afterbegin",`<svg class="pgear" viewBox="-17 -17 34 34" aria-hidden="true"><g class="rot"><path d="${gearPath(9,15,11,0)}"/><circle r="4.2"/></g></svg>`)});
+$$(".hubR .leaf").forEach(lf=>{if(!lf.querySelector(".pgear")){const g=gear3d({cls:"pgear",vb:"-17 -17 34 34",d:gearPath(9,15,11,0),layers:7,depth:6,
+ face:v=>el("circle",{r:4.2,class:"hole"},v)});g.querySelector(".spin").classList.add("rot");lf.prepend(g)}});
 function moreScenes(s){
  /* Slide 8: máy nhập về, tháo ra để học, lắp lại với một bộ phận cải tiến (tô màu son) */
  const ja=s.querySelector(".tlbar.a"),tl=s.querySelector(".tl");
@@ -269,7 +280,7 @@ function moreScenes(s){
  if(big){/* bánh răng giữa đã quay bằng CSS (26 giây một vòng); bánh nhỏ 9 răng quay ngược, nhanh gấp đôi */
   $$(".hubR .leaf",s).forEach((lf,k)=>{const g=lf.querySelector(".pgear");if(!g)return;const d=1+(2+k)*.12+.7;
    live.push(gsap.fromTo(g,{opacity:.2},{opacity:1,duration:.3,delay:d}));
-   live.push(gsap.fromTo(g.querySelector(".rot"),{rotation:0},{rotation:-720,svgOrigin:"0 0",duration:26,ease:"none",repeat:-1,delay:d}))})}
+   live.push(gsap.fromTo(g.querySelector(".rot"),{rotation:0},{rotation:-720,duration:26,ease:"none",repeat:-1,delay:d}))})}
  /* Slide 20: con đường 90 ngày, tới cờ nào thì dòng kế hoạch đó sáng lên */
  const pl=s.querySelector("#plan");
  if(pl){pl.classList.remove("d1","d2","d3");pl.classList.add("run");let R=s.querySelector(".road");if(!R){R=el("svg",{class:"road",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(R)}
@@ -426,7 +437,10 @@ function enter(i){live.forEach(t=>t.kill());live=[];const s=slides[i];tbSet(i);
   live.push(gsap.to(z,{v:1,duration:1.4,delay:1.1,ease:"power2.out",onUpdate(){e.textContent=Math.round(m[1]*z.v)+"–"+Math.round(m[2]*z.v)+m[3]},onComplete(){e.textContent=o}}))});
  $$(CNT,s).forEach((e,k)=>{const t=count(e,.5+k*.08);if(t)live.push(t)});
  extras(s);scenes(s);humanScene(s);shuttleScene(s);moreScenes(s);lastScenes(s);climbScene(s);lineScene(s);finalScenes(s);live.push(heads(s,.1));
- if(s.querySelector(".gearbox"))live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}))}
+ if(s.querySelector(".gearbox")){live.push(gsap.fromTo($$(".gearbox",s),{scale:.6,opacity:0},{scale:1,opacity:1,duration:.8,ease:"back.out(1.6)",delay:.4}));
+  /* bánh răng 3D xoay từ thế nhìn gần như từ cạnh về thế nghiêng 3/4, rồi lắc nhẹ để thấy độ dày */
+  const tl=$$(".gearbox>.g3>.tilt",s);live.push(gsap.timeline({delay:.4}).fromTo(tl,{rotationX:12,rotationY:-78},{rotationX:24,rotationY:-26,duration:1.8,ease:"power3.out"})
+   .to(tl,{rotationY:-8,rotationX:30,duration:4.5,ease:"sine.inOut",yoyo:true,repeat:-1}))}}
 
 /* 10b. Chi tiết riêng từng slide */
 // Dấu khác: hai gạch ngang rồi nét chéo
