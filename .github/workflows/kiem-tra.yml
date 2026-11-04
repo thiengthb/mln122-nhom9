@@ -58,10 +58,10 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Cài trình duyệt
         run: |
-          npm install --no-save --no-package-lock playwright@1.48.2
+          npm install --no-save --no-package-lock playwright@1.63.0
           npx playwright install --with-deps chromium
       - name: Chụp 22 slide, tìm chỗ chữ đè
         run: node scripts/chup-slide.js anh-slide giay,cham

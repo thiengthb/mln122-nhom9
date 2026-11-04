@@ -36,12 +36,16 @@ fs.mkdirSync(out, { recursive: true });
           if (A.contains(C) || C.contains(A)) continue;
           const h = A.closest("h1,h2"); if (h && h === C.closest("h1,h2")) continue; // tiêu đề tách từng từ
           if (A.closest('[aria-hidden="true"]') || C.closest('[aria-hidden="true"]')) continue; // chữ trang trí (dấu ngoặc lớn, con dấu xoay) được phép nằm dưới chữ
-          let hit = false;
-          for (const x of R[a][1]) for (const y of R[c][1]) {
+          // Hộp chữ của trình duyệt cao hơn nét chữ (chừa chỗ cho dấu tiếng Việt), nên hai dòng xếp sát nhau
+          // có thể chạm hộp mà chữ không chạm. Chỉ tính phần thân chữ: bỏ 22% trên và 22% dưới của mỗi hộp.
+          const core = (r) => { const k = r.height * 0.22; return { left: r.left, right: r.right, top: r.top + k, bottom: r.bottom - k }; };
+          let hit = null;
+          for (const x0 of R[a][1]) for (const y0 of R[c][1]) {
+            const x = core(x0), y = core(y0);
             const w = Math.min(x.right, y.right) - Math.max(x.left, y.left), hh = Math.min(x.bottom, y.bottom) - Math.max(x.top, y.top);
-            if (w > 2 && hh > 2) hit = true;
+            if (w > 2 && hh > 2) hit = `${Math.round(w)}×${Math.round(hh)}px`;
           }
-          if (hit) o.push(`"${A.textContent.trim().slice(0, 30)}" đè "${C.textContent.trim().slice(0, 30)}"`);
+          if (hit) o.push(`"${A.textContent.trim().slice(0, 30)}" đè "${C.textContent.trim().slice(0, 30)}" (${hit})`);
         }
         return o;
       });
