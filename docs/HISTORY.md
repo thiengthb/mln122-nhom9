@@ -146,4 +146,12 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Chuyển slide thường: tờ đang chiếu được chụp lại đúng trạng thái rồi ngả ra sau qua mép trên như lật tờ trên bàn vẽ (3D, có bóng); lùi slide thì lật qua mép dưới. Tờ bìa giữa các phần giữ nguyên như cũ. Hàm `freeze()` trong `src/ban-ve.part`.
 - Slide 3: gói "công nghệ" bay theo đường tắt lên đỉnh, nhảy nhẹ trong lúc chờ; một người leo tám bậc "năng lực", lên tới đỉnh thì vòng sáng tỏa ra. Thay cho chấm tròn leo bậc cũ (slide 21 vẫn giữ chấm tròn).
 - Slide 15: dây chuyền may nhỏ cạnh chữ "Dệt may": áo chạy trên băng chuyền qua khâu cắt (kéo) và khâu may (kim), mỗi khâu hai người; cánh tay robot lần lượt hạ xuống, một người ở mỗi khâu mờ đi. Chỉ ví von cho câu "số người trên dây chuyền giảm", không thêm số.
+- Cập nhật cùng ngày: nhóm thấy hiệu ứng lật tờ 3D chưa đẹp, đã gỡ; chuyển slide trở lại kiểu cũ (nội dung lùi ra, tờ mới quét vào). Giữ cảnh slide 3 và slide 15.
+
+## 04/11/2026: Thêm chi tiết cho slide 7, 11, 19, 21, 22
+- Slide 7: thêm chấm thứ hai (màu của đường "mua") chạy cùng lúc trên sợi thứ hai của đường "kết hợp", hai chấm đan qua nhau như hai sợi xoắn.
+- Slide 11: hình người theo ngành: nón lá (nông, lâm, thủy sản), mũ bảo hộ (công nghiệp, xây dựng), xách cặp (dịch vụ). Ô người và ô đồng xu rơi xuống lần lượt như rót hạt. Ghi chú thêm một câu giải thích ba dáng người.
+- Slide 19: kính lúp, khiên tích, chìa khóa lần lượt bay từ ba ô A, B, C vào chiếc ba lô "hành trang" cạnh một bạn sinh viên; món nào vào thì chữ cái của ô đó đổi màu.
+- Slide 21: sau khi sợi chỉ thắt nút, con dấu "Luận điểm · Nhóm 9 · Đã chốt" đóng xuống phía trên bậc thang.
+- Slide 22: mỗi nguồn có biểu tượng loại dưới số thứ tự; dải cuối trang đếm số nguồn mỗi loại (sách, giáo trình 2; văn bản, thống kê nhà nước 5; tổ chức, hiệp hội 11; tạp chí 4; báo, hãng tin 4; tổng 26). Phân loại theo trường `kind` của từng nguồn trong `src/app.part`.
 

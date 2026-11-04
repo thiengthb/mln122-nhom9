@@ -8,10 +8,10 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 |---|---|---|---|
 | Người 1 | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
 | Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.7 phút |
-| Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.0 phút |
+| Người 3 | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
 | Người 4 | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.7 phút |
 | Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 4.4 phút |
-| **Tổng phần nói** | | | **19.4 phút** (nói nhanh 170: 17.1 phút) |
+| **Tổng phần nói** | | | **19.5 phút** (nói nhanh 170: 17.2 phút) |
 
 ## Người 1: slide 1–5 (khoảng 3.6 phút)
 
@@ -53,7 +53,7 @@ Lấy Hàn Quốc làm ví dụ. Đầu những năm 1960, theo Ngân hàng Th�
 
 Bên trái là chi cho nghiên cứu và phát triển theo phần trăm GDP, cùng nguồn Ngân hàng Thế giới, cùng năm 2023. Hàn Quốc gần 5%. Nhật Bản hơn 3,4%. Việt Nam 0,41%. Nghị quyết 57 đặt mục tiêu 2% vào năm 2030, gần gấp năm lần hiện nay. Bên phải là số robot trên 10.000 lao động ngành chế tạo, mỗi hình robot là 100 robot: Hàn Quốc hơn 12 hình, Trung Quốc chưa tới 2 hình. [Dừng.] Em nói rõ một giới hạn: đây là số hiện tại, không chứng minh vì sao họ thành công trong quá khứ. Nó chỉ cho thấy các nước đi trước đến giờ vẫn đầu tư rất mạnh cho nghiên cứu. Nên câu trả lời cho câu hỏi một là: đi tắt được, nhưng vẫn phải trả học phí cho năng lực, không thì mãi là người đi mua công nghệ. Giờ cần đặt bài học đó vào một Việt Nam đang chuyển dịch cơ cấu và chuyển đổi số cùng lúc. Em mời [Người 3].
 
-## Người 3: slide 10–13 (khoảng 4.0 phút)
+## Người 3: slide 10–13 (khoảng 4.1 phút)
 
 ### Slide 10. Vì sao phải công nghiệp hóa
 
@@ -61,7 +61,7 @@ Em là [Người 3]. Trước hết, công nghiệp hóa, hiện đại hóa là
 
 ### Slide 11. Việt Nam đang ở đâu
 
-Mỗi hình là một phần trăm. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.
+Mỗi hình là một phần trăm. Người đội nón lá là nông, lâm, thủy sản; đội mũ bảo hộ là công nghiệp, xây dựng; xách cặp là dịch vụ. Bên trái là 100 người lao động, bên phải là 100 đồng GDP. [Chỉ vào màu nông nghiệp.] Cứ 100 người đi làm thì khoảng 25 người ở nông, lâm, thủy sản, nhưng khu vực này chỉ làm ra chưa tới 11 đồng. Hai số thuộc hai kỳ gần nhau, không trùng nhau, nên chỉ dùng để nhìn cơ cấu: năng suất bình quân giữa các khu vực còn chênh lớn. Rồi 60,6% lao động làm việc phi chính thức, tức là chưa được bao phủ đầy đủ bởi hợp đồng và bảo hiểm xã hội. Trong khi đó, kinh tế số đã chiếm hơn 14% GDP. Nghĩa là nhiều khâu cơ khí hóa, chính thức hóa lao động còn chưa xong, thì chuyển đổi số đã tới. Nên như giáo trình trang 156 nói, phải làm song song cả hai.
 
 ### Slide 12. Nội dung CNH, HĐH
 
