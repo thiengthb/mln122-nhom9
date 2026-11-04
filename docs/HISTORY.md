@@ -73,3 +73,11 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
   - Slide 13: dấu khác tự vẽ (hai gạch ngang rồi nét chéo). Slide 18: vạch chia sáng dần theo cung, có dấu đích ở đỉnh vòng.
   - Mặt cắt gạch chéo quét từ trái sang sau khi viền kẻ xong. Ô để trống ở slide 2 có viền đứt chạy vòng. Tên tờ trong khung tên gõ ra từng chữ.
   - Bấm vào con số để soi nguồn: có đường dẫn kẻ từ con số sang ô nguồn, như chú thích trên bản vẽ.
+
+## 04/11/2026: phản biện review Codex lần 2, sửa nội dung (nhánh claude/project-thread-rshvkc)
+- Kiểm lại từng điểm bằng nguồn gốc, ghi ở cuối `docs/03`. Nhận phần lớn; không nhận: Kahoot tính trong 20 phút (người dùng đã xác nhận Kahoot riêng), tốc độ "135–150 từ" (tiếng Việt tính theo âm tiết), nguồn 67,1% Codex dẫn sai, số Hàn Quốc 94 USD (năm tỷ giá tụt), đưa slide 14 vào phụ lục.
+- Lời nói: cắt từ khoảng 4.050 xuống khoảng 2.850 âm tiết; build giờ không đếm chỉ dẫn trong ngoặc vuông và tính ở 150 âm tiết/phút (khoảng 19 phút; ở 170 là khoảng 17 phút). Thêm chỉ dẫn nhấn, dừng, thao tác trong ngoặc vuông ở các slide chính. Bàn giao theo nội dung, bỏ "Cảm ơn [Người X]".
+- Phân vai: slide 13 (86% hay dưới 2%) chuyển sang Người 3.
+- Sửa: định nghĩa CNH, HĐH ở slide 10; slide 9 dùng R&D World Bank 2023 cho cả ba nước; slide 14 ghi giới hạn mô hình; slide 15 bỏ 90,5% và 5–7%, ghi mẫu Bangladesh và 67,1%; slide 16 nói rõ WEF không riêng AI, thêm số riêng AI, thêm bốn tác nhân; slide 17 "nhóm gom thành năm cụm"; slide 18 bỏ vòng tiến độ, thành thẻ "hiện tại, mốc 2030"; slide 19, 20, 21 sửa câu chữ. Đổi nguồn NQ57, Luật AI, GII sang trang chính thức.
+- Bản B (nhánh khác) lấy lời nói từ `src/slides.part` theo tên slide nên tự nhận lời mới; chữ trên slide của bản B ở `src/b/slides.part` phải chép lại các sửa đổi này khi gộp. `#gauges` giữ id, đổi cách vẽ trong `src/app.part`.
+- Nhóm phải tự nói lại lời nói bằng lời của mình (FAQ: AI viết toàn bộ script là vi phạm).

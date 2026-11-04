@@ -34,9 +34,7 @@ $$(".gearbox").forEach(g=>{const s=el("svg",{viewBox:"0 0 300 300","aria-hidden"
 
 /* 5. Vạch chia: trục năm và mặt đồng hồ mục tiêu */
 $$(".tks").forEach(g=>{for(let y=0;y<=80;y+=5){const x=10+y*10;el("line",{class:"d-ax",x1:x,y1:y%10?27:22,x2:x,y2:32},g)}});
-$$("#gauges .gc svg:not(.ol)").forEach(s=>{const g=el("g",{class:"tk2"},s);for(let k=0;k<40;k++){const a=k/40*2*Math.PI,l=k%5?4:9;
- el("line",{x1:100+96*Math.sin(a),y1:100-96*Math.cos(a),x2:100+(96+l)*Math.sin(a),y2:100-(96+l)*Math.cos(a)},g)}
- el("path",{class:"tgt",d:"M100 -9 l-7 -11 h14z"},s)});
+/* Slide 18 dùng thẻ, không có mặt đồng hồ (bốn chỉ tiêu khác đơn vị, không tính phần trăm hoàn thành). */
 
 /* 6. Đường c/v trong mô phỏng */
 (()=>{const p=$("#simA").closest(".panel"),w=document.createElement("div");w.id="cvw";p.append(w);
@@ -129,9 +127,7 @@ function extras(s){
  const ws=$$("#waysvg .way",s);if(ws.length){$$("#waysvg .pen,#waysvg .ring").forEach(e=>e.remove());
   [[ws[0],"pen p0",0,3.2],[ws[1],"pen p1",3.4,1.4],[ws[2],"pen p2",5.2,3.8]].forEach(([p,c,d,u])=>{const t=along(p,c,u,d,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:d+u+.1}))});
   const rg=el("circle",{class:"ring",cx:880,cy:70,r:9},$("#waysvg"));live.push(gsap.fromTo(rg,{attr:{r:9},opacity:.9},{attr:{r:30},opacity:0,duration:1.1,repeat:2,delay:9.1,ease:"power1.out"}))}
- // Slide 18: vạch chia sáng dần theo cung đang chạy
- $$("#gauges .gc",s).forEach((g,j)=>{const x=G[j],p=Math.min(1,x[2]/x[3]),tk=$$(".tk2 line",g),gg=g.querySelector(".tk2");if(!gg)return;gg.style.setProperty("--c",`var(${x[10]})`);
-  tk.forEach((l,k)=>{l.removeAttribute("data-on");const f=k/40;if(f>p)return;live.push(gsap.to(l,{duration:0,delay:.5+1.8*(1-Math.sqrt(1-f/p))*p,attr:{"data-on":1}}))})})}
+}
 
 /* 10c. Soi nguồn: kẻ đường dẫn từ con số ra ô nguồn, như chú thích trên bản vẽ */
 const LS=el("svg",{id:"lead",viewBox:"0 0 1600 900","aria-hidden":"true"});stage.append(LS);

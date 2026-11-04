@@ -32,7 +32,7 @@ function heads(s,t0){const tl=gsap.timeline({delay:t0});
  return tl}
 
 /* 3. Mục tiêu 2030 dạng thanh đích: mỗi dòng có thang riêng, vì đơn vị và năm khác nhau */
-(()=>{const g=$("#gauges");g.className="bullets grow r";g.style.cssText="--i:2";
+(()=>{return;/* Đã tắt 04/11/2026: nội dung mới không vẽ thang tiến độ cho bốn chỉ tiêu khác đơn vị. */const g=$("#gauges");g.className="bullets grow r";g.style.cssText="--i:2";
  g.innerHTML=G.map(x=>{const rg=x[6].match(/(\d+)–(\d+)/),t1=x[3],t2=rg?+rg[2]:t1,M=t2*1.45,P=v=>(v/M*100).toFixed(2)+"%";
   return`<div class="bl" style="--c:var(${x[10]==="--vai"?"--vai-2":x[10]})"><div><h3>${x[0]}</h3><div class="u">Đơn vị: ${x[1]}</div><div class="s2"><span class="n" data-c="${x[8]}">Số hiện tại</span> · <span class="n" data-c="${x[9]}">Mục tiêu theo ${x[7]}</span></div></div>
   <div class="blc"><div class="blt"></div><div class="blg" style="left:${P(x[2])};width:${(Math.max(0,t1-x[2])/M*100).toFixed(2)}%"></div><div class="blf" style="width:${P(x[2])}"></div>
