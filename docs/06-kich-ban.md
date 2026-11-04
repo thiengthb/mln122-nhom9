@@ -10,8 +10,8 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người 2 | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 4.4 phút |
 | Người 3 | 10–12 | Vì sao phải công nghiệp hóa đến Nội dung CNH, HĐH | 3.2 phút |
 | Người 4 | 13–16 | 86% hay dưới 2% đến Câu trả lời | 5.6 phút |
-| Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 6.1 phút |
-| **Tổng phần nói** | | | **24.1 phút** |
+| Người 5 | 17–21 | Nghị quyết 57 đến Kết luận | 6.0 phút |
+| **Tổng phần nói** | | | **24.0 phút** |
 
 ## Người 1: slide 1–5 (khoảng 4.7 phút)
 
@@ -85,7 +85,7 @@ Cảm ơn [Người 3]. Em là [Người 4]. Câu hỏi AI có lấy mất việ
 
 Vậy AI tạo việc hay lấy việc? Câu trả lời của nhóm em là cả hai. Diễn đàn Kinh tế Thế giới dự báo đến năm 2030, trên toàn cầu có khoảng 170 triệu việc làm mới và 92 triệu việc mất đi, tức là tăng thêm 78 triệu. Nghe thì lạc quan, nhưng người mất việc và người có việc mới thường không phải là một. Không phải ai làm công nhân may hôm nay cũng chuyển sang làm phân tích dữ liệu được ngay ngày mai. Ở Việt Nam, tỷ lệ lao động nữ bị AI ảnh hưởng là 24,1%, cao hơn nam là 17,8%. Trên thế giới, chỉ 100 công ty đã chiếm 40% số tiền doanh nghiệp chi cho nghiên cứu. Nên khi nói "không chia đều", nhóm em muốn nói đến hai thứ: cơ hội có việc làm tốt, và phần thu nhập do công nghệ mang lại. Giáo trình trang 147 cũng cảnh báo điều này: thất nghiệp và phân hóa thu nhập buộc các nước phải điều chỉnh chính sách phân phối và an sinh. Vì vậy nhóm em cho rằng công nghệ không tự quyết định kết quả. Đào tạo lại và chính sách của Nhà nước mới là chỗ quyết định. Việt Nam đã có Luật Trí tuệ nhân tạo, hiệu lực từ tháng 3 năm nay. Còn định hướng lớn hơn của cả nước thì nằm ở Nghị quyết 57, phần cuối cùng do [Người 5] trình bày.
 
-## Người 5: slide 17–21 (khoảng 6.1 phút)
+## Người 5: slide 17–21 (khoảng 6.0 phút)
 
 ### Slide 17. Nghị quyết 57
 
@@ -101,11 +101,11 @@ Khi đọc Nghị quyết, nhóm em để ý là văn bản không có một dan
 
 ### Slide 20. Kế hoạch 90 ngày
 
-Nhóm em thử viết một kế hoạch 90 ngày, lấy ngành Kỹ thuật phần mềm làm ví dụ vì đa số lớp mình học ngành này. Cột đầu là những việc mình có thể giao cho AI, như viết code mẫu hay sinh test, với điều kiện là phải kiểm tra lại. Cột giữa là những việc mình phải tự giữ, như thiết kế hệ thống, đánh giá bảo mật, và chịu trách nhiệm khi có lỗi. Còn cột cuối là việc cụ thể. Trong 30 ngày đầu, tự đọc và sửa được code do AI viết. Đến ngày 60, làm xong một dự án có kiểm thử đầy đủ. Đến ngày 90, viết tài liệu thiết kế và nhờ người có kinh nghiệm góp ý. Bạn nào học ngành khác thì hàng dưới có gợi ý cho một số ngành. Không cần phải làm đúng như vậy, nhưng nhóm em mong mỗi bạn có một kế hoạch của riêng mình, bắt đầu từ tuần này.
+Nhóm em thử viết một kế hoạch 90 ngày, lấy ngành Kỹ thuật phần mềm làm ví dụ vì đây là ngành gần với lớp mình. Cột đầu là những việc mình có thể giao cho AI, như viết code mẫu hay sinh test, với điều kiện là phải kiểm tra lại. Cột giữa là những việc mình phải tự giữ, như thiết kế hệ thống, đánh giá bảo mật, và chịu trách nhiệm khi có lỗi. Còn cột cuối là việc cụ thể. Trong 30 ngày đầu, tự đọc và sửa được code do AI viết. Đến ngày 60, làm xong một dự án có kiểm thử đầy đủ. Đến ngày 90, viết tài liệu thiết kế và nhờ người có kinh nghiệm góp ý. Bạn nào học ngành khác thì hàng dưới có gợi ý cho một số ngành. Không cần phải làm đúng như vậy, nhưng nhóm em mong mỗi bạn có một kế hoạch của riêng mình, bắt đầu từ tuần này.
 
 ### Slide 21. Kết luận
 
-Đến đây em xin quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có một câu được nhắc đến khá nhiều: người lấy việc của bạn là người biết dùng AI. Nhóm em đồng ý, nhưng muốn nói thêm một chút: chỉ biết dùng thì vẫn chưa đủ, vì ai cũng sẽ biết dùng, mà mình phải làm chủ được nó. Em xin tóm lại bài của nhóm trong ba ý. Nhật Bản và các nước công nghiệp mới rút ngắn được thời gian, nhưng không bỏ qua việc học. AI vừa thay thế vừa tạo việc làm, nhưng cơ hội và thu nhập không chia đều. Và Nghị quyết 57 đặt ra đột phá ở tầm quốc gia, nhưng rốt cuộc vẫn phải bắt đầu từ năng lực của từng người. Nên nhóm em xin kết lại bằng đúng câu đã nói lúc đầu: đi tắt được công nghệ, không đi tắt được năng lực. Trước khi chuyển sang phần phản biện, nhóm em để lại một câu hỏi cho lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? Mời một bạn chia sẻ nhanh. [Nghe một câu trả lời.] Nhóm em cảm ơn thầy và các bạn đã lắng nghe. Xin mời Nhóm 10, Nhóm 4 và Nhóm 5 phản biện. Sau đó nhóm em sẽ mời cả lớp cùng chơi Kahoot ạ.
+Đến đây em xin quay lại câu hỏi đầu bài: AI sẽ làm gì với nghề bạn đang học? Nhà kinh tế Richard Baldwin có một câu được nhắc đến khá nhiều: người lấy việc của bạn là người biết dùng AI. Nhóm em đồng ý, nhưng muốn nói thêm một chút: chỉ biết dùng thì vẫn chưa đủ, vì ai cũng sẽ biết dùng, mà mình phải làm chủ được nó. Em xin tóm lại bài của nhóm trong ba ý. Nhật Bản và các nước công nghiệp mới rút ngắn được thời gian, nhưng không bỏ qua việc học. AI vừa thay thế vừa tạo việc làm, nhưng cơ hội và thu nhập không chia đều. Và Nghị quyết 57 đặt ra đột phá ở tầm quốc gia, nhưng rốt cuộc vẫn phải bắt đầu từ năng lực của từng người. Nên nhóm em xin kết lại bằng đúng câu đã nói lúc đầu: đi tắt được công nghệ, không đi tắt được năng lực. Trước khi kết thúc, nhóm em để lại một câu hỏi cho lớp: nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm? Mời một bạn chia sẻ nhanh. [Nghe một câu trả lời.] Nhóm em cảm ơn thầy và các bạn đã lắng nghe.
 
 ## Slide dự phòng
 

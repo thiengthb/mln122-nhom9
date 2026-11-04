@@ -30,3 +30,13 @@ Xem mục "Việc nhóm phải làm" trong README.
 - Ba giao diện, đổi bằng phím D: Giấy kỹ thuật (mặc định), Rừng rêu, Chàm cũ.
 - Sửa slide 22: danh mục tràn khung, ba mục cuối bị khuất.
 - Còn chờ: thứ tự 5 người, ngày thuyết trình, kiểm chứng của nhóm cho Phụ lục AI.
+
+## 04/11/2026: bàn giao sang chat mới
+Người dùng đã chốt: giữ câu "nhóm dùng AI hỗ trợ" ở slide 19; không đọc câu mời phản biện và Kahoot ở cuối slide 21.
+Việc tiếp theo:
+1. Người dùng chọn kiểu màu (mặc định Giấy kỹ thuật) và góp ý lời nói.
+2. Sau 22h 04/11: nhận thứ tự 5 người, ngày thuyết trình. Thay `[Người 1]`...`[Người 5]` trong `src/slides.part`, điền `CONFIG.ngay` và phân công trong `src/app.part`.
+3. Tạo file Word Phụ lục AI theo mẫu Tab 6 từ `docs/05`; cột kiểm chứng phải là thông tin thật do nhóm cung cấp, không tự điền.
+4. Soạn mẫu Biên bản nhóm theo Tab 7.
+5. Tập nói, bấm giờ thật, thử trên máy chiếu; kiểm tra lại link GitHub Pages: https://thiengthb.github.io/mln122-nhom9/
+Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đăng lại `src/deck.html` với `url` này, chat mới phải đọc artifact trước khi đăng).
