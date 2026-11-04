@@ -230,7 +230,7 @@ body.pres #pv{display:flex;flex-direction:column;gap:18px;max-width:1100px;margi
    Ba kiểu màu (phím D): Giấy can (mặc định), Bản in xanh, Bàn vẽ đêm. */
 :root{
   --cham:#F3F4EF; --cham-2:#E8EAE3; --cham-3:#B9C0BB; --cham-deep:#FBFBF8;
-  --vai:#16202C; --vai-2:#3E4A57; --vai-3:#6E7A86;
+  --vai:#16202C; --vai-2:#3E4A57; --vai-3:#5A6571;
   --son:#1D4ED8; --nghe:#C8441A; --si:#0B7A6E;
   --on-son:#FFFFFF; --on-nghe:#FFFFFF; --on-si:#FFFFFF; --on-vai:#FFFFFF;
   --tex:rgba(29,78,216,.07); --tex2:rgba(29,78,216,.13); --ghost:rgba(22,32,44,.08);
@@ -288,7 +288,7 @@ h2 em,.cover h1 em{color:var(--son)}
 .s.on h2.r::after,.s.on h1.r::after{content:"";position:absolute;top:-6px;bottom:-6px;width:0;border-left:2px solid var(--nghe);left:0;animation:pen 1.1s cubic-bezier(.5,0,.3,1) both;animation-delay:calc(var(--i,0)*90ms)}
 @keyframes pen{0%{left:0;opacity:1}92%{left:100%;opacity:1}100%{left:100%;opacity:0}}
 .mono{font-family:var(--mono)}
-.lbl{font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-3);text-transform:uppercase}
+.lbl{font:600 15px var(--mono);letter-spacing:.08em;color:var(--vai-2);text-transform:uppercase}
 
 /* Khối: nền trong suốt, viền do JS kẻ; .dark = mặt cắt gạch chéo */
 .panel,.leaf,.fork,.tcol,.rv,.wc,.shift span,.chain b,.lg-box,.blank,.view,.callout{position:relative}
@@ -341,13 +341,13 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 /* Luận điểm: bậc thang và cú nhảy */
 .thesis{display:grid;grid-template-columns:1fr 520px;gap:40px;align-items:stretch}
 .thesis svg,.mini svg{width:100%;height:100%;overflow:visible}
-.st-step{fill:none;stroke:var(--vai);stroke-width:4;stroke-linejoin:round}
-.st-jump{fill:none;stroke:var(--nghe);stroke-width:3.5;stroke-dasharray:10 9}
+.st-step{fill:none;stroke:var(--nghe);stroke-width:4;stroke-linejoin:round}
+.st-jump{fill:none;stroke:var(--son);stroke-width:3.5;stroke-dasharray:10 9}
 .st-g{stroke:var(--vai-3);stroke-width:1.5}
 .st-t{fill:var(--vai-2);font:600 17px var(--mono);letter-spacing:.06em}
 .st-t.b{fill:var(--vai);font:700 22px var(--body);letter-spacing:0}
-.st-t.o{fill:var(--nghe)}
-.st-dot{fill:var(--son)}
+.st-t.o{fill:var(--son)}.st-t.nl{fill:var(--nghe)}
+.st-dot{fill:var(--nghe)}
 .qs{display:flex;flex-direction:column;gap:14px;justify-content:center}
 .qs .callout{display:grid;grid-template-columns:34px 1fr;gap:16px;align-items:start}
 .qs h3{font-size:27px}
@@ -358,7 +358,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .rv.on{background:color-mix(in srgb,var(--son) 10%,var(--cham));opacity:1}.rv.on b{color:var(--son)}
 .rv.done{opacity:.8}
 #revlist{border-top:2.5px solid var(--ln);border-bottom:2.5px solid var(--ln);align-self:center}
-.rvhd{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:6px 16px;font:600 12px var(--mono);letter-spacing:.1em;color:var(--vai-3);border-bottom:1px solid var(--ln)}
+.rvhd{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:6px 16px;font:600 14px var(--mono);letter-spacing:.1em;color:var(--vai-3);border-bottom:1px solid var(--ln)}
 
 /* Mác */
 .mq{display:flex;flex-direction:column;justify-content:center;gap:16px;padding:34px 36px}
@@ -390,7 +390,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 #waysvg .axl{stroke:var(--vai-2);stroke-width:2;fill:none}
 .wc{border-left:0!important;padding-left:72px!important}
 .wc::before{content:"";position:absolute;left:18px;top:30px;width:40px;border-top:5px solid var(--c,var(--vai))}
-.wc0{--c:var(--vai)}.wc1{--c:var(--nghe)}.wc2{--c:var(--son)}
+.wc0{--c:var(--nghe)}.wc1{--c:var(--son)}.wc2{--c:var(--son)}
 
 /* Đông Á */
 .tlaxis{border-bottom:1.5px solid var(--vai-2);padding-bottom:4px;position:relative;background:linear-gradient(90deg,var(--vai-2) 1.5px,transparent 1.5px) 0 100%/calc(100%/12) 8px repeat-x}
@@ -409,7 +409,7 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .vc .bar>span:last-child{font-size:27px}
 
 /* Bánh răng trung tâm */
-.gearbox{position:relative;width:300px;height:300px;display:grid;place-items:center;text-align:center;justify-self:center}
+.gearbox{position:relative;width:380px;height:380px;display:grid;place-items:center;text-align:center;justify-self:center}
 .gearbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .gear{fill:var(--cham);stroke:var(--son);stroke-width:3;stroke-linejoin:round}
 /* Bánh răng 3D: các lớp chồng theo chiều sâu, nghiêng trong phối cảnh */
@@ -422,12 +422,18 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 @media (prefers-reduced-motion:reduce){.s.on .gearbox .g3 .spin{animation:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .gearbox .in{position:relative;padding:40px;display:flex;flex-direction:column;gap:6px;align-items:center}
-.gearbox b{font:800 28px/1.12 var(--display)}
-.gearbox span{font:600 14px var(--mono);letter-spacing:.08em;color:var(--son);text-transform:uppercase}
-.hub{grid-template-columns:1fr 300px 1fr;gap:70px}
-.hubR .leaf{border-left:0;font-size:23px}
-.hubL .panel p{font-size:24px}
-.nq{grid-template-columns:1fr 300px 1fr;gap:70px}
+.gearbox b{font:800 32px/1.12 var(--display)}
+.gearbox span{font:600 16px var(--mono);letter-spacing:.08em;color:var(--son);text-transform:uppercase}
+.hub{grid-template-columns:1fr 380px 1fr;gap:56px;margin-top:-30px}
+.hubR .leaf{border-left:0;font-size:25px;padding-top:18px;padding-bottom:18px}
+.hubL .panel p{font-size:27px}
+.nq{grid-template-columns:1fr 380px 1fr;gap:56px}
+.nq .nqcol .leaf{font-size:25px;padding-top:15px;padding-bottom:15px}
+.gearbox .in{padding:66px}
+.nq .gearbox b{font-size:22px!important}
+.hub .gearbox b{font-size:29px}
+/* Slide 7: "kết hợp" là hai sợi, công nghệ và năng lực */
+.wc2::before{border-top:0;height:5px;top:30px;background:linear-gradient(90deg,var(--son) 50%,var(--nghe) 50%)}
 
 /* Thực trạng */
 .wf i{outline:1px solid color-mix(in srgb,var(--vai) 25%,transparent);outline-offset:-1px}
@@ -435,19 +441,19 @@ svg.links circle{fill:var(--cham);stroke:var(--vai-2);stroke-width:2}
 .lgt>*{padding:9px 0;border-bottom:1px solid var(--cham-3)}
 .lgt i{width:18px;height:18px;padding:0;border:0}
 .lgt b{font:700 19px var(--mono);text-align:right}
-.lgt .h{font:600 11px var(--mono);letter-spacing:.1em;color:var(--vai-3)}
+.lgt .h{font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-2)}
 
 /* Nội dung */
 .flow{display:grid;grid-template-columns:330px 1fr 430px;gap:80px;align-items:center}
-.fend{background:transparent;color:var(--vai);padding:30px;border:0;outline:2.5px solid var(--son);outline-offset:6px}
-.fend .eb{color:var(--son)}
+.fend{background:transparent;color:var(--vai);padding:30px;border:0;outline:2.5px solid var(--nghe);outline-offset:6px}
+.fend .eb{color:var(--nghe)}
 .fend .n{border-color:var(--vai-3)}
 
 /* 86% và 2% */
 .vs{display:grid;grid-template-columns:1fr 90px 1fr;align-items:stretch}
 .vs .neq{display:grid;place-items:center;font:800 76px var(--display);color:var(--nghe)}
 .big{font-family:var(--mono);font-weight:700;letter-spacing:-.04em}
-.ms{font:600 13px var(--mono);letter-spacing:.1em;color:var(--vai-3);border-top:1.5px solid var(--vai-3);padding-top:6px;margin-top:4px}
+.ms{font:600 14px var(--mono);letter-spacing:.08em;color:var(--vai-2);border-top:1.5px solid var(--vai-3);padding-top:6px;margin-top:4px}
 
 /* Mô phỏng */
 #dots i{background:var(--vai)}
@@ -551,7 +557,7 @@ svg.links path.a.flow{stroke-dasharray:9 6;animation:flow .9s linear infinite}
 @media (prefers-reduced-motion:reduce){.wb.p::after,.wb.w::after{transform:none;animation:none!important}}
 /* Slide 12: ô kết luận nháy vòng sóng khi các nét nối chạm tới */
 .s.on .fend{animation:fpulse 1.4s 2.7s ease-out 2}
-@keyframes fpulse{0%{box-shadow:0 0 0 6px color-mix(in srgb,var(--son) 50%,transparent)}100%{box-shadow:0 0 0 30px transparent}}
+@keyframes fpulse{0%{box-shadow:0 0 0 6px color-mix(in srgb,var(--nghe) 50%,transparent)}100%{box-shadow:0 0 0 30px transparent}}
 @media (prefers-reduced-motion:reduce){.s.on .fend{animation:none}}
 /* Đợt chi tiết 2 (04/11/2026) */
 .tip{fill:var(--cham);stroke:var(--nghe);stroke-width:2.5;pointer-events:none}
@@ -569,11 +575,11 @@ svg.links .tip{fill:var(--cham)}
   background-repeat:repeat-x,repeat-x,repeat-y,repeat-y;background-size:18px 2px,18px 2px,2px 18px,2px 18px;background-position:0 0,0 100%,0 0,100% 0;animation:ants 1.2s linear infinite}
 @keyframes ants{to{background-position:18px 0,-18px 100%,0 -18px,100% 18px}}
 /* Bậc thang: chấm leo bậc và chấm đi tắt */
-.climb{fill:var(--son);stroke:var(--cham);stroke-width:3}
-.jumper{fill:var(--nghe);stroke:var(--cham);stroke-width:3}
+.climb{fill:var(--nghe);stroke:var(--cham);stroke-width:3}
+.jumper{fill:var(--son);stroke:var(--cham);stroke-width:3}
 /* Slide 7: ngòi bút trên ba con đường */
 #waysvg .pen{fill:var(--cham);stroke-width:3}
-#waysvg .p0{stroke:var(--vai)}#waysvg .p1{stroke:var(--nghe)}#waysvg .p2{stroke:var(--son);fill:var(--son)}
+#waysvg .p0{stroke:var(--nghe);fill:var(--nghe)}#waysvg .p1{stroke:var(--son);fill:var(--son)}#waysvg .p2{stroke:var(--son);fill:var(--son)}
 #waysvg .ring{fill:none;stroke:var(--son);stroke-width:2}
 /* Slide 18: vạch chia sáng theo cung, dấu đích ở đỉnh */
 .gc .tk2 line[data-on]{stroke:var(--c);stroke-width:2.5}
@@ -707,7 +713,7 @@ svg.links .tip{fill:var(--cham)}
 .stitch .kn{fill:none;stroke:var(--son);stroke-width:3.2;stroke-linecap:round}
 .stitch .knd{fill:var(--nghe)}
 .s .hum{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
-.hum .hgnd{fill:none;stroke:var(--son);stroke-width:1.5;opacity:.6}
+.hum .hgnd{fill:none;stroke:var(--nghe);stroke-width:1.5;opacity:.6}
 figure.view{position:relative}
 .view .shut{position:absolute;pointer-events:none;overflow:visible;transition:opacity .4s}
 .shut .bd{fill:var(--cham);stroke:var(--vai);stroke-width:2.2}
@@ -749,9 +755,9 @@ figure.view{position:relative}
 svg.links .pk{fill:var(--vai);stroke:var(--cham);stroke-width:2}
 svg.links .pk.o{fill:var(--son)}
 /* Slide 3: leo bậc và gói công nghệ */
-.clb .pkg{fill:var(--cham);stroke:var(--nghe);stroke-width:1.6;stroke-linejoin:round}
-.clb .mnn{fill:none;stroke:var(--son);stroke-width:3;stroke-linecap:round}.clb .mnn circle{fill:var(--son)}
-.clb .ring{fill:none;stroke:var(--son);stroke-width:2}
+.clb .pkg{fill:var(--cham);stroke:var(--son);stroke-width:1.6;stroke-linejoin:round}
+.clb .mnn{fill:none;stroke:var(--nghe);stroke-width:3;stroke-linecap:round}.clb .mnn circle{fill:var(--nghe)}
+.clb .ring{fill:none;stroke:var(--nghe);stroke-width:2}
 /* Slide 15: dây chuyền may */
 .s .lineq{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:2}
 .lineq .blt{fill:var(--cham-2);stroke:var(--vai);stroke-width:2}
@@ -785,6 +791,11 @@ svg.links .pk.o{fill:var(--son)}
 #refsum svg{width:22px;height:22px;fill:none;stroke:var(--son);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 #refsum b{font:700 18px var(--mono);color:var(--vai)}
 #refsum .tot{margin-left:auto;color:var(--vai-3)}
+/* Màu theo luận điểm: công nghệ là màu nhấn, năng lực (con người) là màu cam */
+h2 em.nl,.cover h1 em.nl{color:var(--nghe)}
+.w0{stroke:var(--nghe)}.w1{stroke:var(--son)}.w2b{stroke:var(--nghe)}
+/* Slide 12: hạ ô nhân lực xuống để hình người hạt đứng trên ô, không chen tiêu đề */
+.flow #fe{margin-top:190px}
 </style>
 
 <style>

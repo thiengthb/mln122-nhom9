@@ -28,7 +28,7 @@
 
 <section class="s" data-act="0" data-who="1" data-min="1" data-title="Luận điểm và ba câu hỏi" data-refs="gt|tr. 158">
   <div class="eb r">LUẬN ĐIỂM CỦA BÀI <span class="tag">quan điểm nhóm</span></div>
-  <h2 class="r" style="--i:1;font-size:72px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
+  <h2 class="r" style="--i:1;font-size:72px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em class="nl">năng lực</em>.</h2>
   <div class="thesis grow r" style="--i:2">
     <svg viewBox="0 0 860 470" role="img" aria-label="Hình: công nghệ có thể nhảy tắt, năng lực phải leo từng bậc">
       <line class="st-g" x1="20" y1="430" x2="850" y2="430"/>
@@ -37,8 +37,8 @@
       <circle class="st-dot" cx="800" cy="78" r="9"/>
       <text class="st-t" x="845" y="32" text-anchor="end">TRÌNH ĐỘ CAO</text>
       <text class="st-t" x="70" y="458">XUẤT PHÁT</text>
-      <text class="st-t b o" x="320" y="126" style="fill:var(--nghe)">Công nghệ</text><text class="st-t o" x="320" y="150">MUA ĐƯỢC · ĐI TẮT ĐƯỢC</text>
-      <text class="st-t b" x="470" y="350">Năng lực</text><text class="st-t" x="470" y="376">PHẢI LEO TỪNG BẬC</text>
+      <text class="st-t b o" x="320" y="126">Công nghệ</text><text class="st-t o" x="320" y="150">MUA ĐƯỢC · ĐI TẮT ĐƯỢC</text>
+      <text class="st-t b nl" x="470" y="350">Năng lực</text><text class="st-t nl" x="470" y="376">PHẢI LEO TỪNG BẬC</text>
     </svg>
     <div class="qs">
       <p class="sm">Giáo trình viết: <span class="n" data-c="gt" data-l="tr. 158">"kết hợp quá trình phát triển tuần tự với đi tắt đón đầu"</span>.</p>
@@ -110,7 +110,7 @@
 
 <section class="s" data-act="1" data-who="2" data-min="1" data-title="Ba con đường công nghệ" data-refs="gt|tr. 153, 158">
   <div class="eb r">CÂU HỎI 1 · LÀM SAO ĐỂ CÓ CÔNG NGHỆ</div>
-  <h2 class="r" style="--i:1">Họ chọn cách <em>vừa mua công nghệ, vừa tự nghiên cứu</em></h2>
+  <h2 class="r" style="--i:1">Họ chọn cách vừa <em>mua công nghệ</em>, vừa <em class="nl">tự nghiên cứu</em></h2>
   <div class="row r grow" style="--i:2;grid-template-columns:1fr 520px">
     <svg viewBox="0 0 900 480" id="waysvg" style="width:100%;height:100%;overflow:visible" role="img" aria-label="Ba con đường từ trình độ thấp đến trình độ cao">
       <path class="axl" marker-end="url(#da)" d="M20 450 L20 20"/><path class="axl" marker-end="url(#da)" d="M20 450 L895 450"/>
@@ -119,7 +119,7 @@
       <path class="way w0" pathLength="1" d="M20 430 C120 430 90 330 200 340 S300 420 380 320 S480 230 560 260 S680 200 720 140 S820 110 880 70" fill="none" stroke-width="4"/>
       <path class="way w1" pathLength="1" d="M20 430 L880 70" fill="none" stroke-width="4" stroke-dasharray="1"/>
       <path class="way w2" pathLength="1" d="M20 430 C110 340 170 420 260 330 S380 290 450 250 S570 240 640 170 S770 130 880 70" fill="none" stroke-width="6"/>
-      <path class="way w2" pathLength="1" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke-width="6"/>
+      <path class="way w2 w2b" pathLength="1" d="M20 430 C110 420 170 330 260 330 S380 240 450 250 S570 170 640 170 S770 70 880 70" fill="none" stroke-width="6"/>
       <circle cx="880" cy="70" r="9" style="fill:var(--son)"/>
     </svg>
     <div style="display:flex;flex-direction:column;gap:12px;justify-content:center">
@@ -133,7 +133,7 @@
 
 <section class="s" data-act="1" data-who="2" data-min="1.5" data-title="Nhật Bản, Hàn Quốc đã làm gì" data-refs="ea26;wbgdp;ldn24;gt|tr. 153, 156">
   <div class="eb r">CÂU HỎI 1 · BÀI HỌC TỪ ĐÔNG Á</div>
-  <h2 class="r" style="--i:1">Họ mua công nghệ để <em>học cách cải tiến</em>, không chỉ để dùng</h2>
+  <h2 class="r" style="--i:1">Họ mua công nghệ để <em class="nl">học cách cải tiến</em>, không chỉ để dùng</h2>
   <div class="tl r" style="--i:2">
     <div class="tlaxis"><span>1945</span><span>1960</span><span>1975</span><span>1990</span></div>
     <div class="tlrow"><b>Nhật Bản</b><div class="tlbar a" style="--l:0%;--w:55.6%"><span>Nhập công nghệ máy móc, hóa chất rồi học để cải tiến; đầu tư cho giáo dục và kỹ sư</span></div></div>
@@ -150,7 +150,7 @@
 
 <section class="s" data-act="1" data-who="2" data-min="1" data-title="Đầu tư cho năng lực" data-refs="wbrd;ifr26;nq57">
   <div class="eb r">CÂU HỎI 1 · KHOẢNG CÁCH VỀ ĐẦU TƯ</div>
-  <h2 class="r" style="--i:1">Đi tắt nhưng vẫn phải <em>đầu tư cho năng lực</em></h2>
+  <h2 class="r" style="--i:1">Đi tắt nhưng vẫn phải <em class="nl">đầu tư cho năng lực</em></h2>
   <div class="row c2 grow r vc" style="--i:2;gap:44px">
     <div class="panel">
       <span class="lbl">Bảng đo 1</span><h3>Chi cho nghiên cứu và phát triển, % GDP, năm 2023</h3>
@@ -215,7 +215,7 @@
 
 <section class="s" data-act="1" data-who="3" data-min="1" data-title="Nội dung CNH, HĐH" data-refs="gt|tr. 155–162" data-links="fa>ft1,fa>ft2,fa>ft3,fa>ft4,ft1>fe!,ft2>fe!,ft3>fe!,ft4>fe!">
   <div class="eb r">CÂU HỎI 1 · VIỆT NAM CẦN LÀM GÌ</div>
-  <h2 class="r" style="--i:1">Mọi nhiệm vụ cuối cùng đều cần đến <em>con người</em></h2>
+  <h2 class="r" style="--i:1">Mọi nhiệm vụ cuối cùng đều cần đến <em class="nl">con người</em></h2>
   <div class="flow grow r" style="--i:2">
     <div style="display:flex;flex-direction:column;gap:12px"><span class="lbl">Bước 1 · trước hết</span><div class="leaf" id="fa">Tạo điều kiện về tư duy, thể chế, nguồn lực, môi trường quốc tế</div><p class="sm"><span class="n" data-c="gt" data-l="tr. 155">"không có nghĩa là chờ chuẩn bị đầy đủ mới thực hiện"</span></p></div>
     <div style="display:flex;flex-direction:column;gap:12px"><span class="lbl">Bước 2 · tiếp theo</span>
@@ -266,7 +266,7 @@
 
 <section class="s" data-act="2" data-who="4" data-min="1.5" data-title="Dệt may và logistics" data-refs="blf25;qlnn26;bnews26;vna26">
   <div class="eb r">CÂU HỎI 2 · HAI NGÀNH ĐƯỢC HỎI</div>
-  <h2 class="r" style="--i:1">Máy thay từng công đoạn; <em>điều còn thiếu là kỹ năng</em></h2>
+  <h2 class="r" style="--i:1">Máy thay từng công đoạn; <em class="nl">điều còn thiếu là kỹ năng</em></h2>
   <div class="row c2 grow r vc" style="--i:2;gap:44px">
     <div class="panel">
       <span class="lbl">Ngành 1</span><h3>Dệt may</h3>
@@ -312,7 +312,7 @@
   <div class="eb r">CÂU HỎI 3 · NGHỊ QUYẾT 57-NQ/TW, NGÀY 22/12/2024</div>
   <h2 class="r" style="--i:1">Nghị quyết 57 gọi đây là <em><span class="n" data-c="nq57">"đột phá quan trọng hàng đầu"</span></em></h2>
   <div class="nq grow r" style="--i:2">
-    <div class="nqcol"><span class="lbl">Nhóm gom thành năm cụm</span><div class="leaf hi" id="nl1">Thể chế, cần đi trước một bước</div><div class="leaf hi2" id="nl2">Nhân lực</div><div class="leaf" id="nl3">Hạ tầng</div><div class="leaf" id="nl4">Dữ liệu</div><div class="leaf" id="nl5">Công nghệ chiến lược</div></div>
+    <div class="nqcol"><span class="lbl">Nhóm gom thành năm cụm</span><div class="leaf hi2" id="nl1">Thể chế, cần đi trước một bước</div><div class="leaf hi" id="nl2">Nhân lực</div><div class="leaf" id="nl3">Hạ tầng</div><div class="leaf" id="nl4">Dữ liệu</div><div class="leaf" id="nl5">Công nghệ chiến lược</div></div>
     <div class="gearbox" id="nc"><div class="in"><b style="font-size:24px">Khoa học, công nghệ, đổi mới sáng tạo, chuyển đổi số</b><span>động lực chính</span></div></div>
     <div class="nqcol"><span class="lbl">Nhằm</span><div class="leaf" id="nr1">Phát triển nhanh lực lượng sản xuất hiện đại</div><div class="leaf" id="nr2">Hoàn thiện quan hệ sản xuất</div><div class="leaf" id="nr3">Đổi mới phương thức quản trị quốc gia</div><div class="leaf" id="nr4">Ngăn chặn nguy cơ tụt hậu</div></div>
   </div>
@@ -330,7 +330,7 @@
 
 <section class="s" data-act="3" data-who="5" data-min="1" data-title="Yêu cầu với sinh viên" data-refs="nq57;gt|tr. 151, 158;wef25;luatai" data-links="t1>o1!,t2>o2!,t3>o3!">
   <div class="eb r">CÂU HỎI 3 · YÊU CẦU VỚI SINH VIÊN</div>
-  <h2 class="r" style="--i:1">Điều đó đòi hỏi gì ở <em>sinh viên chúng ta</em>?</h2>
+  <h2 class="r" style="--i:1">Điều đó đòi hỏi gì ở <em class="nl">sinh viên chúng ta</em>?</h2>
   <div class="stk grow"><div class="tri r" style="--i:2">
     <div class="tcol panel" id="t1"><span class="eb">NGHỊ QUYẾT 57</span><p><span class="n" data-c="nq57">"nâng cao năng lực số trong xã hội"</span>; phong trào <span class="n" data-c="nq57">"học tập số"</span></p></div>
     <div class="tcol panel" id="t2"><span class="eb">GIÁO TRÌNH</span><p><span class="n" data-c="gt" data-l="tr. 151">"mỗi sinh viên cần ý thức"</span> được những tác động mới</p></div>
@@ -357,7 +357,7 @@
   <div class="endg">
     <div>
       <p class="r" style="--i:1;font-size:25px;color:var(--vai-2)"><span class="n" data-c="baldwin">"It's somebody using AI that will take your job."</span> Đại ý: người biết dùng AI mới là người lấy việc của bạn. <span style="font-size:19px">(Richard Baldwin, nhà kinh tế; nhóm dịch; một lời nhắc, không phải bằng chứng)</span></p>
-      <h2 class="r" style="--i:2;font-size:76px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em>năng lực</em>.</h2>
+      <h2 class="r" style="--i:2;font-size:76px">Đi tắt được <em>công nghệ</em>,<br>không đi tắt được <em class="nl">năng lực</em>.</h2>
       <p class="r" style="--i:3;font-size:28px">Vì thích ứng với Cách mạng 4.0 <span class="n" data-c="gt" data-l="tr. 161–162">"phải do con người quyết định"</span>.</p>
     </div>
     <div class="mini r" style="--i:2"><svg viewBox="0 0 860 470" aria-hidden="true">
@@ -365,7 +365,7 @@
       <path class="st-step dr" data-d="2" data-w=".6" d="M70 430 L70 386 L158 386 L158 342 L246 342 L246 298 L334 298 L334 254 L422 254 L422 210 L510 210 L510 166 L598 166 L598 122 L686 122 L686 78 L800 78"/>
       <path class="st-jump" d="M70 430 C150 40 520 0 780 70" style="opacity:.35"/>
       <circle class="st-dot" cx="800" cy="78" r="12"/>
-      <text class="st-t b" x="845" y="30" text-anchor="end">Con người</text>
+      <text class="st-t b nl" x="845" y="30" text-anchor="end">Con người</text>
     </svg></div>
   </div>
   <div class="panel dark r" style="--i:4"><span class="eb">CÂU HỎI CHO LỚP</span><p style="font-size:28px;font-family:var(--display);font-weight:600">Nếu AI làm được phần lớn bài tập của bạn, phần nào bạn vẫn phải tự làm để không bị bỏ lại phía sau?</p></div>

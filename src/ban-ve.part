@@ -221,7 +221,7 @@ function humanScene(s){const fe=s.querySelector("#fe"),ft=["#ft1","#ft2","#ft3",
  const src=ft.map(e=>{const b=box(e,s);return[b.x+b.w,b.y+b.h/2]}),COL=["--son","--si","--nghe","--vai"];
  pts.forEach(([x,y],j)=>{const k=j%4,[sx,sy]=src[k],c=el("circle",{cx:sx,cy:sy+(Math.random()-.5)*20,r:3,style:`fill:var(${COL[k]})`},K);c.style.opacity=0;
   const mx=sx+70+Math.random()*30,my=sy,d=1.6+Math.random()*1.4;
-  live.push(gsap.timeline({delay:d}).to(c,{opacity:1,duration:.15}).to(c,{attr:{cx:mx,cy:my},duration:.45,ease:"power1.in"}).to(c,{attr:{cx:x,cy:y},duration:1.1,ease:"power2.out"}).to(c,{style:"fill:var(--son)",duration:.6},"+=.3"))});
+  live.push(gsap.timeline({delay:d}).to(c,{opacity:1,duration:.15}).to(c,{attr:{cx:mx,cy:my},duration:.45,ease:"power1.in"}).to(c,{attr:{cx:x,cy:y},duration:1.1,ease:"power2.out"}).to(c,{style:"fill:var(--nghe)",duration:.6},"+=.3"))});
  const ring=el("ellipse",{class:"hgnd",cx,cy:base+12,rx:0,ry:0},K);live.push(gsap.to(ring,{attr:{rx:80,ry:7},duration:.6,delay:4.6,ease:"power2.out"}))}
 
 /* 10h. Slide 1: con thoi chạy theo hàng đang dệt; ở nửa trên (vải thành dữ liệu) con thoi thành một chấm sáng */
@@ -365,7 +365,7 @@ const RK=[["sach","Sách, giáo trình",/Giáo trình|kinh điển/],["nha","Vă
  R.insertAdjacentHTML("afterend",`<div id="refsum">${RK.map((r,j)=>`<span><svg viewBox="0 0 24 24" aria-hidden="true">${IC[r[0]]}</svg>${r[1]}<b class="cnt">${n[j]}</b></span>`).join("")}<span class="tot">Tổng<b class="cnt">${n.reduce((a,b)=>a+b,0)}</b> nguồn</span></div>`)})();
 function finalScenes(s){
  /* Slide 7: hai chấm chạy trên hai sợi xoắn của đường "kết hợp" */
- const ws=$$("#waysvg .way",s);if(ws.length>3){const t=along(ws[3],"pen p1",3.8,5.2,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:9.1}))}
+ const ws=$$("#waysvg .way",s);if(ws.length>3){const t=along(ws[3],"pen p0",3.8,5.2,"power1.inOut");live.push(t);live.push(gsap.to(t.dot,{opacity:0,duration:.3,delay:9.1}))}
  /* Slide 19: ba món (kính lúp, khiên tích, chìa khóa) bay vào ba lô của một bạn sinh viên */
  if(s.dataset.title==="Yêu cầu với sinh viên"){let K=s.querySelector(".pack");if(!K){K=el("svg",{class:"pack",viewBox:"0 0 1600 900","aria-hidden":"true"});s.append(K)}
   const O=[1,2,3].map(k=>s.querySelector("#o"+k));if(O.some(e=>!e))return;const bx=800,by=834,MAN='<circle cx="12" cy="5.6" r="3.6"/><path d="M5.5 22.5v-6a6.5 6.5 0 0 1 13 0v6"/>';

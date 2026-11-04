@@ -160,3 +160,10 @@ Bản đăng trang slide: https://claude.ai/artifact/7go3S9kmCDnw2bBwPx3iyL (đ�
 - Khi vào slide, bánh răng xoay từ thế nhìn gần như từ cạnh về thế nghiêng 3/4, rồi lắc nhẹ qua lại để thấy độ dày. Chữ ở giữa vẫn phẳng, dễ đọc.
 - Bốn bánh răng nhỏ của bốn đặc điểm (slide 10) cũng có độ dày (7 lớp).
 - Không dùng thư viện 3D, chỉ CSS 3D; hàm `gear3d()` trong `src/ban-ve.part`. Hai đề xuất 3D còn lại (người bằng hạt slide 12, khối slide 16) chưa làm.
+
+## 04/11/2026: Rà màu và bố cục, sửa bốn mục (người dùng đồng ý)
+- Nhãn nhỏ (`.lbl` như "BƯỚC 1 · TRƯỚC HẾT", "ĐẦU VÀO") từ 13 px lên 15 px, dùng màu `--vai-2`; `--vai-3` của bộ Giấy can đậm hơn (#5A6571, độ tương phản 5,4 thay vì 3,97) để lên máy chiếu không mất.
+- Quy ước hai màu theo luận điểm: "công nghệ" là màu nhấn (`--son`), "năng lực / con người" là màu cam (`--nghe`, lớp `em.nl` trong tiêu đề). Áp dụng: tiêu đề slide 3, 7, 8, 9, 12, 15, 19, 21; slide 3 và 21 bậc thang và người leo màu cam, đường đi tắt và gói công nghệ màu nhấn; slide 7 đường "tự nghiên cứu" cam, "mua" màu nhấn, "kết hợp" hai sợi hai màu; slide 12 ô "Nguồn nhân lực chất lượng cao" và hình người hạt màu cam; slide 17 ô "Nhân lực" tô cam, ô "Thể chế" tô xanh (đổi chỗ hai màu tô).
+- Slide 10, 17: bánh răng 380 px (trước 300), chữ trong ô to hơn, chữ giữa bánh răng không tràn ra răng.
+- Slide 12: ô nhân lực hạ xuống, hình người hạt đứng trên ô không chen tiêu đề và số câu hỏi mờ.
+- Chưa làm: slide 2 (nửa dưới trống), slide 14 (chú thích nhỏ), slide 19 (ba lô sát dòng Nguồn).
