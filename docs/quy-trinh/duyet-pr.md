@@ -1,6 +1,6 @@
-# Dành cho trưởng nhóm: bật bảo vệ `main` và duyệt PR
+# Dành cho trưởng nhóm: cài đặt `main` và duyệt PR
 
-Phiên bản quy tắc: QT-2026-11-04.
+Phiên bản quy tắc: QT-2026-11-06.
 
 ## 1. Cài đặt GitHub (làm một lần, chỉ chủ repo làm được)
 
@@ -8,22 +8,19 @@ Repo đang công khai nên mọi tính năng dưới đây dùng được với 
 
 **a. Mời thành viên:** Settings → Collaborators → Add people, mời 4 bạn. Họ có quyền tạo nhánh, mở PR.
 
-**b. Luật bảo vệ `main`:** Settings → Rules → Rulesets → New ruleset → New branch ruleset.
-- Ruleset name: `Bảo vệ main`. Enforcement status: **Active**.
-- Bypass list → Add bypass → **Repository admin** → chọn **For pull requests only**. Nghĩa là: chính bạn cũng phải đi qua PR (không push thẳng), nhưng được merge PR của mình mà không cần người khác duyệt. GitHub không cho tác giả tự duyệt PR của mình, nên không có dòng này thì PR của bạn (và của Claude trong các phiên của bạn) sẽ kẹt.
-- Target branches → Add target → **Include default branch**.
-- Tích các luật:
-  - **Restrict deletions**
-  - **Block force pushes**
-  - **Require a pull request before merging**, trong đó: Required approvals `1`; Dismiss stale pull request approvals when new commits are pushed; Require review from Code Owners; Require approval of the most recent reviewable push; Require conversation resolution before merging; Allowed merge methods: chỉ **Squash**.
-  - **Require status checks to pass**, thêm hai kiểm tra `quy-tac` và `chup-slide` (chúng hiện trong danh sách sau khi máy kiểm tra chạy lần đầu trên một PR).
-- Create.
+**b. Bảo vệ `main`: đã nới từ 06/11/2026.** Thành viên được push thẳng lên `main`, không cần PR. Cách nới (chỉ chủ repo làm được):
+- Settings → Rules → Rulesets → bấm ruleset `Bảo vệ main.` (link thẳng: https://github.com/thiengthb/mln122-nhom9/rules/26546650).
+- **Bỏ tích** "Require a pull request before merging" và "Require status checks to pass".
+- **Giữ tích** "Restrict deletions" và "Block force pushes", để không ai lỡ tay xóa `main` hay ghi đè lịch sử.
+- Bấm **Save changes**.
+- Settings → Branches: nếu còn "Branch protection rule" cho `main` (kiểu cũ) thì bấm **Delete**.
+- Thử: một thành viên `git push` lên `main` phải đi qua.
+
+Muốn gỡ hẳn thì trong ruleset kéo xuống cuối, bấm **Delete ruleset**. Muốn khóa lại (ví dụ trước giờ thuyết trình), tích lại "Require a pull request before merging".
 
 **c. Gọn gàng PR:** Settings → General → Pull Requests: bỏ Allow merge commits và Allow rebase merging, giữ **Allow squash merging**; tích **Automatically delete head branches**.
 
 **d. Quyền của máy kiểm tra:** Settings → Actions → General → Workflow permissions: **Read repository contents and packages permissions**.
-
-Sau khi bật, thử: một thành viên push thẳng lên `main` phải bị từ chối.
 
 ## 2. Duyệt một PR
 
@@ -40,7 +37,7 @@ Mở PR → tab Checks và Files changed. Thứ tự đọc:
 
 Duyệt: Review changes → Approve → Squash and merge. Chưa được: Request changes, ghi rõ cần sửa gì.
 
-**PR do chính bạn hoặc Claude (trong phiên của bạn) mở:** GitHub không cho tác giả tự duyệt, nên PR luôn bị "blocked" dù đã xanh. Đợi cả `quy-tac` và `chup-slide` xanh, tích ô "Merge without waiting for requirements to be met (bypass rules)", rồi Squash and merge. **Không** dùng ô này cho PR của thành viên khác, và không dùng khi kiểm tra còn đỏ hoặc đang chạy.
+**PR do chính bạn hoặc Claude mở:** khi ruleset còn bật "Require a pull request", GitHub không cho tác giả tự duyệt nên PR bị "blocked" dù đã xanh; đợi kiểm tra xanh, tích ô "bypass rules" rồi merge. Sau khi đã nới luật ở mục 1b thì merge bình thường.
 
 ## 3. Lịch khóa nội dung
 

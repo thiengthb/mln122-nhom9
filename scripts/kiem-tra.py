@@ -18,7 +18,7 @@ import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
-PHIEN_BAN = "QT-2026-11-04"
+PHIEN_BAN = "QT-2026-11-06"
 
 # Phân công đã khóa: data-who của slide 1..22 (1 Huy, 2 Thiên, 3 Phương, 4 Vỹ, 5 Nghĩa)
 PHAN_CONG = [1] * 5 + [2] * 4 + [3] * 4 + [4] * 3 + [5] * 6
@@ -229,8 +229,6 @@ def kiem_pr(body_file):
     body = Path(body_file).read_text(encoding="utf8") if body_file and Path(body_file).exists() else ""
     if PHIEN_BAN not in body:
         loi.append(f"Mô tả PR chưa ghi phiên bản quy tắc `{PHIEN_BAN}`. Nghĩa là AI và người sửa chưa đọc bản quy tắc hiện hành (AGENTS.md).")
-    if "Kết luận" not in body:
-        canh_bao.append("Mô tả PR chưa có tóm tắt phiếu phản biện (dòng \"Kết luận\").")
 
 
 def main():

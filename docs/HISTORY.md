@@ -213,3 +213,10 @@ Trưởng nhóm cho 4 thành viên vào repo, yêu cầu quy trình nghiêm ng�
 
 ## 04/11/2026: Ngày thuyết trình
 Trưởng nhóm báo: thứ Ba tuần sau, tức 10/11/2026. Điền `CONFIG.ngay`, ghi lịch khóa nội dung (hạn PR 07/11, nộp 09/11, nộp bản sửa 11/11) vào `docs/quy-trinh/duyet-pr.md` và đầu `CONTRIBUTING.md`.
+
+## 06/11/2026: Nới quy trình, thành viên được tự sửa slide (QT-2026-11-06)
+Thành viên báo AI của họ không chịu sửa slide (vì phiếu xác nhận, phiếu phản biện bắt buộc, cấm viết hộ, chỉ nhận PR). Trưởng nhóm quyết định nới:
+- `AGENTS.md` viết lại: AI sửa trực tiếp khi thành viên nhờ, không cần phiếu xác nhận; thành viên push thẳng `main` sau khi build và chạy máy kiểm tra; PR chỉ khi muốn trưởng nhóm xem trước.
+- Vẫn giữ: không thêm số chưa mở nguồn, nguồn bị cấm, nội dung chính trị, ghi Phụ lục AI và thành viên tự giải thích được; khung chung (luận điểm, ba câu hỏi, thứ tự slide, phân công, giao diện chung, máy kiểm tra) do trưởng nhóm đổi.
+- `docs/quy-trinh/ai-phan-bien.md`: phiếu phản biện thành tùy chọn. `CONTRIBUTING.md`: quy trình push thẳng. `duyet-pr.md` mục 1b: cách nới ruleset (bỏ "Require a pull request", "Require status checks"; giữ chặn xóa và force-push).
+- `scripts/kiem-tra.py`: phiên bản mới, bỏ cảnh báo thiếu dòng "Kết luận" trong PR.

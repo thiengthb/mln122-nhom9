@@ -1,6 +1,6 @@
 # Quy tắc nội dung, phân công và nguồn
 
-Phiên bản quy tắc: QT-2026-11-04. Người duyệt cuối: Trần Ngọc Thiên (trưởng nhóm, chủ repo).
+Phiên bản quy tắc: QT-2026-11-06. Người duyệt cuối: Trần Ngọc Thiên (trưởng nhóm, chủ repo).
 
 Thứ tự ưu tiên khi sửa: **đúng yêu cầu môn và rubric trước, mạch chung của cả bài sau, sáng tạo riêng sau cùng.** Một ý hay nhưng làm lệch luận điểm hoặc thiếu nguồn thì không vào bài.
 
@@ -28,16 +28,16 @@ Mọi slide phải phục vụ một trong ba câu hỏi hoặc luận điểm. 
 | 4. Mai Tuấn Vỹ | 14–16 | Câu 2: mô phỏng c/v, dệt may và logistics, câu trả lời của nhóm | Cuối slide 16 mời bạn Nghĩa |
 | 5. Bùi Hiếu Nghĩa | 17–22 | Câu 3: Nghị quyết 57, mục tiêu 2030, yêu cầu với sinh viên, kế hoạch 90 ngày, kết luận, tài liệu tham khảo, dẫn Kahoot | Kết luận quay về câu hỏi mở ở slide 2 |
 
-Mỗi người chỉ sửa slide của mình. Muốn sửa slide người khác: hỏi người đó, ghi "Đã hỏi ý <tên>" trong PR. Đổi phân công là việc của trưởng nhóm (máy kiểm tra sẽ báo lỗi nếu `data-who` bị đổi).
+Mỗi người chủ yếu sửa slide của mình. Sửa slide người khác thì báo người đó một câu. Đổi phân công là việc của trưởng nhóm (máy kiểm tra sẽ báo lỗi nếu `data-who` bị đổi).
 
 ## 3. Được sáng tạo ở đâu
 
-**Được tự làm** (vẫn qua PR và phiếu phản biện):
+**Được tự làm** (sửa trực tiếp, build, push lên `main`):
 - Lời nói của mình trong ghi chú `<aside class="notes">`: tự viết bằng giọng của mình, ví dụ gần gũi, câu chuyển mượt hơn.
 - Ví dụ minh họa trong khung đã có (đổi ngành ví dụ, đổi cách kể), nếu không cần số liệu mới.
 - Sửa lỗi chính tả, câu khó hiểu, chú thích hình trên slide của mình.
 
-**Phải đề xuất trước, trưởng nhóm đồng ý mới làm:**
+**Nên báo trưởng nhóm trước (nhắn hoặc mở PR):**
 - Thêm, bớt, đổi thứ tự slide; đổi tiêu đề slide; đổi câu chốt của phần.
 - Thêm số liệu hoặc nguồn mới; thay một số liệu đã có.
 - Hình hay hiệu ứng mới (xem `giao-dien.md`).
@@ -62,7 +62,7 @@ Mỗi người chỉ sửa slide của mình. Muốn sửa slide người khác:
 - Mỗi số phải ghi năm và đơn vị đo. Không so hai số đo khác nhau như thể cùng một thước (bài học slide 13).
 - Suy luận của nhóm phải nói là suy luận, không gán cho văn bản.
 
-**Thêm một số mới, đủ ba chỗ trong cùng PR:**
+**Thêm một số mới, đủ ba chỗ trong cùng một lần sửa:**
 1. `docs/03-nguon-va-kiem-chung.md`: giá trị, nguồn, trạng thái (Gốc hay Dẫn lại), link, ngày mở.
 2. `src/app.part`, bảng `S`: khóa ngắn, `short`, `kind`, `url`, `apa` (APA 7), `use` (số được dùng ở đâu).
 3. Trên slide: `data-c="<khóa>"` ở con số, khóa đó trong `data-refs` của slide.
