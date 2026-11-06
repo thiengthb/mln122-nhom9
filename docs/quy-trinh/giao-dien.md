@@ -1,6 +1,6 @@
 # Quy tắc giao diện, công nghệ và UI/UX
 
-Phiên bản quy tắc: QT-2026-11-04. Giao diện "Bản vẽ kỹ thuật động" đã được nhóm chốt ngày 04/11/2026. Mọi thay đổi phải trông như cùng một người vẽ cả 22 tờ.
+Phiên bản quy tắc: QT-2026-11-06. Giao diện "Bản vẽ kỹ thuật động" đã được nhóm chốt ngày 04/11/2026. Mọi thay đổi phải trông như cùng một người vẽ cả 22 tờ.
 
 ## 1. Công nghệ: được dùng gì
 
@@ -58,8 +58,8 @@ Muốn thêm công nghệ: đề xuất trong PR, nêu vì sao cái có sẵn kh
 
 Mũi tên, Space: chuyển nhịp. N: ghi chú. P: cửa sổ người nói. K: soi nguồn. F: toàn màn hình. T: bấm đồng hồ. D: đổi kiểu màu. Không gán phím mới khi chưa hỏi trưởng nhóm.
 
-## 7. Kiểm tra trước khi mở PR
+## 7. Kiểm tra trước khi push
 
 1. `python3 scripts/build.py` và `python3 scripts/kiem-tra.py` qua hết.
 2. Mở `index.html` trong trình duyệt, xem slide của mình ở cả ba kiểu màu (phím D), đợi hoạt ảnh chạy hết.
-3. Trên GitHub, máy kiểm tra chụp lại 22 slide và đính kèm vào PR (mục Artifacts của lần chạy). Trưởng nhóm sẽ xem ảnh này khi duyệt.
+3. Trên GitHub, mỗi lần push lên `main` (hoặc mở PR) máy kiểm tra chụp lại 22 slide, ảnh ở mục Artifacts của lần chạy trong tab Actions.
