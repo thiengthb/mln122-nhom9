@@ -521,17 +521,42 @@ function extras(s){
 
 /* 10d. Slide 4: bốn hình thu nhỏ lại thành một quá trình 1 → 2, nối xuống 3 → 4 */
 (()=>{const cv=$("#morph");if(!cv)return;const fig=cv.closest("figure"),rv=$$("#revlist .rv"),i4=slides.findIndex(s=>s.dataset.title==="Bốn cuộc cách mạng");
+ const stEl=document.createElement("style");
+ stEl.textContent=`#revlist .rv{cursor:pointer;transition:background .2s,opacity .2s}#revlist .rv:hover{opacity:.95}#revlist.paused .rv.on::after{animation-play-state:paused}#revlist.hold .rv.on::after{animation:none;transform:scaleX(1);background:var(--nghe)}.view .proc .pc{cursor:pointer;transition:transform .18s}.view .proc .pc:hover{transform:translateY(-3px)}.view .cap{align-items:center;white-space:nowrap}.revctl{display:inline-flex;align-items:center;gap:6px}.revbtn{appearance:none;border:1.5px solid var(--ln);background:var(--cham);color:var(--vai-2);font:600 12px/1 var(--mono);letter-spacing:.05em;padding:4px 8px;cursor:pointer;white-space:nowrap;transition:all .15s}.revbtn:hover{border-color:var(--son);color:var(--son)}.revbtn.on{border-color:var(--nghe);color:var(--nghe);background:color-mix(in srgb,var(--nghe) 10%,var(--cham))}.revtabs{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}.revtab{cursor:pointer;padding:2px 5px;border-radius:2px;white-space:nowrap;transition:color .15s,background .15s}.revtab:hover{color:var(--son)}.revtab.on{color:var(--son);font-weight:700;background:color-mix(in srgb,var(--son) 12%,transparent)}#morph{cursor:pointer}`;
+ document.head.append(stEl);
  const ov=document.createElement("div");ov.className="proc";ov.setAttribute("aria-hidden","true");fig.append(ov);
+ const cap=fig.querySelector(".cap");
+ if(cap){const names=["VẢI","DÂY CHUYỀN","VI MẠCH","MẠNG LƯỚI"];
+  cap.innerHTML=`<span>HÌNH 1</span><span class="revctl" aria-hidden="true"><button type="button" class="revbtn" id="revPlay" title="Tạm dừng hoặc tiếp tục tự chạy (hoặc bấm vào hình)">⏸ TẠM DỪNG</button><button type="button" class="revbtn" id="revGrid" title="Xem tổng hợp cả 4 cuộc cách mạng">⊞ 4 THỜI KỲ</button></span><span class="revtabs">${names.map((n,j)=>`<b class="revtab" data-rev="${j}" title="Bấm để xem Thời kỳ ${j+1}">${j+1}.${n}</b>`).join("<span>·</span>")}</span>`}
+ const btnPlay=$("#revPlay",fig),btnGrid=$("#revGrid",fig),tabs=$$(".revtab",fig);
  let snaps=[],tmr=null,tl=null;
  const snap=j=>{snaps[j]=window.__morphSnap?window.__morphSnap(j,snaps[j]):(()=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);return c})()};
- const reset=()=>{clearTimeout(tmr);tmr=null;if(tl){tl.kill();tl=null}snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ const syncUI=()=>{const inGrid=ov.classList.contains("on"),p=M.isPaused(),s=M.stage();
+  if(btnPlay){btnPlay.textContent=inGrid?"↻ CHẠY LẠI":p?`▶ CHẠY TIẾP (MỐC ${s+1})`:"⏸ TẠM DỪNG";btnPlay.classList.toggle("on",p&&!inGrid)}
+  if(btnGrid){btnGrid.textContent=inGrid?`↩ VỀ MỐC ${s+1}`:"⊞ 4 THỜI KỲ";btnGrid.classList.toggle("on",inGrid)}
+  tabs.forEach((t,j)=>t.classList.toggle("on",!inGrid&&j===s))};
+ M.onChange(()=>syncUI());
+ const hideGrid=()=>{clearTimeout(tmr);tmr=null;if(tl){tl.kill();tl=null}ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"});syncUI()};
+ const reset=()=>{hideGrid();snaps=[]};
  window.__morphRefresh=()=>{M.redraw();if(ov.classList.contains("on"))snaps.forEach((c,j)=>{if(c&&window.__morphSnap)window.__morphSnap(j,c)})};
+ const pickStage=j=>{hideGrid();M.goTo(j);syncUI()};
+ rv.forEach((el,j)=>el.addEventListener("click",e=>{if(e.target.closest("[data-c]"))return;e.stopPropagation();pickStage(j)}));
+ tabs.forEach(t=>t.addEventListener("click",e=>{e.stopPropagation();pickStage(+t.dataset.rev)}));
+ cv.addEventListener("click",e=>{e.stopPropagation();if(ov.classList.contains("on"))return;M.toggle();if(M.isPaused()){clearTimeout(tmr);tmr=null}else if(M.stage()===3&&!tmr){tmr=setTimeout(()=>{for(let k=0;k<4;k++)if(!snaps[k])snap(k);build()},2000)}syncUI()});
+ if(btnPlay)btnPlay.addEventListener("click",e=>{e.stopPropagation();btnPlay.blur();
+  if(ov.classList.contains("on")){reset();M.start();syncUI();return}
+  M.toggle();if(M.isPaused()){clearTimeout(tmr);tmr=null}else if(M.stage()===3&&!tmr){tmr=setTimeout(()=>{for(let k=0;k<4;k++)if(!snaps[k])snap(k);build()},2000)}syncUI()});
+ if(btnGrid)btnGrid.addEventListener("click",e=>{e.stopPropagation();btnGrid.blur();
+  if(ov.classList.contains("on")){pickStage(M.stage());return}
+  clearTimeout(tmr);tmr=null;M.pause();for(let k=0;k<4;k++)if(!snaps[k])snap(k);build();syncUI()});
+ ov.addEventListener("click",e=>{const pc=e.target.closest(".pc");if(!pc)return;e.stopPropagation();const j=$$(".pc",ov).indexOf(pc);if(j>=0)pickStage(j)});
  new MutationObserver(()=>{const j=rv.findIndex(e=>e.classList.contains("on"));if(j<0||cur!==i4)return;
-  if(j===0){reset();return}for(let k=0;k<j;k++)if(!snaps[k])snap(k);
-  if(j===3&&!tmr){tmr=setTimeout(()=>{for(let k=0;k<4;k++)if(!snaps[k])snap(k);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
+  if(j===0&&!M.isPaused()){reset();return}for(let k=0;k<=j;k++)if(!snaps[k])snap(k);
+  if(j===3&&!M.isPaused()&&!tmr){tmr=setTimeout(()=>{if(M.isPaused())return;for(let k=0;k<4;k++)if(!snaps[k])snap(k);build()},1800+1600)}
+  syncUI()}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
  function build(){if(cur!==i4||!motion||snaps.filter(Boolean).length<4)return;
-  const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");
-  ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
+  const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");syncUI();
+  ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}" title="Bấm để phóng to Thời kỳ ${j+1}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
   $$(".ph",ov).forEach((p,j)=>{snaps[j].className="";p.append(snaps[j])});
   const sv=$(".pl",ov);sv.setAttribute("viewBox",`0 0 ${ov.offsetWidth} ${H}`);
   const B=$$(".pc",ov).map(c=>box(c.querySelector(".ph"),ov)),cell=$$(".pc",ov);
@@ -552,7 +577,7 @@ function extras(s){
    .add(draw(l3,.4,0),">-.05")
    .to(cell[3].querySelector(".pt"),{opacity:1,duration:.3},">-.1")
    .fromTo(cell[3],{"--rg":"0px"},{"--rg":"6px",duration:.5,ease:"power2.out"})}
- const show1=window.show;window.show=function(i,st){reset();show1(i,st)};show=window.show})();
+ const show1=window.show;window.show=function(i,st){reset();show1(i,st);if(i===i4)syncUI()};show=window.show})();
 
 /* 10e. Tờ bìa phụ khi sang phần câu hỏi mới */
 const QS=$$(".qs .callout h3").map(h=>h.textContent);
