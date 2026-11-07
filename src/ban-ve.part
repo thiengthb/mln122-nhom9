@@ -523,11 +523,12 @@ function extras(s){
 (()=>{const cv=$("#morph");if(!cv)return;const fig=cv.closest("figure"),rv=$$("#revlist .rv"),i4=slides.findIndex(s=>s.dataset.title==="Bốn cuộc cách mạng");
  const ov=document.createElement("div");ov.className="proc";ov.setAttribute("aria-hidden","true");fig.append(ov);
  let snaps=[],tmr=null,tl=null;
- const snap=j=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);snaps[j]=c};
- const reset=()=>{clearTimeout(tmr);tmr=null;if(tl)tl.kill();snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ const snap=j=>{snaps[j]=window.__morphSnap?window.__morphSnap(j,snaps[j]):(()=>{const c=document.createElement("canvas");c.width=cv.width;c.height=cv.height;c.getContext("2d").drawImage(cv,0,0);return c})()};
+ const reset=()=>{clearTimeout(tmr);tmr=null;if(tl){tl.kill();tl=null}snaps=[];ov.innerHTML="";ov.classList.remove("on");gsap.set(cv,{clearProps:"transform,opacity"})};
+ window.__morphRefresh=()=>{M.redraw();if(ov.classList.contains("on"))snaps.forEach((c,j)=>{if(c&&window.__morphSnap)window.__morphSnap(j,c)})};
  new MutationObserver(()=>{const j=rv.findIndex(e=>e.classList.contains("on"));if(j<0||cur!==i4)return;
-  if(j===0){reset();return}if(!snaps[j-1])snap(j-1);
-  if(j===3&&!tmr){tmr=setTimeout(()=>{snap(3);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
+  if(j===0){reset();return}for(let k=0;k<j;k++)if(!snaps[k])snap(k);
+  if(j===3&&!tmr){tmr=setTimeout(()=>{for(let k=0;k<4;k++)if(!snaps[k])snap(k);build()},1800+1600)}}).observe($("#revlist"),{subtree:true,attributes:true,attributeFilter:["class"]});
  function build(){if(cur!==i4||!motion||snaps.filter(Boolean).length<4)return;
   const H=cv.offsetHeight,W=cv.offsetWidth;ov.style.height=H+"px";ov.classList.add("on");
   ov.innerHTML=rv.map((r,j)=>`<div class="pc pc${j}"><div class="ph"></div><div class="pt"><b>${j+1}</b><span>${r.querySelector("h3").textContent}</span></div></div>`).join("")+`<svg class="pl" aria-hidden="true"></svg>`;
@@ -551,7 +552,7 @@ function extras(s){
    .add(draw(l3,.4,0),">-.05")
    .to(cell[3].querySelector(".pt"),{opacity:1,duration:.3},">-.1")
    .fromTo(cell[3],{"--rg":"0px"},{"--rg":"6px",duration:.5,ease:"power2.out"})}
- const show1=window.show;window.show=function(i,st){if(i!==i4)reset();show1(i,st)};show=window.show})();
+ const show1=window.show;window.show=function(i,st){reset();show1(i,st)};show=window.show})();
 
 /* 10e. Tờ bìa phụ khi sang phần câu hỏi mới */
 const QS=$$(".qs .callout h3").map(h=>h.textContent);
