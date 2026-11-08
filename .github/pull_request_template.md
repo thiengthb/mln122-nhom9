@@ -4,16 +4,16 @@
 
 - Người sửa: <!-- tên -->
 - Slide: <!-- ví dụ 14–15 -->
-- Phiên bản quy tắc đã đọc: <!-- chép từ dòng "Phiên bản quy tắc" trong AGENTS.md, ví dụ QT-2026-11-04 -->
+- Phiên bản quy tắc đã đọc: <!-- chép từ dòng "Phiên bản quy tắc" trong AGENTS.md, ví dụ QT-2026-11-06 -->
 - Có dùng AI không, công cụ nào: <!-- ví dụ: có, ChatGPT / Claude Code / không -->
 
 ## Sửa gì và vì sao
 
 <!-- 2–4 câu. Vì sao bản mới tốt hơn bản cũ, theo rubric nào. -->
 
-## Tóm tắt phiếu phản biện của AI
+## Tóm tắt phiếu phản biện của AI (không bắt buộc)
 
-<!-- Dán từ phiếu ở docs/quy-trinh/ai-phan-bien.md. Không dùng AI thì tự trả lời ba dòng này. -->
+<!-- Nếu có làm phiếu ở docs/quy-trinh/ai-phan-bien.md thì dán vào đây, không thì xóa mục này. -->
 - Đề xuất:
 - Phản biện mạnh nhất:
 - Kết luận:

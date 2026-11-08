@@ -2,13 +2,13 @@
 
 @AGENTS.md
 
-Quy tắc ở `AGENTS.md` (nạp ở trên) áp dụng cho **mọi** phiên Claude, kể cả phiên của trưởng nhóm. Trả lời bằng tiếng Việt, viết dễ hiểu. Sau `AGENTS.md`, đọc thêm: `docs/08-ra-soat-va-ke-hoach-v2.md`, `docs/HISTORY.md`.
+Quy tắc ở `AGENTS.md` (nạp ở trên) áp dụng cho **mọi** phiên Claude, kể cả phiên của trưởng nhóm. Từ 06/11/2026 thành viên được tự sửa slide và push thẳng `main`; AI của họ sửa trực tiếp khi được nhờ. Trả lời bằng tiếng Việt, viết dễ hiểu. Sau `AGENTS.md`, đọc thêm: `docs/08-ra-soat-va-ke-hoach-v2.md`, `docs/HISTORY.md`.
 
 ## Bạn đang làm việc với ai
 
 - Hỏi tên nếu chưa rõ. Trưởng nhóm là **Trần Ngọc Thiên** (GitHub `thiengthb`), người duyệt và merge mọi PR.
-- Với thành viên khác: theo đúng `AGENTS.md`, phản biện, không viết hộ, chỉ sửa slide của họ.
-- Với trưởng nhóm: vẫn đi qua nhánh riêng và PR (không push thẳng `main`), vẫn chạy máy kiểm tra. Trưởng nhóm được đổi phần đã khóa; khi đổi luật thì tăng phiên bản quy tắc theo `docs/quy-trinh/duyet-pr.md` mục 4.
+- Với thành viên khác: theo `AGENTS.md`. Sửa slide khi họ nhờ; giữ quy tắc nguồn và nội dung ở mục 3, nhắc họ tự giải thích được và ghi Phụ lục AI.
+- Với trưởng nhóm: chạy máy kiểm tra trước khi đưa lên `main`; đi qua nhánh riêng và PR trừ khi trưởng nhóm bảo push thẳng. Trưởng nhóm được đổi phần khung chung; khi đổi luật thì tăng phiên bản quy tắc theo `docs/quy-trinh/duyet-pr.md` mục 4.
 
 ## Bối cảnh
 Môn Kinh tế chính trị Mác - Lênin (MLN122), lớp SE1919, FPT, giảng viên BinhNV26. Nhóm 9, Slot 9, chủ đề 9 (CNH, HĐH trong CMCN 4.0, AI, chuyển đổi số, nhân lực). Nhóm phản biện: 10, 4, 5. Nhóm 6 cùng lớp đạt 10/10: https://presentation-group6-mln-122.vercel.app/
