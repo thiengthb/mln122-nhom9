@@ -6,34 +6,34 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 
 | Người | Slide | Nội dung | Ước tính |
 |---|---|---|---|
-| Người 1 (Phạm Gia Huy) | 1–5 | Bìa đến Dự báo của Mác | 3.6 phút |
+| Người 1 (Phạm Gia Huy) | 1–5 | Bìa đến Dự báo của Mác | 3.4 phút |
 | Người 2 (Trần Ngọc Thiên) | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.8 phút |
 | Người 3 (Vũ Huy Phương) | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
 | Người 4 (Mai Tuấn Vỹ) | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.9 phút |
 | Người 5 (Bùi Hiếu Nghĩa) | 17–21 | Nghị quyết 57 đến Kết luận | 4.5 phút |
-| **Tổng phần nói** | | | **19.8 phút** (nói nhanh 170: 17.5 phút) |
+| **Tổng phần nói** | | | **19.7 phút** (nói nhanh 170: 17.4 phút) |
 
-## Người 1 (Phạm Gia Huy): slide 1–5 (khoảng 3.6 phút)
+## Người 1 (Phạm Gia Huy): slide 1–5 (khoảng 3.4 phút)
 
 ### Slide 1. Bìa
 
-Em chào thầy và các bạn. Em là Phạm Gia Huy, đại diện Nhóm 9. [Nhìn lớp, không nhìn màn hình.] Hình bên phải là một tấm vải đang dệt, càng lên cao thì hoa văn càng biến thành những ô dữ liệu. Cuộc cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Gần 300 năm sau, dệt may lại xuất hiện trong đề của nhóm em, lần này như một lát cắt của AI và chuyển đổi số. Vì vậy bài có tên: một sợi chỉ, bốn cuộc cách mạng.
+Em chào thầy và các bạn. Em là Phạm Gia Huy, đại diện Nhóm 9. [Nhìn lớp, không nhìn màn hình.] Hình bên phải là tấm vải đang dệt, càng lên cao càng biến thành các ô dữ liệu. Cuộc cách mạng công nghiệp đầu tiên bắt đầu từ ngành dệt. Gần 300 năm sau, dệt may lại xuất hiện trong đề của nhóm em, lần này gắn với AI và chuyển đổi số. Vì vậy bài có tên: một sợi chỉ, bốn cuộc cách mạng. Mỗi khi máy móc thay đổi, câu hỏi đầu tiên luôn dành cho người đứng cạnh nó.
 
 ### Slide 2. Câu hỏi mở đầu
 
-Trước khi vào bài, em hỏi các bạn một câu. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì tự nêu ba lựa chọn rồi đi tiếp.] Em cảm ơn bạn. Nhóm em giữ lại câu trả lời này, cuối bài mình sẽ quay lại.
+Hơn 200 năm trước là người thợ dệt, còn hôm nay là chính chúng ta. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì nêu ba kịch bản trên màn hình rồi đi tiếp.] Em cảm ơn bạn. Dù chọn phương án nào, câu trả lời cũng dẫn về một điểm cốt lõi mà nhóm em giữ lại đến cuối bài.
 
 ### Slide 3. Luận điểm và ba câu hỏi
 
-Đây là kết luận nhóm em thống nhất: đi tắt được công nghệ. [Dừng một nhịp.] Nhưng không đi tắt được năng lực. Mua một cái máy thì chỉ cần tiền. Còn sửa được nó, cải tiến nó, rồi tự làm ra cái tốt hơn thì phải học và phải có thời gian. Nhóm em không phản đối đi tắt đón đầu. Giáo trình trang 158 viết "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu", tức là cần cả hai vế; nhóm em nhấn vào vế hay bị quên. Bài đi qua ba câu hỏi thầy giao trên màn hình. Trước hết, cách mạng công nghiệp là gì?
+Điểm cốt lõi đó là: đi tắt được công nghệ, [Dừng một nhịp.] nhưng không đi tắt được năng lực. Mua một công nghệ thì chỉ cần tiền; nhưng hiểu nó, cải tiến nó thì cần thời gian và con người. Giáo trình trang 158 viết "kết hợp quá trình phát triển tuần tự với đi tắt đón đầu", tức là cần cả hai vế; nhóm em nhấn vào vế năng lực hay bị quên. Bài đi qua ba câu hỏi trên màn hình. Để thấy vì sao công nghệ nhảy vọt được, ta nhìn lại sợi chỉ từ cuộc cách mạng đầu tiên.
 
 ### Slide 4. Bốn cuộc cách mạng
 
-Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt về chất của tư liệu lao động, tức là máy móc, công cụ sản xuất. Bước nhảy đó làm thay đổi căn bản phân công lao động và đưa năng suất lên cao hơn hẳn. [Nói theo mốc đang sáng, không nói đè hình.] Lần một ở nước Anh, thế kỷ 18: máy dệt, máy hơi nước. Lần hai: điện và dây chuyền, sản xuất hàng loạt. Lần ba: máy tính và tự động hóa. Một chi tiết thú vị: năm 1804, máy dệt Jacquard dùng thẻ đục lỗ để điều khiển hoa văn, và được cho là đã gợi ý cho Babbage khi thiết kế máy tính. Nói vui thì máy dệt và máy tính có họ hàng; nói chính xác thì đó là tiền lệ của việc điều khiển máy bằng chương trình. Lần thứ tư là bây giờ: AI, dữ liệu lớn, Internet vạn vật, nối thế giới thực với thế giới số.
+Giáo trình định nghĩa cách mạng công nghiệp là bước nhảy vọt về chất của tư liệu lao động trên cơ sở đột phá kỹ thuật, kéo theo thay đổi căn bản về phân công lao động và nâng cao năng suất. [Nói theo mốc đang sáng, không nói đè hình.] Lần một ở Anh: máy dệt, máy hơi nước. Lần hai: điện và dây chuyền hàng loạt. Lần ba: máy tính và tự động hóa. Chi tiết thú vị: năm 1804, máy dệt Jacquard dùng thẻ đục lỗ điều khiển hoa văn đã gợi ý cho Babbage thiết kế máy tính; đó chính là tiền lệ của điều khiển bằng chương trình. Lần bốn là hôm nay: AI, dữ liệu lớn, Internet vạn vật. Công cụ đã nhảy từ khung cửi đến AI, nhưng quy luật phía sau đã được Mác nhìn thấy từ rất sớm.
 
 ### Slide 5. Dự báo của Mác
 
-Mác viết, và giáo trình dẫn ở trang 144: của cải sẽ ngày càng ít phụ thuộc vào số giờ lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. [Hạ giọng.] Mác không nói về AI. Nhưng câu này gợi cho nhóm em một cách đọc hôm nay: công nghệ đổi lực lượng sản xuất, rồi buộc quan hệ sản xuất và cách quản trị phải điều chỉnh theo. Với Việt Nam có hai mặt. Mặt khó: lợi thế nhân công rẻ yếu dần. Mặt thuận: nước đi sau có thể dùng thành tựu của nước đi trước để rút ngắn khoảng cách. Nhưng cơ hội đó chỉ thành thật nếu biết học từ người đi trước. Bạn Thiên sẽ bắt đầu từ ba mô hình công nghiệp hóa.
+Mác viết, và giáo trình dẫn ở trang 144: của cải sẽ ngày càng ít phụ thuộc vào thời gian lao động, mà phụ thuộc vào việc ứng dụng khoa học vào sản xuất. [Hạ giọng.] Mác không nói về AI, nhưng câu này cho thấy: công nghệ đổi lực lượng sản xuất, buộc quan hệ sản xuất và quản trị phải điều chỉnh theo. Với Việt Nam: mất dần lợi thế nhân công rẻ, nhưng có cơ hội tận dụng thành tựu đi trước để rút ngắn khoảng cách. Nhưng cơ hội chỉ thành thật nếu biết tích lũy năng lực từ người đi trước. Bạn Thiên sẽ tiếp tục từ ba mô hình công nghiệp hóa.
 
 ## Người 2 (Trần Ngọc Thiên): slide 6–9 (khoảng 3.8 phút)
 
