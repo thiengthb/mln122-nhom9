@@ -20,10 +20,32 @@
 </section>
 
 <section class="s mid" data-act="0" data-who="1" data-min="1" data-title="Câu hỏi mở đầu">
-  <div class="eb r">TRƯỚC KHI VÀO BÀI</div>
-  <h2 class="r" style="--i:1;font-size:96px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
-  <div class="blank r" style="--i:2"><span class="lbl">Ô để trống · lớp điền vào</span><p>Mời một, hai bạn chia sẻ.</p><i class="cur" aria-hidden="true"></i></div>
-  <div class="hint3 r" style="--i:3"><span class="lbl">Nếu chưa ai nói: ba hướng gợi ý</span><div><b>1</b>Thay bạn</div><div><b>2</b>Giúp bạn</div><div><b>3</b>Chẳng đổi gì nhiều</div></div>
+  <div class="eb r">TRƯỚC KHI VÀO BÀI · KHẢO SÁT NHANH</div>
+  <h2 class="r" style="--i:1;font-size:74px">AI sẽ làm gì với<br><em>nghề bạn đang học?</em></h2>
+  <div class="row c3 r grow" style="--i:2;gap:24px;align-items:stretch">
+    <div class="panel poll-card">
+      <div class="poll-hd"><span class="bub s1">1</span><span class="lbl">KỊCH BẢN 1</span></div>
+      <h3>Thay bạn?</h3>
+      <p>Tự động hóa các tác vụ lặp lại, quy chuẩn; thu hẹp đáng kể nhu cầu nhân lực trực tiếp.</p>
+      <div class="poll-ft"><span class="tag y">Rủi ro thay thế</span></div>
+    </div>
+    <div class="panel dark poll-card">
+      <div class="poll-hd"><span class="bub s1">2</span><span class="lbl">KỊCH BẢN 2</span></div>
+      <h3>Giúp bạn?</h3>
+      <p>Đóng vai trò trợ lý và đòn bẩy năng suất; giải phóng con người khỏi thao tác thủ công để tập trung sáng tạo.</p>
+      <div class="poll-ft"><span class="tag">Cơ hội cộng tác</span></div>
+    </div>
+    <div class="panel poll-card">
+      <div class="poll-hd"><span class="bub s1">3</span><span class="lbl">KỊCH BẢN 3</span></div>
+      <h3>Chẳng đổi mấy?</h3>
+      <p>Nghề đòi hỏi kỹ năng hiện trường, thấu cảm xã hội hoặc tư duy phản biện sâu mà AI chưa thể làm thay.</p>
+      <div class="poll-ft"><span class="tag m">Vùng an toàn</span></div>
+    </div>
+  </div>
+  <div class="poll-bar r" style="--i:3">
+    <span class="lbl">LẮNG NGHE LỚP</span>
+    <p class="sm">Mời các bạn chia sẻ: ngành bạn đang học thuộc kịch bản nào?</p>
+  </div>
   <aside class="notes">Trước khi vào bài, em hỏi các bạn một câu. Ra trường rồi, AI sẽ làm gì với nghề bạn đang học? Thay bạn, giúp bạn, hay chẳng đổi gì nhiều? [Chờ 5 giây. Mời một bạn, tối đa 20 giây. Nếu lớp im lặng thì tự nêu ba lựa chọn rồi đi tiếp.] Em cảm ơn bạn. Nhóm em giữ lại câu trả lời này, cuối bài mình sẽ quay lại.</aside>
 </section>
 

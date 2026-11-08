@@ -306,7 +306,7 @@ isoRob();
 function lastScenes(s){
  if(s.querySelector(".iso"))isoRob();
  /* Slide 2: dòng mời lớp được gõ ra từng chữ, con trỏ nháy ở cuối như đang chờ lớp gõ tiếp */
- const bp=s.querySelector(".blank p");
+ const bp=s.querySelector(".blank p, .poll-bar p");
  if(bp){const o=bp.dataset.o||(bp.dataset.o=bp.textContent);bp.innerHTML=`<span class="ty"></span><span class="caret" aria-hidden="true"></span>`;const ty=bp.firstChild,z={n:0};
   live.push(gsap.to(z,{n:o.length,duration:o.length*.065,delay:1.5,ease:"none",onUpdate(){ty.textContent=o.slice(0,Math.round(z.n))},onInterrupt(){ty.textContent=o}}))}
  /* Slide 17: hạt chạy từ năm cụm vào bánh răng, rồi từ bánh răng ra bốn mục tiêu */
