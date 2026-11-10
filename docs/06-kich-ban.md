@@ -11,7 +11,7 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người 3 (Vũ Huy Phương) | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
 | Người 4 (Mai Tuấn Vỹ) | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.8 phút |
 | Người 5 (Bùi Hiếu Nghĩa) | 17–21 | Nghị quyết 57 đến Kết luận | 4.5 phút |
-| **Tổng phần nói** | | | **24.8 phút** (nói nhanh 170: 21.8 phút) |
+| **Tổng phần nói** | | | **24.6 phút** (nói nhanh 170: 21.7 phút) |
 
 ## Người 1 (Phạm Gia Huy): slide 1–5 (khoảng 3.4 phút)
 
