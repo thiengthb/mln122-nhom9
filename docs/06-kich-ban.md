@@ -9,9 +9,9 @@ Phím: mũi tên phải hoặc bút trình chiếu. `[Bấm một lần.]` là n
 | Người 1 (Phạm Gia Huy) | 1–5 | Bìa đến Dự báo của Mác | 3.4 phút |
 | Người 2 (Trần Ngọc Thiên) | 6–9 | Ba mô hình công nghiệp hóa đến Đầu tư cho năng lực | 3.8 phút |
 | Người 3 (Vũ Huy Phương) | 10–13 | Vì sao phải công nghiệp hóa đến 86% hay dưới 2% | 4.1 phút |
-| Người 4 (Mai Tuấn Vỹ) | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.9 phút |
+| Người 4 (Mai Tuấn Vỹ) | 14–16 | Mô phỏng c/v đến Câu trả lời | 3.8 phút |
 | Người 5 (Bùi Hiếu Nghĩa) | 17–21 | Nghị quyết 57 đến Kết luận | 4.5 phút |
-| **Tổng phần nói** | | | **19.7 phút** (nói nhanh 170: 17.4 phút) |
+| **Tổng phần nói** | | | **19.5 phút** (nói nhanh 170: 17.2 phút) |
 
 ## Người 1 (Phạm Gia Huy): slide 1–5 (khoảng 3.4 phút)
 
@@ -71,11 +71,11 @@ Vậy cần làm gì? Giáo trình chia hai phần. Trước hết là tạo đi
 
 Đó là câu hỏi thứ hai: AI tạo việc hay lấy việc? Đây là hai con số của cùng Tổ chức Lao động Quốc tế, cùng về Việt Nam. Năm 2016: 86%. [Dừng.] Năm 2026: dưới 2%. [Dừng.] Họ đổi ý, hay một số bị sai? [Bấm một lần.] Cả hai đều đúng, vì đo hai thứ khác nhau. 86% là lao động làm công trong dệt may, da giày, có rủi ro cao bị tự động hóa về mặt kỹ thuật trong khoảng hai chục năm, tính mọi loại máy. Dưới 2%, khoảng một triệu người, là trên toàn bộ lao động, và chỉ tính AI tạo sinh. Cùng báo cáo đó, khoảng 11,5 triệu người có một phần công việc chịu tác động của AI tạo sinh, nhưng chịu tác động không có nghĩa là mất việc. Nên nghe số nào, hãy hỏi: đo ai? Công nghệ nào? Trong bao lâu? Còn về lý luận, vì sao máy móc ảnh hưởng đến việc làm? Em mời bạn Vỹ.
 
-## Người 4 (Mai Tuấn Vỹ): slide 14–16 (khoảng 3.9 phút)
+## Người 4 (Mai Tuấn Vỹ): slide 14–16 (khoảng 3.8 phút)
 
 ### Slide 14. Mô phỏng c/v
 
-Em là Mai Tuấn Vỹ. Nhóm em dựng một mô hình nhỏ, số đều là giả định. [Để hình chạy 3 giây, im lặng.] Một dây chuyền may 100 công nhân, giữ nguyên 100 sản phẩm. Máy vào dần, các hình người mờ dần là công nhân không còn cần. Nhìn cán cân ở giữa: bên c là máy móc, nặng dần; bên v là tiền công, nhẹ dần. Chương 3 gọi c là tiền cho máy móc, nguyên liệu, v là tiền trả công. Tỷ lệ c trên v là cấu tạo hữu cơ, ở đây tăng từ 1 lên 3,5, đúng xu hướng ở trang 68. Vì sao chủ xưởng muốn vậy? Vì làm ra sản phẩm rẻ hơn mà vẫn bán theo giá chung. Phần chênh là giá trị thặng dư siêu ngạch, trang 65. [Bấm một lần.] Khi cả ngành dùng máy, giá chung hạ, phần siêu ngạch mất, ai cũng phải đổi mới tiếp. Em nói rõ giới hạn: mô hình chỉ cho thấy trên một dây chuyền, sản lượng không đổi, thì cần ít người hơn. Việc làm cả ngành còn tùy nhu cầu thị trường, quy mô sản xuất, việc mới sinh ra và đào tạo. Mô hình không dự báo tổng việc làm. Vậy thực tế thì sao?
+Em là Mai Tuấn Vỹ. Để trả lời câu hỏi của bạn Phương, nhóm em mô phỏng một dây chuyền may 100 sản phẩm. [Để hình chạy 3 giây, im lặng.] Khi tự động hóa tăng lên, 100 công nhân ban đầu giảm xuống chỉ còn 40 người. Cán cân kinh tế thay đổi rõ rệt: chi phí máy móc (c) tăng, chi phí tiền công (v) giảm. Tỷ lệ c trên v – tức cấu tạo hữu cơ của tư bản theo Chương 3 – tăng vọt từ 1 lên 3,5. Động lực của doanh nghiệp là gì? Làm ra rẻ hơn nhưng vẫn bán theo giá thị trường, xưởng sẽ thu được giá trị thặng dư siêu ngạch (trang 65). [Bấm một lần.] Nhưng khi cả ngành cùng đổi mới, giá trị xã hội hạ xuống, phần siêu ngạch biến mất, buộc mọi người phải tiếp tục chạy đua. Như vậy, trên một dây chuyền cố định, máy rõ ràng thay thế con người. Nhưng với toàn ngành, việc làm còn tùy thuộc vào quy mô mở rộng và ngành nghề mới sinh ra. Vậy bức tranh thực tế tại Việt Nam ra sao?
 
 ### Slide 15. Dệt may và logistics
 
